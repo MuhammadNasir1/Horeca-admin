@@ -15,8 +15,11 @@
 <body class="bg-white">
     <div class=" h-screen w-full flex justify-center items-center shadow-dark">
         <div
-            class="bg-green-600 w-full sm:w-1/2 md:w-9/12 lg:w-1/2 shadow-md flex flex-col md:flex-row items-center mx-5 sm:m-0 rounded">
-            <div class="w-full md:w-1/2 hidden md:flex flex-col justify-center items-center text-white">
+            class="bg-green-600 w-full sm:w-1/2 md:w-9/12 lg:w-1/2 shadow-md flex flex-col md:flex-row items-center mx-5 sm:m-0 rounded ">
+            <div class="w-full md:w-1/2 hidden md:flex flex-col justify-center items-center text-white relative">
+                <div>
+                 <img class="w-52    absolute left-1/2  -translate-x-[50%] top-[-100%]" src="{{asset('images/Horeca-White.svg')}}" alt="">
+                </div>
                 <h1 class="text-3xl">Hello</h1>
                 <p class="text-5xl font-extrabold">Welcome!</p>
             </div>
@@ -107,24 +110,6 @@
             });
         });
 
-
-        //  register page password show and hide
-
-        let passinputs = document.querySelectorAll('.passinput');
-        let eyebtns = document.querySelectorAll(".eyeicon");
-
-        eyebtns.forEach((btn, index) => {
-            btn.addEventListener("click", () => {
-                let passinput = passinputs[index];
-                if (passinput.type === "password") {
-                    passinput.type = "text";
-                    btn.src = "../images/icons/eye-visible.png";
-                } else {
-                    passinput.type = "password";
-                    btn.src = "../images/icons/eye-invisible.png";
-                }
-            });
-        });
     </script>
 
 </body>
