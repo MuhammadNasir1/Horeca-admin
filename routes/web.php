@@ -26,20 +26,20 @@ Route::get('/login', function () {
 
 
 Route::middleware('custom')->group(function () {
-
-
-
-
-
-
     Route::get('/setting', [authController::class, 'settingdata']);
     Route::post('updateSettings', [authController::class, 'updateSet']);
-
     Route::get('/', [userController::class, 'Dashboard']);
 
+    Route::get('product', function () {
 
-
-
+        return view('product');
+    });
+    Route::get('help', function () {
+        return view('help');
+    });
+    Route::get('customers', function () {
+        return view('customers');
+    });
 });
 
 
