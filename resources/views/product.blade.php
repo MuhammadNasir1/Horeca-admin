@@ -9,15 +9,15 @@
         <div>
             <div class="flex justify-between px-[20px] mb-3">
                 <h3 class="text-[20px] text-black">@lang('lang.product_List')</h3>
-             <div>
+                <div>
 
-                 <button data-modal-target="addproductmodal" data-modal-toggle="addproductmodal"
-                 class="bg-primary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
-                 @lang('lang.Add_Product')</button>
-                 <button
-                 class="bg-secondary cursor-pointer text-white  ml-4 h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
-                 @lang('lang.Import_From_Excel')</button>
-             </div>
+                    <button data-modal-target="addproductmodal" data-modal-toggle="addproductmodal"
+                        class="bg-primary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
+                        @lang('lang.Add_Product')</button>
+                    <button
+                        class="bg-secondary cursor-pointer text-white  ml-4 h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
+                        @lang('lang.Import_From_Excel')</button>
+                </div>
             </div>
             <div class="overflow-x-auto">
                 <table id="datatable" class="overflow-scroll">
@@ -78,7 +78,8 @@
 <div id="addproductmodal" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
     <div class="relative p-4 w-full   max-w-6xl max-h-full ">
-        <form action="productdata" method="post" enctype="multipart/form-data">
+        <form id="productdata" method="post" enctype="multipart/form-data">
+        {{-- <form action="addProduct" method="post" enctype="multipart/form-data"> --}}
             @csrf
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                 <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
@@ -100,7 +101,7 @@
                         <label class="text-[14px] font-normal" for="firstName">@lang('lang.Product_Name')</label>
                         <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="full_name" id="fullName" placeholder=" @lang('lang.Name_Here')">
+                            name="product_name" id="request" placeholder=" @lang('lang.Name_Here')">
                     </div>
                     <div class=" ">
                         <label class="text-[14px] font-normal" for="productCode">@lang('lang.Product_Code')</label>
@@ -109,14 +110,14 @@
                             name="product_code" id="productCode" placeholder=" @lang('lang.Code_Here')">
                     </div>
                     <div class=" ">
-                        <label class="text-[14px] font-normal" for="firstName">@lang('lang.Product_Category')</label>
+                        <label class="text-[14px] font-normal" for="category">@lang('lang.Product_Category')</label>
                         <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="category" id="category" placeholder=" @lang('lang.Category_Here')">
 
                     </div>
                     <div class="mt-4">
-                        <label class="text-[14px] font-normal" for="firstName">@lang('lang.Product_Sub_Category')</label>
+                        <label class="text-[14px] font-normal" for="subCategory">@lang('lang.Product_Sub_Category')</label>
                         <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="sub_category" id="subCategory" placeholder=" @lang('lang.Sub_Category_Here')">
@@ -135,11 +136,11 @@
                                 name="rate" id="Rate" placeholder=" @lang('lang.Rate_Here')">
                         </div>
                         <div>
-                            <label class="text-[14px] font-normal" for="Rate">@lang('lang.Tax')%</label>
+                            <label class="text-[14px] font-normal" for="tax">@lang('lang.Tax')%</label>
 
                             <input type="number"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="rate" id="Rate" placeholder="%  @lang('lang.Here')  ">
+                                name="tax" id="tax" placeholder="%  @lang('lang.Here')  ">
                         </div>
                     </div>
                     <div class="mt-4  ">
@@ -173,7 +174,7 @@
                 </div>
 
                 <div class="flex justify-end ">
-                    <button class="bg-primary text-white py-2 px-6 my-4 rounded-[4px]  mx-6 uaddBtn  font-semibold">
+                    <button class="bg-primary text-white py-2 px-6 my-4 rounded-[4px]  mx-6 uaddBtn  font-semibold " id="addBtn">
                         <div class=" text-center hidden" id="spinner">
                             <svg aria-hidden="true"
                                 class="w-5 h-5 mx-auto text-center text-gray-200 animate-spin fill-primary"
@@ -245,6 +246,47 @@
 @include('layouts.footer')
 <script>
     $(document).ready(function() {
+        // insert data
+
+        $(document).ready(function() {
+            $("#productdata").submit(function(event) {
+                var url = "../addProduct/";
+                event.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: formData,
+                    dataType: "json",
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function() {
+                        $('#spinner').removeClass('hidden');
+                        $('#text').addClass('hidden');
+                        $('#addBtn').attr('disabled', true);
+                    },
+                    success: function(response) {
+                            window.location.href = '../product';
+
+                    },
+                    error: function(jqXHR) {
+                        let response = JSON.parse(jqXHR.responseText);
+                        console.log("error");
+                        Swal.fire(
+                            'Warning!',
+                            response.message,
+                            'warning'
+                        );
+
+                        $('#utext').removeClass('hidden');
+                        $('#uspinner').addClass('hidden');
+                        $('#uaddBtn').attr('disabled', false);
+                    }
+                });
+            });
+        });
+
+
         // delete training video
         $('.delbtn').click(function() {
             var delId = $(this).attr('delId');

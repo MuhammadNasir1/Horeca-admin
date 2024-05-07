@@ -3,6 +3,7 @@
 use App\Http\Controllers\authController;
 use App\Http\Controllers\coursesController;
 use App\Http\Controllers\parentController;
+use App\Http\Controllers\productController;
 use App\Http\Controllers\studentController;
 use App\Http\Controllers\teacherController;
 use App\Http\Controllers\teachingController;
@@ -40,6 +41,8 @@ Route::middleware('custom')->group(function () {
     Route::get('customers', function () {
         return view('customers');
     });
+
+    Route::post('/addProduct' , [productController::class ,  'insert']);
 });
 
 
