@@ -31,10 +31,6 @@ Route::middleware('custom')->group(function () {
     Route::post('updateSettings', [authController::class, 'updateSet']);
     Route::get('/', [userController::class, 'Dashboard']);
 
-    Route::get('product', function () {
-
-        return view('product');
-    });
     Route::get('help', function () {
         return view('help');
     });
@@ -43,6 +39,7 @@ Route::middleware('custom')->group(function () {
     });
 
     Route::post('/addProduct' , [productController::class ,  'insert']);
+    Route::get('/product' , [productController::class ,  'productData']);
 });
 
 

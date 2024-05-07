@@ -34,38 +34,33 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($products as $x => $data)
-                        <tr class="pt-4">
-                            <td>{{ $x + 1 }}</td>
-                            <td class="w-[220px]">
-                                <video class=" rounded-[4px] w-full" controls width="200px"
-                                    src="../{{ $data->video }}"></video>
-                            </td>
-                            <td>{{ $data-> }}</td>
-                            <td>{{ $data-> }}</td>
-                            <td>{{ $data-> }}</td>
-                            <td>{{ $data-> }}</td>
-                            <td>
-                                <div class="flex gap-5 items-center justify-center">
-                                    @if (session('user_det')['role'] == 'admin')
+                        @foreach ($products as $x => $data)
+                            <tr class="pt-4">
+                                <td>{{ $x + 1 }}</td>
+                                <td class="w-[220px]">
+                                    <img class="h-20 w-20 rounded-full"
+                                    src="../{{ $data->image ?? asset('images/favicon(32X32).png') }}"
+                                    alt="product Image">
+
+                                </td>
+                                <td>{{ $data->code }}</td>
+                                <td>{{ $data->name }}</td>
+                                <td>{{ $data->category }} / {{ $data->sub_category }}</td>
+                                <td>{{ $data->rate }}</td>
+                                <td>{{ $data->status }}</td>
+                                <td>
+                                    <div class="flex gap-5 items-center justify-center">
+                                        <button class="edit_btn" updId="{{ $data->id }}"><img width="38px"
+                                                src="{{ asset('images/icons/edit.svg') }}" alt="delete"></button>
                                         <button class="delbtn" delId="{{ $data->id }}"><img width="38px"
                                                 src="{{ asset('images/icons/delete.svg') }}" alt="delete"></button>
-                                    @endif
-                                    <a class="cursor-pointer" data-modal-target="videodetails{{ $x }}"
-                                        data-modal-toggle="Productdetails"><img width="38px"
-                                            src="{{ asset('images/icons/view.svg') }}" alt="View"></a>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach --}}
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                                        <a class="cursor-pointer"><img width="38px"
+                                                src="{{ asset('images/icons/view.svg') }}" alt="View"></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+
                     </tbody>
                 </table>
             </div>
@@ -79,7 +74,7 @@
     class="hidden overflow-y-auto overflow-x-hidden fixed  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
     <div class="relative p-4 w-full   max-w-6xl max-h-full ">
         <form id="productdata" method="post" enctype="multipart/form-data">
-        {{-- <form action="addProduct" method="post" enctype="multipart/form-data"> --}}
+            {{-- <form action="addProduct" method="post" enctype="multipart/form-data"> --}}
             @csrf
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                 <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
@@ -174,7 +169,8 @@
                 </div>
 
                 <div class="flex justify-end ">
-                    <button class="bg-primary text-white py-2 px-6 my-4 rounded-[4px]  mx-6 uaddBtn  font-semibold " id="addBtn">
+                    <button class="bg-primary text-white py-2 px-6 my-4 rounded-[4px]  mx-6 uaddBtn  font-semibold "
+                        id="addBtn">
                         <div class=" text-center hidden" id="spinner">
                             <svg aria-hidden="true"
                                 class="w-5 h-5 mx-auto text-center text-gray-200 animate-spin fill-primary"
@@ -266,7 +262,7 @@
                         $('#addBtn').attr('disabled', true);
                     },
                     success: function(response) {
-                            window.location.href = '../product';
+                        window.location.href = '../product';
 
                     },
                     error: function(jqXHR) {
