@@ -30,6 +30,8 @@ return [
     "Product_Tags" => "Product Tags",
     "Rate" => "Rate",
     "Tax" => "Tax",
+    "quantity" => "Quantity",
+    "quantity_here" => "Quantity here",
     "Status" => "Status",
     "Active" => "Active",
     "Not_Active" => "Not Active",

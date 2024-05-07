@@ -37,14 +37,14 @@
                         @foreach ($products as $x => $data)
                             <tr class="pt-4">
                                 <td>{{ $x + 1 }}</td>
-                                <td class="w-[220px]">
-                                    <img class="h-20 w-20 rounded-full"
-                                    src="../{{ $data->image ?? asset('images/favicon(32X32).png') }}"
-                                    alt="product Image">
-
-                                </td>
                                 <td>{{ $data->code }}</td>
                                 <td>{{ $data->name }}</td>
+                                <td class="w-[220px]">
+                                    <img class="h-20 w-20 rounded-full"
+                                        src="../{{ $data->image ?? asset('images/favicon(32X32).png') }}"
+                                        alt="product Image">
+
+                                </td>
                                 <td>{{ $data->category }} / {{ $data->sub_category }}</td>
                                 <td>{{ $data->rate }}</td>
                                 <td>{{ $data->status }}</td>
@@ -138,19 +138,27 @@
                                 name="tax" id="tax" placeholder="%  @lang('lang.Here')  ">
                         </div>
                     </div>
-                    <div class="mt-4  ">
-                        <label class="text-[14px] font-normal" for="quantityAlert">@lang('lang.Product_Alert_on_Quantity')</label>
-                        <input type="number"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="quantity_alert" id="quantityAlert" placeholder=" @lang('lang.Alert_Here')">
+                    <div class="flex  gap-4  mt-4">
+                        <div>
+                            <label class="text-[14px] font-normal" for="quantity">@lang('lang.quantity')</label>
+                            <input type="number"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="quantity" id="quantity" placeholder=" @lang('lang.quantity_here')">
+                        </div>
+                        <div>
+                            <label class="text-[14px] font-normal" for="quantityAlert">@lang('lang.Product_Alert_on_Quantity')</label>
+                            <input type="number"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="quantity_alert" id="quantityAlert" placeholder=" @lang('lang.Alert_Here')">
+                        </div>
                     </div>
                     <div class="mt-4">
                         <label class="text-[14px] font-normal" for="Status">@lang('lang.Status')</label>
                         <select
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="status" id="Status">
-                            <option value="male">@lang('lang.Active')</option>
-                            <option value="other">@lang('lang.Not_Active')</option>
+                            <option value="active">@lang('lang.Active')</option>
+                            <option value="not active">@lang('lang.Not_Active')</option>
                         </select>
 
                     </div>
@@ -243,76 +251,39 @@
 <script>
     $(document).ready(function() {
         // insert data
-
-        $(document).ready(function() {
-            $("#productdata").submit(function(event) {
-                var url = "../addProduct/";
-                event.preventDefault();
-                var formData = new FormData(this);
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: formData,
-                    dataType: "json",
-                    contentType: false,
-                    processData: false,
-                    beforeSend: function() {
-                        $('#spinner').removeClass('hidden');
-                        $('#text').addClass('hidden');
-                        $('#addBtn').attr('disabled', true);
-                    },
-                    success: function(response) {
-                        window.location.href = '../product';
-
-                    },
-                    error: function(jqXHR) {
-                        let response = JSON.parse(jqXHR.responseText);
-                        console.log("error");
-                        Swal.fire(
-                            'Warning!',
-                            response.message,
-                            'warning'
-                        );
-
-                        $('#utext').removeClass('hidden');
-                        $('#uspinner').addClass('hidden');
-                        $('#uaddBtn').attr('disabled', false);
-                    }
-                });
-            });
-        });
-
-
-        // delete training video
-        $('.delbtn').click(function() {
-            var delId = $(this).attr('delId');
-            console.log(delId);
-            var url = "../delRecording/" + delId;
+        $("#productdata").submit(function(event) {
+            var url = "../addProduct/";
+            event.preventDefault();
+            var formData = new FormData(this);
             $.ajax({
-                type: "GET",
+                type: "POST",
                 url: url,
+                data: formData,
                 dataType: "json",
+                contentType: false,
+                processData: false,
+                beforeSend: function() {
+                    $('#spinner').removeClass('hidden');
+                    $('#text').addClass('hidden');
+                    $('#addBtn').attr('disabled', true);
+                },
                 success: function(response) {
-                    if (response.success == true) {
-                        window.location.href = '../studentRec';
-                    } else if (response.success == false) {
-                        Swal.fire(
-                            'Warning!',
-                            response.message,
-                            'warning'
-                        );
-                    }
+                    window.location.href = '../product';
+
                 },
                 error: function(jqXHR) {
                     let response = JSON.parse(jqXHR.responseText);
                     console.log("error");
                     Swal.fire(
                         'Warning!',
-                        'Recording Not Found',
+                        response.message,
                         'warning'
                     );
-                }
 
+                    $('#text').removeClass('hidden');
+                    $('#spinner').addClass('hidden');
+                    $('#addBtn').attr('disabled', false);
+                }
             });
         });
     });

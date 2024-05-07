@@ -38,8 +38,11 @@ Route::middleware('custom')->group(function () {
         return view('customers');
     });
 
-    Route::post('/addProduct' , [productController::class ,  'insert']);
+
+    // product CRUD
     Route::get('/product' , [productController::class ,  'productData']);
+    Route::post('/addProduct' , [productController::class ,  'insert']);
+    Route::post('/delProduct/{id}' , [productController::class ,  'delete']);
 });
 
 

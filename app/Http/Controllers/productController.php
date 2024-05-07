@@ -15,15 +15,16 @@ class productController extends Controller
                 'product_name' => 'required',
                 'product_code' => 'required',
                 'category' => 'required',
-                'sub_category' => 'required',
-                'product_tags' => 'required',
+                'sub_category' => 'nullable',
+                'product_tags' => 'nullable',
                 'rate' => 'required',
                 'product_tags' => 'required',
-                'tax' => 'required',
-                'quantity_alert' => 'required',
+                'tax' => 'nullable',
+                'quantity' => 'required',
+                'quantity_alert' => 'nullable',
                 'status' => 'required',
                 'product_image' => 'nullable|image',
-                'description' => 'required',
+                'description' => 'nullable',
             ]);
 
 
@@ -35,6 +36,7 @@ class productController extends Controller
                 'tags' => $validateData['product_tags'],
                 'rate' => $validateData['rate'],
                 'tax' => $validateData['tax'],
+                'quantity' => $validateData['quantity'],
                 'quantity_alert' => $validateData['quantity_alert'],
                 'status' => $validateData['status'],
                 'description' => $validateData['description'],
@@ -48,7 +50,7 @@ class productController extends Controller
             }
             $product->save();
 
-            return response()->json(['success'  => true, 'message' => "data add success full"],  200);
+            return response()->json(['success'  => true, 'message' => "produnct add successfully"],  200);
         } catch (\Exception $e) {
             return response()->json(['success'  => false, 'message' => $e->getMessage()],  500);
         }
@@ -58,5 +60,19 @@ class productController extends Controller
     {
         $products = product::all();
         return view('product',  ['products' => $products]);
+    }
+
+    public function delete($id)
+    {
+        try {
+            $products = product::find($id);
+            if (!$products) {
+                return response()->json(['success'  => false, 'message' => "Product not found"],  500);
+            }
+            $products->delete();
+            return response()->json(['success'  => true, 'message' => "produnct  delete successfully"],  200);
+        } catch (\Exception $e) {
+            return response()->json(['success'  => false, 'message' => $e->getMessage()],  500);
+        }
     }
 }

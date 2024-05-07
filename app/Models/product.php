@@ -19,6 +19,7 @@ class product extends Model
         'tags',
         'rate',
         'tax',
+        'quantity',
         'quantity_alert',
         'status',
         'image',

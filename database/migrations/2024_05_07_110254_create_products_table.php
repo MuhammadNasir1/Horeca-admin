@@ -16,14 +16,15 @@ return new class extends Migration
             $table->string('name');
             $table->string('code');
             $table->string('category');
-            $table->string('sub_category');
-            $table->string('tags');
+            $table->string('sub_category')->nullable();
+            $table->string('tags')->nullable();
             $table->string('rate');
-            $table->string('tax');
+            $table->string('tax')->nullable();
+            $table->string('quantity');
             $table->string('quantity_alert')->nullable();
             $table->string('status');
             $table->string('image')->nullable();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
