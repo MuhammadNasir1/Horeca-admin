@@ -9,9 +9,15 @@
         <div>
             <div class="flex justify-between px-[20px] mb-3">
                 <h3 class="text-[20px] text-black">@lang('lang.product_List')</h3>
-                <button data-modal-target="addproductmodal" data-modal-toggle="addproductmodal"
-                    class="bg-secondary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
-                    @lang('lang.Add_Product')</button>
+             <div>
+
+                 <button data-modal-target="addproductmodal" data-modal-toggle="addproductmodal"
+                 class="bg-primary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
+                 @lang('lang.Add_Product')</button>
+                 <button
+                 class="bg-secondary cursor-pointer text-white  ml-4 h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
+                 @lang('lang.Import_From_Excel')</button>
+             </div>
             </div>
             <div class="overflow-x-auto">
                 <table id="datatable" class="overflow-scroll">
@@ -71,7 +77,7 @@
 {{-- ============ add  product modal  =========== --}}
 <div id="addproductmodal" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
-    <div class="relative p-4 w-full   max-w-8xl max-h-full ">
+    <div class="relative p-4 w-full   max-w-6xl max-h-full ">
         <form action="productdata" method="post" enctype="multipart/form-data">
             @csrf
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
@@ -89,85 +95,83 @@
                         </svg>
                     </button>
                 </div>
-                <div class="grid grid-cols-4   gap-6 mx-6">
-                    <div class="my-4  ">
+                <div class="grid grid-cols-3 gap-x-6 mx-6 my-6">
+                    <div class="  ">
                         <label class="text-[14px] font-normal" for="firstName">@lang('lang.Product_Name')</label>
                         <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="full_name" id="fullName" placeholder=" @lang('lang.Name_Here')">
                     </div>
-                    <div class="my-4 ">
+                    <div class=" ">
                         <label class="text-[14px] font-normal" for="productCode">@lang('lang.Product_Code')</label>
                         <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="product_code" id="productCode" placeholder=" @lang('lang.Code_Here')">
                     </div>
-                    <div class="my-4 ">
+                    <div class=" ">
                         <label class="text-[14px] font-normal" for="firstName">@lang('lang.Product_Category')</label>
                         <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="category" id="category" placeholder=" @lang('lang.Category_Here')">
 
                     </div>
-                    <div class="my-4 ">
+                    <div class="mt-4">
                         <label class="text-[14px] font-normal" for="firstName">@lang('lang.Product_Sub_Category')</label>
                         <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="sub_category" id="subCategory" placeholder=" @lang('lang.Sub_Category_Here')">
                     </div>
-                </div>
-                <div class="grid grid-cols-4   gap-6 mx-6">
-                    <div class="my-4  ">
+                    <div class="mt-4  ">
                         <label class="text-[14px] font-normal" for="tags">@lang('lang.Product_Tags')</label>
                         <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="product_tags" id="tags" placeholder=" @lang('lang.Tags_Here')">
                     </div>
-                    <div class="my-4  ">
-                        <div class="flex  gap-4">
-                            <div>
-                                <label class="text-[14px] font-normal" for="Rate">@lang('lang.Rate')</label>
-                                <input type="number"
-                                    class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                    name="rate" id="Rate" placeholder=" @lang('lang.Rate_Here')">
-                            </div>
-                            <div>
-                                <label class="text-[14px] font-normal" for="Rate">@lang('lang.Tax')%</label>
+                    <div class="flex  gap-4  mt-4">
+                        <div>
+                            <label class="text-[14px] font-normal" for="Rate">@lang('lang.Rate')</label>
+                            <input type="number"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="rate" id="Rate" placeholder=" @lang('lang.Rate_Here')">
+                        </div>
+                        <div>
+                            <label class="text-[14px] font-normal" for="Rate">@lang('lang.Tax')%</label>
 
-                                <input type="number"
-                                    class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                    name="rate" id="Rate" placeholder="%  @lang('lang.Here')  ">
-                            </div>
+                            <input type="number"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="rate" id="Rate" placeholder="%  @lang('lang.Here')  ">
                         </div>
                     </div>
-                    <div class="my-4  ">
+                    <div class="mt-4  ">
                         <label class="text-[14px] font-normal" for="quantityAlert">@lang('lang.Product_Alert_on_Quantity')</label>
                         <input type="number"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="quantity_alert" id="quantityAlert" placeholder=" @lang('lang.Alert_Here')">
                     </div>
-                    <div class="my-4  ">
-                        <div class="flex  gap-4">
-                            <div>
-                                <label class="text-[14px] font-normal" for="Status">@lang('lang.Status')</label>
-                                <select
-                                    class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                    name="status" id="Status">
-                                    <option value="male">@lang('lang.Activce')</option>
-                                    <option value="other">@lang('lang.unActive')</option>
-                                </select>
+                    <div class="mt-4">
+                        <label class="text-[14px] font-normal" for="Status">@lang('lang.Status')</label>
+                        <select
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="status" id="Status">
+                            <option value="male">@lang('lang.Active')</option>
+                            <option value="other">@lang('lang.Not_Active')</option>
+                        </select>
 
-                            </div>
-                            <div>
-                                <label class="text-[14px] font-normal" for="image">@lang('lang.Product_Image')</label>
-                                <input type="file"
-                                    class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                    name="product_image" id="image">
-                            </div>
-
-                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <label class="text-[14px] font-normal" for="image">@lang('lang.Product_Image')</label>
+                        <input type="file"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="product_image" id="image">
+                    </div>
+                    <div class="mt-4 col-span-3">
+                        <label class="text-[14px] font-normal" for="description">@lang('lang.Product_Description')</label>
+                        <textarea name="description" id="description"
+                            class="w-full h-24  border-[#DEE2E6] rounded-[4px] focus:border-primary text-[14px] "
+                            placeholder="@lang('lang.Start_writing_here')"></textarea>
                     </div>
                 </div>
+
                 <div class="flex justify-end ">
                     <button class="bg-primary text-white py-2 px-6 my-4 rounded-[4px]  mx-6 uaddBtn  font-semibold">
                         <div class=" text-center hidden" id="spinner">
