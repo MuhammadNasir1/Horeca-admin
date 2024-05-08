@@ -10,25 +10,12 @@
             <div class="bg-white  border border-secondary rounded-[10px] py-5 px-8">
                 <div class="flex gap-1 justify-between items-center">
                     <div>
-                        <p class="text-sm text-[#808191]">@lang('lang.Total_Students')</p>
-                        <h2 class="text-2xl font-semibold mt-1"></h2>
+                        <p class="text-sm text-[#808191]">@lang('lang.Total_orders')</p>
+                        <h2 class="text-2xl font-semibold mt-1">110</h2>
                     </div>
                     <div>
-                        <img width="90px" height="90px" src="{{ asset('images/totall_student.svg') }}" alt="students">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card-1 ">
-            <div class="bg-white  border border-secondary rounded-[10px] py-5 px-8">
-                <div class="flex gap-1 justify-between items-center">
-                    <div>
-                        <p class="text-sm text-[#808191]">@lang('lang.Total_Parents')</p>
-                        <h2 class="text-2xl font-semibold mt-1"></h2>
-                    </div>
-                    <div>
-                        <img width="90px" height="90px" src="{{ asset('images/total_prent.svg') }}" alt="students">
+                        <img width="60px" height="60px" src="{{ asset('images/icons/total_orders.svg') }}"
+                            alt="Orders">
                     </div>
                 </div>
             </div>
@@ -38,11 +25,12 @@
             <div class="bg-white  border border-secondary rounded-[10px] py-5 px-8">
                 <div class="flex gap-1 justify-between items-center">
                     <div>
-                        <p class="text-sm text-[#808191]">@lang('lang.Total_Teachers')</p>
-                        <h2 class="text-2xl font-semibold mt-1"></h2>
+                        <p class="text-sm text-[#808191]">@lang('lang.Pending_orders')</p>
+                        <h2 class="text-2xl font-semibold mt-1">11</h2>
                     </div>
                     <div>
-                        <img width="90px" height="90px" src="{{ asset('images/total_teacher.svg') }}" alt="teacher">
+                        <img width="52px" height=52px" src="{{ asset('images/icons/pending-orders.svg') }}"
+                            alt="Pending Orders">
                     </div>
                 </div>
             </div>
@@ -52,11 +40,27 @@
             <div class="bg-white  border border-secondary rounded-[10px] py-5 px-8">
                 <div class="flex gap-1 justify-between items-center">
                     <div>
-                        <p class="text-sm text-[#808191]">@lang('lang.Total_Revenue')</p>
+                        <p class="text-sm text-[#808191]">@lang('lang.Total_product')</p>
+                        <h2 class="text-2xl font-semibold mt-1">215</h2>
+                    </div>
+                    <div>
+                        <img width="60px" height="60px" src="{{ asset('images/icons/total-product.svg') }}"
+                            alt="Product">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-1 ">
+            <div class="bg-white  border border-secondary rounded-[10px] py-5 px-8">
+                <div class="flex gap-1 justify-between items-center">
+                    <div>
+                        <p class="text-sm text-[#808191]">@lang('lang.Total_customers')</p>
                         <h2 class="text-2xl font-semibold mt-1">$0.00</h2>
                     </div>
                     <div>
-                        <img width="90px" height="90px" src="{{ asset('images/total_rev.svg') }}" alt="Revenue">
+                        <img width="50px" height="50px" src="{{ asset('images/icons/customers.svg') }}"
+                            alt="Customers">
                     </div>
                 </div>
             </div>
@@ -77,7 +81,7 @@
 
         <div class=" shadow-med p-3 py-5  mt-8 rounded-xl min-h-[448px]">
             <div class="flex justify-between px-6">
-                <h2 class="text-xl  font-semibold ">@lang('lang.Top_Performer')</h2>
+                <h2 class="text-xl  font-semibold ">@lang('lang.Top_Product')</h2>
 
             </div>
             <div>
@@ -88,13 +92,13 @@
                             <thead class="text-sm text-gray-900 = text-dblue ">
                                 <tr>
                                     <th class="px-6 py-3">
+                                        @lang('lang.Code')
+                                    </th>
+                                    <th class="px-6 py-3">
                                         @lang('lang.Photo')
                                     </th>
                                     <th class="px-6 py-3">
                                         @lang('lang.Name')
-                                    </th>
-                                    <th class="px-6 py-3">
-                                        @lang('lang.Standard')
                                     </th>
                                     <th class="px-6 py-3">
                                         @lang('lang.Rank')
@@ -104,13 +108,10 @@
                             <tbody>
                                 <tr class="bg-white ">
                                     <td class="px-6 py-3 ">
-                                        <div class="flex justify-center">
-                                            <img height="40px" width="40px" src="{{ asset('images/teacher.svg') }}"
-                                                alt="user">
-                                        </div>
+                                        11
                                     </td>
-                                    <td class="px-6 py-3">
-                                        John Smith
+                                    <td class="px-6 py-3 flex  justify-center">
+                                        <img src="{{ asset('images/favicon(32X32).png') }}" alt="Product">
                                     </td>
                                     <td class="px-6 py-3">
                                         7th Class
@@ -126,31 +127,6 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="bg-white ">
-                                    <td class="px-6 py-3 ">
-                                        <div class="flex justify-center">
-                                            <img height="40px" width="40px" src="{{ asset('images/teacher.svg') }}"
-                                                alt="user">
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-3">
-                                        John Smith
-                                    </td>
-                                    <td class="px-6 py-3">
-                                        7th Class
-                                    </td>
-                                    <td class="px-6 py-3">
-                                        <div class="flex items-center justify-center flex-col">
-                                            <div>
-                                                <p class="text-dblue flex">95.06%</p>
-                                                <div class="bg-green-100 rounded-xl w-36 h-3 relative  mt-1">
-                                                    <div class="bg-dblue w-[70%] rounded-xl h-full"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
 
                             </tbody>
                         </table>
@@ -163,25 +139,25 @@
     </div>
     <div class="w-[40%]">
         <div class=" shadow-med p-3 rounded-xl">
-            <h2 class="text-xl  font-semibold ml-6">@lang('lang.Students')</h2>
+            <h2 class="text-xl  font-semibold ml-6">@lang('lang.Orders')</h2>
             <div id="studentChart" class="mt-4" style="height: 370px; width: 100%;"></div>
         </div>
         <div class=" shadow-med p-3 rounded-xl mt-10">
 
             <div>
                 <div class="flex justify-between px-6">
-                    <h2 class="text-xl  font-semibold ">@lang('lang.Attendance')</h2>
+                    <h2 class="text-xl  font-semibold ">@lang('lang.Orders')</h2>
                 </div>
                 <div id="attendanceChart" class="mt-4" style="height: 270px; width: 100%;"></div>
                 <div class="mt-8 mx-10">
                     <div class="flex justify-around">
                         <div class="flex flex-col items-center">
-                            <p class="text-[#CECECE] text-lg font-semibold">@lang('lang.Students')</p>
+                            <p class="text-[#CECECE] text-lg font-semibold">@lang('lang.Pending')</p>
                             <h2 class="text-secondary text-3xl  mt-2 font-bold">84%</h2>
                         </div>
                         <div class="flex flex-col items-center">
-                            <p class="text-[#CECECE] text-lg font-semibold">@lang('lang.Teachers')</p>
-                            <h2 class="text-pink text-3xl  mt-2  font-bold">34%</h2>
+                            <p class="text-[#CECECE] text-lg font-semibold">@lang('lang.Confirm')</p>
+                            <h2 class="text-primary text-3xl  mt-2  font-bold">34%</h2>
                         </div>
 
                     </div>

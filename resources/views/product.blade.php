@@ -54,8 +54,8 @@
                                                 src="{{ asset('images/icons/edit.svg') }}" alt="delete"></button>
                                         <button class="delbtn" delId="{{ $data->id }}"><img width="38px"
                                                 src="{{ asset('images/icons/delete.svg') }}" alt="delete"></button>
-                                        <a class="cursor-pointer"><img width="38px"
-                                                src="{{ asset('images/icons/view.svg') }}" alt="View"></a>
+                                        <button  data-modal-target="Productdetails" data-modal-toggle="Productdetails" class="cursor-pointer"><img width="38px"
+                                                src="{{ asset('images/icons/view.svg') }}" alt="View"></button>
                                     </div>
                                 </td>
                             </tr>
@@ -286,6 +286,8 @@
                 }
             });
         });
+
+        // delete data
+
     });
 </script>
-@include('layouts.footer')

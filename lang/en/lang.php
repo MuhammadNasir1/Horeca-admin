@@ -47,6 +47,18 @@ return [
     "Product_Sub_Category" => "Product Sub-Category",
     "Sub_Category_Here" => "Sub-Category Here",
     "Category/Sub-Category" => "Category/Sub-Category",
+    "Total_orders" => "Total orders",
+    "Pending_orders" => "Pending orders",
+    "Total_product" => "Total product",
+    "Total_customers" => "Total customers",
+    "Top_Product" => "Top Product",
+    "Rank" => "Rank",
+    "Code" => "Code",
+    "Photo" => "Photo",
+    "Orders" => "Orders",
+    "Pending" => "Pending",
+    "Confirm" => "Confirm",
+    "Earning" => "Earning",
 
 
 ];
