@@ -64,15 +64,9 @@ class productController extends Controller
 
     public function delete($id)
     {
-        try {
-            $products = product::find($id);
-            if (!$products) {
-                return response()->json(['success'  => false, 'message' => "Product not found"],  500);
-            }
-            $products->delete();
-            return response()->json(['success'  => true, 'message' => "produnct  delete successfully"],  200);
-        } catch (\Exception $e) {
-            return response()->json(['success'  => false, 'message' => $e->getMessage()],  500);
-        }
+
+        $products = product::find($id);
+        $products->delete();
+        return redirect('../product');
     }
 }

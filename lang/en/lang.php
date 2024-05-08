@@ -59,6 +59,9 @@ return [
     "Pending" => "Pending",
     "Confirm" => "Confirm",
     "Earning" => "Earning",
+    "Add_Order" => "Add Order",
+    "All_Orders" => "All Orders",
+    "Order_List" => "Order List",
 
 
 ];

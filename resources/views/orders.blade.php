@@ -2,21 +2,18 @@
 @include('layouts.nav')
 <div class="mx-4 mt-12">
     <div>
-        <h1 class=" font-semibold   text-2xl ">@lang('lang.All_Product')</h1>
+        <h1 class=" font-semibold   text-2xl ">@lang('lang.All_Orders')</h1>
     </div>
 
     <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
         <div>
             <div class="flex justify-between px-[20px] mb-3">
-                <h3 class="text-[20px] text-black">@lang('lang.product_List')</h3>
+                <h3 class="text-[20px] text-black">@lang('lang.Order_List')</h3>
                 <div>
 
-                    <button data-modal-target="addproductmodal" data-modal-toggle="addproductmodal"
+                    <button data-modal-target="addordermodal" data-modal-toggle="addordermodal"
                         class="bg-primary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
-                        @lang('lang.Add_Product')</button>
-                    <button
-                        class="bg-secondary cursor-pointer text-white  ml-4 h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
-                        @lang('lang.Import_From_Excel')</button>
+                        @lang('lang.Add_Order')</button>
                 </div>
             </div>
             <div class="overflow-x-auto">
@@ -26,15 +23,15 @@
                             <th>@lang('lang.STN')</th>
                             <th>@lang('lang.Code')</th>
                             <th>@lang('lang.Name')</th>
-                            <th>@lang('lang.Image')</th>
-                            <th>@lang('lang.Category/Sub-Category')</th>
+                            <th>@lang('lang.Price')</th>
+                            <th>@lang('lang.Price')</th>
                             <th>@lang('lang.Price')</th>
                             <th>@lang('lang.Status')</th>
                             <th>@lang('lang.Action')</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($products as $x => $data)
+                        {{-- @foreach ($products as $x => $data)
                             <tr class="pt-4">
                                 <td>{{ $x + 1 }}</td>
                                 <td>{{ $data->code }}</td>
@@ -57,8 +54,17 @@
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach
-
+                        @endforeach --}}
+                        <tr>
+                            <th>@lang('lang.STN')</th>
+                            <th>@lang('lang.Code')</th>
+                            <th>@lang('lang.Name')</th>
+                            <th>@lang('lang.Image')</th>
+                            <th>@lang('lang.Category/Sub-Category')</th>
+                            <th>@lang('lang.Price')</th>
+                            <th>@lang('lang.Status')</th>
+                            <th>@lang('lang.Action')</th>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -68,7 +74,7 @@
 </div>
 
 {{-- ============ add  product modal  =========== --}}
-<div id="addproductmodal" data-modal-backdrop="static"
+<div id="addordermodal" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
     <div class="relative p-4 w-full   max-w-6xl max-h-full ">
         <form id="productdata" method="post" enctype="multipart/form-data">
@@ -81,7 +87,7 @@
                     </h3>
                     <button type="button"
                         class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
-                        data-modal-hide="addproductmodal">
+                        data-modal-hide="addordermodal">
                         <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 14 14">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

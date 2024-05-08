@@ -34,15 +34,15 @@ Route::middleware('custom')->group(function () {
     Route::get('help', function () {
         return view('help');
     });
-    Route::get('customers', function () {
-        return view('customers');
+    Route::get('orders', function () {
+        return view('orders');
     });
 
 
     // product CRUD
-    Route::get('/product' , [productController::class ,  'productData']);
-    Route::post('/addProduct' , [productController::class ,  'insert']);
-    Route::post('/delProduct/{id}' , [productController::class ,  'delete']);
+    Route::get('/product', [productController::class,  'productData']);
+    Route::post('/addProduct', [productController::class,  'insert']);
+    Route::get('/delProduct/{id}', [productController::class,  'delete']);
 });
 
 
