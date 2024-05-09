@@ -37,6 +37,9 @@ Route::middleware('custom')->group(function () {
     Route::get('orders', function () {
         return view('orders');
     });
+    Route::get('createOrder', function () {
+        return view('createOrder');
+    });
 
 
     // product CRUD

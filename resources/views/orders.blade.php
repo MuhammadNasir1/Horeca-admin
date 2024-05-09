@@ -76,7 +76,7 @@
 {{-- ============ add  product modal  =========== --}}
 <div id="addordermodal" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
-    <div class="relative p-4 w-full   max-w-6xl max-h-full ">
+    <div class="relative p-4 w-full   max-w-7xl max-h-full ">
         <form id="productdata" method="post" enctype="multipart/form-data">
             {{-- <form action="addProduct" method="post" enctype="multipart/form-data"> --}}
             @csrf
@@ -96,19 +96,33 @@
                     </button>
                 </div>
                 <div class="grid grid-cols-3 gap-x-6 mx-6 my-6">
-                    <div class="  ">
+                    <div class="grid grid-cols-2 gap-4 ">
+                        <div>
+                            <label class="text-[14px] font-normal" for="order_id">@lang('lang.Order_Id')</label>
+                            <input type="number"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="order_id" id="order_id" value="01">
+                        </div>
+                        <div>
+                            <label class="text-[14px] font-normal" for="order_date">@lang('lang.Order_Date')</label>
+                            <input type="date"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="order_date" id="order_date">
+                        </div>
+                    </div>
+                    <div class="">
                         <label class="text-[14px] font-normal" for="customer_name">@lang('lang.Customer_Name')</label>
                         <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="customer_name" id="customer_name" placeholder=" @lang('lang.Name_Here')">
                     </div>
-                    <div class=" ">
-                        <label class="text-[14px] font-normal" for="order_date">@lang('lang.Order_Date')</label>
-                        <input type="date"
+                    <div class="">
+                        <label class="text-[14px] font-normal" for="customer_name">@lang('lang.Customer_phone')</label>
+                        <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="order_date" id="order_date">
+                            name="customer_name" id="customer_name" placeholder=" @lang('lang.Phone_Here')">
                     </div>
-                    <div class=" ">
+                    <div class="mt-4 ">
                         <label class="text-[14px] font-normal" for="product">@lang('lang.Product')</label>
                         <select
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
@@ -118,6 +132,22 @@
                         </select>
 
                     </div>
+                    <div class="grid grid-cols-2 gap-4  mt-4">
+                        <div>
+                            <label class="text-[14px] font-normal" for="Product_Price">@lang('lang.Product_Price')</label>
+                            <input type="number"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="Product_Price" id="Product_Price" value="100" readonly>
+                        </div>
+                        <div>
+                            <label class="text-[14px] font-normal" for="Tax">@lang('lang.Tax')%</label>
+                            <input type="number"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="Tax" id="tax" readonly value="18">
+                        </div>
+                    </div>
+
+
                     <div class="mt-4">
                         <label class="text-[14px] font-normal" for="order_quantity">@lang('lang.Quantity')</label>
                         <input type="number"
@@ -125,12 +155,12 @@
                             name="order_quantity" id="order_quantity" placeholder=" @lang('lang.Quantity')" min="1">
 
                     </div>
-                    <div class="mt-4  ">
-                        <label class="text-[14px] font-normal" for="order_tracking">@lang('lang.Order_Tracking')</label>
-                        <input type="text"
+                    <div class=" mt-4">
+                        <label class="text-[14px] font-normal" for="order_discount">@lang('lang.Discount')</label>
+                        <input type="number"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="order_tracking" id="order_tracking" placeholder=" @lang('lang.Order_Tracking')">
-
+                            name="order_discount" id="order_discount" placeholder=" @lang('lang.Discount')"
+                            min="1">
                     </div>
                     <div class=" mt-4">
                         <label class="text-[14px] font-normal" for="order_status">@lang('lang.Order_Status')</label>
@@ -142,12 +172,7 @@
                         </select>
 
                     </div>
-                    <div class=" mt-4">
-                        <label class="text-[14px] font-normal" for="order_discount">@lang('lang.Discount')</label>
-                        <input type="number"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="order_discount" id="order_discount" placeholder=" @lang('lang.Discount')" min="1">
-                    </div>
+
                     <div class="mt-4">
                         <label class="text-[14px] font-normal" for="payment_type">@lang('lang.Payment_Type')</label>
                         <select
@@ -158,20 +183,22 @@
                         </select>
 
                     </div>
-                    <div class="mt-4">
-                        <label class="text-[14px] font-normal" for="image">@lang('lang.Product_Image')</label>
-                        <input type="file"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="product_image" id="image">
-                    </div>
-                    <div class="mt-4  col-span-3">
-                        <div>
-                            <label class="text-[14px] font-normal" for="order_description">@lang('lang.Order_Description')</label>
-                            <textarea name="order_description" id="order_description"
-                                class="w-full h-24  border-[#DEE2E6] rounded-[4px] focus:border-primary text-[14px] "
-                                placeholder="@lang('lang.Order_Description')"></textarea>
+                    <div class="mt-4  col-span-3  ">
+                        <div class="flex gap-4 items-center">
+                            <div class="w-full">
+                                <label class="text-[14px] font-normal"
+                                    for="Customer_Adress">@lang('lang.Customer_Adress')</label>
+                                <input type="text"
+                                    class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                    name="Customer_Adress" id="Customer_Adress" placeholder=" @lang('lang.Adress_Here')"
+                                    min="1">
+                            </div>
+                            <div class="mt-6">
+                                <button type="button"
+                                    class="bg-primary toggle-button h-[40px] rounded-[4px] w-[40px] font-bold text-white text-2xl"
+                                    style="width: 42px">+</button>
+                            </div>
                         </div>
-
                     </div>
 
                 </div>

@@ -73,5 +73,13 @@ return [
     "Payment_Type" => "Payment Type",
     "COD" => "COD",
     "Credit_Debit_Card" => "Credit/Debit Card",
+    "Customer_phone" => "Customer Phone",
+    "Phone_Here" => "Phone Here",
+    "Order_Id" => "Order Id",
+    "tax" => "Tax",
+    "Product_Price" => "Product Price",
+    "Customer_Adress" => "Customer Adress",
+    "Adress_Here" => "Adress Here",
+    "create_order" => "Create order",
 
 ];
