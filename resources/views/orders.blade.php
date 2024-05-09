@@ -83,7 +83,7 @@
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                 <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
                     <h3 class="text-xl font-semibold text-white ">
-                        @lang('lang.Add_Product')
+                        @lang('lang.Add_Order')
                     </h3>
                     <button type="button"
                         class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
@@ -97,72 +97,64 @@
                 </div>
                 <div class="grid grid-cols-3 gap-x-6 mx-6 my-6">
                     <div class="  ">
-                        <label class="text-[14px] font-normal" for="firstName">@lang('lang.Product_Name')</label>
+                        <label class="text-[14px] font-normal" for="customer_name">@lang('lang.Customer_Name')</label>
                         <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="product_name" id="request" placeholder=" @lang('lang.Name_Here')">
+                            name="customer_name" id="customer_name" placeholder=" @lang('lang.Name_Here')">
                     </div>
                     <div class=" ">
-                        <label class="text-[14px] font-normal" for="productCode">@lang('lang.Product_Code')</label>
-                        <input type="text"
+                        <label class="text-[14px] font-normal" for="order_date">@lang('lang.Order_Date')</label>
+                        <input type="date"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="product_code" id="productCode" placeholder=" @lang('lang.Code_Here')">
+                            name="order_date" id="order_date">
                     </div>
                     <div class=" ">
-                        <label class="text-[14px] font-normal" for="category">@lang('lang.Product_Category')</label>
-                        <input type="text"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="category" id="category" placeholder=" @lang('lang.Category_Here')">
-
-                    </div>
-                    <div class="mt-4">
-                        <label class="text-[14px] font-normal" for="subCategory">@lang('lang.Product_Sub_Category')</label>
-                        <input type="text"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="sub_category" id="subCategory" placeholder=" @lang('lang.Sub_Category_Here')">
-                    </div>
-                    <div class="mt-4  ">
-                        <label class="text-[14px] font-normal" for="tags">@lang('lang.Product_Tags')</label>
-                        <input type="text"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="product_tags" id="tags" placeholder=" @lang('lang.Tags_Here')">
-                    </div>
-                    <div class="flex  gap-4  mt-4">
-                        <div>
-                            <label class="text-[14px] font-normal" for="Rate">@lang('lang.Rate')</label>
-                            <input type="number"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="rate" id="Rate" placeholder=" @lang('lang.Rate_Here')">
-                        </div>
-                        <div>
-                            <label class="text-[14px] font-normal" for="tax">@lang('lang.Tax')%</label>
-
-                            <input type="number"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="tax" id="tax" placeholder="%  @lang('lang.Here')  ">
-                        </div>
-                    </div>
-                    <div class="flex  gap-4  mt-4">
-                        <div>
-                            <label class="text-[14px] font-normal" for="quantity">@lang('lang.quantity')</label>
-                            <input type="number"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="quantity" id="quantity" placeholder=" @lang('lang.quantity_here')">
-                        </div>
-                        <div>
-                            <label class="text-[14px] font-normal" for="quantityAlert">@lang('lang.Product_Alert_on_Quantity')</label>
-                            <input type="number"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="quantity_alert" id="quantityAlert" placeholder=" @lang('lang.Alert_Here')">
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <label class="text-[14px] font-normal" for="Status">@lang('lang.Status')</label>
+                        <label class="text-[14px] font-normal" for="product">@lang('lang.Product')</label>
                         <select
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="status" id="Status">
+                            name="product" id="product">
                             <option value="active">@lang('lang.Active')</option>
                             <option value="not active">@lang('lang.Not_Active')</option>
+                        </select>
+
+                    </div>
+                    <div class="mt-4">
+                        <label class="text-[14px] font-normal" for="order_quantity">@lang('lang.Quantity')</label>
+                        <input type="number"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="order_quantity" id="order_quantity" placeholder=" @lang('lang.Quantity')" min="1">
+
+                    </div>
+                    <div class="mt-4  ">
+                        <label class="text-[14px] font-normal" for="order_tracking">@lang('lang.Order_Tracking')</label>
+                        <input type="text"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="order_tracking" id="order_tracking" placeholder=" @lang('lang.Order_Tracking')">
+
+                    </div>
+                    <div class=" mt-4">
+                        <label class="text-[14px] font-normal" for="order_status">@lang('lang.Order_Status')</label>
+                        <select
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="order_status" id="order_status">
+                            <option value="active">@lang('lang.Active')</option>
+                            <option value="not active">@lang('lang.Not_Active')</option>
+                        </select>
+
+                    </div>
+                    <div class=" mt-4">
+                        <label class="text-[14px] font-normal" for="order_discount">@lang('lang.Discount')</label>
+                        <input type="number"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="order_discount" id="order_discount" placeholder=" @lang('lang.Discount')" min="1">
+                    </div>
+                    <div class="mt-4">
+                        <label class="text-[14px] font-normal" for="payment_type">@lang('lang.Payment_Type')</label>
+                        <select
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="payment_type" id="payment_type">
+                            <option value="cod">@lang('lang.COD')</option>
+                            <option value="Credit/Debit Card">@lang('lang.Credit_Debit_Card')</option>
                         </select>
 
                     </div>
@@ -172,12 +164,16 @@
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="product_image" id="image">
                     </div>
-                    <div class="mt-4 col-span-3">
-                        <label class="text-[14px] font-normal" for="description">@lang('lang.Product_Description')</label>
-                        <textarea name="description" id="description"
-                            class="w-full h-24  border-[#DEE2E6] rounded-[4px] focus:border-primary text-[14px] "
-                            placeholder="@lang('lang.Start_writing_here')"></textarea>
+                    <div class="mt-4  col-span-3">
+                        <div>
+                            <label class="text-[14px] font-normal" for="order_description">@lang('lang.Order_Description')</label>
+                            <textarea name="order_description" id="order_description"
+                                class="w-full h-24  border-[#DEE2E6] rounded-[4px] focus:border-primary text-[14px] "
+                                placeholder="@lang('lang.Order_Description')"></textarea>
+                        </div>
+
                     </div>
+
                 </div>
 
                 <div class="flex justify-end ">

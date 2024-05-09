@@ -53,7 +53,6 @@ return [
     "Total_customers" => "Total customers",
     "Top_Product" => "Top Product",
     "Rank" => "Rank",
-    "Code" => "Code",
     "Photo" => "Photo",
     "Orders" => "Orders",
     "Pending" => "Pending",
@@ -62,6 +61,17 @@ return [
     "Add_Order" => "Add Order",
     "All_Orders" => "All Orders",
     "Order_List" => "Order List",
-
+    "Customer_Name" => "Customer Name",
+    "Order_Date" => "Order Date",
+    "Quantity" => "Quantity",
+    "Order_Tracking" => "Order Tracking",
+    "Order_Notes" => "Order Notes",
+    "Order_Description" => "Order Description   ",
+    "Order_Status" => "Order Status   ",
+    "Product" => "Product",
+    "Discount" => "Discount",
+    "Payment_Type" => "Payment Type",
+    "COD" => "COD",
+    "Credit_Debit_Card" => "Credit/Debit Card",
 
 ];
