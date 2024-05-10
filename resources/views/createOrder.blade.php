@@ -118,13 +118,10 @@
                         <td class="border-2 border-primary py-2" colspan="3">
                             <div class="text-right pr-2 w-[100%]">Sub Total:</div>
                         </td>
-                        <td class="border-2 border-primary py-2" colspan="1">
-                            <div class="">500</div>
+                        <td class="border-2 border-primary py-2" colspan="2">
+                            <div class="" id="subtotal">0</div>
                         </td>
-                        <td class="border-2 border-primary py-2" colspan="1">
-                            <div class="">500</div>
-                        </td>
-                        <td class="border-2 border-primary py-1" colspan="1">
+                        <td class="border-2 border-primary py-1" colspan="2">
                             <div class="flex gap-2 w-[80%] mx-auto">
                                 <form action="#" class="flex items-center gap-4 w-full">
                                     <label class="text-[14px] font-normal" for="discount">@lang('lang.Discount'):</label>
@@ -147,11 +144,8 @@
                         <td class="border-2 border-primary py-2 px-2" colspan="3">
                             <div class="text-right    w-[100%] font-bold text-primary">Grand Total:</div>
                         </td>
-                        <td class="border-2 border-primary py-2" colspan="1">
-                            <div class="">500</div>
-                        </td>
-                        <td class="border-2 border-primary py-2" colspan="1">
-                            <div class="">500</div>
+                        <td class="border-2 border-primary py-2 " colspan="2">
+                            <div class="" id="">0</div>
                         </td>
                         <td class="border-2 border-primary py-2" colspan="2">
                             <div class=""></div>
@@ -200,12 +194,13 @@
             <td class="border-2 border-primary">${price}</td>
             <td class="border-2 border-primary px-5">${tax}%</td>
             <td class="border-2 border-primary py-2 quantity">${quantity}</td>
-            <td class="border-2 border-primary py-2 quantity">${total}</td>
+            <td class="border-2 border-primary py-2  total">${total}</td>
             <td class="border-2 border-primary">
                 <div class="flex justify-center">
                     <button class="delete-btn">
                         <img width="40px" src="{{ asset('images/icons/delete.svg') }}" alt="delete">
                     </button>
+                </div>
                 </div>
             </td>
         </tr>`;
@@ -215,6 +210,12 @@
                 $('#Product_Price').val('');
                 $('#tax').val('');
                 $('#order_quantity').val('');
+                var subTotal = 0;
+                $('#product_output .total').each(function() {
+                    subTotal += parseFloat($(this).text());
+                    $('#subtotal').html(subTotal);
+                    console.log("Sub Total is" + subTotal);
+                });
             }
         });
 
@@ -244,7 +245,7 @@
                     var productId = product
                         .id; // Get the name field from each product object
                     // Append a new option with the product name to the select element
-                    $('#product').append($('<option></option>').attr('value', productId)
+                    $('#product').append($('<option></option>').attr('value', productName)
                         .attr('productId', productId).text(productName));
                 });
             },
