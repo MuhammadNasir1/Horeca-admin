@@ -69,4 +69,23 @@ class productController extends Controller
         $products->delete();
         return redirect('../product');
     }
+
+    function getProducts()
+    {
+        try {
+            $products = product::all();
+            return response()->json(['success'  => true, 'message' => "produnct get successfully", 'products' => $products],  200);
+        } catch (\Exception $e) {
+            return response()->json(['success'  => false, 'message' => $e->getMessage()],  500);
+        }
+    }
+    function SingleproductData($product_id)
+    {
+        try {
+            $products = product::Where('id', $product_id)->get();
+            return response()->json(['success'  => true, 'message' => "produnct get successfully", 'products' => $products],  200);
+        } catch (\Exception $e) {
+            return response()->json(['success'  => false, 'message' => $e->getMessage()],  500);
+        }
+    }
 }

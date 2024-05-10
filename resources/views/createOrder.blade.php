@@ -44,8 +44,7 @@
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="product" id="product">
                             <option value="">@lang('lang.Product')</option>
-                            <option value="Shirt">Shirt</option>
-                            <option value="Pent">Pent</option>
+
 
                         </select>
 
@@ -222,6 +221,75 @@
         // Add click event listener for dynamically generated delete buttons
         $('#product_output').on('click', '.delete-btn', function() {
             $(this).closest('tr').remove();
+        });
+
+
+
+        // get product data
+        $.ajax({
+            type: "GET",
+            url: '../productData',
+            dataType: "json",
+            success: function(response) {
+                var products = response
+                    .products; // Assuming response.products is an array of objects
+
+                // Clear existing options from the select element
+                $('#product').empty();
+
+                // Iterate over each product object
+                $.each(products, function(index, product) {
+                    var productName = product
+                        .name; // Get the name field from each product object
+                    var productId = product
+                        .id; // Get the name field from each product object
+                    // Append a new option with the product name to the select element
+                    $('#product').append($('<option></option>').attr('value', productId)
+                        .attr('productId', productId).text(productName));
+                });
+            },
+            error: function(jqXHR) {
+                let response = JSON.parse(jqXHR.responseText);
+                console.log("error");
+                Swal.fire(
+                    'Warning!',
+                    'Student Not Found',
+                    'warning'
+                );
+            }
+        });
+
+        $('#product').change(function() {
+            var selectedOption = $(this).find(':selected');
+            var productId = selectedOption.attr('productId');
+            var url = '../singleproductData/' + productId;
+            console.log(url);
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: "json",
+                success: function(response) {
+                    var products = response.products;
+
+                    // Iterate over each product object
+                    $.each(products, function(index, product) {
+                        var productName = product.name;
+                        $('#Product_Price').val(product.rate);
+                        $('#tax').val(product.tax);
+                    });
+                },
+                error: function(jqXHR) {
+                    let response = JSON.parse(jqXHR.responseText);
+                    console.log("error");
+                    Swal.fire(
+                        'Warning!',
+                        'product Not Found',
+                        'warning'
+                    );
+                }
+
+            });
+
         });
 
 

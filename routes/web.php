@@ -46,6 +46,8 @@ Route::middleware('custom')->group(function () {
     Route::get('/product', [productController::class,  'productData']);
     Route::post('/addProduct', [productController::class,  'insert']);
     Route::get('/delProduct/{id}', [productController::class,  'delete']);
+    Route::get('/productData', [productController::class,  'getProducts']);
+    Route::get('/singleproductData/{product_id}', [productController::class,  'SingleproductData']);
 });
 
 
