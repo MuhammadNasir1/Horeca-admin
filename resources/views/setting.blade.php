@@ -89,32 +89,6 @@
                     </div>
 
                 </div>
-                <div class="flex gap-[30px] mt-4">
-                    <div class="w-[50%] mt-4">
-                        <label class="text-[16px] font-semibold block  text-[#452C88]"
-                            for="oldPass">@lang('lang.Old_Password')</label>
-                        <input type="password"
-                            class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                            name="old_password" id="oldPass" placeholder="@lang('lang.Enter_Old_Password')">
-                    </div>
-
-                    <div class="w-[50%] mt-4">
-                        <label class="text-[16px] font-semibold block  text-[#452C88]"
-                            for="newPass">@lang('lang.New_Password')</label>
-                        <input type="password"
-                            class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                            name="confirm_password" id="newPass" placeholder="@lang('lang.Enter_New_Password')">
-                    </div>
-                    <div class="w-[50%] mt-4">
-                        <label class="text-[16px] font-semibold block  text-[#452C88]"
-                            for="conPass">@lang('lang.Confirm_Password')</label>
-                        <input type="password"
-                            class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                            name="con_pass" id="conPass" placeholder="@lang('lang.Enter_Confirm_Password')">
-                    </div>
-
-                </div>
-
                 <div class="mt-10  flex justify-end">
                     <button class="bg-secondary  text-white h-12 w-24 rounded-[6px]  shadow-sm font-semibold "
                         id="addBtn">
