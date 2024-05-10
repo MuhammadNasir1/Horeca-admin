@@ -32,7 +32,6 @@ return [
     "Tax" => "Tax",
     "quantity" => "Quantity",
     "quantity_here" => "Quantity here",
-    "Status" => "Status",
     "Active" => "Active",
     "Not_Active" => "Not Active",
     "Import_From_Excel" => "Import From Excel",
@@ -81,5 +80,7 @@ return [
     "Customer_Adress" => "Customer Adress",
     "Adress_Here" => "Adress Here",
     "create_order" => "Create order",
+    "Delivery_Charges" => "Delivery Charges",
+
 
 ];
