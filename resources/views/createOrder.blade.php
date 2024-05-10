@@ -43,8 +43,10 @@
                         <select
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="product" id="product">
-                            <option value="active">@lang('lang.Active')</option>
-                            <option value="not active">@lang('lang.Not_Active')</option>
+                            <option value="">@lang('lang.Product')</option>
+                            <option value="Shirt">Shirt</option>
+                            <option value="Pent">Pent</option>
+
                         </select>
 
 
@@ -83,7 +85,7 @@
                                     min="1">
                             </div>
                             <div class="mt-6 flex">
-                                <button type="button"
+                                <button id="addProductBtn" type="button"
                                     class="bg-primary toggle-button h-[40px] rounded-[4px] w-[40px] font-bold text-white text-sm flex justify-center items-center"
                                     style="width: 132px"> <span class="text-2xl pr-2">+</span> Add Product</button>
 
@@ -104,24 +106,15 @@
                         <th>Product Name</th>
                         <th>Unit Price</th>
                         <th>Tax</th>
+                        <th>Quantity</th>
                         <th>Total Price</th>
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody class="text-center">
-                    <tr>
-                        <td class="border-2 border-primary py-2">gt6050</td>
-                        <td class="border-2 border-primary">RC CAR</td>
-                        <td class="border-2 border-primary">500</td>
-                        <td class="border-2 border-primary px-5">18%</td>
-                        <td class="border-2 border-primary">1</td>
-                        <td class="border-2 border-primary">
-                            <div class="flex justify-center">
-                                <img width="40px" src="{{ asset('images/icons/delete.svg') }}" alt="delete">
-                            </div>
-                        </td>
-                    </tr>
+                <tbody class="text-center" id="product_output">
 
+                </tbody>
+                <tfoot>
                     <tr>
                         <td class="border-2 border-primary py-2" colspan="3">
                             <div class="text-right pr-2 w-[100%]">Sub Total:</div>
@@ -165,7 +158,7 @@
                             <div class=""></div>
                         </td>
                     </tr>
-                </tbody>
+                </tfoot>
             </table>
         </div>
         <div class="py-7 flex justify-end  pr-6">
@@ -181,3 +174,56 @@
 
 
 @include('layouts.footer')
+
+<script>
+    $(document).ready(function() {
+        $('#addProductBtn').click(function() {
+            var product = $('#product').val();
+            var price = $('#Product_Price').val();
+            var tax = $('#tax').val();
+            var quantity = $('#order_quantity').val();
+            var total = (price * quantity) + ((price * quantity) * (tax / 100));
+            var existingRow = $('#product_output').find('.productName').filter(function() {
+                return $(this).text() === product;
+            }).closest('tr');
+
+            if (existingRow.length > 0) {
+                // If the product already exists, update the quantity
+                var existingQuantity = parseInt(existingRow.find('.quantity').text());
+                var updatedQuantity = existingQuantity + parseInt(quantity);
+                existingRow.find('.quantity').text(updatedQuantity);
+            } else {
+                // If the product doesn't exist, add a new row
+                console.log(product);
+                var productData = `<tr>
+            <td class="border-2 border-primary">35</td>
+            <td class="border-2 border-primary productName">${product}</td>
+            <td class="border-2 border-primary">${price}</td>
+            <td class="border-2 border-primary px-5">${tax}%</td>
+            <td class="border-2 border-primary py-2 quantity">${quantity}</td>
+            <td class="border-2 border-primary py-2 quantity">${total}</td>
+            <td class="border-2 border-primary">
+                <div class="flex justify-center">
+                    <button class="delete-btn">
+                        <img width="40px" src="{{ asset('images/icons/delete.svg') }}" alt="delete">
+                    </button>
+                </div>
+            </td>
+        </tr>`;
+                $('#product_output').append(productData);
+                // Clear input fields
+                $('#product').val('');
+                $('#Product_Price').val('');
+                $('#tax').val('');
+                $('#order_quantity').val('');
+            }
+        });
+
+        // Add click event listener for dynamically generated delete buttons
+        $('#product_output').on('click', '.delete-btn', function() {
+            $(this).closest('tr').remove();
+        });
+
+
+    });
+</script>
