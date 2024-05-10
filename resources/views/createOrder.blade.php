@@ -123,7 +123,7 @@
 
                 <tr>
                     <td class="border-2 border-primary py-2" colspan="3">
-                        <div class="text-right pr-2 w-[100%]">Sub Total</div>
+                        <div class="text-right pr-2 w-[100%]">Sub Total:</div>
                     </td>
                     <td class="border-2 border-primary py-2" colspan="1">
                         <div class="">500</div>
@@ -149,8 +149,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="border-2 border-primary py-2" colspan="3">
-                        <div class="text-right   w-[100%] font-bold text-primary">Grand Total</div>
+                    <td class="border-2 border-primary py-2 px-2" colspan="3">
+                        <div class="text-right    w-[100%] font-bold text-primary">Grand Total:</div>
                     </td>
                     <td class="border-2 border-primary py-2" colspan="1">
                         <div class="">500</div>
