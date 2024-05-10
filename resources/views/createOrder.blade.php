@@ -145,7 +145,7 @@
                             <div class="text-right    w-[100%] font-bold text-primary">Grand Total:</div>
                         </td>
                         <td class="border-2 border-primary py-2 " colspan="2">
-                            <div class="" id="">0</div>
+                            <div class="" id="grandTotal">0</div>
                         </td>
                         <td class="border-2 border-primary py-2" colspan="2">
                             <div class=""></div>
@@ -218,7 +218,15 @@
                 });
             }
         });
-
+        // Recalculate grand total when discount or delivery charges change
+        $('#discount, #delivery_charges').on('input', function() {
+            var subTotal = parseFloat($('#subtotal').text());
+            var discount = parseFloat($('#discount').val()) || 0; // default to 0 if input is empty
+            var deliveryCharges = parseFloat($('#delivery_charges').val()) ||
+            0; // default to 0 if input is empty
+            var grandTotal = subTotal - (subTotal * (discount / 100)) + deliveryCharges;
+            $('#grandTotal').text(grandTotal);
+        });
         // Add click event listener for dynamically generated delete buttons
         $('#product_output').on('click', '.delete-btn', function() {
             $(this).closest('tr').remove();
