@@ -96,74 +96,83 @@
             </form>
 
         </div>
-        <table class="w-full">
-            <thead class=" border-2 border-primary bg-primary text-white">
-                <tr>
-                    <th class="py-3">Code</th>
-                    <th>Product Name</th>
-                    <th>Unit Price</th>
-                    <th>Tax</th>
-                    <th>Total Price</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody class="text-center">
-                <tr>
-                    <td class="border-2 border-primary py-2">gt6050</td>
-                    <td class="border-2 border-primary">RC CAR</td>
-                    <td class="border-2 border-primary">500</td>
-                    <td class="border-2 border-primary px-5">18%</td>
-                    <td class="border-2 border-primary">1</td>
-                    <td class="border-2 border-primary">
-                        <div class="flex justify-center">
-                            <img width="40px" src="{{ asset('images/icons/delete.svg') }}" alt="delete">
-                        </div>
-                    </td>
-                </tr>
+        <div class="px-6">
+            <table class="w-full">
+                <thead class=" border-2 border-primary bg-primary text-white">
+                    <tr>
+                        <th class="py-3">Code</th>
+                        <th>Product Name</th>
+                        <th>Unit Price</th>
+                        <th>Tax</th>
+                        <th>Total Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    <tr>
+                        <td class="border-2 border-primary py-2">gt6050</td>
+                        <td class="border-2 border-primary">RC CAR</td>
+                        <td class="border-2 border-primary">500</td>
+                        <td class="border-2 border-primary px-5">18%</td>
+                        <td class="border-2 border-primary">1</td>
+                        <td class="border-2 border-primary">
+                            <div class="flex justify-center">
+                                <img width="40px" src="{{ asset('images/icons/delete.svg') }}" alt="delete">
+                            </div>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td class="border-2 border-primary py-2" colspan="3">
-                        <div class="text-right pr-2 w-[100%]">Sub Total:</div>
-                    </td>
-                    <td class="border-2 border-primary py-2" colspan="1">
-                        <div class="">500</div>
-                    </td>
-                    <td class="border-2 border-primary py-2" colspan="1">
-                        <div class="">500</div>
-                    </td>
-                    <td class="border-2 border-primary py-1" colspan="1">
-                        <div class="flex gap-2 w-[80%] mx-auto">
-                            <form action="#" class="flex items-center gap-4 w-full">
-                                <label class="text-[14px] font-normal" for="discount">@lang('lang.Discount'):</label>
-                                <input type="number"
-                                    class="w-[50%] border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                    name="discount" id="discount" value="0" min="0">
-                                <label class="text-[14px] font-normal"
-                                    for="delivery_charges">@lang('lang.Delivery_Charges'):</label>
-                                <input type="text"
-                                    class="w-[50%] border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                    name="delivery_charges" id="delivery_charges" placeholder="@lang('lang.Delivery_Charges')">
-                            </form>
+                    <tr>
+                        <td class="border-2 border-primary py-2" colspan="3">
+                            <div class="text-right pr-2 w-[100%]">Sub Total:</div>
+                        </td>
+                        <td class="border-2 border-primary py-2" colspan="1">
+                            <div class="">500</div>
+                        </td>
+                        <td class="border-2 border-primary py-2" colspan="1">
+                            <div class="">500</div>
+                        </td>
+                        <td class="border-2 border-primary py-1" colspan="1">
+                            <div class="flex gap-2 w-[80%] mx-auto">
+                                <form action="#" class="flex items-center gap-4 w-full">
+                                    <label class="text-[14px] font-normal" for="discount">@lang('lang.Discount'):</label>
+                                    <input type="number"
+                                        class="w-[50%] border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                        name="discount" id="discount" value="0" min="0">
 
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="border-2 border-primary py-2 px-2" colspan="3">
-                        <div class="text-right    w-[100%] font-bold text-primary">Grand Total:</div>
-                    </td>
-                    <td class="border-2 border-primary py-2" colspan="1">
-                        <div class="">500</div>
-                    </td>
-                    <td class="border-2 border-primary py-2" colspan="1">
-                        <div class="">500</div>
-                    </td>
-                    <td class="border-2 border-primary py-2" colspan="2">
-                        <div class=""></div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                                    <label class="text-[14px] font-normal"
+                                        for="delivery_charges">@lang('lang.Delivery_Charges'):</label>
+                                    <input type="text"
+                                        class="w-[50%] border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                        name="delivery_charges" id="delivery_charges"
+                                        placeholder="@lang('lang.Delivery_Charges')">
+                                </form>
+
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border-2 border-primary py-2 px-2" colspan="3">
+                            <div class="text-right    w-[100%] font-bold text-primary">Grand Total:</div>
+                        </td>
+                        <td class="border-2 border-primary py-2" colspan="1">
+                            <div class="">500</div>
+                        </td>
+                        <td class="border-2 border-primary py-2" colspan="1">
+                            <div class="">500</div>
+                        </td>
+                        <td class="border-2 border-primary py-2" colspan="2">
+                            <div class=""></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="py-7 flex justify-end  pr-6">
+            <button type="button"
+                class="bg-primary toggle-button h-[40px] rounded-[4px] w-[40px] font-bold text-white text-sm flex justify-center items-center"
+                style="width: 132px">Save & Print</button>
+        </div>
     </div>
 </div>
 
