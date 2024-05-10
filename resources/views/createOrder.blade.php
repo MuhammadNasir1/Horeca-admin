@@ -176,6 +176,10 @@
             var tax = $('#tax').val();
             var quantity = $('#order_quantity').val();
             var total = (price * quantity) + ((price * quantity) * (tax / 100));
+            if (isNaN(parseInt(quantity)) || isNaN(parseFloat(price))) {
+                // If either quantity or price is not a valid number, do not append the row
+                return;
+            }
             var existingRow = $('#product_output').find('.productName').filter(function() {
                 return $(this).text() === product;
             }).closest('tr');
@@ -223,7 +227,7 @@
             var subTotal = parseFloat($('#subtotal').text());
             var discount = parseFloat($('#discount').val()) || 0; // default to 0 if input is empty
             var deliveryCharges = parseFloat($('#delivery_charges').val()) ||
-            0; // default to 0 if input is empty
+                0; // default to 0 if input is empty
             var grandTotal = subTotal - (subTotal * (discount / 100)) + deliveryCharges;
             $('#grandTotal').text(grandTotal);
         });
