@@ -156,8 +156,8 @@
                     </table>
                 </div>
 
-                <input type="text" name="grand_total" id="grand_total">
-                <input type="text" name="sub_total" id="sub_total">
+                <input type="hidden" name="grand_total" id="grand_total">
+                <input type="hidden" name="sub_total" id="sub_total">
                 <div class="py-7 flex justify-end  pr-6">
                     <button
                         class="bg-primary toggle-button h-[40px] rounded-[4px] w-[40px] font-bold text-white text-sm flex justify-center items-center"
@@ -202,11 +202,11 @@
                     var productData = `<tr>
             <td class="border-2 border-primary">
                 <input type="text" value="${code}" name="product_code[]">
-                    <input type="text" value="${Product_id}" name="product_id[]">
-                    <input type="text" value="${price}" name="product_rate[]">
-                    <input type="text" value="${tax}" name="product_tax[]">
-                    <input type="text" value="${quantity}" name="product_quantity[]">
-                    <input type="text" value="${total}" name="product_total[]">
+                    <input type="hidden" value="${Product_id}" name="product_id[]">
+                    <input type="hidden" value="${price}" name="product_rate[]">
+                    <input type="hidden" value="${tax}" name="product_tax[]">
+                    <input type="hidden" value="${quantity}" name="product_quantity[]">
+                    <input type="hidden" value="${total}" name="product_total[]">
                 ${code}</td>
             <td class="border-2 border-primary productName">${product}</td>
             <td class="border-2 border-primary">${price}</td>

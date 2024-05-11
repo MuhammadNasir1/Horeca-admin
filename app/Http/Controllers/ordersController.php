@@ -30,9 +30,9 @@ class ordersController extends Controller
                 'product_total'  => 'required',
             ]);
 
-
+            $userId   = session("user_det")['user_id'];
             $orders  = orders::create([
-                'user_id' => 1,
+                'user_id' =>  $userId,
                 'order_date' => $validatedData['order_date'],
                 'customer_name' => $validatedData['customer_name'],
                 'customer_id' => 0,
@@ -52,7 +52,7 @@ class ordersController extends Controller
             ]);
             foreach ($request['product_id'] as $j => $product) {
                 $order_items  = order_items::create([
-                    'order_id' => $request['order_id'][$j],
+                    'order_id' => $orders->id,
                     'product_id' => $validatedData['product_id'][$j],
                     'product_rate' => $validatedData['product_rate'][$j],
                     'product_quantity' => $validatedData['product_quantity'][$j],
