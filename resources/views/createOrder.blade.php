@@ -5,10 +5,10 @@
         <h1 class=" font-semibold   text-2xl ">@lang('lang.create_order')</h1>
     </div>
 
-    <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
-        <div>
+    <form id="productdata" method="post" enctype="multipart/form-data" class="pb-5">
+        <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
+            <div>
 
-            <form id="productdata" method="post" enctype="multipart/form-data" class="pb-5">
 
                 <div class="grid grid-cols-3 gap-x-6 mx-6 my-6">
 
@@ -39,6 +39,7 @@
                             name="customer_phone" id="customer_phone" placeholder=" @lang('lang.Phone_Here')">
                     </div>
                     <input type="hidden" id="productCode">
+                    <input type="hidden" id="Product_id">
                     <div class="mt-4 ">
                         <label class="text-[14px] font-normal" for="product">@lang('lang.Product')</label>
                         <select
@@ -95,107 +96,116 @@
 
 
 
-            </form>
 
+                </div>
+                <div class="px-6">
+                    <table class="w-full">
+                        <thead class=" border-2 border-primary bg-primary text-white">
+                            <tr>
+                                <th class="py-3">Code</th>
+                                <th>Product Name</th>
+                                <th>Unit Price</th>
+                                <th>Tax</th>
+                                <th>Quantity</th>
+                                <th>Total Price</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center" id="product_output">
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td class="border-2 border-primary py-2" colspan="3">
+                                    <div class="text-right pr-2 w-[100%]">Sub Total:</div>
+                                </td>
+                                <td class="border-2 border-primary py-2" colspan="2">
+                                    <div class="" id="subtotal">0</div>
+                                </td>
+                                <td class="border-2 border-primary py-1" colspan="2">
+                                    <div class="flex gap-2 w-[80%] mx-auto">
+                                        <form action="#" class="flex items-center gap-4 w-full">
+                                            <label class="text-[14px] font-normal"
+                                                for="discount">@lang('lang.Discount'):</label>
+                                            <input type="number"
+                                                class="w-[50%] border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                                name="discount" id="discount" value="0" min="0">
+
+                                            <label class="text-[14px] font-normal"
+                                                for="delivery_charges">@lang('lang.Delivery_Charges'):</label>
+                                            <input type="text"
+                                                class="w-[50%] border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                                name="delivery_charges" id="delivery_charges"
+                                                placeholder="@lang('lang.Delivery_Charges')">
+                                        </form>
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="border-2 border-primary py-2 px-2" colspan="3">
+                                    <div class="text-right    w-[100%] font-bold text-primary">Grand Total:</div>
+                                </td>
+                                <td class="border-2 border-primary py-2 " colspan="2">
+                                    <div class="" id="grandTotal">0</div>
+                                </td>
+                                <td class="border-2 border-primary py-2" colspan="2">
+                                    <div class=""></div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="py-7 flex justify-end  pr-6">
+                    <button type="button"
+                        class="bg-primary toggle-button h-[40px] rounded-[4px] w-[40px] font-bold text-white text-sm flex justify-center items-center"
+                        style="width: 132px">Save & Print</button>
+                </div>
+            </div>
         </div>
-        <div class="px-6">
-            <table class="w-full">
-                <thead class=" border-2 border-primary bg-primary text-white">
-                    <tr>
-                        <th class="py-3">Code</th>
-                        <th>Product Name</th>
-                        <th>Unit Price</th>
-                        <th>Tax</th>
-                        <th>Quantity</th>
-                        <th>Total Price</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody class="text-center" id="product_output">
-
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td class="border-2 border-primary py-2" colspan="3">
-                            <div class="text-right pr-2 w-[100%]">Sub Total:</div>
-                        </td>
-                        <td class="border-2 border-primary py-2" colspan="2">
-                            <div class="" id="subtotal">0</div>
-                        </td>
-                        <td class="border-2 border-primary py-1" colspan="2">
-                            <div class="flex gap-2 w-[80%] mx-auto">
-                                <form action="#" class="flex items-center gap-4 w-full">
-                                    <label class="text-[14px] font-normal" for="discount">@lang('lang.Discount'):</label>
-                                    <input type="number"
-                                        class="w-[50%] border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                        name="discount" id="discount" value="0" min="0">
-
-                                    <label class="text-[14px] font-normal"
-                                        for="delivery_charges">@lang('lang.Delivery_Charges'):</label>
-                                    <input type="text"
-                                        class="w-[50%] border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                        name="delivery_charges" id="delivery_charges"
-                                        placeholder="@lang('lang.Delivery_Charges')">
-                                </form>
-
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="border-2 border-primary py-2 px-2" colspan="3">
-                            <div class="text-right    w-[100%] font-bold text-primary">Grand Total:</div>
-                        </td>
-                        <td class="border-2 border-primary py-2 " colspan="2">
-                            <div class="" id="grandTotal">0</div>
-                        </td>
-                        <td class="border-2 border-primary py-2" colspan="2">
-                            <div class=""></div>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-        <div class="py-7 flex justify-end  pr-6">
-            <button type="button"
-                class="bg-primary toggle-button h-[40px] rounded-[4px] w-[40px] font-bold text-white text-sm flex justify-center items-center"
-                style="width: 132px">Save & Print</button>
-        </div>
-    </div>
-</div>
+    </form>
 
 
 
 
 
-@include('layouts.footer')
+    @include('layouts.footer')
 
-<script>
-    $(document).ready(function() {
-        $('#addProductBtn').click(function() {
-            var product = $('#product').val();
-            var price = $('#Product_Price').val();
-            var tax = $('#tax').val();
-            var quantity = $('#order_quantity').val();
-            var code = $('#productCode').val();
-            var total = (price * quantity) + ((price * quantity) * (tax / 100));
-            if (isNaN(parseInt(quantity)) || isNaN(parseFloat(price))) {
-                // If either quantity or price is not a valid number, do not append the row
-                return;
-            }
-            var existingRow = $('#product_output').find('.productName').filter(function() {
-                return $(this).text() === product;
-            }).closest('tr');
+    <script>
+        $(document).ready(function() {
+            $('#addProductBtn').click(function() {
+                var product = $('#product').val();
+                var price = $('#Product_Price').val();
+                var tax = $('#tax').val();
+                var quantity = $('#order_quantity').val();
+                var code = $('#productCode').val();
+                var Product_id = $('#Product_id').val();
+                var total = (price * quantity) + ((price * quantity) * (tax / 100));
+                if (isNaN(parseInt(quantity)) || isNaN(parseFloat(price))) {
+                    // If either quantity or price is not a valid number, do not append the row
+                    return;
+                }
+                var existingRow = $('#product_output').find('.productName').filter(function() {
+                    return $(this).text() === product;
+                }).closest('tr');
 
-            if (existingRow.length > 0) {
-                // If the product already exists, update the quantity
-                var existingQuantity = parseInt(existingRow.find('.quantity').text());
-                var updatedQuantity = existingQuantity + parseInt(quantity);
-                existingRow.find('.quantity').text(updatedQuantity);
-            } else {
-                // If the product doesn't exist, add a new row
-                console.log(product);
-                var productData = `<tr>
-            <td class="border-2 border-primary">${code}</td>
+                if (existingRow.length > 0) {
+                    // If the product already exists, update the quantity
+                    var existingQuantity = parseInt(existingRow.find('.quantity').text());
+                    var updatedQuantity = existingQuantity + parseInt(quantity);
+                    existingRow.find('.quantity').text(updatedQuantity);
+                } else {
+                    // If the product doesn't exist, add a new row
+                    console.log(product);
+                    var productData = `<tr>
+            <td class="border-2 border-primary">
+                <input type="text" value="${code}" name="product_code[]">
+                    <input type="text" value="${Product_id}" name="product_id[]">
+                    <input type="text" value="${price}" name="product_price[]">
+                    <input type="text" value="${tax}" name="product_tax[]">
+                    <input type="text" value="${quantity}" name="product_quantity[]">
+                    <input type="text" value="${total}" name="product_quantity[]">
+                ${code}</td>
             <td class="border-2 border-primary productName">${product}</td>
             <td class="border-2 border-primary">${price}</td>
             <td class="border-2 border-primary px-5">${tax}%</td>
@@ -210,89 +220,58 @@
                 </div>
             </td>
         </tr>`;
-                $('#product_output').append(productData);
-                // Clear input fields
-                $('#product').val('');
-                $('#Product_Price').val('');
-                $('#tax').val('');
-                $('#order_quantity').val('');
-                var subTotal = 0;
-                $('#product_output .total').each(function() {
-                    subTotal += parseFloat($(this).text());
-                    $('#subtotal').html(subTotal);
-                    console.log("Sub Total is" + subTotal);
-                    $('#grandTotal').html(subTotal);
-                });
-            }
-        });
-        // Recalculate grand total when discount or delivery charges change
-        $('#discount, #delivery_charges').on('input', function() {
-            var subTotal = parseFloat($('#subtotal').text());
-            var discount = parseFloat($('#discount').val()) || 0; // default to 0 if input is empty
-            var deliveryCharges = parseFloat($('#delivery_charges').val()) ||
-                0; // default to 0 if input is empty
-            var grandTotal = subTotal - (subTotal * (discount / 100)) + deliveryCharges;
-            $('#grandTotal').text(grandTotal);
-        });
-        // Add click event listener for dynamically generated delete buttons
-        $('#product_output').on('click', '.delete-btn', function() {
-            $(this).closest('tr').remove();
-        });
+                    $('#product_output').append(productData);
+                    // Clear input fields
+                    $('#product').val('');
+                    $('#Product_Price').val('');
+                    $('#tax').val('');
+                    $('#order_quantity').val('');
+                    var subTotal = 0;
+                    $('#product_output .total').each(function() {
+                        subTotal += parseFloat($(this).text());
+                        $('#subtotal').html(subTotal);
+                        console.log("Sub Total is" + subTotal);
+                        $('#grandTotal').html(subTotal);
+                    });
+                }
+            });
+            // Recalculate grand total when discount or delivery charges change
+            $('#discount, #delivery_charges').on('input', function() {
+                var subTotal = parseFloat($('#subtotal').text());
+                var discount = parseFloat($('#discount').val()) || 0; // default to 0 if input is empty
+                var deliveryCharges = parseFloat($('#delivery_charges').val()) ||
+                    0; // default to 0 if input is empty
+                var grandTotal = subTotal - (subTotal * (discount / 100)) + deliveryCharges;
+                $('#grandTotal').text(grandTotal);
+            });
+            // Add click event listener for dynamically generated delete buttons
+            $('#product_output').on('click', '.delete-btn', function() {
+                $(this).closest('tr').remove();
+            });
 
 
 
-        // get product data
-        $.ajax({
-            type: "GET",
-            url: '../productData',
-            dataType: "json",
-            success: function(response) {
-                var products = response
-                    .products; // Assuming response.products is an array of objects
-
-                // Clear existing options from the select element
-                $('#product').empty();
-
-                // Iterate over each product object
-                $.each(products, function(index, product) {
-                    var productName = product
-                        .name; // Get the name field from each product object
-                    var productId = product
-                        .id; // Get the name field from each product object
-                    // Append a new option with the product name to the select element
-                    $('#product').append($('<option></option>').attr('value', productName)
-                        .attr('productId', productId).text(productName));
-                });
-            },
-            error: function(jqXHR) {
-                let response = JSON.parse(jqXHR.responseText);
-                console.log("error");
-                Swal.fire(
-                    'Warning!',
-                    'Student Not Found',
-                    'warning'
-                );
-            }
-        });
-
-        $('#product').change(function() {
-            var selectedOption = $(this).find(':selected');
-            var productId = selectedOption.attr('productId');
-            var url = '../singleproductData/' + productId;
-            console.log(url);
+            // get product data
             $.ajax({
                 type: "GET",
-                url: url,
+                url: '../productData',
                 dataType: "json",
                 success: function(response) {
-                    var products = response.products;
+                    var products = response
+                        .products; // Assuming response.products is an array of objects
+
+                    // Clear existing options from the select element
+                    $('#product').empty();
 
                     // Iterate over each product object
                     $.each(products, function(index, product) {
-                        var productName = product.name;
-                        $('#Product_Price').val(product.rate);
-                        $('#productCode').val(product.code);
-                        $('#tax').val(product.tax);
+                        var productName = product
+                            .name; // Get the name field from each product object
+                        var productId = product
+                            .id; // Get the name field from each product object
+                        // Append a new option with the product name to the select element
+                        $('#product').append($('<option></option>').attr('value', productName)
+                            .attr('productId', productId).text(productName));
                     });
                 },
                 error: function(jqXHR) {
@@ -300,13 +279,45 @@
                     console.log("error");
                     Swal.fire(
                         'Warning!',
-                        'product Not Found',
+                        'Student Not Found',
                         'warning'
                     );
                 }
-
             });
 
+            $('#product').change(function() {
+                var selectedOption = $(this).find(':selected');
+                var productId = selectedOption.attr('productId');
+                var url = '../singleproductData/' + productId;
+                console.log(url);
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    dataType: "json",
+                    success: function(response) {
+                        var products = response.products;
+
+                        // Iterate over each product object
+                        $.each(products, function(index, product) {
+                            var productName = product.name;
+                            $('#Product_Price').val(product.rate);
+                            $('#Product_id').val(product.id);
+                            $('#productCode').val(product.code);
+                            $('#tax').val(product.tax);
+                        });
+                    },
+                    error: function(jqXHR) {
+                        let response = JSON.parse(jqXHR.responseText);
+                        console.log("error");
+                        Swal.fire(
+                            'Warning!',
+                            'product Not Found',
+                            'warning'
+                        );
+                    }
+
+                });
+
+            });
         });
-    });
-</script>
+    </script>
