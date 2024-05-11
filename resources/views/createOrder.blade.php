@@ -247,7 +247,7 @@
                     0; // default to 0 if input is empty
                 var grandTotal = subTotal - (subTotal * (discount / 100)) + deliveryCharges;
                 $('#grandTotal').text(grandTotal);
-                $('#sub_total').val(grandTotal);
+                $('#grandTotal').val(grandTotal);
             });
             // Add click event listener for dynamically generated delete buttons
             $('#product_output').on('click', '.delete-btn', function() {
