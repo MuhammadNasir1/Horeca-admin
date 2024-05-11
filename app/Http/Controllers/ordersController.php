@@ -62,9 +62,19 @@ class ordersController extends Controller
                 ]);
                 $order_items->save();
             };
-            return response()->json(['success' => true, 'message' => 'Order add successfully'], 200);
+            return redirect('invoice/' . $orders->id);
+            // return response()->json(['success' => true, 'message' => 'Order add successfully'], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
+    }
+
+    public function getOrderData($order_id)
+    {
+        $orderItems = [];
+        $order  =  orders::where('id', $order_id)->get();
+        $order_items  =  order_items::where('order_id', $order_id)->get();
+        $orderItems =  $order_items;
+        return view('Invoices.customer_invoice', ['order' =>  $order, 'orderItems' => $order_items]);
     }
 }

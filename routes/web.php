@@ -53,6 +53,10 @@ Route::middleware('custom')->group(function () {
 
     // Order
     Route::post('/addOrder', [ordersController::class,  'insert']);
+
+    // Invoice pages
+    Route::get('/invoice/{order_id}', [ordersController::class,  'getOrderData']);
+
 });
 
 

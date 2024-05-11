@@ -1,3 +1,10 @@
+{{-- @foreach ($orderItems as $orderItem )
+
+@endforeach
+@php
+
+
+@endphp --}}
 <!DOCTYPE html>
 <html lang="en">
 
