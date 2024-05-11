@@ -38,6 +38,7 @@
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="customer_phone" id="customer_phone" placeholder=" @lang('lang.Phone_Here')">
                     </div>
+                    <input type="hidden" id="productCode">
                     <div class="mt-4 ">
                         <label class="text-[14px] font-normal" for="product">@lang('lang.Product')</label>
                         <select
@@ -175,6 +176,7 @@
             var price = $('#Product_Price').val();
             var tax = $('#tax').val();
             var quantity = $('#order_quantity').val();
+            var code = $('#productCode').val();
             var total = (price * quantity) + ((price * quantity) * (tax / 100));
             if (isNaN(parseInt(quantity)) || isNaN(parseFloat(price))) {
                 // If either quantity or price is not a valid number, do not append the row
@@ -193,7 +195,7 @@
                 // If the product doesn't exist, add a new row
                 console.log(product);
                 var productData = `<tr>
-            <td class="border-2 border-primary">35</td>
+            <td class="border-2 border-primary">${code}</td>
             <td class="border-2 border-primary productName">${product}</td>
             <td class="border-2 border-primary">${price}</td>
             <td class="border-2 border-primary px-5">${tax}%</td>
@@ -219,6 +221,7 @@
                     subTotal += parseFloat($(this).text());
                     $('#subtotal').html(subTotal);
                     console.log("Sub Total is" + subTotal);
+                    $('#grandTotal').html(subTotal);
                 });
             }
         });
@@ -288,6 +291,7 @@
                     $.each(products, function(index, product) {
                         var productName = product.name;
                         $('#Product_Price').val(product.rate);
+                        $('#productCode').val(product.code);
                         $('#tax').val(product.tax);
                     });
                 },
@@ -304,7 +308,5 @@
             });
 
         });
-
-
     });
 </script>
