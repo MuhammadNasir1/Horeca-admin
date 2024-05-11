@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\authController;
 use App\Http\Controllers\coursesController;
+use App\Http\Controllers\ordersController;
 use App\Http\Controllers\parentController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\studentController;
@@ -48,6 +49,10 @@ Route::middleware('custom')->group(function () {
     Route::get('/delProduct/{id}', [productController::class,  'delete']);
     Route::get('/productData', [productController::class,  'getProducts']);
     Route::get('/singleproductData/{product_id}', [productController::class,  'SingleproductData']);
+
+
+    // Order
+    Route::post('/addOrder', [ordersController::class,  'insert']);
 });
 
 

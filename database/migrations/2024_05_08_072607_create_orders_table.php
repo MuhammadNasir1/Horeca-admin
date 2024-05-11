@@ -17,15 +17,18 @@ return new class extends Migration
             $table->date('order_date');
             $table->string('customer_name')->nullable();
             $table->integer('customer_id')->nullable();
+            $table->integer('customer_phone')->nullable();
+            $table->text('customer_adress')->nullable();
             $table->string('sub_total');
             $table->string('order_vat');
-            $table->string('discount');
+            $table->string('discount')->nullable();
             $table->string('grand_total');
-            $table->string('order_description');
-            $table->string('order_traking');
-            $table->string('order_note');
-            $table->string('payment_type');
-            $table->string('order_status');
+            $table->string('order_description')->nullable();
+            $table->string('order_tracking')->nullable();
+            $table->string('order_note')->nullable();
+            $table->string('payment_type')->nullable();
+            $table->string('order_status')->nullable();
+            $table->string('delivery_charges')->nullable();
             $table->timestamps();
         });
     }

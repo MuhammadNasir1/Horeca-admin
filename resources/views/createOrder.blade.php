@@ -5,7 +5,8 @@
         <h1 class=" font-semibold   text-2xl ">@lang('lang.create_order')</h1>
     </div>
 
-    <form id="productdata" method="post" enctype="multipart/form-data" class="pb-5">
+    <form action="addOrder" method="post" enctype="multipart/form-data" class="pb-5">
+        @csrf
         <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
             <div>
 
@@ -58,7 +59,7 @@
                             <label class="text-[14px] font-normal" for="Product_Price">@lang('lang.Product_Price')</label>
                             <input type="number"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="Product_Price" id="Product_Price" value="100" readonly>
+                                name="price" id="Product_Price" value="100" readonly>
                         </div>
                         <div>
                             <label class="text-[14px] font-normal" for="Tax">@lang('lang.Tax')%</label>
@@ -82,7 +83,7 @@
                                 <label class="text-[14px] font-normal" for="Customer_Adress">@lang('lang.Customer_Adress')</label>
                                 <input type="text"
                                     class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                    name="Customer_Adress" id="Customer_Adress" placeholder=" @lang('lang.Adress_Here')"
+                                    name="customer_adress" id="Customer_Adress" placeholder=" @lang('lang.Adress_Here')"
                                     min="1">
                             </div>
                             <div class="mt-6 flex">
@@ -124,20 +125,18 @@
                                 </td>
                                 <td class="border-2 border-primary py-1" colspan="2">
                                     <div class="flex gap-2 w-[80%] mx-auto">
-                                        <form action="#" class="flex items-center gap-4 w-full">
-                                            <label class="text-[14px] font-normal"
-                                                for="discount">@lang('lang.Discount'):</label>
-                                            <input type="number"
-                                                class="w-[50%] border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                                name="discount" id="discount" value="0" min="0">
+                                        <label class="text-[14px] font-normal"
+                                            for="discount">@lang('lang.Discount'):</label>
+                                        <input type="number"
+                                            class="w-[50%] border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                            name="order_vat" id="discount" value="0" min="0">
 
-                                            <label class="text-[14px] font-normal"
-                                                for="delivery_charges">@lang('lang.Delivery_Charges'):</label>
-                                            <input type="text"
-                                                class="w-[50%] border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                                name="delivery_charges" id="delivery_charges"
-                                                placeholder="@lang('lang.Delivery_Charges')">
-                                        </form>
+                                        <label class="text-[14px] font-normal"
+                                            for="delivery_charges">@lang('lang.Delivery_Charges'):</label>
+                                        <input type="text"
+                                            class="w-[50%] border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                            name="delivery_charges" id="delivery_charges"
+                                            placeholder="@lang('lang.Delivery_Charges')">
 
                                     </div>
                                 </td>
@@ -156,8 +155,11 @@
                         </tfoot>
                     </table>
                 </div>
+
+                <input type="text" name="grand_total" id="grand_total">
+                <input type="text" name="sub_total" id="sub_total">
                 <div class="py-7 flex justify-end  pr-6">
-                    <button type="button"
+                    <button
                         class="bg-primary toggle-button h-[40px] rounded-[4px] w-[40px] font-bold text-white text-sm flex justify-center items-center"
                         style="width: 132px">Save & Print</button>
                 </div>
@@ -201,10 +203,10 @@
             <td class="border-2 border-primary">
                 <input type="text" value="${code}" name="product_code[]">
                     <input type="text" value="${Product_id}" name="product_id[]">
-                    <input type="text" value="${price}" name="product_price[]">
+                    <input type="text" value="${price}" name="product_rate[]">
                     <input type="text" value="${tax}" name="product_tax[]">
                     <input type="text" value="${quantity}" name="product_quantity[]">
-                    <input type="text" value="${total}" name="product_quantity[]">
+                    <input type="text" value="${total}" name="product_total[]">
                 ${code}</td>
             <td class="border-2 border-primary productName">${product}</td>
             <td class="border-2 border-primary">${price}</td>
@@ -232,6 +234,8 @@
                         $('#subtotal').html(subTotal);
                         console.log("Sub Total is" + subTotal);
                         $('#grandTotal').html(subTotal);
+                        $('#grand_total').val(subTotal);
+                        $('#sub_total').val(subTotal);
                     });
                 }
             });
@@ -243,6 +247,7 @@
                     0; // default to 0 if input is empty
                 var grandTotal = subTotal - (subTotal * (discount / 100)) + deliveryCharges;
                 $('#grandTotal').text(grandTotal);
+                $('#sub_total').val(grandTotal);
             });
             // Add click event listener for dynamically generated delete buttons
             $('#product_output').on('click', '.delete-btn', function() {
