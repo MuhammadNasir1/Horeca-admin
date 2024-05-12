@@ -11,7 +11,7 @@
                 <div class="flex gap-1 justify-between items-center">
                     <div>
                         <p class="text-sm text-[#808191]">@lang('lang.Total_orders')</p>
-                        <h2 class="text-2xl font-semibold mt-1">110</h2>
+                        <h2 class="text-2xl font-semibold mt-1">{{ $totalOrders }}</h2>
                     </div>
                     <div>
                         <img width="60px" height="60px" src="{{ asset('images/icons/total_orders.svg') }}"
@@ -26,7 +26,7 @@
                 <div class="flex gap-1 justify-between items-center">
                     <div>
                         <p class="text-sm text-[#808191]">@lang('lang.Pending_orders')</p>
-                        <h2 class="text-2xl font-semibold mt-1">11</h2>
+                        <h2 class="text-2xl font-semibold mt-1">0</h2>
                     </div>
                     <div>
                         <img width="52px" height=52px" src="{{ asset('images/icons/pending-orders.svg') }}"
@@ -41,7 +41,7 @@
                 <div class="flex gap-1 justify-between items-center">
                     <div>
                         <p class="text-sm text-[#808191]">@lang('lang.Total_product')</p>
-                        <h2 class="text-2xl font-semibold mt-1">215</h2>
+                        <h2 class="text-2xl font-semibold mt-1">{{ $totalProduct }}</h2>
                     </div>
                     <div>
                         <img width="60px" height="60px" src="{{ asset('images/icons/total-product.svg') }}"
@@ -56,7 +56,7 @@
                 <div class="flex gap-1 justify-between items-center">
                     <div>
                         <p class="text-sm text-[#808191]">@lang('lang.Total_customers')</p>
-                        <h2 class="text-2xl font-semibold mt-1">$0.00</h2>
+                        <h2 class="text-2xl font-semibold mt-1">{{ $totalUser }}</h2>
                     </div>
                     <div>
                         <img width="50px" height="50px" src="{{ asset('images/icons/customers.svg') }}"

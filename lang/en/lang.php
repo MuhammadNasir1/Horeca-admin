@@ -81,6 +81,8 @@ return [
     "Adress_Here" => "Adress Here",
     "create_order" => "Create order",
     "Delivery_Charges" => "Delivery Charges",
+    "Amount" => "Amount",
+    "Order_Number" => "Order Number",
 
 
 ];

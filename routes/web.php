@@ -30,14 +30,13 @@ Route::get('/login', function () {
 Route::middleware('custom')->group(function () {
     Route::get('/setting', [authController::class, 'settingdata']);
     Route::post('updateSettings', [authController::class, 'updateSet']);
-    Route::get('/', [userController::class, 'Dashboard']);
-
+    Route::get('/', [authController::class, 'Dashboard']);
     Route::get('help', function () {
         return view('help');
     });
-    Route::get('orders', function () {
-        return view('orders');
-    });
+
+
+    Route::get('/orders', [ordersController::class, 'orders']);
     Route::get('createOrder', function () {
         return view('createOrder');
     });

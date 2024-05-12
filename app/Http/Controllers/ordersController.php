@@ -83,4 +83,12 @@ class ordersController extends Controller
         $products = product::whereIn('id', $productIds)->get();
         return view('Invoices.customer_invoice', ['order' =>  $order, 'orderItems' => $order_items , 'products' => $products]);
     }
+
+    // view orders
+
+    public function orders(){
+
+        $orders = orders::all();
+        return view('orders' , ['orders' => $orders]);
+    }
 }

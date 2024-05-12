@@ -15,50 +15,33 @@
                     <thead class="py-6 bg-primary text-white">
                         <tr>
                             <th>@lang('lang.STN')</th>
-                            <th>@lang('lang.Code')</th>
-                            <th>@lang('lang.Name')</th>
-                            <th>@lang('lang.Price')</th>
-                            <th>@lang('lang.Price')</th>
-                            <th>@lang('lang.Price')</th>
-                            <th>@lang('lang.Status')</th>
+                            <th>@lang('lang.Order_Number')</th>
+                            <th>@lang('lang.Order_Date')</th>
+                            <th>@lang('lang.Customer_Name')</th>
+                            <th>@lang('lang.Customer_phone')</th>
+                            <th>@lang('lang.Amount')</th>
                             <th>@lang('lang.Action')</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($products as $x => $data)
+                        @foreach ($orders as $x => $data)
                             <tr class="pt-4">
                                 <td>{{ $x + 1 }}</td>
-                                <td>{{ $data->code }}</td>
-                                <td>{{ $data->name }}</td>
-                                <td class="w-[220px]">
-                                    <img class="h-20 w-20 rounded-full"
-                                        src="../{{ $data->image ?? asset('images/favicon(32X32).png') }}"
-                                        alt="product Image">
-
-                                </td>
-                                <td>{{ $data->category }} / {{ $data->sub_category }}</td>
-                                <td>{{ $data->rate }}</td>
-                                <td>{{ $data->status }}</td>
+                                <td>{{ $data->id }}</td>
+                                <td>{{ $data->order_date }}</td>
+                                <td>{{ $data->customer_name }}</td>
+                                <td>{{ $data->customer_phone }}</td>
+                                <td>{{ $data->grand_total }}</td>
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
                                         <button class="edit_btn" updId="{{ $data->id }}"><img width="38px"
                                                 src="{{ asset('images/icons/edit.svg') }}" alt="delete"></button>
-                                        <a href="../delProduct/{{ $data->id }}" ><img width="38px"
+                                        <a href="../delProduct/{{ $data->id }}"><img width="38px"
                                                 src="{{ asset('images/icons/delete.svg') }}" alt="delete"></a>
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach --}}
-                        <tr>
-                            <th>@lang('lang.STN')</th>
-                            <th>@lang('lang.Code')</th>
-                            <th>@lang('lang.Name')</th>
-                            <th>@lang('lang.Image')</th>
-                            <th>@lang('lang.Category/Sub-Category')</th>
-                            <th>@lang('lang.Price')</th>
-                            <th>@lang('lang.Status')</th>
-                            <th>@lang('lang.Action')</th>
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
