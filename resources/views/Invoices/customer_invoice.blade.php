@@ -1,10 +1,3 @@
-{{-- @foreach ($orderItems as $orderItem )
-
-@endforeach
-@php
-
-
-@endphp --}}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -70,6 +63,8 @@
 
         .header-div2 .logo img {
             padding-left: 67px;
+            width: 250px;
+            margin-bottom: 10px;
         }
 
         .content {
@@ -149,6 +144,11 @@
 
         .content-div2 table .column3 {
             width: 50px;
+            text-align: center;
+        }
+
+        .content-div2 table .column4 {
+            width: 100px;
             text-align: center;
         }
 
@@ -234,15 +234,15 @@
         <div class="header">
             <div class="header-div1">
                 <h1>INVOICE</h1>
-                <p>Build To:</p>
+                <p>Biled To:</p>
                 <ul>
-                    <li>Customer Name</li>
-                    <li>Customer Address</li>
-                    <li>Customer Contact</li>
+                    <li>{{ $order->customer_name }}</li>
+                    <li>{{ $order->customer_phone }}</li>
+                    <li>{{ $order->customer_adress }}</li>
                 </ul>
             </div>
             <div class="header-div2">
-                <div class="logo"><img src="./logo/Horeca Logo.svg" alt="" /></div>
+                <div class="logo"><img src="{{ asset('images/Horeca-White.svg') }}" alt="" /></div>
 
                 <div>
                     <ul>
@@ -260,15 +260,11 @@
                 <ul>
                     <li>
                         <p>Invoice #</p>
-                        <p class="color text">AB2324-01</p>
+                        <p class="color text">{{ $order->id }}</p>
                     </li>
                     <li>
-                        <p>Invoice #</p>
-                        <p class="color text">AB2324-01</p>
-                    </li>
-                    <li>
-                        <p>Invoice #</p>
-                        <p class="color text">AB2324-01</p>
+                        <p>Invoice Date</p>
+                        <p class="color text">{{ $order->order_date }}</p>
                     </li>
                 </ul>
             </div>
@@ -282,55 +278,48 @@
                                     <th class="column2">Qty</th>
                                     <th class="column2">Rate</th>
                                     <th class="column3 text-1">Tax%</th>
+                                    <th class="column3 text-1">Total </th>
                                 </tr>
                             </div>
                             <div class="tr"></div>
                         </thead>
 
                         <tbody>
-                            <tr class="font-size">
-                                <td class="column1">Item Name</td>
+                            @foreach ($orderItems as $orderItem)
+                                <h1></h1>
+                                <tr class="font-size">
+                                    <td class="column1">
+                                        {{ $products->where('id', $orderItem->product_id)->first()->name }}</td>
 
-                                <td class="color">1</td>
+                                    <td class="color">{{ $orderItem['product_quantity'] }}</td>
 
-                                <td class="color">$3,000.00</td>
+                                    <td class="color">{{ $orderItem['product_rate'] }}</td>
 
-                                <td class="color column3">7%</td>
-                            </tr>
-                            <tr class="font-size">
-                                <td class="column1">Item Name</td>
-
-                                <td class="color">1</td>
-
-                                <td class="color">$3,000.00</td>
-
-                                <td class="color column3">7%</td>
-                            </tr>
-                            <tr class="font-size">
-                                <td class="column1">Item Name</td>
-
-                                <td class="color">1</td>
-
-                                <td class="color">$3,000.00</td>
-
-                                <td class="color column3">7%</td>
-                            </tr>
+                                    <td class="color column3">{{ $orderItem['product_tax'] }}</td>
+                                    <td class="color column4"><strong> {{ $orderItem['product_total'] }}&euro;</strong>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
                 <div class="div2-2">
                     <div class="div2-left">
                         <h2>SubTotal</h2>
-                        <h2 class="color">$9000.00</h2>
+                        <h2 class="color">{{ $order->sub_total }}&euro;</h2>
                     </div>
                     <div class="div2-left">
-                        <h2>Freight</h2>
-                        <h2 class="color">$900.00</h2>
+                        <h2>Delivery Charges</h2>
+                        <h2 class="color">{{ $order->delivery_charges }}&euro;</h2>
+                    </div>
+                    <div class="div2-left">
+                        <h2>Discount</h2>
+                        <h2 class="color">{{ $order->discount }}&euro;</h2>
                     </div>
                     <div class="table-footer">
                         <div class="footer-content">
-                            <h3>Total Due</h3>
-                            <h3>US $9,900.00</h3>
+                            <h3>Grand Total </h3>
+                            <h3>{{ $order->grand_total }}&euro;</h3>
                         </div>
                     </div>
                 </div>

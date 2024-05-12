@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\order_items;
 use App\Models\orders;
+use App\Models\product;
 use Illuminate\Http\Request;
 
 class ordersController extends Controller
@@ -72,9 +73,14 @@ class ordersController extends Controller
     public function getOrderData($order_id)
     {
         $orderItems = [];
-        $order  =  orders::where('id', $order_id)->get();
+        $order  =  orders::find($order_id);
+        // $order  =  orders::where('id', $order_id)->get();
         $order_items  =  order_items::where('order_id', $order_id)->get();
         $orderItems =  $order_items;
-        return view('Invoices.customer_invoice', ['order' =>  $order, 'orderItems' => $order_items]);
+
+        // $product_id =  $order_items->product_id;
+        $productIds = $orderItems->pluck('product_id');
+        $products = product::whereIn('id', $productIds)->get();
+        return view('Invoices.customer_invoice', ['order' =>  $order, 'orderItems' => $order_items , 'products' => $products]);
     }
 }
