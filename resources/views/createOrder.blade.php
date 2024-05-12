@@ -24,14 +24,14 @@
                             <label class="text-[14px] font-normal" for="order_date">@lang('lang.Order_Date')</label>
                             <input type="date"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="order_date" id="order_date">
+                                name="order_date" id="order_date" required>
                         </div>
                     </div>
                     <div class="">
                         <label class="text-[14px] font-normal" for="customer_name">@lang('lang.Customer_Name')</label>
                         <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="customer_name" id="customer_name" placeholder=" @lang('lang.Name_Here')">
+                            name="customer_name" id="customer_name" placeholder=" @lang('lang.Name_Here')" required>
                     </div>
                     <div class="">
                         <label class="text-[14px] font-normal" for="customer_phone">@lang('lang.Customer_phone')</label>
@@ -120,11 +120,11 @@
                                 <td class="border-2 border-primary py-2" colspan="3">
                                     <div class="text-right pr-2 w-[100%]">Sub Total:</div>
                                 </td>
-                                <td class="border-2 border-primary py-2" colspan="2">
+                                <td class="border-2 border-primary py-2 px-2" colspan="2">
                                     <div class="" id="subtotal">0</div>
                                 </td>
                                 <td class="border-2 border-primary py-1" colspan="2">
-                                    <div class="flex gap-2 w-[80%] mx-auto">
+                                    <div class="flex gap-2 w-[80%] mx-auto items-center">
                                         <label class="text-[14px] font-normal"
                                             for="discount">@lang('lang.Discount'):</label>
                                         <input type="number"
@@ -145,7 +145,7 @@
                                 <td class="border-2 border-primary py-2 px-2" colspan="3">
                                     <div class="text-right    w-[100%] font-bold text-primary">Grand Total:</div>
                                 </td>
-                                <td class="border-2 border-primary py-2 " colspan="2">
+                                <td class="border-2 border-primary py-2 px-2" colspan="2">
                                     <div class="" id="grandTotal">0</div>
                                 </td>
                                 <td class="border-2 border-primary py-2" colspan="2">
@@ -201,7 +201,7 @@
                     console.log(product);
                     var productData = `<tr>
             <td class="border-2 border-primary">
-                <input type="text" value="${code}" name="product_code[]">
+                    <input type="hidden" value="${code}" name="product_code[]">
                     <input type="hidden" value="${Product_id}" name="product_id[]">
                     <input type="hidden" value="${price}" name="product_rate[]">
                     <input type="hidden" value="${tax}" name="product_tax[]">
@@ -247,7 +247,7 @@
                     0; // default to 0 if input is empty
                 var grandTotal = subTotal - (subTotal * (discount / 100)) + deliveryCharges;
                 $('#grandTotal').text(grandTotal);
-                $('#grandTotal').val(grandTotal);
+                $('#grand_total').val(grandTotal);
             });
             // Add click event listener for dynamically generated delete buttons
             $('#product_output').on('click', '.delete-btn', function() {
@@ -266,7 +266,8 @@
                         .products; // Assuming response.products is an array of objects
 
                     // Clear existing options from the select element
-                    $('#product').empty();
+                    // $('#product').empty();
+                    $('#product').html($('<option></option>').attr('value', "").text("@lang('lang.Select_Product')"));
 
                     // Iterate over each product object
                     $.each(products, function(index, product) {

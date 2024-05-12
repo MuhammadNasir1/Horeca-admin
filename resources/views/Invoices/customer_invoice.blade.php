@@ -314,7 +314,7 @@
                     </div>
                     <div class="div2-left">
                         <h2>Discount</h2>
-                        <h2 class="color">{{ $order->discount }}&euro;</h2>
+                        <h2 class="color">{{ $order->discount }}%</h2>
                     </div>
                     <div class="table-footer">
                         <div class="footer-content">

@@ -83,6 +83,7 @@ return [
     "Delivery_Charges" => "Delivery Charges",
     "Amount" => "Amount",
     "Order_Number" => "Order Number",
+    "Select_Product" => "Select Product",
 
 
 ];
