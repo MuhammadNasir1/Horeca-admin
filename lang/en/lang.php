@@ -90,6 +90,7 @@ return [
     "Gate_Pass" => "Gate Pass",
     "Add_Product" => "Add Product",
     "Excel_File" => "Excel File",
+    "Update_Product" => "Update Product",
 
 
 ];

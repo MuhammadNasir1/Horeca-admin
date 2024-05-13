@@ -29,7 +29,7 @@
                             <th>@lang('lang.Category/Sub-Category')</th>
                             <th>@lang('lang.Price')</th>
                             <th>@lang('lang.Status')</th>
-                            <th>@lang('lang.Action')</th>
+                            <th class="flex  justify-center">@lang('lang.Action')</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -51,8 +51,8 @@
                                     <div class="flex gap-5 items-center justify-center">
 
                                         <button
-                                            class="w-[95px] edit_btn py-2 text-white bg-green-400 rounded-xl font-bold text-[16px]"
-                                            updId="{{ $data->id }}">@lang('lang.Edit')</button>
+                                            class="w-[95px] updateBtn  py-2 text-white bg-green-400 rounded-xl font-bold text-[16px]"
+                                            updateId="{{ $data->id }}">@lang('lang.Edit')</button>
                                         <a href="../delProduct/{{ $data->id }}"> <button
                                                 class="w-[95px] py-2 text-white bg-red-600 rounded-xl font-bold text-[16px]">@lang('lang.Delete')</button></a>
                                     </div>
@@ -311,7 +311,38 @@
             });
         });
 
-        // delete data
+        // update  data
+        $('.updateBtn').click(function() {
+            var updateId = $(this).attr('updateId');
+            var url = "../ProductUpdataData/" + updateId;
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: "json",
+                success: function(response) {
+                    var product = response.product;
+                    // $('#update_id').val(parent.id);
+                    // $('#firstName').val(parent.first_name);
+                    // $('#gender').val(parent.gender);
+                    // $('#phoneNo').val(parent.phone_no);
+                    // $('#address').val(parent.address);
+                    // $('#lastName').val(parent.last_name);
+                    // $('#email').val(parent.email);
+                    // $('#contact').val(parent.contact);
+                    // $('#child_ren').val(parent.child_ren);
+
+                },
+                error: function(jqXHR) {
+                    let response = JSON.parse(jqXHR.responseText);
+                    console.log("error");
+                    Swal.fire(
+                        'Warning!',
+                        'Product Not Found',
+                        'warning'
+                    );
+                }
+            });
+        })
 
     });
 </script>

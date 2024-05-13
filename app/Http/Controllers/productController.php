@@ -118,4 +118,18 @@ class productController extends Controller
 
         return redirect()->back();
     }
+
+
+    public function ProductUpdataData($product_id)
+    {
+        try {
+            $product = product::find($product_id);
+            if (!$product) {
+                return response()->json(['success'  => false, 'message' => "Product not found"],  500);
+            }
+            return response()->json(['success'  => true, 'message' => "product get successfully", 'product' => $product],  200);
+        } catch (\Exception $e) {
+            return response()->json(['success'  => false, 'message' => $e->getMessage()],  500);
+        }
+    }
 }
