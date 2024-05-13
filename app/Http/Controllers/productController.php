@@ -115,5 +115,7 @@ class productController extends Controller
                 // Add more columns as needed
             ]);
         }
+
+        return redirect()->back();
     }
 }

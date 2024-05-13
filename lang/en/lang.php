@@ -88,6 +88,8 @@ return [
     "Delete" => "Delete",
     "Print" => "Print",
     "Gate_Pass" => "Gate Pass",
+    "Add_Product" => "Add Product",
+    "Excel_File" => "Excel File",
 
 
 ];
