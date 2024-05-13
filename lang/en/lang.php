@@ -77,8 +77,8 @@ return [
     "Order_Id" => "Order Id",
     "tax" => "Tax",
     "Product_Price" => "Product Price",
-    "Customer_Adress" => "Customer Adress",
-    "Adress_Here" => "Adress Here",
+    "Customer_Address" => "Customer Address",
+    "Address_Here" => "Address Here",
     "create_order" => "Create order",
     "Delivery_Charges" => "Delivery Charges",
     "Amount" => "Amount",
@@ -91,6 +91,10 @@ return [
     "Add_Product" => "Add Product",
     "Excel_File" => "Excel File",
     "Update_Product" => "Update Product",
+
+    "Categories" => "Categories",
+    "Customer_note" => "Customer note",
+    "Note_Here" => "Note Here",
 
 
 ];

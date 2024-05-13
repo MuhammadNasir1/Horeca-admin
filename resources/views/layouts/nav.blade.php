@@ -12,7 +12,7 @@
     class="fixed  bg-primary text-white top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
     aria-label="Sidebar">
     <div class="flex  justify-center mt-[30px] pr-4 mb-3">
-        <a href="../"> <img  class=" w-48" src="{{ asset('images/Horeca-White.svg') }}" alt="Horeca"></a>
+        <a href="../"> <img class=" w-48" src="{{ asset('images/Horeca-White.svg') }}" alt="Horeca"></a>
     </div>
     <div class="h-full  py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
         <ul class="space-y-2  pl-3 pr-6 font-medium">
@@ -29,25 +29,7 @@
                 </a>
             </li>
             <li>
-                <a href="../product"
-                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <rect width="22" height="22" fill="url(#pattern0_30_3)"/>
-                        <defs>
-                        <pattern id="pattern0_30_3" patternContentUnits="objectBoundingBox" width="1" height="1">
-                        <use xlink:href="#image0_30_3" transform="scale(0.0111111)"/>
-                        </pattern>
-                        <image id="image0_30_3" width="90" height="90" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFVUlEQVR4nO2dSYxVRRRAq7VFkEEwEBIMMtk4oLIgbjTsRBQNiQvjiMEh7owstNst0RATXYiYuDEKLoxzOhoTp4XogogxiC2KOC00JEDEkWbq7mMu1Cff5g31qOFXdddJekHe575bpy/161XVK5TyDHAz8AGwj/jYp3O7SaUMsIF02KBSRKqE9FitUgI4C/ia9NgDdKtUAO4oaMQwcNDiZ7Ag5qBlTMlpNHepFADOBr4taMAWy7i9BTF7LWO+nGxVS0UUJD8EXBKh6IuB48lVta7m7woS3+wgtnPROu6W5KoaWOOjmj2LXlRS1XeriKt5d0HCLzmK70W0jr25IPYPUVY1cE9JNS9OQHRZVa9RsQF876uafYvW8V8siL9bxQZwpCDRz4DXHf3sLIi/02H8TwviH1aJiE6dwyo2suhAZNGByKIDkUUHIosORBYdiCw6EFl0ILLoQGTRgciiA5FFByKLDkQWHYgsOhBZdCCy6EBk0YHIogORRQciizYE6AJmyI6jM/z7eRX8/7u2xGXX6AvrgF/b3ut4SDUkiz4J8DCwX7sUp+taFx4o2dNwr2pAFq3EwX0lLu+XiwMlF7/Jomm0gQbYVeJyQC4eKrk41GQ35XivaKBbOyviUJ2guVm0GcBFlb+wGtHXGN4nVzRcWyf6aMUHbsuizQBur/B4pE70I4b3yRUNj9qIfiaLNgPYWCf6WMUH3jK8T65oeLvC49G6it7eQPTvjD0ONGj/9jrRVRW9t8GNPmLs8X6D9u+tiHOsTrS8Kz3B8EarGHvcYNj2CSXvlRuLFhY0+K0+zthhfYN2L6iJdUJ00ft17Sw3vWFbZcupLgdIj/3SXZhWclubl9fEPa4qns9b3NnkpuMRig8aaCy6r9MNiR3gMReiN3W6IbEDPOdCdH9bwCvlz8CPwCfACjVOAK4HPgZ+Al4DlrRdEydVDJmI/lIHuwL4d9S1Ef3oaTQETBE9dNuo29rOny3Z4shEdNX4D70wMBt4o+Iz25rMXaeCtEm3rYxXtJuyxZMWwyaihedLTpZpR4ZzK9UYAVhpMET9SrvBlWgZa/9sElAG+nIcm0oUTh4lt97Qyy6D55BTokf3PWWYfk74EJilEgOYpXM3ZdjUnQT3xW+yvKMSAbga+MWTC6+i0f+s+k7bsRMZwIM108XRi27RD0xXkQFM1WNi35wQPXps7Is9wFUqEiQXnVMI/pEbvkM4BoG1EUheW3LWqS/6W8dGVq0O+OAFYFIHBE/S9w6JuF3U/gT0ReAEdsgvOaDkeTXrej6QU8wWjk5kYsk5nT75C7g1gOTV+hjjkLwKTK7ajN5rMNHkkpEmy0YNBUt7nmj4sGXLkPGQVk8Jht4+8JQH0U8HbsPBxvM9+rzOkMfHjwDXOZS8InAlD5z60juDZKfUTI+6ZqtD0VsD5i2Oprjo5/oC9dsjwAUOJM9oMOFjm++TTmcrgRuBPwIkv8xBrssC5CkuVrmxe3oDeire03DFUgd5LvWcozjocWO1ut9+02MjljjIUdY3ffEucL4bm+b9to9+8FIH+V2WRH/c4X67x0Feix3n9Ddwixtr8fTbCx3kJM8ArpCp1MtVRBPoVTvemzDPQT7zccN70S1Y6NXjTQ4aN9dBLjIbacuz0a7ma9mfWzZwjoM85ljmsC1ayS3kf+SxbORsBznI7iEb4t+qLF8clo2c6SCHmZY5xPHlZ/maQR3THc112DBfxQ5woWUjpzrIYVqnvydCbauy4TwHOUzudPflHZkHsGzkuQ5ykPVPG6ap2NFL+jZ0O8jhHMscJqrY0Sdk2dDlIAcZz9vgfAz9H1Zz9T9xDepGAAAAAElFTkSuQmCC"/>
-                        </defs>
-                        </svg>
-
-
-                    <span class="flex-1 ms-3 whitespace-nowrap"> @lang('lang.Products')</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="../orders"
+                <a href="../customers"
                     class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <svg width="24" height="18" viewBox="0 0 20 14" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -72,32 +54,63 @@
                     </svg>
 
 
+                    <span class="flex-1 ms-3 whitespace-nowrap"> @lang('lang.Customers')</span>
+                </a>
+            </li>
+            <li>
+                <a href="../category"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <svg class="w-[24px]" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                        <path fill="#ffffff"
+                            d="M264.5 5.2c14.9-6.9 32.1-6.9 47 0l218.6 101c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 149.8C37.4 145.8 32 137.3 32 128s5.4-17.9 13.9-21.8L264.5 5.2zM476.9 209.6l53.2 24.6c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 277.8C37.4 273.8 32 265.3 32 256s5.4-17.9 13.9-21.8l53.2-24.6 152 70.2c23.4 10.8 50.4 10.8 73.8 0l152-70.2zm-152 198.2l152-70.2 53.2 24.6c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 405.8C37.4 401.8 32 393.3 32 384s5.4-17.9 13.9-21.8l53.2-24.6 152 70.2c23.4 10.8 50.4 10.8 73.8 0z" />
+                    </svg>
+
+
+                    <span class="flex-1 ms-3 whitespace-nowrap"> @lang('lang.Categories')</span>
+                </a>
+            </li>
+            <li>
+                <a href="../product"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <rect width="22" height="22" fill="url(#pattern0_30_3)" />
+                        <defs>
+                            <pattern id="pattern0_30_3" patternContentUnits="objectBoundingBox" width="1"
+                                height="1">
+                                <use xlink:href="#image0_30_3" transform="scale(0.0111111)" />
+                            </pattern>
+                            <image id="image0_30_3" width="90" height="90"
+                                xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFVUlEQVR4nO2dSYxVRRRAq7VFkEEwEBIMMtk4oLIgbjTsRBQNiQvjiMEh7owstNst0RATXYiYuDEKLoxzOhoTp4XogogxiC2KOC00JEDEkWbq7mMu1Cff5g31qOFXdddJekHe575bpy/161XVK5TyDHAz8AGwj/jYp3O7SaUMsIF02KBSRKqE9FitUgI4C/ia9NgDdKtUAO4oaMQwcNDiZ7Ag5qBlTMlpNHepFADOBr4taMAWy7i9BTF7LWO+nGxVS0UUJD8EXBKh6IuB48lVta7m7woS3+wgtnPROu6W5KoaWOOjmj2LXlRS1XeriKt5d0HCLzmK70W0jr25IPYPUVY1cE9JNS9OQHRZVa9RsQF876uafYvW8V8siL9bxQZwpCDRz4DXHf3sLIi/02H8TwviH1aJiE6dwyo2suhAZNGByKIDkUUHIosORBYdiCw6EFl0ILLoQGTRgciiA5FFByKLDkQWHYgsOhBZdCCy6EBk0YHIogORRQciizYE6AJmyI6jM/z7eRX8/7u2xGXX6AvrgF/b3ut4SDUkiz4J8DCwX7sUp+taFx4o2dNwr2pAFq3EwX0lLu+XiwMlF7/Jomm0gQbYVeJyQC4eKrk41GQ35XivaKBbOyviUJ2guVm0GcBFlb+wGtHXGN4nVzRcWyf6aMUHbsuizQBur/B4pE70I4b3yRUNj9qIfiaLNgPYWCf6WMUH3jK8T65oeLvC49G6it7eQPTvjD0ONGj/9jrRVRW9t8GNPmLs8X6D9u+tiHOsTrS8Kz3B8EarGHvcYNj2CSXvlRuLFhY0+K0+zthhfYN2L6iJdUJ00ft17Sw3vWFbZcupLgdIj/3SXZhWclubl9fEPa4qns9b3NnkpuMRig8aaCy6r9MNiR3gMReiN3W6IbEDPOdCdH9bwCvlz8CPwCfACjVOAK4HPgZ+Al4DlrRdEydVDJmI/lIHuwL4d9S1Ef3oaTQETBE9dNuo29rOny3Z4shEdNX4D70wMBt4o+Iz25rMXaeCtEm3rYxXtJuyxZMWwyaihedLTpZpR4ZzK9UYAVhpMET9SrvBlWgZa/9sElAG+nIcm0oUTh4lt97Qyy6D55BTokf3PWWYfk74EJilEgOYpXM3ZdjUnQT3xW+yvKMSAbga+MWTC6+i0f+s+k7bsRMZwIM108XRi27RD0xXkQFM1WNi35wQPXps7Is9wFUqEiQXnVMI/pEbvkM4BoG1EUheW3LWqS/6W8dGVq0O+OAFYFIHBE/S9w6JuF3U/gT0ReAEdsgvOaDkeTXrej6QU8wWjk5kYsk5nT75C7g1gOTV+hjjkLwKTK7ajN5rMNHkkpEmy0YNBUt7nmj4sGXLkPGQVk8Jht4+8JQH0U8HbsPBxvM9+rzOkMfHjwDXOZS8InAlD5z60juDZKfUTI+6ZqtD0VsD5i2Oprjo5/oC9dsjwAUOJM9oMOFjm++TTmcrgRuBPwIkv8xBrssC5CkuVrmxe3oDeire03DFUgd5LvWcozjocWO1ut9+02MjljjIUdY3ffEucL4bm+b9to9+8FIH+V2WRH/c4X67x0Feix3n9Ddwixtr8fTbCx3kJM8ArpCp1MtVRBPoVTvemzDPQT7zccN70S1Y6NXjTQ4aN9dBLjIbacuz0a7ma9mfWzZwjoM85ljmsC1ayS3kf+SxbORsBznI7iEb4t+qLF8clo2c6SCHmZY5xPHlZ/maQR3THc112DBfxQ5woWUjpzrIYVqnvydCbauy4TwHOUzudPflHZkHsGzkuQ5ykPVPG6ap2NFL+jZ0O8jhHMscJqrY0Sdk2dDlIAcZz9vgfAz9H1Zz9T9xDepGAAAAAElFTkSuQmCC" />
+                        </defs>
+                    </svg>
+
+
+                    <span class="flex-1 ms-3 whitespace-nowrap"> @lang('lang.Products')</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="../orders"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <svg width="24" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                        <path fill="#ffffff"
+                            d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
+                    </svg>
+
+
                     <span class="flex-1 ms-3 whitespace-nowrap"> @lang('lang.Orders')</span>
                 </a>
             </li>
             <li>
                 <a href="../createOrder"
                     class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <svg width="24" height="18" viewBox="0 0 20 14" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M10.0002 7.98469C11.491 7.98469 12.6995 6.77614 12.6995 5.28531C12.6995 3.79449 11.491 2.58594 10.0002 2.58594C8.50933 2.58594 7.30078 3.79449 7.30078 5.28531C7.30078 6.77614 8.50933 7.98469 10.0002 7.98469Z"
-                            fill="white" />
-                        <path
-                            d="M14.2741 13.2241C14.2272 10.6453 12.3334 8.57031 10.0003 8.57031C7.66719 8.57031 5.77281 10.6459 5.72656 13.2241H14.2741Z"
-                            fill="white" />
-                        <path
-                            d="M3.20977 4.16172C4.32987 4.16172 5.23789 3.2537 5.23789 2.13359C5.23789 1.01349 4.32987 0.105469 3.20977 0.105469C2.08966 0.105469 1.18164 1.01349 1.18164 2.13359C1.18164 3.2537 2.08966 4.16172 3.20977 4.16172Z"
-                            fill="white" />
-                        <path
-                            d="M6.42188 8.09781C6.38687 6.16094 4.96438 4.60156 3.21063 4.60156C1.45688 4.60156 0.035 6.16094 0 8.09781H6.42188Z"
-                            fill="white" />
-                        <path
-                            d="M16.7879 4.16172C17.908 4.16172 18.816 3.2537 18.816 2.13359C18.816 1.01349 17.908 0.105469 16.7879 0.105469C15.6678 0.105469 14.7598 1.01349 14.7598 2.13359C14.7598 3.2537 15.6678 4.16172 16.7879 4.16172Z"
-                            fill="white" />
-                        <path
-                            d="M20.0006 8.09781C19.9656 6.16094 18.5431 4.60156 16.7894 4.60156C15.0356 4.60156 13.6137 6.16094 13.5781 8.09781H20.0006Z"
-                            fill="white" />
+                    <svg width="24" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                        <path fill="#ffffff"
+                            d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96zM252 160c0 11 9 20 20 20h44v44c0 11 9 20 20 20s20-9 20-20V180h44c11 0 20-9 20-20s-9-20-20-20H356V96c0-11-9-20-20-20s-20 9-20 20v44H272c-11 0-20 9-20 20z" />
                     </svg>
 
 
@@ -204,15 +217,26 @@
                     </svg>
                     English (US)
                 @else
-                <svg class="h-6 w-6 rounded-full me-2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="256" height="256" viewBox="0 0 256 256" xml:space="preserve">
+                    <svg class="h-6 w-6 rounded-full me-2" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="256" height="256"
+                        viewBox="0 0 256 256" xml:space="preserve">
 
-                    <defs>
-                    </defs>
-                    <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" >
-                        <path d="M 2.57 30 l 84.859 0 C 81.254 12.534 64.611 0.015 45.033 0 l -0.068 0 C 25.388 0.015 8.745 12.534 2.57 30 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                        <path d="M 87.429 60 L 2.57 60 C 8.749 77.476 25.408 90 45 90 S 81.25 77.476 87.429 60 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,206,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                        <path d="M 87.429 60 C 89.088 55.307 90 50.261 90 45 c 0 -5.261 -0.911 -10.307 -2.571 -15 L 2.57 30 C 0.911 34.693 0 39.739 0 45 c 0 5.261 0.912 10.307 2.571 15 L 87.429 60 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(221,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                    </g>
+                        <defs>
+                        </defs>
+                        <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;"
+                            transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
+                            <path
+                                d="M 2.57 30 l 84.859 0 C 81.254 12.534 64.611 0.015 45.033 0 l -0.068 0 C 25.388 0.015 8.745 12.534 2.57 30 z"
+                                style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"
+                                transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                            <path d="M 87.429 60 L 2.57 60 C 8.749 77.476 25.408 90 45 90 S 81.25 77.476 87.429 60 z"
+                                style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,206,0); fill-rule: nonzero; opacity: 1;"
+                                transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                            <path
+                                d="M 87.429 60 C 89.088 55.307 90 50.261 90 45 c 0 -5.261 -0.911 -10.307 -2.571 -15 L 2.57 30 C 0.911 34.693 0 39.739 0 45 c 0 5.261 0.912 10.307 2.571 15 L 87.429 60 z"
+                                style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(221,0,0); fill-rule: nonzero; opacity: 1;"
+                                transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                        </g>
                     </svg>
                     German
                 @endif
@@ -254,17 +278,29 @@
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
                             role="menuitem">
                             <div class="inline-flex items-center">
-                                 <svg class="h-3.5 w-3.5 rounded-full me-2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="256" height="256" viewBox="0 0 256 256" xml:space="preserve">
+                                <svg class="h-3.5 w-3.5 rounded-full me-2" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="256"
+                                    height="256" viewBox="0 0 256 256" xml:space="preserve">
 
                                     <defs>
                                     </defs>
-                                    <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" >
-                                        <path d="M 2.57 30 l 84.859 0 C 81.254 12.534 64.611 0.015 45.033 0 l -0.068 0 C 25.388 0.015 8.745 12.534 2.57 30 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                        <path d="M 87.429 60 L 2.57 60 C 8.749 77.476 25.408 90 45 90 S 81.25 77.476 87.429 60 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,206,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                        <path d="M 87.429 60 C 89.088 55.307 90 50.261 90 45 c 0 -5.261 -0.911 -10.307 -2.571 -15 L 2.57 30 C 0.911 34.693 0 39.739 0 45 c 0 5.261 0.912 10.307 2.571 15 L 87.429 60 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(221,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                    <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;"
+                                        transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
+                                        <path
+                                            d="M 2.57 30 l 84.859 0 C 81.254 12.534 64.611 0.015 45.033 0 l -0.068 0 C 25.388 0.015 8.745 12.534 2.57 30 z"
+                                            style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"
+                                            transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                        <path
+                                            d="M 87.429 60 L 2.57 60 C 8.749 77.476 25.408 90 45 90 S 81.25 77.476 87.429 60 z"
+                                            style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,206,0); fill-rule: nonzero; opacity: 1;"
+                                            transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                        <path
+                                            d="M 87.429 60 C 89.088 55.307 90 50.261 90 45 c 0 -5.261 -0.911 -10.307 -2.571 -15 L 2.57 30 C 0.911 34.693 0 39.739 0 45 c 0 5.261 0.912 10.307 2.571 15 L 87.429 60 z"
+                                            style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(221,0,0); fill-rule: nonzero; opacity: 1;"
+                                            transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
                                     </g>
-                                    </svg>
-                                    German
+                                </svg>
+                                German
                             </div>
                         </a>
                     </li>
