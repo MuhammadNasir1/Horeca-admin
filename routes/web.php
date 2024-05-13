@@ -55,7 +55,10 @@ Route::middleware('custom')->group(function () {
     Route::get('/delOrder/{order_id}', [ordersController::class,  'delete']);
 
     // Invoice pages
-    Route::get('/invoice/{order_id}', [ordersController::class,  'getOrderData']);
+    Route::get('/invoice/{order_id}', [ordersController::class,  'getOrderData'])->name('invoice');
+    Route::get('/gatepass/{order_id}', [ordersController::class,  'getOrderData'])->name('gatepass');
+
+    //  gate pass
 
 });
 

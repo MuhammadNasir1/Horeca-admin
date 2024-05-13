@@ -74,14 +74,19 @@ class ordersController extends Controller
     {
         $orderItems = [];
         $order  =  orders::find($order_id);
-        // $order  =  orders::where('id', $order_id)->get();
         $order_items  =  order_items::where('order_id', $order_id)->get();
         $orderItems =  $order_items;
-
-        // $product_id =  $order_items->product_id;
         $productIds = $orderItems->pluck('product_id');
         $products = product::whereIn('id', $productIds)->get();
-        return view('Invoices.customer_invoice', ['order' =>  $order, 'orderItems' => $order_items, 'products' => $products]);
+
+        $routeName = request()->route()->getName();
+        $viewName = '';
+        if ($routeName === 'invoice') {
+            $viewName = 'Invoices.customer_invoice';
+        } elseif ($routeName === 'gatepass') {
+            $viewName = 'Invoices.gatepass';
+        }
+        return view($viewName, ['order' =>  $order, 'orderItems' => $order_items, 'products' => $products]);
     }
 
     // view orders
