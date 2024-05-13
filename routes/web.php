@@ -58,7 +58,8 @@ Route::middleware('custom')->group(function () {
     Route::get('/invoice/{order_id}', [ordersController::class,  'getOrderData'])->name('invoice');
     Route::get('/gatepass/{order_id}', [ordersController::class,  'getOrderData'])->name('gatepass');
 
-    //  gate pass
+    // Excel data import
+    Route::post('/product/import', [productController::class,  'importExcelData']);
 
 });
 

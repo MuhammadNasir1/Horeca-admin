@@ -4,7 +4,15 @@
     <div>
         <h1 class=" font-semibold   text-2xl ">@lang('lang.All_Product')</h1>
     </div>
+    <form action="{{ url('product/import') }}" method="POST" enctype="multipart/form-data">
+        @csrf
 
+        <div class="input-group">
+            <input type="file" name="excel_file" class="form-control" />
+            <button type="submit" class="btn btn-primary">Import</button>
+        </div>
+
+    </form>
     <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
         <div>
             <div class="flex justify-between px-[20px] mb-3">

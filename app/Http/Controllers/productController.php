@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\product;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Validated;
+use Maatwebsite\Excel\Facades\Excel;
 
 class productController extends Controller
 {
@@ -86,6 +87,33 @@ class productController extends Controller
             return response()->json(['success'  => true, 'message' => "produnct get successfully", 'products' => $products],  200);
         } catch (\Exception $e) {
             return response()->json(['success'  => false, 'message' => $e->getMessage()],  500);
+        }
+    }
+
+    public function  importExcelData(Request $request)
+    {
+        $validateData =  $request->validate([
+            'excel_file' => 'required|mimes:xlsx,xls',
+        ]);
+
+        $file = $request->file('excel_file');
+        $data = Excel::toArray([], $file);
+        foreach ($data[0] as $row) {
+            product::create([
+                'name' => $row[0],
+                'code' => $row[1],
+                'category' => $row[2],
+                'sub_category' => $row[3],
+                'tags' => $row[4],
+                'rate' => $row[5],
+                'tax' => $row[6],
+                'quantity' => $row[7],
+                'quantity_alert' => $row[8],
+                'status' => $row[9],
+                'image' => null,
+                'description' => $row[10],
+                // Add more columns as needed
+            ]);
         }
     }
 }
