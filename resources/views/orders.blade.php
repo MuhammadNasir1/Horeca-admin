@@ -20,7 +20,7 @@
                             <th>@lang('lang.Customer_Name')</th>
                             <th>@lang('lang.Customer_phone')</th>
                             <th>@lang('lang.Amount')</th>
-                            <th>@lang('lang.Action')</th>
+                            <th class="flex justify-center">@lang('lang.Action')</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,13 +31,17 @@
                                 <td>{{ $data->order_date }}</td>
                                 <td>{{ $data->customer_name }}</td>
                                 <td>{{ $data->customer_phone }}</td>
-                                <td>{{ $data->grand_total }}</td>
+                                <td>{{ $data->grand_total }}&euro;</td>
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
-                                        <button class="edit_btn" updId="{{ $data->id }}"><img width="38px"
-                                                src="{{ asset('images/icons/edit.svg') }}" alt="delete"></button>
-                                        <a href="../delProduct/{{ $data->id }}"><img width="38px"
-                                                src="{{ asset('images/icons/delete.svg') }}" alt="delete"></a>
+                                        <a href="../order/{{ $data->id }}"><button
+                                                class="w-[95px] py-2 text-white bg-green-400 rounded-xl font-bold text-[16px]">@lang('lang.Edit')</button></a>
+                                        <a href="../delOrder/{{ $data->id }}"> <button
+                                                class="w-[95px] py-2 text-white bg-red-600 rounded-xl font-bold text-[16px]">@lang('lang.Delete')</button></a>
+                                        <a href="../invoice/{{ $data->id }}"> <button
+                                                class="w-[95px] py-2 text-white bg-black rounded-xl font-bold text-[16px]">@lang('lang.Print')</button></a>
+                                        <a href="../gatepass/{{ $data->id }}"> <button
+                                                class="w-[95px] py-2 text-white bg-black rounded-xl font-bold text-[16px]">@lang('lang.Gate_Pass')</button></a>
                                     </div>
                                 </td>
                             </tr>

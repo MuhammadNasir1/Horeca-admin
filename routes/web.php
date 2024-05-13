@@ -52,6 +52,7 @@ Route::middleware('custom')->group(function () {
 
     // Order
     Route::post('/addOrder', [ordersController::class,  'insert']);
+    Route::get('/delOrder/{order_id}', [ordersController::class,  'delete']);
 
     // Invoice pages
     Route::get('/invoice/{order_id}', [ordersController::class,  'getOrderData']);

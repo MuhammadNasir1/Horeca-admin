@@ -81,14 +81,30 @@ class ordersController extends Controller
         // $product_id =  $order_items->product_id;
         $productIds = $orderItems->pluck('product_id');
         $products = product::whereIn('id', $productIds)->get();
-        return view('Invoices.customer_invoice', ['order' =>  $order, 'orderItems' => $order_items , 'products' => $products]);
+        return view('Invoices.customer_invoice', ['order' =>  $order, 'orderItems' => $order_items, 'products' => $products]);
     }
 
     // view orders
 
-    public function orders(){
+    public function orders()
+    {
 
         $orders = orders::all();
-        return view('orders' , ['orders' => $orders]);
+        return view('orders', ['orders' => $orders]);
+    }
+
+    public function delete($order_id)
+    {
+
+        $order = orders::find($order_id);
+        $orderItems = order_items::where('order_id', $order_id)->get();
+
+        $order->delete();
+
+        foreach ($orderItems as $orderItem) {
+            $orderItem->delete();
+        }
+
+        return redirect('orders');
     }
 }

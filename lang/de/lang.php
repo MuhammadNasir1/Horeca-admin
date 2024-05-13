@@ -6,7 +6,7 @@ return [
     'logout' => 'logout',
     'Help' => 'Help',
     'Setting' => 'Setting',
-    'Dashboard' => 'Dashboard',
+    'Dashboard' => 'Dashboarda',
     "Action" => "Action",
     "Update" => "Update",
     "STN" => "STN",

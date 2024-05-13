@@ -173,7 +173,7 @@
             {{-- =============language dropdown======================== --}}
             <button type="button" data-dropdown-toggle="language-dropdown-menu"
                 class="inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
-                @if (session()->get('locale') !== 'zh')
+                @if (session()->get('locale') !== 'de')
                     <svg class="w-6 h-6 rounded-full me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                         xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 3900 3900">
                         <path fill="#b22234" d="M0 0h7410v3900H0z" />
@@ -204,24 +204,17 @@
                     </svg>
                     English (US)
                 @else
-                    <svg class="h-6 w-6 rounded-full me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink" id="flag-icon-css-cn" viewBox="0 0 512 512">
-                        <defs>
-                            <path id="a" fill="#ffde00" d="M1-.3L-.7.8 0-1 .6.8-1-.3z" />
-                        </defs>
-                        <path fill="#de2910" d="M0 0h512v512H0z" />
-                        <use width="30" height="20" transform="matrix(76.8 0 0 76.8 128 128)"
-                            xlink:href="#a" />
-                        <use width="30" height="20" transform="rotate(-121 142.6 -47) scale(25.5827)"
-                            xlink:href="#a" />
-                        <use width="30" height="20" transform="rotate(-98.1 198 -82) scale(25.6)"
-                            xlink:href="#a" />
-                        <use width="30" height="20" transform="rotate(-74 272.4 -114) scale(25.6137)"
-                            xlink:href="#a" />
-                        <use width="30" height="20" transform="matrix(16 -19.968 19.968 16 256 230.4)"
-                            xlink:href="#a" />
+                <svg class="h-6 w-6 rounded-full me-2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="256" height="256" viewBox="0 0 256 256" xml:space="preserve">
+
+                    <defs>
+                    </defs>
+                    <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" >
+                        <path d="M 2.57 30 l 84.859 0 C 81.254 12.534 64.611 0.015 45.033 0 l -0.068 0 C 25.388 0.015 8.745 12.534 2.57 30 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                        <path d="M 87.429 60 L 2.57 60 C 8.749 77.476 25.408 90 45 90 S 81.25 77.476 87.429 60 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,206,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                        <path d="M 87.429 60 C 89.088 55.307 90 50.261 90 45 c 0 -5.261 -0.911 -10.307 -2.571 -15 L 2.57 30 C 0.911 34.693 0 39.739 0 45 c 0 5.261 0.912 10.307 2.571 15 L 87.429 60 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(221,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                    </g>
                     </svg>
-                    中文 (繁體)
+                    German
                 @endif
 
 
@@ -257,29 +250,21 @@
                         </a>
                     </li>
                     <li>
-                        <a href="../lang?lang=zh"
+                        <a href="../lang?lang=de"
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
                             role="menuitem">
                             <div class="inline-flex items-center">
-                                <svg class="h-3.5 w-3.5 rounded-full me-2" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                    id="flag-icon-css-cn" viewBox="0 0 512 512">
+                                 <svg class="h-3.5 w-3.5 rounded-full me-2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="256" height="256" viewBox="0 0 256 256" xml:space="preserve">
+
                                     <defs>
-                                        <path id="a" fill="#ffde00" d="M1-.3L-.7.8 0-1 .6.8-1-.3z" />
                                     </defs>
-                                    <path fill="#de2910" d="M0 0h512v512H0z" />
-                                    <use width="30" height="20" transform="matrix(76.8 0 0 76.8 128 128)"
-                                        xlink:href="#a" />
-                                    <use width="30" height="20"
-                                        transform="rotate(-121 142.6 -47) scale(25.5827)" xlink:href="#a" />
-                                    <use width="30" height="20" transform="rotate(-98.1 198 -82) scale(25.6)"
-                                        xlink:href="#a" />
-                                    <use width="30" height="20"
-                                        transform="rotate(-74 272.4 -114) scale(25.6137)" xlink:href="#a" />
-                                    <use width="30" height="20"
-                                        transform="matrix(16 -19.968 19.968 16 256 230.4)" xlink:href="#a" />
-                                </svg>
-                                中文 (繁體)
+                                    <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" >
+                                        <path d="M 2.57 30 l 84.859 0 C 81.254 12.534 64.611 0.015 45.033 0 l -0.068 0 C 25.388 0.015 8.745 12.534 2.57 30 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                        <path d="M 87.429 60 L 2.57 60 C 8.749 77.476 25.408 90 45 90 S 81.25 77.476 87.429 60 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,206,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                        <path d="M 87.429 60 C 89.088 55.307 90 50.261 90 45 c 0 -5.261 -0.911 -10.307 -2.571 -15 L 2.57 30 C 0.911 34.693 0 39.739 0 45 c 0 5.261 0.912 10.307 2.571 15 L 87.429 60 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(221,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                    </g>
+                                    </svg>
+                                    German
                             </div>
                         </a>
                     </li>
