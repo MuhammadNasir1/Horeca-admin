@@ -39,6 +39,24 @@
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="customer_phone" id="customer_phone" placeholder=" @lang('lang.Phone_Here')">
                     </div>
+
+
+                    <div class="mt-4  col-span-3  ">
+                        <div class="flex gap-4 items-center">
+                            <div class="w-full">
+                                <label class="text-[14px] font-normal" for="Customer_Address">@lang('lang.Customer_Address')</label>
+                                <br>
+                                <textarea name="customer_adress" id="Customer_Address" placeholder=" @lang('lang.Address_Here')" rows="2"
+                                    class="w-full   border-[#DEE2E6] rounded-[4px] focus:border-primary [40px] text-[14px]"></textarea>
+                            </div>
+                            <div class="w-full">
+                                <label class="text-[14px] font-normal" for="Customer_note">@lang('lang.Customer_note')</label>
+                                <br>
+                                <textarea name="customer_note" id="Customer_note" placeholder=" @lang('lang.Note_Here')" rows="2"
+                                    class="w-full   border-[#DEE2E6] rounded-[4px] focus:border-primary [40px] text-[14px]"></textarea>
+                            </div>
+                        </div>
+                    </div>
                     <input type="hidden" id="productCode">
                     <input type="hidden" id="Product_id">
                     <div class="mt-4 ">
@@ -69,31 +87,23 @@
                         </div>
                     </div>
 
-                    <div class="mt-4">
-                        <label class="text-[14px] font-normal" for="order_quantity">@lang('lang.Quantity')</label>
-                        <input type="number"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="order_quantity" id="order_quantity" placeholder=" @lang('lang.Quantity')" min="1">
+                    <div class="flex mt-4 gap-2">
+                        <div class="">
+                            <label class="text-[14px] font-normal" for="order_quantity">@lang('lang.Quantity')</label>
+                            <input type="number"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="order_quantity" id="order_quantity" placeholder=" @lang('lang.Quantity')"
+                                min="1">
 
-                    </div>
+                        </div>
+                        <div class="mt-6 flex">
+                            <button id="addProductBtn" type="button"
+                                class="bg-primary toggle-button h-[40px] rounded-[4px] w-[40px] font-bold text-white text-sm flex justify-center items-center"
+                                style="width: 132px"> <span class="text-2xl pr-2">+</span> Add Product</button>
 
-                    <div class="mt-4  col-span-3  ">
-                        <div class="flex gap-4 items-center">
-                            <div class="w-full">
-                                <label class="text-[14px] font-normal" for="Customer_Adress">@lang('lang.Customer_Adress')</label>
-                                <input type="text"
-                                    class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                    name="customer_adress" id="Customer_Adress" placeholder=" @lang('lang.Adress_Here')"
-                                    min="1">
-                            </div>
-                            <div class="mt-6 flex">
-                                <button id="addProductBtn" type="button"
-                                    class="bg-primary toggle-button h-[40px] rounded-[4px] w-[40px] font-bold text-white text-sm flex justify-center items-center"
-                                    style="width: 132px"> <span class="text-2xl pr-2">+</span> Add Product</button>
-
-                            </div>
                         </div>
                     </div>
+
 
 
 
@@ -267,7 +277,8 @@
 
                     // Clear existing options from the select element
                     // $('#product').empty();
-                    $('#product').html($('<option></option>').attr('value', "").text("@lang('lang.Select_Product')"));
+                    $('#product').html($('<option></option>').attr('value', "").text(
+                        "@lang('lang.Select_Product')"));
 
                     // Iterate over each product object
                     $.each(products, function(index, product) {
