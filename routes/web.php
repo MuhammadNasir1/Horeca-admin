@@ -61,10 +61,15 @@ Route::middleware('custom')->group(function () {
 
     // Excel data import
     Route::post('/product/import', [productController::class,  'importExcelData']);
+    // category CRUD
+    Route::get('/category', [productController::class,  'categories']);
 
+    // customers CRUD
+    Route::get('/customers', [userController::class,  'customers']);
 });
 
 
 Route::get('email', function () {
+
     return view("emails.parent");
 });

@@ -26,9 +26,9 @@ class userController extends Controller
         return redirect()->back();
     }
     // dashboard  Users Couny
-    public function Dashboard()
+    public function customers()
     {
-        return view('dashboard');
+        return view('customers');
     }
 
 
