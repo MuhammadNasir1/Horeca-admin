@@ -35,6 +35,10 @@ Route::middleware('custom')->group(function () {
         return view('help');
     });
 
+    Route::get('report', function () {
+        return view('sale_report');
+    });
+
 
     Route::get('/orders', [ordersController::class, 'orders']);
     Route::get('createOrder', function () {

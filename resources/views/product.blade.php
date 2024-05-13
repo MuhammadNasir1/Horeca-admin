@@ -50,11 +50,12 @@
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
 
-                                        <button
-                                            class="w-[95px] updateBtn  py-2 text-white bg-green-400 rounded-xl font-bold text-[16px]"
-                                            updateId="{{ $data->id }}">@lang('lang.Edit')</button>
-                                        <a href="../delProduct/{{ $data->id }}"> <button
-                                                class="w-[95px] py-2 text-white bg-red-600 rounded-xl font-bold text-[16px]">@lang('lang.Delete')</button></a>
+                                        <button class="] updateBtn cursor-pointer  " updateId="{{ $data->id }}"><img
+                                                width="38px" src="{{ asset('images/icons/edit.svg') }}"
+                                                alt="update"></button>
+                                        <a href="../delProduct/{{ $data->id }}"><img width="38px"
+                                                src="{{ asset('images/icons/delete.svg') }}"
+                                                alt="update"></button></a>
                                     </div>
                                 </td>
                             </tr>
