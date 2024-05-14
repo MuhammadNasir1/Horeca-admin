@@ -168,11 +168,15 @@
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="product_code" id="productCode" placeholder=" @lang('lang.Code_Here')">
                     </div>
-                    <div class=" ">
+                    <div class="">
                         <label class="text-[14px] font-normal" for="category">@lang('lang.Product_Category')</label>
-                        <input type="text"
+                        <select
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="category" id="category" placeholder=" @lang('lang.Category_Here')">
+                            name="category" id="category">
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->name }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
 
                     </div>
                     <div class="mt-4">

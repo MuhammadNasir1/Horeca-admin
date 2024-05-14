@@ -61,7 +61,8 @@ class productController extends Controller
     public function productData()
     {
         $products = product::all();
-        return view('product',  ['products' => $products]);
+        $categories = category::where('status', "active")->get();
+        return view('product',  ['products' => $products , 'categories' => $categories]);
     }
 
     public function delete($id)
