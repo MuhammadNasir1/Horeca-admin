@@ -9,27 +9,47 @@
             <div class="flex justify-between px-[20px] mb-3">
                 <h3 class="text-[20px] text-black">@lang('lang.Reqorts_List')</h3>
                 <div class="flex gap-4 items-center">
-                    <div class="">
+
+                    <div class="mb-1">
                         <label class="text-[14px] font-normal" for="from_date">@lang('lang.From_Date')</label>
                         <br>
                         <input type="date"
                             class="w-70 border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="from_date" id="from_date">
                     </div>
-                    <div>
+                    <div class="mb-1">
                         <label class="text-[14px] font-normal" for="to_date">@lang('lang.To_Date')</label>
                         <br>
                         <input type="date"
                             class="w-70 border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="to_date" id="to_date">
                     </div>
-                    <div>
+                    <div class="bg-primary mt-5 px-3 rounded-[6px]">
+
+                        <a href="#" class="border-r-2 border-white"> <button
+                                class="cursor-pointer text-white h-10  shadow-sm font-semibold px-3">
+                                @lang('lang.Daily')
+                            </button></a>
+
+                        <a href="#" class="border-r-2 border-white">
+                            <button class=" cursor-pointer text-white h-10  shadow-sm font-semibold px-3">
+                                @lang('lang.Weekly')
+                            </button>
+                        </a>
+
+                        <a href="#">
+                            <button class=" cursor-pointer text-white h-10  shadow-sm font-semibold px-3">
+                                @lang('lang.Monthly')
+                            </button>
+                        </a>
+                    </div>
+                    {{-- <div>
 
                         <button
                             class="bg-primary cursor-pointer text-white h-10 px-5 rounded-[6px] mt-5 shadow-sm font-semibold ">
                             @lang('lang.Get_Report')
                         </button>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="overflow-x-auto px-5 pb-10 pt-5">

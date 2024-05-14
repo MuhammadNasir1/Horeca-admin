@@ -122,6 +122,9 @@ return [
     "From_Date" => "From Date",
     "To_Date" => "To Date",
     "Get_Report" => "Get Report",
+    "Daily" => "Daily",
+    "Weekly" => "Weekly",
+    "Monthly" => "Monthly",
 
 
 ];
