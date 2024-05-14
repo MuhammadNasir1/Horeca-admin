@@ -125,6 +125,12 @@ return [
     "Daily" => "Daily",
     "Weekly" => "Weekly",
     "Monthly" => "Monthly",
+    "Day_Report" => "Day Report",
+    "Customer_Email" => "Customer Email",
+    "Total" => "Total",
+    "Tax" => "Tax",
+    "Grand_total" => "Grand total",
+    "Download_Example" => "Download Example",
 
 
 ];

@@ -17,7 +17,7 @@
                         class="bg-secondary cursor-pointer text-white  ml-4 h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
                         @lang('lang.Import_From_Excel')</button> <br>
                     <a href="{{ asset('assets/products sample.xlsx') }}" class="float-end mt-2 font-semibold"
-                        download="products">Download Example</a>
+                        download="products">@lang('lang.Download_Example')</a>
                 </div>
             </div>
             <div class="overflow-x-auto">

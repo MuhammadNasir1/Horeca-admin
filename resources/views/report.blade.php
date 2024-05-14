@@ -24,51 +24,48 @@
                             class="w-70 border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="to_date" id="to_date">
                     </div>
-                    <div class="bg-primary mt-5 px-3 rounded-[6px]">
+                    <div class="w-36  mt-5">
+                        <select
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="report" id="category">
+                            <option value="1">1 @lang('lang.Day_Report')</option>
+                            <option value="3">3 @lang('lang.Day_Report')</option>
+                            <option value="7">7 @lang('lang.Day_Report')</option>
+                        </select>
 
-                        <a href="#" class="border-r-2 border-white"> <button
-                                class="cursor-pointer text-white h-10  shadow-sm font-semibold px-3">
-                                @lang('lang.Daily')
-                            </button></a>
-
-                        <a href="#" class="border-r-2 border-white">
-                            <button class=" cursor-pointer text-white h-10  shadow-sm font-semibold px-3">
-                                @lang('lang.Weekly')
-                            </button>
-                        </a>
-
-                        <a href="#">
-                            <button class=" cursor-pointer text-white h-10  shadow-sm font-semibold px-3">
-                                @lang('lang.Monthly')
-                            </button>
-                        </a>
                     </div>
-                    {{-- <div>
+                    <div>
 
                         <button
                             class="bg-primary cursor-pointer text-white h-10 px-5 rounded-[6px] mt-5 shadow-sm font-semibold ">
                             @lang('lang.Get_Report')
                         </button>
-                    </div> --}}
+                    </div>
                 </div>
             </div>
             <div class="overflow-x-auto px-5 pb-10 pt-5">
-                <table class="overflow-scroll w-full">
+                <table class="overflow-scroll w-full text-center">
                     <thead class=" bg-primary text-white border-2 border-primary">
                         <tr>
                             <th class="py-3">@lang('lang.STN')</th>
-                            <th>@lang('lang.Name')</th>
-                            <th>@lang('lang.Image')</th>
-                            <th class="">@lang('lang.Action')</th>
+                            <th class="border-2 border-primary">@lang('lang.Customer_Name')</th>
+                            <th class="border-2 border-primary">@lang('lang.Customer_phone')</th>
+                            <th class="border-2 border-primary">@lang('lang.Customer_Email')</th>
+                            <th class="border-2 border-primary">@lang('lang.Total')</th>
+                            <th class="border-2 border-primary">@lang('lang.Tax')</th>
+                            <th class="border-2 border-primary">@lang('lang.Grand_total')</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <th class="border-2 border-primary">@lang('lang.STN')</th>
-                            <th class="border-2 border-primary">@lang('lang.Image')</th>
-                            <th class="border-2 border-primary">@lang('lang.Name')</th>
-                            <th class=" border-2 border-primary">@lang('lang.Action')
-                            </th>
+                    <tbody class="">
+                        <tr
+                        >
+                            <td>1</td>
+                            <td>Peter</td>
+                            <td>1234567</td>
+                            <td>Peter@gmail.com</td>
+                            <td>100&euro;</td>
+                            <td>10%</td>
+                            <td>110&euro;</td>
                         </tr>
                         {{-- @foreach ($products as $x => $data)
                             <tr class="pt-4">

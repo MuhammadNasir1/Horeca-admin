@@ -1,20 +1,10 @@
 <?php
 
 use App\Http\Controllers\authController;
-use App\Http\Controllers\coursesController;
 use App\Http\Controllers\ordersController;
-use App\Http\Controllers\parentController;
 use App\Http\Controllers\productController;
-use App\Http\Controllers\studentController;
-use App\Http\Controllers\teacherController;
-use App\Http\Controllers\teachingController;
-use App\Http\Controllers\trainingController;
 use App\Http\Controllers\userController;
-use App\Models\training;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Testing\ParallelConsoleOutput;
 
 // language route
 Route::get('/lang', [userController::class, 'language_change']);
@@ -36,7 +26,7 @@ Route::middleware('custom')->group(function () {
     });
 
     Route::get('report', function () {
-        return view('sale_report');
+        return view('report');
     });
 
 
