@@ -117,6 +117,14 @@ return [
     "Add_Category" => "Add Category",
     "Category_Name" => "Category Name",
     "Sale_Report" => "Sale Report",
+    "All_Reqorts" => "All Reqorts",
+    "Reqorts_List" => "Reports List",
+    "From_Date" => "From Date",
+    "To_Date" => "To Date",
+    "Get_Report" => "Get Report",
+    "Daily" => "Daily",
+    "Weekly" => "Weekly",
+    "Monthly" => "Monthly",
 
 
 ];
