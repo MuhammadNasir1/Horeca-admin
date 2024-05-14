@@ -28,41 +28,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th>@lang('lang.STN')</th>
-                            <th>@lang('lang.Name')</th>
-                            <th>@lang('lang.Image')</th>
-                            <th>@lang('lang.Image')</th>
-                            <th>@lang('lang.Category/Sub-Category')</th>
-                            <th class="flex  justify-center">@lang('lang.Action')</th>
-                        </tr>
-                        {{-- @foreach ($products as $x => $data)
+                        @foreach ($customers as $x => $data)
                             <tr class="pt-4">
                                 <td>{{ $x + 1 }}</td>
-                                <td>{{ $data->code }}</td>
                                 <td>{{ $data->name }}</td>
-                                <td class="w-[220px]">
-                                    <img class="h-20 w-20 rounded-full"
-                                        src="../{{ $data->image ?? asset('images/favicon(32X32).png') }}"
-                                        alt="product Image">
-
-                                </td>
-                                <td>{{ $data->category }} / {{ $data->sub_category }}</td>
-                                <td>{{ $data->rate }}</td>
-                                <td>{{ $data->status }}</td>
+                                <td>{{ $data->email }}</td>
+                                <td>{{ $data->phone }}</td>
+                                <td>{{ $data->role }}</td>
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
 
                                         <button class="] updateBtn cursor-pointer  " updateId="{{ $data->id }}"><img
                                                 width="38px" src="{{ asset('images/icons/edit.svg') }}"
                                                 alt="update"></button>
-                                        <a href="../delProduct/{{ $data->id }}"><img width="38px"
+                                        <a href="../delCustomer/{{ $data->id }}"><img width="38px"
                                                 src="{{ asset('images/icons/delete.svg') }}"
                                                 alt="update"></button></a>
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach --}}
+                        @endforeach
 
                     </tbody>
                 </table>
@@ -112,32 +97,7 @@
                         <label class="text-[14px] font-normal" for="PhoneNO">@lang('lang.Customer_phone')</label>
                         <input type="number"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="phone" id="PhoneNO" placeholder=" @lang('lang.Phone_Here')">
-
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-x-6 mx-6 my-6">
-
-                    <div class="">
-                        <label class="text-[14px] font-normal" for="gender">@lang('lang.Gender')</label>
-                        <select
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="gender" id="gender">
-                            <option value="">@lang('lang.Select_Gender')</option>
-                            <option value="male">@lang('lang.Male')</option>
-                            <option value="female">@lang('lang.Female')</option>
-                            <option value="other">@lang('lang.Other')</option>
-                        </select>
-
-                    </div>
-                    <div class="">
-                        <label class="text-[14px] font-normal" for="Role">@lang('lang.Role')</label>
-                        <select
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="role" id="Role">
-                            <option value="">@lang('lang.Select_Role')</option>
-                            <option value="customer" selected>@lang('lang.Customer')</option>
-                        </select>
+                            name="phone_no" id="PhoneNO" placeholder=" @lang('lang.Phone_Here')">
 
                     </div>
                 </div>

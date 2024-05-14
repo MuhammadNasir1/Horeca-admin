@@ -52,7 +52,7 @@
                             <div class="w-full">
                                 <label class="text-[14px] font-normal" for="Customer_note">@lang('lang.Customer_note')</label>
                                 <br>
-                                <textarea name="customer_note" id="Customer_note" placeholder=" @lang('lang.Note_Here')" rows="2"
+                                <textarea name="order_note" id="Customer_note" placeholder=" @lang('lang.Note_Here')" rows="2"
                                     class="w-full   border-[#DEE2E6] rounded-[4px] focus:border-primary [40px] text-[14px]"></textarea>
                             </div>
                         </div>
@@ -77,13 +77,13 @@
                             <label class="text-[14px] font-normal" for="Product_Price">@lang('lang.Product_Price')</label>
                             <input type="number"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="price" id="Product_Price" value="100" readonly>
+                                name="price" id="Product_Price" value="0" readonly>
                         </div>
                         <div>
                             <label class="text-[14px] font-normal" for="Tax">@lang('lang.Tax')%</label>
                             <input type="number"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="Tax" id="tax" readonly value="18">
+                                name="Tax" id="tax" readonly value="0">
                         </div>
                     </div>
 
@@ -143,10 +143,10 @@
 
                                         <label class="text-[14px] font-normal"
                                             for="delivery_charges">@lang('lang.Delivery_Charges'):</label>
-                                        <input type="text"
+                                        <input type="number"
                                             class="w-[50%] border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                                             name="delivery_charges" id="delivery_charges"
-                                            placeholder="@lang('lang.Delivery_Charges')">
+                                            placeholder="@lang('lang.Delivery_Charges')" value="0">
 
                                     </div>
                                 </td>

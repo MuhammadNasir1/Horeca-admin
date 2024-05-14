@@ -13,6 +13,7 @@ use App\Models\students;
 use App\Models\teacher;
 use App\Models\teacher_rec;
 use App\Models\training;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class userController extends Controller
@@ -28,8 +29,32 @@ class userController extends Controller
     // dashboard  Users Couny
     public function customers()
     {
-        return view('customers');
+        $customers =  User::where('role', 'customer')->get();
+        return view('customers', ['customers'  => $customers]);
     }
 
+    public function  addCustomer(Request $request)
+    {
+        try {
+            $validateData = $request->validate([
+                'name' => 'required',
+                'email' => 'required|email',
+                'phone_no' => 'required',
+                'address' => 'required',
 
+            ]);
+            $customer =  User::create([
+                'name' => $validateData['name'],
+                'email' => $validateData['email'],
+                'password' => Hash::make(12345678),
+                'phone' => $validateData['phone_no'],
+                'role' => "customer",
+                'address' => $validateData['address'],
+            ]);
+
+            return response()->json(['success' => true, 'message' => "Customer Add Successfully"]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => true, 'message' => $e->getMessage()]);
+        }
+    }
 }

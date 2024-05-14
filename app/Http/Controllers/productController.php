@@ -139,7 +139,8 @@ class productController extends Controller
 
     public function categories()
     {
-        return view('category');
+        $categories = category::all();
+        return view('category'  ,   ['categories' => $categories]);
     }
 
 

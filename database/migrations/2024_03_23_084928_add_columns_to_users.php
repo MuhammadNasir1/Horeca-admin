@@ -16,6 +16,7 @@ return new class extends Migration
             $table->text('city')->nullable();
             $table->text('country')->nullable();
             $table->text('language')->nullable();
+            $table->text('address')->nullable();
             $table->text('user_image')->nullable();
         });
     }

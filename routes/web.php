@@ -70,6 +70,7 @@ Route::middleware('custom')->group(function () {
 
     // customers CRUD
     Route::get('/customers', [userController::class,  'customers']);
+    Route::post('/addCustomer', [userController::class,  'addCustomer']);
 
 
     // Category CRUD

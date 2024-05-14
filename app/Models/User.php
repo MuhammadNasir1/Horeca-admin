@@ -26,6 +26,7 @@ class User extends Authenticatable
         'city',
         'country',
         'language',
+        'address',
         'user_image',
     ];
 

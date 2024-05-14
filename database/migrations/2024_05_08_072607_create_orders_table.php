@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('order_date');
             $table->string('customer_name')->nullable();
             $table->integer('customer_id')->nullable();
-            $table->integer('customer_phone')->nullable();
+            $table->string('customer_phone')->nullable();
             $table->text('customer_adress')->nullable();
             $table->string('sub_total');
             $table->string('order_vat');

@@ -22,29 +22,20 @@
                             <th>@lang('lang.STN')</th>
                             <th>@lang('lang.Name')</th>
                             <th>@lang('lang.Image')</th>
+                            <th>@lang('lang.Status')</th>
                             <th class="flex  justify-center">@lang('lang.Action')</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th>@lang('lang.STN')</th>
-                            <th>@lang('lang.Name')</th>
-                            <th>@lang('lang.Image')</th>
-                            <th class="flex  justify-center">@lang('lang.Action')</th>
-                        </tr>
-                        {{-- @foreach ($products as $x => $data)
+                        @foreach ($categories as $x => $data)
                             <tr class="pt-4">
                                 <td>{{ $x + 1 }}</td>
-                                <td>{{ $data->code }}</td>
                                 <td>{{ $data->name }}</td>
                                 <td class="w-[220px]">
                                     <img class="h-20 w-20 rounded-full"
                                         src="../{{ $data->image ?? asset('images/favicon(32X32).png') }}"
                                         alt="product Image">
-
                                 </td>
-                                <td>{{ $data->category }} / {{ $data->sub_category }}</td>
-                                <td>{{ $data->rate }}</td>
                                 <td>{{ $data->status }}</td>
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
@@ -52,13 +43,13 @@
                                         <button class="] updateBtn cursor-pointer  " updateId="{{ $data->id }}"><img
                                                 width="38px" src="{{ asset('images/icons/edit.svg') }}"
                                                 alt="update"></button>
-                                        <a href="../delProduct/{{ $data->id }}"><img width="38px"
+                                        <a href="../delCategory/{{ $data->id }}"><img width="38px"
                                                 src="{{ asset('images/icons/delete.svg') }}"
                                                 alt="update"></button></a>
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach --}}
+                        @endforeach
 
                     </tbody>
                 </table>
