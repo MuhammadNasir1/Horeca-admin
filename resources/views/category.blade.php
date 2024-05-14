@@ -91,7 +91,7 @@
                         </svg>
                     </button>
                 </div>
-                <div class="grid grid-cols-2 gap-x-6 mx-6 my-6">
+                <div class="grid grid-cols-3 gap-x-6 mx-6 my-6">
                     <div>
                         <label class="text-[14px] font-normal" for="Name">@lang('lang.Category_Name')</label>
                         <input type="text" required
@@ -103,6 +103,16 @@
                         <input type="file" required
                             class="w-full border-[#DEE2E6]  border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="category_img" id="image" required>
+                    </div>
+                    <div class="">
+                        <label class="text-[14px] font-normal" for="Status">@lang('lang.Status')</label>
+                        <select
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="status" id="Status">
+                            <option value="active">@lang('lang.Active')</option>
+                            <option value="not-active">@lang('lang.Not_Active')</option>
+                        </select>
+
                     </div>
                 </div>
                 <div class="flex justify-end ">

@@ -76,7 +76,9 @@ class productController extends Controller
     {
         try {
             $products = product::all();
-            return response()->json(['success'  => true, 'message' => "produnct get successfully", 'products' => $products],  200);
+
+            $categories = category::where('status', "active")->get();
+            return response()->json(['success'  => true, 'message' => "produnct get successfully", 'products' => $products,  'categories' => $categories],  200);
         } catch (\Exception $e) {
             return response()->json(['success'  => false, 'message' => $e->getMessage()],  500);
         }
@@ -147,11 +149,13 @@ class productController extends Controller
         try {
             $validateData = $request->validate([
                 'category_name' => 'required',
-                'category_img' => 'required',
+                'category_img' => 'nullable|image',
+                'status' => 'required',
 
             ]);
             $Category =  category::create([
                 'name' => $validateData['category_name'],
+                'status' => $validateData['status'],
                 'image' => '',
             ]);
 
@@ -162,7 +166,7 @@ class productController extends Controller
                 $Category->image = 'storage/category_image/' . $name;
             }
             $Category->save();
-            return response()->json(['success' => true, 'message' => "Category Add Successfully" ,  'category' =>  $Category]);
+            return response()->json(['success' => true, 'message' => "Category Add Successfully",  'category' =>  $Category]);
         } catch (\Exception $e) {
             return response()->json(['success' => true, 'message' => $e->getMessage()]);
         }

@@ -12,6 +12,7 @@ class category extends Model
     protected  $fillable  =  [
         'name',
         'image',
+        'status',
     ];
     protected  $timestamp  =  true;
 }
