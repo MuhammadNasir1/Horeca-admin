@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\category;
 use App\Models\product;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Validated;
@@ -136,5 +137,34 @@ class productController extends Controller
     public function categories()
     {
         return view('category');
+    }
+
+
+    // add category
+
+    public function insertCategory(Request $request)
+    {
+        try {
+            $validateData = $request->validate([
+                'category_name' => 'required',
+                'category_img' => 'required',
+
+            ]);
+            $Category =  category::create([
+                'name' => $validateData['category_name'],
+                'image' => '',
+            ]);
+
+            if ($request->hasFile('category_img')) {
+                $category_image = $request->file('category_img');
+                $name = time() . '.' . $category_image->getClientOriginalExtension();
+                $category_image->storeAs('public/category_image', $name);
+                $Category->image = 'storage/category_image/' . $name;
+            }
+            $Category->save();
+            return response()->json(['success' => true, 'message' => "Category Add Successfully" ,  'category' =>  $Category]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => true, 'message' => $e->getMessage()]);
+        }
     }
 }

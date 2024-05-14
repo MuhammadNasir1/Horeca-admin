@@ -102,7 +102,7 @@
                         <label class="text-[14px] font-normal" for="image">@lang('lang.Image')</label>
                         <input type="file" required
                             class="w-full border-[#DEE2E6]  border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="image" id="image">
+                            name="category_img" id="image" required>
                     </div>
                 </div>
                 <div class="flex justify-end ">
@@ -141,8 +141,8 @@
 <script>
     $(document).ready(function() {
         // insert data
-        $("#customerData").submit(function(event) {
-            var url = "../categoryData/";
+        $("#categoryData").submit(function(event) {
+            var url = "../addCategory";
             event.preventDefault();
             var formData = new FormData(this);
             $.ajax({
@@ -158,7 +158,7 @@
                     $('#addBtn').attr('disabled', true);
                 },
                 success: function(response) {
-                    window.location.href = '../customers';
+                    window.location.href = '../category';
 
                 },
                 error: function(jqXHR) {
