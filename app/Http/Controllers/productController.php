@@ -14,8 +14,8 @@ class productController extends Controller
     {
         try {
             $validateData = $request->validate([
-                'product_name' => 'required',
-                'product_code' => 'required',
+                'name' => 'required',
+                'code' => 'required',
                 'category' => 'required',
                 'sub_category' => 'nullable',
                 'product_tags' => 'nullable',
@@ -31,8 +31,8 @@ class productController extends Controller
 
 
             $product = product::create([
-                'name' => $validateData['product_name'],
-                'code' => $validateData['product_code'],
+                'name' => $validateData['name'],
+                'code' => $validateData['code'],
                 'category' => $validateData['category'],
                 'sub_category' => $validateData['sub_category'],
                 'tags' => $validateData['product_tags'],
@@ -219,6 +219,29 @@ class productController extends Controller
             return response()->json(['success' => true, 'message' => "Category Data Get Successfully", 'category' => $category]);
         } catch (\Exception $e) {
             return response()->json(['success' => true, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function UpdataProduct(Request $request, $product_id)
+    {
+
+        try {
+
+            $product = product::find($product_id);
+            if (!$product) {
+                return response()->json(['success' => false, 'category' => 'category not found'], 500);
+            }
+            if ($request->hasFile('product_image')) {
+                $product_image = $request->file('product_image');
+                $name = time() . '.' . $product_image->getClientOriginalExtension();
+                $product_image->storeAs('public/product_image', $name);
+                $product->image = 'storage/product_image/' . $name;
+            }
+
+            $product->update($request->except('product_image'));
+            return response()->json(['success' => true, 'message' => "Product Update Successfully"]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
     }
 }
