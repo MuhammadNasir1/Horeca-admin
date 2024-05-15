@@ -30,10 +30,10 @@ Route::middleware('custom')->group(function () {
 
 
      /// report data
-     Route::get('report', function () {
-         return view('report');
-        });
-        Route::get('/reportData}', [ordersController::class,  'reportData']);
+    //  Route::get('report', function () {
+    //      return view('report');
+    //     });
+        Route::get('/report', [ordersController::class,  'reportData']);
 
 
     Route::get('/orders', [ordersController::class, 'orders']);

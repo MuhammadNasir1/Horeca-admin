@@ -117,15 +117,11 @@ class ordersController extends Controller
     //  get order report data
     public function reportData(Request $request){
         try {
-            // Get the parameters from the request
-            $from = $request->input('from');
-            $to = $request->input('to');
-            $interval = $request->input('interval'); // This could be 'daily', 'weekly', or 'monthly'
+            $from = $request->input('from_date');
+            $to = $request->input('to_date');
             $reports = orders::whereBetween('order_date', [$from, $to])->get();
-            // Query the reports data based on the date range
-            $reports = $this->queryReports($from, $to, $interval);
-
-            return response()->json(['success' => true, 'message' => "Report Get Successfully" , 'reports' => $reports], 200);
+            return view('report' ,  ['reports' => $reports]);
+            // return response()->json(['success' => true, 'message' => "Report Get Successfully" , 'reports' => $reports], 200);
         } catch (\Exception $th) {
             return response()->json(['success' => false, 'message' => $th->getMessage()], 500);
         }
