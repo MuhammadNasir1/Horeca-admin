@@ -28,9 +28,9 @@
                         <select
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="report" id="category">
-                            <option value="1">1 @lang('lang.Day_Report')</option>
-                            <option value="3">3 @lang('lang.Day_Report')</option>
-                            <option value="7">7 @lang('lang.Day_Report')</option>
+                            <option value="Daily"> @lang('lang.Daily')</option>
+                            <option value="Weekly"> @lang('lang.Weekly')</option>
+                            <option value="Monthly"> @lang('lang.Monthly')</option>
                         </select>
 
                     </div>
@@ -57,8 +57,7 @@
                         </tr>
                     </thead>
                     <tbody class="">
-                        <tr
-                        >
+                        <tr>
                             <td>1</td>
                             <td>Peter</td>
                             <td>1234567</td>

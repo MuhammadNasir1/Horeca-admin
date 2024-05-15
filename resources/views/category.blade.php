@@ -93,7 +93,7 @@
                         <label class="text-[14px] font-normal" for="image">@lang('lang.Image')</label>
                         <input type="file" required
                             class="w-full border-[#DEE2E6]  border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="category_img" id="image" required>
+                            name="category_img" id="image" >
                     </div>
                     <div class="">
                         <label class="text-[14px] font-normal" for="Status">@lang('lang.Status')</label>
