@@ -2,12 +2,12 @@
 @include('layouts.nav')
 <div class="mx-4 mt-12">
     <div>
-        <h1 class=" font-semibold   text-2xl ">@lang('lang.All_Reqorts')</h1>
+        <h1 class=" font-semibold   text-2xl ">@lang('lang.All_Reports')</h1>
     </div>
     <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
         <div>
             <div class="flex justify-between px-[20px] mb-3">
-                <h3 class="text-[20px] text-black">@lang('lang.Reqorts_List')</h3>
+                <h3 class="text-[20px] text-black">@lang('lang.Reports_List')</h3>
                 <div class="flex gap-4 items-center">
 
                     <div class="mb-1">
@@ -56,8 +56,8 @@
                             <th class="border-2 border-primary">@lang('lang.Grand_total')</th>
                         </tr>
                     </thead>
-                    <tbody class="">
-                        <tr>
+                    <tbody>
+                        {{-- <tr>
                             <td>1</td>
                             <td>Peter</td>
                             <td>1234567</td>
@@ -65,7 +65,7 @@
                             <td>100&euro;</td>
                             <td>10%</td>
                             <td>110&euro;</td>
-                        </tr>
+                        </tr> --}}
                         {{-- @foreach ($products as $x => $data)
                             <tr class="pt-4">
                                 <td>{{ $x + 1 }}</td>
