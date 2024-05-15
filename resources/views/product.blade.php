@@ -171,16 +171,20 @@
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="product_code" id="productCode" placeholder=" @lang('lang.Code_Here')">
                     </div>
-                    <div class="">
-                        <label class="text-[14px] font-normal" for="category">@lang('lang.Product_Category')</label>
-                        <select
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="category" id="category">
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->name }}">{{ $category->name }}</option>
-                            @endforeach
-                        </select>
-
+                    <div class="flex gap-2">
+                        <div class="w-full">
+                            <label class="text-[14px] font-normal" for="category">@lang('lang.Product_Category')</label>
+                            <select
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="category" id="category">
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->name }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button
+                            class="bg-primary text-white  rounded-[4px] py-1.5 px-3 mt-6 mb-3 uaddBtn
+                            font-semibold">+</button>
                     </div>
                     <div class="mt-4">
                         <label class="text-[14px] font-normal" for="subCategory">@lang('lang.Product_Sub_Category')</label>
