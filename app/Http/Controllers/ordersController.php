@@ -119,6 +119,12 @@ class ordersController extends Controller
         try {
             $from = $request->input('from_date');
             $to = $request->input('to_date');
+            $interval =  $request->input('interval');
+
+            if($interval){
+
+
+            }
             $reports = orders::whereBetween('order_date', [$from, $to])->get();
             return view('report' ,  ['reports' => $reports]);
             // return response()->json(['success' => true, 'message' => "Report Get Successfully" , 'reports' => $reports], 200);

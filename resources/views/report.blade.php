@@ -28,7 +28,7 @@
                         <div class="w-36  mt-5">
                             <select
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="report" id="category">
+                                name="interval" id="interval">
                                 <option value="Daily"> @lang('lang.Daily')</option>
                                 <option value="Weekly"> @lang('lang.Weekly')</option>
                                 <option value="Monthly"> @lang('lang.Monthly')</option>
