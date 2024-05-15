@@ -28,9 +28,12 @@ Route::middleware('custom')->group(function () {
         return view('help');
     });
 
-    Route::get('report', function () {
-        return view('report');
-    });
+
+     /// report data
+     Route::get('report', function () {
+         return view('report');
+        });
+        Route::get('/reportData}', [ordersController::class,  'reportData']);
 
 
     Route::get('/orders', [ordersController::class, 'orders']);
@@ -58,8 +61,6 @@ Route::middleware('custom')->group(function () {
 
     // Excel data import
     Route::post('/product/import', [productController::class,  'importExcelData']);
-    // category CRUD
-    Route::get('/category', [productController::class,  'categories']);
 
     // customers CRUD
     Route::get('/customers', [userController::class,  'customers']);
@@ -67,6 +68,7 @@ Route::middleware('custom')->group(function () {
 
 
     // Category CRUD
+    Route::get('/category', [productController::class,  'categories']);
     Route::post('/addCategory', [productController::class,  'insertCategory']);
     Route::get('/delCategory/{id}', [productController::class,  'deleteCategory']);
     Route::get('/getCategoryData/{id}', [productController::class,  'getUpdateCategoryData']);
