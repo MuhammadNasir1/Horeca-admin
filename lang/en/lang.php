@@ -88,11 +88,8 @@ return [
     "Delete" => "Delete",
     "Print" => "Print",
     "Gate_Pass" => "Gate Pass",
-    "Add_Product" => "Add Product",
     "Excel_File" => "Excel File",
     "Update_Product" => "Update Product",
-    "Update_Product" => "Update Product",
-
     "Categories" => "Categories",
     "Customer_note" => "Customer note",
     "Note_Here" => "Note Here",
@@ -103,7 +100,6 @@ return [
     "Phone_No" => "Phone No",
     "Role" => "Role",
     "Email_Here" => "Email Here",
-    "Phone_Here" => "Phone Here",
     "Male" => "Male",
     "Female" => "Female",
     "Other" => "Other",
@@ -128,9 +124,21 @@ return [
     "Day_Report" => "Day Report",
     "Customer_Email" => "Customer Email",
     "Total" => "Total",
-    "Tax" => "Tax",
+
     "Grand_total" => "Grand total",
     "Download_Example" => "Download Example",
+    "full_name" => "ٖFull Name",
+    "Enter_Your_Name" => "Enter Your Name",
+    "Phone_number" => "Phone Number",
+    "Enter_Your_Number" => "Enter Your Number",
+    "city" => "City",
+    "Enter_City" => "Enter City",
+    "Country" => "Country",
+    "Change_Language" => "Change Language",
+    "Select_Language" => "Select Language",
+    "Enter_country" => "Enter Country",
+    "Notifications" => "Notifications",
+
 
 
 ];

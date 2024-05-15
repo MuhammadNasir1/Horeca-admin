@@ -15,6 +15,9 @@ Route::match(['get',  'post'], 'weblogout', [authController::class, 'weblogout']
 Route::get('/login', function () {
     return view('login');
 });
+Route::get('/notifications', function () {
+    return view('notification');
+});
 
 
 Route::middleware('custom')->group(function () {
