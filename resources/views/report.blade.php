@@ -44,8 +44,8 @@
                 </div>
             </div>
             <div class="overflow-x-auto px-5 pb-10 pt-5">
-                <table class="overflow-scroll w-full text-center">
-                    <thead class=" bg-primary text-white border-2 border-primary">
+                <table id="datatable" class="overflow-scroll">
+                    <thead class="py-6 bg-primary text-white">
                         <tr>
                             <th class="py-3">@lang('lang.STN')</th>
                             <th class="border-2 border-primary">@lang('lang.Customer_Name')</th>
@@ -57,44 +57,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- <tr>
-                            <td>1</td>
-                            <td>Peter</td>
-                            <td>1234567</td>
-                            <td>Peter@gmail.com</td>
-                            <td>100&euro;</td>
-                            <td>10%</td>
-                            <td>110&euro;</td>
-                        </tr> --}}
-                        {{-- @foreach ($products as $x => $data)
-                            <tr class="pt-4">
-                                <td>{{ $x + 1 }}</td>
-                                <td>{{ $data->code }}</td>
-                                <td>{{ $data->name }}</td>
-                                <td class="w-[220px]">
-                                    <img class="h-20 w-20 rounded-full"
-                                        src="../{{ $data->image ?? asset('images/favicon(32X32).png') }}"
-                                        alt="product Image">
-
-                                </td>
-                                <td>{{ $data->category }} / {{ $data->sub_category }}</td>
-                                <td>{{ $data->rate }}</td>
-                                <td>{{ $data->status }}</td>
-                                <td>
-                                    <div class="flex gap-5 items-center justify-center">
-
-                                        <button class="] updateBtn cursor-pointer  " updateId="{{ $data->id }}"><img
-                                                width="38px" src="{{ asset('images/icons/edit.svg') }}"
-                                                alt="update"></button>
-                                        <a href="../delProduct/{{ $data->id }}"><img width="38px"
-                                                src="{{ asset('images/icons/delete.svg') }}"
-                                                alt="update"></button></a>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach --}}
+                        <tr>
+                            <td>0303</td>
+                            <td>Arham</td>
+                            <td>03030565545</td>
+                            <td>arham@gmail.com</td>
+                            <td>500</td>
+                            <td>18%</td>
+                            <td>200</td>
+                        </tr>
 
                     </tbody>
+                    <tfoot>
+                        <td colspan="7" class="pr-5 w-full">
+                            <div class="text-right font-bold">Grand Total: <span>500</span></div>
+                        </td>
+                    </tfoot>
                 </table>
             </div>
 
