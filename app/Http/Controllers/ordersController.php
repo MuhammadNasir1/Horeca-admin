@@ -115,22 +115,49 @@ class ordersController extends Controller
 
 
     //  get order report data
-    public function reportData(Request $request){
+    public function reportData(Request $request)
+    {
         try {
             $from = $request->input('from_date');
             $to = $request->input('to_date');
-            $interval =  $request->input('interval');
+            $interval = $request->input('interval');
+            if ($from && $to) {
+                // If both from_date and to_date are provided, ignore interval
+                $reports = orders::whereBetween('order_date', [$from, $to])->get();
+            } elseif ($interval) {
+                // If interval is provided, generate report based on the interval
+                switch ($interval) {
+                    case 'today':
+                        $from = date('Y-m-d');
+                        $to = date('Y-m-d');
+                        break;
+                    case 'last_week':
+                        // Setting start of the week
+                        $from = date('Y-m-d', strtotime('last Monday'));
+                        // Setting end of the week
+                        $to = date('Y-m-d');
+                        break;
+                    case 'last_month':
+                        // Setting start of the month
+                        $from = date('Y-m-01', strtotime('-1 month'));
+                        // Setting end of the month
+                        $to = date('Y-m-d');
+                        break;
+                    default:
+                        // Handle unsupported interval
+                        return response()->json(['success' => false, 'message' => 'Unsupported interval'], 400);
+                }
+                $reports = orders::whereBetween('order_date', [$from, $to])->get();
+            } else {
 
-            if($interval){
-
-
+                return view('report',  ['reports' =>  []]);
             }
+
             $reports = orders::whereBetween('order_date', [$from, $to])->get();
-            return view('report' ,  ['reports' => $reports]);
+            return view('report',  ['reports' => $reports]);
             // return response()->json(['success' => true, 'message' => "Report Get Successfully" , 'reports' => $reports], 200);
         } catch (\Exception $th) {
             return response()->json(['success' => false, 'message' => $th->getMessage()], 500);
         }
     }
-
 }

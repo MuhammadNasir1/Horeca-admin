@@ -29,9 +29,9 @@
                             <select
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                                 name="interval" id="interval">
-                                <option value="Daily"> @lang('lang.Daily')</option>
-                                <option value="Weekly"> @lang('lang.Weekly')</option>
-                                <option value="Monthly"> @lang('lang.Monthly')</option>
+                                <option value="today"> @lang('lang.Today')</option>
+                                <option value="last_week"> @lang('lang.This_Week')</option>
+                                <option value="last_month"> @lang('lang.This_Month')</option>
                             </select>
 
                         </div>
@@ -73,11 +73,11 @@
                         @endforeach
 
                     </tbody>
-                    <tfoot>
+                    {{-- <tfoot>
                         <td colspan="7" class="pr-5 w-full">
                             <div class="text-right font-bold">Grand Total: <span>500</span></div>
                         </td>
-                    </tfoot>
+                    </tfoot> --}}
                 </table>
             </div>
 
