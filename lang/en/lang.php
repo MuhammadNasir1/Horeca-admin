@@ -138,6 +138,7 @@ return [
     "Select_Language" => "Select Language",
     "Enter_country" => "Enter Country",
     "Notifications" => "Notifications",
+    "Update_Category" => "Update Category",
 
 
 

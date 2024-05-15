@@ -42,8 +42,8 @@
                                 <td>{{ $data->name }}</td>
                                 <td class="w-[220px]">
                                     <img class="h-18 w-18 rounded-full"
-                                    src="{{ isset($data->image) ? asset($data->image) : asset('images/favicon(32X32).png') }}"
-                                    alt="product Image">
+                                        src="{{ isset($data->image) ? asset($data->image) : asset('images/favicon(32X32).png') }}"
+                                        alt="product Image">
 
 
                                 </td>

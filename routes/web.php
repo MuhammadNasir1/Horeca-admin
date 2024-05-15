@@ -68,6 +68,9 @@ Route::middleware('custom')->group(function () {
 
     // Category CRUD
     Route::post('/addCategory', [productController::class,  'insertCategory']);
+    Route::get('/delCategory/{id}', [productController::class,  'deleteCategory']);
+    Route::get('/getCategoryData/{id}', [productController::class,  'getUpdateCategoryData']);
+    Route::post('/updateCategory/{id}', [productController::class,  'updateCategory']);
 });
 
 

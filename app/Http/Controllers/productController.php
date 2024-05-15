@@ -62,7 +62,7 @@ class productController extends Controller
     {
         $products = product::all();
         $categories = category::where('status', "active")->get();
-        return view('product',  ['products' => $products , 'categories' => $categories]);
+        return view('product',  ['products' => $products, 'categories' => $categories]);
     }
 
     public function delete($id)
@@ -140,7 +140,7 @@ class productController extends Controller
     public function categories()
     {
         $categories = category::all();
-        return view('category'  ,   ['categories' => $categories]);
+        return view('category',   ['categories' => $categories]);
     }
 
 
@@ -150,13 +150,13 @@ class productController extends Controller
     {
         try {
             $validateData = $request->validate([
-                'category_name' => 'required',
+                'name' => 'required',
                 'category_img' => 'nullable|image',
                 'status' => 'required',
 
             ]);
             $Category =  category::create([
-                'name' => $validateData['category_name'],
+                'name' => $validateData['name'],
                 'status' => $validateData['status'],
                 'image' => '',
             ]);
@@ -169,6 +169,54 @@ class productController extends Controller
             }
             $Category->save();
             return response()->json(['success' => true, 'message' => "Category Add Successfully",  'category' =>  $Category]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => true, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function deleteCategory($id)
+    {
+        $category = category::find($id);
+        $category->delete();
+        if (!empty($category->image)) {
+            $file_path = public_path($category->image);
+            if (file_exists($file_path)) {
+                unlink($file_path);
+            }
+        }
+        return redirect('category');
+    }
+
+
+    public function updateCategory(Request $request, $id)
+    {
+
+        try {
+
+            $category = category::find($id);
+            if (!$category) {
+                return response()->json(['success' => false, 'category' => 'category not found'], 500);
+            }
+            if ($request->hasFile('category_img')) {
+                $category_image = $request->file('category_img');
+                $name = time() . '.' . $category_image->getClientOriginalExtension();
+                $category_image->storeAs('public/category_image', $name);
+                $category->image = 'storage/category_image/' . $name;
+            }
+
+            $category->update($request->except('category_img'));
+            return response()->json(['success' => true, 'message' => "Category Update Successfully", 'category' => $category]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+    public function getUpdateCategoryData($id)
+    {
+
+        try {
+
+            $category = category::find($id);
+            return response()->json(['success' => true, 'message' => "Category Data Get Successfully", 'category' => $category]);
         } catch (\Exception $e) {
             return response()->json(['success' => true, 'message' => $e->getMessage()]);
         }
