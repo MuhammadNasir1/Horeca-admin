@@ -83,7 +83,7 @@
                             <option>@lang('lang.Select_Language')</option>
                             <option {{ $user->language == 'english' ? 'selected' : '' }} value="english">English
                             </option>
-                            <option {{ $user->language == 'chinese' ? 'selected' : '' }} value="chinese">Chinese
+                            <option {{ $user->language == 'german' ? 'selected' : '' }} value="german">German
                             </option>
                         </select>
                     </div>
