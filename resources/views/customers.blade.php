@@ -227,7 +227,7 @@
     $(document).ready(function() {
         // insert data
         $("#customerData").submit(function(event) {
-            var url = "../addCustomer/";
+            var url = "../addCustomer";
             event.preventDefault();
             var formData = new FormData(this);
             $.ajax({
