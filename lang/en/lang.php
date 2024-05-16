@@ -161,6 +161,8 @@ return [
     "Biled_To" => "Build To",
     "Invoice_Date" => "Invoice Date",
     "View_all" => "View All",
+    "Total_Sale" => "Total Sale",
+    "Select_Interval" => "Select Interval",
 
 
 

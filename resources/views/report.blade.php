@@ -29,6 +29,7 @@
                             <select
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                                 name="interval" id="interval">
+                                <option value=""> @lang('lang.Select_Interval')</option>
                                 <option value="today"> @lang('lang.Today')</option>
                                 <option value="last_week"> @lang('lang.This_Week')</option>
                                 <option value="last_month"> @lang('lang.This_Month')</option>
@@ -66,17 +67,18 @@
                                 <td>{{ $report->customer_phone }}</td>
                                 <td>{{ $report->customer_adress }}</td>
                                 <td>{{ $report->sub_total }}</td>
-                                <td>{{ $report->discount }} / {{ $report->delivery_charges }}</td>
-                                <td>{{ $report->grand_total }}</td>
+                                <td>{{ $report->discount }}% / {{ $report->delivery_charges }}&euro;</td>
+                                <td class="grandTotal">{{ $report->grand_total }}</td>
 
                             </tr>
                         @endforeach
 
                     </tbody>
                     <tfoot>
-                        <td colspan="7" class="pr-5 w-full text-primary">
-                            <div class="text-right font-bold text-[23px]">Total Sale:
-                                <span>500</span><span>&euro;</span>
+                        <td colspan="7" class="pr-5  w-full ">
+                            <div class="text-right font-bold text-[23px]">@lang('lang.Total_Sale'):
+                                <span class="text-primary " id="total-sale">500</span><span
+                                    class="text-primary ">&euro;</span>
                             </div>
                         </td>
                     </tfoot>
@@ -94,75 +96,14 @@
 @include('layouts.footer')
 <script>
     $(document).ready(function() {
-        // insert data
-        $("#customerData").submit(function(event) {
-            var url = "../categoryData/";
-            event.preventDefault();
-            var formData = new FormData(this);
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: formData,
-                dataType: "json",
-                contentType: false,
-                processData: false,
-                beforeSend: function() {
-                    $('#spinner').removeClass('hidden');
-                    $('#text').addClass('hidden');
-                    $('#addBtn').attr('disabled', true);
-                },
-                success: function(response) {
-                    window.location.href = '../customers';
+        var total = 0;
 
-                },
-                error: function(jqXHR) {
-                    let response = JSON.parse(jqXHR.responseText);
-                    console.log("error");
-                    Swal.fire(
-                        'Warning!',
-                        response.message,
-                        'warning'
-                    );
-
-                    $('#text').removeClass('hidden');
-                    $('#spinner').addClass('hidden');
-                    $('#addBtn').attr('disabled', false);
-                }
-            });
+        $('.grandTotal').each(function() {
+            var value = parseFloat($(this).text());
+            if (!isNaN(value)) {
+                total += value;
+            }
         });
-
-        // update  data
-        $('.updateBtn').click(function() {
-            var updateId = $(this).attr('updateId');
-            var url = "../ProductUpdataData/" + updateId;
-            $.ajax({
-                type: "GET",
-                url: url,
-                dataType: "json",
-                success: function(response) {
-                    var product = response.product;
-                    // $('#update_id').val(parent.id);
-                    // $('#firstName').val(parent.first_name);
-                    // $('#gender').val(parent.gender);
-                    // $('#phoneNo').val(parent.phone_no);
-                    // $('#address').val(parent.address);
-                    // $('#lastName').val(parent.last_name);
-                    // $('#email').val(parent.email);
-                    // $('#contact').val(parent.contact);
-                    // $('#child_ren').val(parent.child_ren);
-
-                },
-                error: function(jqXHR) {
-                    let response = JSON.parse(jqXHR.responseText);
-                    console.log("error");
-                    Swal.fire(
-                        'Warning!',
-                        'Product Not Found',
-                        'warning'
-                    );
-                }
-            });
-        })
-
+        $('#total-sale').text(total);
     });
 </script>
