@@ -504,7 +504,7 @@
     $(document).ready(function() {
         // insert data
         $("#productdata").submit(function(event) {
-            var url = "../addProduct/";
+            var url = "../addProduct";
             event.preventDefault();
             var formData = new FormData(this);
             $.ajax({
