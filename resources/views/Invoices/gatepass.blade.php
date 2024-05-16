@@ -214,13 +214,13 @@
 
 <body>
     <div class="backUrl">
-        <h3> <a href="../orders">Go Back To Orders</a></h3>
+        <h3> <a href="../orders">@lang('lang.Go_Back_To_Orders')</a></h3>
     </div>
     <div class="container">
         <div class="header">
             <div class="header-div1">
-                <h1>INVOICE</h1>
-                <p>Build To:</p>
+                <h1>@lang('lang.INVOICE')</h1>
+                <p>@lang('lang.Biled_To') :</p>
                 <ul>
                     <li>{{ $order->customer_name }}</li>
                     <li>{{ $order->customer_phone }}</li>
@@ -228,7 +228,7 @@
                 </ul>
             </div>
             <div class="header-div3">
-                <h1>Gate Pass</h1>
+                <h1>@lang('lang.Gate_Pass')</h1>
             </div>
             <div class="header-div2">
                 <div class="logo"><img width="250px" src="{{ asset('images/Horeca-White.svg') }}" alt="" />
@@ -247,11 +247,11 @@
             <div class="content-div1">
                 <ul>
                     <li>
-                        <p>Invoice #</p>
+                        <p>@lang('lang.Invoice') #</p>
                         <p class="color text">{{ $order->id }}</p>
                     </li>
                     <li>
-                        <p>Invoice Date</p>
+                        <p>@lang('lang.Invoice_Date')</p>
                         <p class="color text">{{ $order->order_date }}</p>
                     </li>
                 </ul>
@@ -262,8 +262,8 @@
                         <thead>
                             <div class="border-head">
                                 <tr>
-                                    <th class="description">Description</th>
-                                    <th class="column2">Qty</th>
+                                    <th class="description">@lang('lang.Description')</th>
+                                    <th class="column2">@lang('lang.Qty')</th>
                                 </tr>
                             </div>
                             <div class="tr"></div>
@@ -285,19 +285,19 @@
         </div>
         <div class="contain">
             <div class="signature">
-                <h4>Prepared By: _______________</h4>
-                <h4>Recieved By: _______________</h4>
+                <h4>@lang('lang.Prepared_By'): _______________</h4>
+                <h4>@lang('lang.Recieved_By'): _______________</h4>
             </div>
         </div>
         <footer>
-            <h1>Software Developed By Samz Creation</h1>
+            <h1>@lang('lang.Software_Developed_By_Samz_Creation')</h1>
         </footer>
 
         <!-- Sencond -->
         <div class="header mTop">
             <div class="header-div1">
-                <h1>INVOICE</h1>
-                <p>Build To:</p>
+                <h1>@lang('lang.INVOICE')</h1>
+                <p>@lang('lang.Biled_To')</p>
                 <ul>
                     <li>{{ $order->customer_name }}</li>
                     <li>{{ $order->customer_phone }}</li>
@@ -305,7 +305,7 @@
                 </ul>
             </div>
             <div class="header-div3">
-                <h1>Gate Pass</h1>
+                <h1>@lang('lang.Gate_Pass')</h1>
             </div>
             <div class="header-div2">
                 <div class="logo"><img src="./logo/Horeca Logo.svg" alt="" /></div>
@@ -323,11 +323,11 @@
             <div class="content-div1">
                 <ul>
                     <li>
-                        <p>Invoice #</p>
+                        <p>@lang('lang.Invoice') #</p>
                         <p class="color text">{{ $order->id }}</p>
                     </li>
                     <li>
-                        <p>Invoice Date</p>
+                        <p>@lang('lang.Invoice_Date')</p>
                         <p class="color text">{{ $order->order_date }}</p>
                     </li>
                 </ul>
@@ -338,8 +338,8 @@
                         <thead>
                             <div class="border-head">
                                 <tr>
-                                    <th class="description">Description</th>
-                                    <th class="column2">Qty</th>
+                                    <th class="description">@lang('lang.Description')</th>
+                                    <th class="column2">@lang('lang.Qty')</th>
                                 </tr>
                             </div>
                             <div class="tr"></div>
@@ -361,12 +361,12 @@
         </div>
         <div class="contain">
             <div class="signature">
-                <h4>Prepared By: _______________</h4>
-                <h4>Recieved By: _______________</h4>
+                <h4>@lang('lang.Prepared_By'): _______________</h4>
+                <h4>@lang('lang.Recieved_By'): _______________</h4>
             </div>
         </div>
         <footer>
-            <h1>Software Developed By Samz Creation</h1>
+            <h1>@lang('lang.Software_Developed_By_Samz_Creation')</h1>
         </footer>
     </div>
     </div>

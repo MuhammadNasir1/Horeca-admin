@@ -158,7 +158,7 @@ return [
     "Prepared_By" => "Prepared By",
     "Recieved_By" => "Recieved By",
     "Qty" => "Qty",
-    "Biled_To" => "Biled To",
+    "Biled_To" => "Build To",
     "Invoice_Date" => "Invoice Date",
     "View_all" => "View All",
 

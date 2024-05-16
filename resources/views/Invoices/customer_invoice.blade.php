@@ -350,9 +350,9 @@
         </div>
         <div class="contain">
             <div class="signature">
-                <h4>@lang('lang.Prepared_By') _______________</h4>
+                <h4>@lang('lang.Prepared_By'): _______________</h4>
 
-                <h4>@lang('lang.Recieved_By') _______________</h4>
+                <h4>@lang('lang.Recieved_By'): _______________</h4>
             </div>
         </div>
         <footer>
