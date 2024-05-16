@@ -250,14 +250,14 @@
 <body>
 
     <div class="backUrl">
-        <h3> <a href="../orders">Go Back To Orders</a></h3>
+        <h3> <a href="../orders">@lang('lang.Go_Back_To_Orders')</a></h3>
     </div>
     <div class="container">
         <!-- Header -->
         <div class="header">
             <div class="header-div1">
-                <h1>INVOICE</h1>
-                <p>Biled To:</p>
+                <h1>@lang('lang.INVOICE')</h1>
+                <p>@lang('lang.Biled_To')</p>
                 <ul>
                     <li>{{ $order->customer_name }}</li>
                     <li>{{ $order->customer_phone }}</li>
@@ -282,11 +282,11 @@
             <div class="content-div1">
                 <ul>
                     <li>
-                        <p>Invoice #</p>
+                        <p>@lang('lang.Invoice') #</p>
                         <p class="color text">{{ $order->id }}</p>
                     </li>
                     <li>
-                        <p>Invoice Date</p>
+                        <p>@lang('lang.Invoice_Date')</p>
                         <p class="color text">{{ $order->order_date }}</p>
                     </li>
                 </ul>
@@ -297,11 +297,11 @@
                         <thead>
                             <div class="border-head">
                                 <tr>
-                                    <th class="description">Description</th>
-                                    <th class="column2">Qty</th>
-                                    <th class="column2">Rate</th>
-                                    <th class="column3 text-1">Tax%</th>
-                                    <th class="column3 text-1">Total </th>
+                                    <th class="description">@lang('lang.Description')</th>
+                                    <th class="column2">@lang('lang.Qty')</th>
+                                    <th class="column2">@lang('lang.Rate')</th>
+                                    <th class="column3 text-1">@lang('lang.Tax')%</th>
+                                    <th class="column3 text-1">@lang('lang.Total') </th>
                                 </tr>
                             </div>
                             <div class="tr"></div>
@@ -328,20 +328,20 @@
                 </div>
                 <div class="div2-2">
                     <div class="div2-left">
-                        <h2>SubTotal</h2>
+                        <h2>@lang('lang.Sub_Total')</h2>
                         <h2 class="color">{{ $order->sub_total }}&euro;</h2>
                     </div>
                     <div class="div2-left">
-                        <h2>Delivery Charges</h2>
+                        <h2>@lang('lang.Delivery_Charges')</h2>
                         <h2 class="color">{{ $order->delivery_charges }}&euro;</h2>
                     </div>
                     <div class="div2-left">
-                        <h2>Discount</h2>
+                        <h2>@lang('lang.Discount')</h2>
                         <h2 class="color">{{ $order->discount }}%</h2>
                     </div>
                     <div class="table-footer">
                         <div class="footer-content">
-                            <h3>Grand Total </h3>
+                            <h3>@lang('lang.Grand_total') </h3>
                             <h3>{{ $order->grand_total }}&euro;</h3>
                         </div>
                     </div>
@@ -350,12 +350,13 @@
         </div>
         <div class="contain">
             <div class="signature">
-                <h4>Prepared By: _______________</h4>
-                <h4>Recieved By: _______________</h4>
+                <h4>@lang('lang.Prepared_By') _______________</h4>
+
+                <h4>@lang('lang.Recieved_By') _______________</h4>
             </div>
         </div>
         <footer>
-            <h1>Software Developed By Samz Creation</h1>
+            <h1>@lang('lang.Software_Developed_By_Samz_Creation')</h1>
         </footer>
     </div>
 </body>
