@@ -144,6 +144,8 @@ return [
     "This_Month" => "This Month",
     "Update_Product" => "Update  Product",
     "Update_Customer" => "Update Customer",
+    "Edit_order" => "Edit order",
+    "Update&Print" => "Update & Print",
 
 
 

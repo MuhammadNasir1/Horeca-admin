@@ -14,6 +14,25 @@
             box-sizing: border-box;
         }
 
+        @media print {
+            .backUrl {
+                display: none !important;
+            }
+        }
+
+        .backUrl {
+            padding-top: 10px !important;
+            position: absolute
+        }
+
+        .backUrl a {
+            margin-left: 50px;
+            font-size: 2rem;
+            color: #027c56;
+            font-family: Arial, Helvetica, sans-serif;
+
+        }
+
         .container {
             height: 297mm;
             width: 210mm;
@@ -229,6 +248,10 @@
 </head>
 
 <body>
+
+    <div class="backUrl">
+        <h3> <a href="../orders">Go Back To Orders</a></h3>
+    </div>
     <div class="container">
         <!-- Header -->
         <div class="header">

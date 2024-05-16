@@ -55,6 +55,7 @@ Route::middleware('custom')->group(function () {
     // Order
     Route::post('/addOrder', [ordersController::class,  'insert']);
     Route::get('/delOrder/{order_id}', [ordersController::class,  'delete']);
+    Route::post('/addUpdatedOrder/{order_id}', [ordersController::class,  'addUpdatedOrder']);
 
     // Invoice pages
     Route::get('/invoice/{order_id}', [ordersController::class,  'getOrderData'])->name('invoice');
@@ -77,6 +78,9 @@ Route::middleware('custom')->group(function () {
     Route::get('/delCategory/{id}', [productController::class,  'deleteCategory']);
     Route::get('/getCategoryData/{id}', [productController::class,  'getUpdateCategoryData']);
     Route::post('/updateCategory/{id}', [productController::class,  'updateCategory']);
+
+    // crud
+    Route::get('/order/{id}', [ordersController::class,  'EditOrder']);
 });
 
 
