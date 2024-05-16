@@ -98,8 +98,8 @@
                         </div>
                         <div class="mt-6 flex">
                             <button id="addProductBtn" type="button"
-                                class="bg-primary toggle-button h-[40px] rounded-[4px] w-[40px] font-bold text-white text-sm flex justify-center items-center"
-                                style="width: 132px"> <span class="text-2xl pr-2">+</span> @lang('lang.Add_Product')</button>
+                                class="bg-primary toggle-button h-[40px] rounded-[4px]  px-3 font-bold text-white text-sm flex justify-center items-center">
+                                <span class="text-2xl pr-2">+</span> @lang('lang.Add_Product')</button>
 
                         </div>
                     </div>
@@ -170,8 +170,7 @@
                 <input type="hidden" name="sub_total" id="sub_total">
                 <div class="py-7 flex justify-end  pr-6">
                     <button
-                        class="bg-primary toggle-button h-[40px] rounded-[4px] w-[40px] font-bold text-white text-sm flex justify-center items-center"
-                        style="width: 132px">@lang('lang.Save&Print')</button>
+                        class="bg-primary toggle-button h-[40px] rounded-[4px] px-3 font-bold text-white text-sm flex justify-center items-center">@lang('lang.Save&Print')</button>
                 </div>
             </div>
         </div>

@@ -73,11 +73,13 @@
                         @endforeach
 
                     </tbody>
-                    {{-- <tfoot>
-                        <td colspan="7" class="pr-5 w-full">
-                            <div class="text-right font-bold">Grand Total: <span>500</span></div>
+                    <tfoot>
+                        <td colspan="7" class="pr-5 w-full text-primary">
+                            <div class="text-right font-bold text-[23px]">Total Sale:
+                                <span>500</span><span>&euro;</span>
+                            </div>
                         </td>
-                    </tfoot> --}}
+                    </tfoot>
                 </table>
             </div>
 

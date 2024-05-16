@@ -154,7 +154,7 @@ return [
     "INVOICE" => "INVOICE",
     "Invoice" => "Invoice",
     "Description" => "Description",
-    "Software_Developed_By_Samz_Creation" => "Software Developed By Samz Creation",
+    "Software_Developed_By" => "Software Developed By",
     "Prepared_By" => "Prepared By",
     "Recieved_By" => "Recieved By",
     "Qty" => "Qty",

@@ -356,7 +356,7 @@
             </div>
         </div>
         <footer>
-            <h1>@lang('lang.Software_Developed_By_Samz_Creation')</h1>
+            <h1>@lang('lang.Software_Developed_By') The Web Concept</h1>
         </footer>
     </div>
 </body>
