@@ -57,4 +57,44 @@ class userController extends Controller
             return response()->json(['success' => true, 'message' => $e->getMessage()]);
         }
     }
+
+    public function delCustomer($user_id)
+    {
+        $user = User::find($user_id);
+        $user->delete();
+        return redirect('customers');
+    }
+    public function CustomerUpdateData($user_id)
+    {
+        try {
+
+            $customer = User::find($user_id);
+            return response()->json(['success' => true,  'message' => "Data  Get Successfully", 'customer' => $customer]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false,  'message' => $e->getMessage()]);
+        }
+    }
+    public function CustomerUpdate(Request $request, $user_id)
+    {
+        try {
+
+            $customer = User::find($user_id);
+
+            $validatedData = $request->validate([
+                'name' => 'nullable',
+                'email' => 'nullable',
+                'phone_no' => 'nullable',
+                'address' => 'nullable',
+            ]);
+
+            $customer->name = $validatedData['name'];
+            $customer->phone = $validatedData['phone_no'];
+            $customer->email = $validatedData['email'];
+            $customer->address = $validatedData['address'];
+            $customer->update();
+            return response()->json(['success' => true,  'message' => "Data  Get Successfully", 'customer' => $customer]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false,  'message' => $e->getMessage()]);
+        }
+    }
 }

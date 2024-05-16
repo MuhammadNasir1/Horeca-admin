@@ -25,9 +25,9 @@
                     <thead class="py-6 bg-primary text-white">
                         <tr>
                             <th>@lang('lang.STN')</th>
+                            <th>@lang('lang.Image')</th>
                             <th>@lang('lang.Code')</th>
                             <th>@lang('lang.Name')</th>
-                            <th>@lang('lang.Image')</th>
                             <th>@lang('lang.Category/Sub-Category')</th>
                             <th>@lang('lang.Price')</th>
                             <th>@lang('lang.Status')</th>
@@ -38,15 +38,13 @@
                         @foreach ($products as $x => $data)
                             <tr class="pt-4">
                                 <td>{{ $x + 1 }}</td>
-                                <td>{{ $data->code }}</td>
-                                <td>{{ $data->name }}</td>
                                 <td class="w-[220px]">
                                     <img class="h-20 w-20 rounded-full"
                                         src="{{ isset($data->image) ? asset($data->image) : asset('images/favicon(32X32).png') }}"
                                         alt="product Image">
-
-
                                 </td>
+                                <td>{{ $data->code }}</td>
+                                <td>{{ $data->name }}</td>
                                 <td>{{ $data->category }} / {{ $data->sub_category }}</td>
                                 <td>{{ $data->rate }}</td>
                                 <td>{{ $data->status }}</td>
@@ -559,7 +557,7 @@
                     $('#subCategory').val(product.sub_category);
                     $('#tags').val(product.tags);
                     $('#Rate').val(product.rate);
-                    $('#tax').val(product.rate);
+                    $('#tax').val(product.tax);
                     $('#quantity').val(product.quantity);
                     $('#quantityAlert').val(product.quantity_alert);
                     $('#Status').val(product.status);

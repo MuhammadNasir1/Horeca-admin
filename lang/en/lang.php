@@ -143,6 +143,7 @@ return [
     "This_Week" => "This Week",
     "This_Month" => "This Month",
     "Update_Product" => "Update  Product",
+    "Update_Customer" => "Update Customer",
 
 
 

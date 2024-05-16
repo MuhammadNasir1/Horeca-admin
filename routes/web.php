@@ -29,11 +29,11 @@ Route::middleware('custom')->group(function () {
     });
 
 
-     /// report data
+    /// report data
     //  Route::get('report', function () {
     //      return view('report');
     //     });
-        Route::get('/report', [ordersController::class,  'reportData']);
+    Route::get('/report', [ordersController::class,  'reportData']);
 
 
     Route::get('/orders', [ordersController::class, 'orders']);
@@ -66,6 +66,9 @@ Route::middleware('custom')->group(function () {
     // customers CRUD
     Route::get('/customers', [userController::class,  'customers']);
     Route::post('/addCustomer', [userController::class,  'addCustomer']);
+    Route::get('/delCustomer/{user_id}', [userController::class,  'delCustomer']);
+    Route::get('/CustomerUpdateData/{user_id}', [userController::class,  'CustomerUpdateData']);
+    Route::post('/CustomerUpdate/{user_id}', [userController::class,  'CustomerUpdate']);
 
 
     // Category CRUD

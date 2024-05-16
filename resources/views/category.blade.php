@@ -20,8 +20,8 @@
                     <thead class="py-6 bg-primary text-white">
                         <tr>
                             <th>@lang('lang.STN')</th>
-                            <th>@lang('lang.Name')</th>
                             <th>@lang('lang.Image')</th>
+                            <th>@lang('lang.Name')</th>
                             <th>@lang('lang.Status')</th>
                             <th class="flex  justify-center">@lang('lang.Action')</th>
                         </tr>
@@ -30,13 +30,13 @@
                         @foreach ($categories as $x => $data)
                             <tr class="pt-4">
                                 <td>{{ $x + 1 }}</td>
-                                <td>{{ $data->name }}</td>
                                 <td class="w-[220px]">
                                     <img class="h-20 w-20 rounded-full"
                                         src="{{ !empty($data->image) ? asset($data->image) : asset('images/favicon(32X32).png') }}"
                                         alt="product Image">
 
                                 </td>
+                                <td>{{ $data->name }}</td>
                                 <td>{{ $data->status }}</td>
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
