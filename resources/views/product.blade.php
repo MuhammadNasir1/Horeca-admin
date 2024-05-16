@@ -215,7 +215,7 @@
 
     </div>
 </div>
-{{-- ============ add  product modal  =========== --}}
+{{-- ============ add  Excel modal  =========== --}}
 <div id="addExcelSheetmodal" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
     <div class="relative p-4 w-full   max-w-2xl max-h-full ">
@@ -396,8 +396,8 @@
 
                 <div class="flex justify-end ">
                     <button class="bg-primary text-white py-2 px-6 my-4 rounded-[4px]  mx-6 uaddBtn  font-semibold "
-                        id="addBtn">
-                        <div class=" text-center hidden" id="spinner">
+                        id="iaddBtn">
+                        <div class=" text-center hidden" id="ispinner">
                             <svg aria-hidden="true"
                                 class="w-5 h-5 mx-auto text-center text-gray-200 animate-spin fill-primary"
                                 viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -409,7 +409,7 @@
                                     fill="currentFill" />
                             </svg>
                         </div>
-                        <div id="text">
+                        <div id="itext">
                             @lang('lang.Save')
                         </div>
 
@@ -515,9 +515,9 @@
                 contentType: false,
                 processData: false,
                 beforeSend: function() {
-                    $('#spinner').removeClass('hidden');
-                    $('#text').addClass('hidden');
-                    $('#addBtn').attr('disabled', true);
+                    $('#ispinner').removeClass('hidden');
+                    $('#itext').addClass('hidden');
+                    $('#iaddBtn').attr('disabled', true);
                 },
                 success: function(response) {
                     window.location.href = '../product';
@@ -532,9 +532,9 @@
                         'warning'
                     );
 
-                    $('#text').removeClass('hidden');
-                    $('#spinner').addClass('hidden');
-                    $('#addBtn').attr('disabled', false);
+                    $('#itext').removeClass('hidden');
+                    $('#ispinner').addClass('hidden');
+                    $('#iaddBtn').attr('disabled', false);
                 }
             });
         });
