@@ -14,6 +14,25 @@
             box-sizing: border-box;
         }
 
+        @media print {
+            .backUrl {
+                display: none !important;
+            }
+        }
+
+        .backUrl {
+            padding-top: 10px !important;
+            position: absolute
+        }
+
+        .backUrl a {
+            margin-left: 50px;
+            font-size: 2rem;
+            color: #027c56;
+            font-family: Arial, Helvetica, sans-serif;
+
+        }
+
         .container {
             height: 297mm;
             width: 210mm;
@@ -63,6 +82,7 @@
 
         .header-div2 .logo img {
             padding-left: 67px;
+            width: 250px;
         }
 
         .header-div3 h1 {
@@ -193,22 +213,26 @@
 </head>
 
 <body>
+    <div class="backUrl">
+        <h3> <a href="../orders">Go Back To Orders</a></h3>
+    </div>
     <div class="container">
         <div class="header">
             <div class="header-div1">
                 <h1>INVOICE</h1>
                 <p>Build To:</p>
                 <ul>
-                    <li>Customer Name</li>
-                    <li>Customer Address</li>
-                    <li>Customer Contact</li>
+                    <li>{{ $order->customer_name }}</li>
+                    <li>{{ $order->customer_phone }}</li>
+                    <li>{{ $order->customer_adress }}</li>
                 </ul>
             </div>
             <div class="header-div3">
                 <h1>Gate Pass</h1>
             </div>
             <div class="header-div2">
-                <div class="logo"><img src="./logo/Horeca Logo.svg" alt="" /></div>
+                <div class="logo"><img width="250px" src="{{ asset('images/Horeca-White.svg') }}" alt="" />
+                </div>
 
                 <div>
                     <ul>
@@ -224,15 +248,11 @@
                 <ul>
                     <li>
                         <p>Invoice #</p>
-                        <p class="color text">AB2324-01</p>
+                        <p class="color text">{{ $order->id }}</p>
                     </li>
                     <li>
-                        <p>Invoice Date #</p>
-                        <p class="color text">06 May, 2024</p>
-                    </li>
-                    <li>
-                        <p>Due Date #</p>
-                        <p class="color text">06 May, 2024</p>
+                        <p>Invoice Date</p>
+                        <p class="color text">{{ $order->order_date }}</p>
                     </li>
                 </ul>
             </div>
@@ -250,21 +270,14 @@
                         </thead>
 
                         <tbody>
-                            <tr class="font-size">
-                                <td class="column1">Item Name</td>
+                            @foreach ($orderItems as $orderItem)
+                                <tr class="font-size">
+                                    <td class="column1">
+                                        {{ $products->where('id', $orderItem->product_id)->first()->name }}</td>
 
-                                <td class="color">1</td>
-                            </tr>
-                            <tr class="font-size">
-                                <td class="column1">Item Name</td>
-
-                                <td class="color">1</td>
-                            </tr>
-                            <tr class="font-size">
-                                <td class="column1">Item Name</td>
-
-                                <td class="color">1</td>
-                            </tr>
+                                    <td class="color">{{ $orderItem['product_quantity'] }}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -286,9 +299,9 @@
                 <h1>INVOICE</h1>
                 <p>Build To:</p>
                 <ul>
-                    <li>Customer Name</li>
-                    <li>Customer Address</li>
-                    <li>Customer Contact</li>
+                    <li>{{ $order->customer_name }}</li>
+                    <li>{{ $order->customer_phone }}</li>
+                    <li>{{ $order->customer_adress }}</li>
                 </ul>
             </div>
             <div class="header-div3">
@@ -311,15 +324,11 @@
                 <ul>
                     <li>
                         <p>Invoice #</p>
-                        <p class="color text">AB2324-01</p>
+                        <p class="color text">{{ $order->id }}</p>
                     </li>
                     <li>
-                        <p>Invoice Date #</p>
-                        <p class="color text">06 May, 2024</p>
-                    </li>
-                    <li>
-                        <p>Due Date #</p>
-                        <p class="color text">06 May, 2024</p>
+                        <p>Invoice Date</p>
+                        <p class="color text">{{ $order->order_date }}</p>
                     </li>
                 </ul>
             </div>
@@ -337,21 +346,14 @@
                         </thead>
 
                         <tbody>
-                            <tr class="font-size">
-                                <td class="column1">Item Name</td>
+                            @foreach ($orderItems as $orderItem)
+                                <tr class="font-size">
+                                    <td class="column1">
+                                        {{ $products->where('id', $orderItem->product_id)->first()->name }}</td>
 
-                                <td class="color">1</td>
-                            </tr>
-                            <tr class="font-size">
-                                <td class="column1">Item Name</td>
-
-                                <td class="color">1</td>
-                            </tr>
-                            <tr class="font-size">
-                                <td class="column1">Item Name</td>
-
-                                <td class="color">1</td>
-                            </tr>
+                                    <td class="color">{{ $orderItem['product_quantity'] }}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
