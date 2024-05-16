@@ -146,6 +146,21 @@ return [
     "Update_Customer" => "Update Customer",
     "Edit_order" => "Edit order",
     "Update&Print" => "Update & Print",
+    "Unit_Price" => "Unit Price",
+    "Total_Price" => "Total Price",
+    "Sub_Total" => "Sub Total",
+    "Save&Print" => "Save & Print",
+    "Go_Back_To_Orders" => "Go Back To Orders",
+    "INVOICE" => "INVOICE",
+    "Invoice" => "Invoice",
+    "Description" => "Description",
+    "Software_Developed_By_Samz_Creation" => "Software Developed By Samz Creation",
+    "Prepared_By" => "Prepared By",
+    "Recieved_By" => "Recieved By",
+    "Qty" => "Qty",
+    "Biled_To" => "Biled To",
+    "Invoice_Date" => "Invoice Date",
+    "View_all" => "View All",
 
 
 

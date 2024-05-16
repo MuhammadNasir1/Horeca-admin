@@ -101,7 +101,7 @@
                         <div class="mt-6 flex">
                             <button id="addProductBtn" type="button"
                                 class="bg-primary toggle-button h-[40px] rounded-[4px] w-[40px] font-bold text-white text-sm flex justify-center items-center"
-                                style="width: 132px"> <span class="text-2xl pr-2">+</span> Add Product</button>
+                                style="width: 132px"> <span class="text-2xl pr-2">+</span>@lang('lang.Add_Product')</button>
 
                         </div>
                     </div>
@@ -115,13 +115,13 @@
                     <table class="w-full">
                         <thead class=" border-2 border-primary bg-primary text-white">
                             <tr>
-                                <th class="py-3">Code</th>
-                                <th>Product Name</th>
-                                <th>Unit Price</th>
-                                <th>Tax</th>
-                                <th>Quantity</th>
-                                <th>Total Price</th>
-                                <th>Action</th>
+                                <th class="py-3">@lang('lang.Code')</th>
+                                <th>@lang('lang.Product_Name')</th>
+                                <th>@lang('lang.Unit_Price')</th>
+                                <th>@lang('lang.Tax')</th>
+                                <th>@lang('lang.Quantity')</th>
+                                <th>@lang('lang.Total_Price')</th>
+                                <th>@lang('lang.Action')</th>
                             </tr>
                         </thead>
                         <tbody class="text-center" id="product_output">
@@ -165,7 +165,7 @@
                         <tfoot>
                             <tr>
                                 <td class="border-2 border-primary py-2" colspan="3">
-                                    <div class="text-right pr-2 w-[100%]">Sub Total:</div>
+                                    <div class="text-right pr-2 w-[100%]">@lang('lang.Sub_Total')</div>
                                 </td>
                                 <td class="border-2 border-primary py-2 px-2" colspan="2">
                                     <div class="" id="subtotal">{{ $order->sub_total }}</div>
@@ -191,7 +191,7 @@
                             </tr>
                             <tr>
                                 <td class="border-2 border-primary py-2 px-2" colspan="3">
-                                    <div class="text-right    w-[100%] font-bold text-primary">Grand Total:</div>
+                                    <div class="text-right    w-[100%] font-bold text-primary">@lang('lang.Grand_total')</div>
                                 </td>
                                 <td class="border-2 border-primary py-2 px-2" colspan="2">
                                     <div class="" id="grandTotal">{{ $order->grand_total }}</div>
