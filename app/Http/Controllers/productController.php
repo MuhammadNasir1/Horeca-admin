@@ -253,17 +253,23 @@ class productController extends Controller
             $categories = category::where('status', 'active')->get();
             return response()->json(['success' => true, 'message' => "Categories get successfully", "categories" =>  $categories], 200);
         } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
-        return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
     }
     // get Product api
-    public function  getAllProducts()
+    public function  getAllProducts(Request  $request)
     {
         try {
-            $products = product::where('status', 'active')->get();
+            if ($request->has('category')) {
+
+                $category = $request->input('category');
+                $products = Product::where('category', $category)->orWhere('sub_category', $category)->where('status', 'active')->get();
+            } else {
+                $products = Product::where('status', 'active')->get();
+            }
             return response()->json(['success' => true, 'message' => "Products get successfully", "products" =>  $products], 200);
         } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
-        return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
     }
 }
