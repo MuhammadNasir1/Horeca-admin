@@ -244,4 +244,26 @@ class productController extends Controller
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
     }
+
+
+    // get categories api
+    public function  getAllCategories()
+    {
+        try {
+            $categories = category::where('status', 'active')->get();
+            return response()->json(['success' => true, 'message' => "Categories get successfully", "categories" =>  $categories], 200);
+        } catch (\Exception $e) {
+        }
+        return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+    }
+    // get Product api
+    public function  getAllProducts()
+    {
+        try {
+            $products = product::where('status', 'active')->get();
+            return response()->json(['success' => true, 'message' => "Products get successfully", "products" =>  $products], 200);
+        } catch (\Exception $e) {
+        }
+        return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+    }
 }

@@ -3,11 +3,13 @@
 use App\Http\Controllers\authController;
 use App\Http\Controllers\coursesController;
 use App\Http\Controllers\parentController;
+use App\Http\Controllers\productController;
 use App\Http\Controllers\studentController;
 use App\Http\Controllers\teacherController;
 use App\Http\Controllers\teachingController;
 use App\Http\Controllers\trainingController;
 use App\Http\Controllers\userController;
+use App\Models\product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 /*
@@ -36,5 +38,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/getUserProfile', [authController::class, 'getUserProfile']);
 });
 
+
+// category
+Route::get('getCategories' , [productController::class  , 'getAllCategories']);
+
+
+//  products
+Route::get('getProducts' , [productController::class  , 'getAllProducts']);
 
 
