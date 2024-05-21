@@ -163,6 +163,7 @@ return [
     "View_all" => "View All",
     "Total_Sale" => "Total Sale",
     "Select_Interval" => "Select Interval",
+    "Enter_Address" => "Enter Address",
 
 
 

@@ -13,9 +13,6 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->text('phone')->nullable();
-            $table->text('city')->nullable();
-            $table->text('country')->nullable();
-            $table->text('language')->nullable();
             $table->text('address')->nullable();
             $table->text('user_image')->nullable();
         });

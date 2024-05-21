@@ -26,25 +26,13 @@ class authController extends Controller
             $validatedData = $request->validate([
                 'name' => 'nullable',
                 'phone' => 'nullable',
-                'city' => 'nullable',
-                'country' => 'nullable',
-                'language' => 'nullable',
-                'old_password' => 'nullable',
-                'confirm_password' => 'nullable',
-                'upload_image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+                'address' => 'nullable',
+                'upload_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             ]);
 
             $user->name = $validatedData['name'];
             $user->phone = $validatedData['phone'];
-            $user->city = $validatedData['city'];
-            $user->country = $validatedData['country'];
-            $user->language = $validatedData['language'];
-
-            if (isset($validatedData['old_password'])) {
-                if (Hash::check($validatedData['old_password'], $user->password)) {
-                    $user->password = Hash::make($validatedData['confirm_password']);
-                }
-            }
+            $user->address = $validatedData['address'];
 
             if ($request->hasFile('upload_image')) {
                 $image = $request->file('upload_image');
@@ -77,10 +65,7 @@ class authController extends Controller
                     'name' => $user->name,
                     'email' => $user->email,
                     'role' => $user->role,
-                    'phone' => $user->phone,
-                    'city' => $user->city,
-                    'country' => $user->country,
-                    'language' => $user->language,
+                    'address' => $user->address,
                     'user_image' => $user->user_image,
                 ]
             ];
@@ -218,20 +203,14 @@ class authController extends Controller
                 'user_id' => 'required',
                 'name' => 'nullable',
                 'phone' => 'nullable',
-                'city' => 'nullable',
-                'country' => 'nullable',
-                'language' => 'nullable',
-                'old_password' => 'nullable',
-                'confirm_password' => 'nullable',
-                'upload_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1024',
+                'address' => 'nullable',
+                'upload_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
             ]);
 
             $user = User::where('id', $validatedData['user_id'])->first();
             $user->name = $validatedData['name'];
             $user->phone = $validatedData['phone'];
-            $user->city = $validatedData['city'];
-            $user->country = $validatedData['country'];
-            $user->language = $validatedData['language'];
+            $user->address = $validatedData['address'];
 
 
 

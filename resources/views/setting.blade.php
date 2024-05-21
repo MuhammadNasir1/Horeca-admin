@@ -7,15 +7,14 @@
     </div>
 
     <div id="reloadDiv" class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
-        <form id="setting_data" method="post">
-            {{-- <form action="../updateSettings" method="post" enctype="multipart/form-data"> --}}
+        {{-- <form id="setting_data" method="post"> --}}
+            <form action="../updateSettings" method="post" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="user_id" value="{{ session('user_det')['user_id'] }}" autocomplete="off">
             <div class="p-8">
                 <div class="flex items-center flex-col gap-2">
                     <div class="h-[200px] w-[200px] relative  rounded-[50%]">
                         <img id="img_view" height="200px" width="200px"
-                            class="h-[200px] w-[200px]  border border-primary  rounded-[50%] cursor-pointer object-contain "
                             class="h-[200px] w-[200px]  border border-primary  rounded-[50%] cursor-pointer object-contain "
                             src=" {{ isset($user->user_image) ? asset($user->user_image) : 'images/owlicon.svg' }}"
                             alt="user">
@@ -54,41 +53,16 @@
                     </div>
                 </div>
 
-                <div class="flex gap-[30px] mt-4">
-                    <div class="w-[50%] mt-4">
+                <div class=" mt-4">
+                    <div class="w-full mt-4">
                         <label class="text-[16px] font-semibold block  text-[#452C88]"
-                            for="city">@lang('lang.city')</label>
+                            for="city">@lang('lang.Address')</label>
                         <input type="text"
                             class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                            name="city" id="city" placeholder="@lang('lang.Enter_City')" value="{{ $user['city'] }}">
-                    </div>
-
-                    <div class="w-[50%] mt-4">
-                        <label class="text-[16px] font-semibold block  text-[#452C88]"
-                            for="country">@lang('lang.Country')</label>
-                        <input type="text"
-                            class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                            name="country" id="country" placeholder="@lang('lang.Enter_country')"
-                            value="{{ $user['country'] }}">
+                            name="address" id="address" placeholder="@lang('lang.Enter_Address')" value="{{ $user['address'] }}">
                     </div>
                 </div>
 
-                <div class="flex gap-[30px] mt-4">
-                    <div class="w-[100%] mt-4">
-                        <label class="text-[16px] font-semibold block  text-[#452C88]"
-                            for="language">@lang('lang.Change_Language')</label>
-                        <select
-                            class="w-full mt-2 border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                            name="language" id="language">
-                            <option>@lang('lang.Select_Language')</option>
-                            <option {{ $user->language == 'english' ? 'selected' : '' }} value="english">English
-                            </option>
-                            <option {{ $user->language == 'german' ? 'selected' : '' }} value="german">German
-                            </option>
-                        </select>
-                    </div>
-
-                </div>
                 <div class="mt-10  flex justify-end">
                     <button class="bg-secondary  text-white h-12 px-3 rounded-[6px]  shadow-sm font-semibold "
                         id="addBtn">
