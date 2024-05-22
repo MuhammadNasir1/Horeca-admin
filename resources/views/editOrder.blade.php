@@ -11,7 +11,7 @@
             <div>
 
 
-                <div class="grid grid-cols-3 gap-x-6 mx-6 my-6">
+                <div class=" lg:grid lg:grid-cols-3 gap-x-6 mx-6 my-6">
 
                     <div class="flex gap-4">
                         <div>
@@ -44,7 +44,7 @@
 
 
                     <div class="mt-4  col-span-3  ">
-                        <div class="flex gap-4 items-center">
+                        <div class="md:flex gap-4 items-center">
                             <div class="w-full">
                                 <label class="text-[14px] font-normal" for="Customer_Address">@lang('lang.Customer_Address')</label>
                                 <br>
@@ -111,17 +111,17 @@
 
 
                 </div>
-                <div class="px-6">
+                <div class="px-6 overflow-x-auto">
                     <table class="w-full">
                         <thead class=" border-2 border-primary bg-primary text-white">
                             <tr>
                                 <th class="py-3">@lang('lang.Code')</th>
-                                <th>@lang('lang.Product_Name')</th>
-                                <th>@lang('lang.Unit_Price')</th>
-                                <th>@lang('lang.Tax')</th>
-                                <th>@lang('lang.Quantity')</th>
-                                <th>@lang('lang.Total_Price')</th>
-                                <th>@lang('lang.Action')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Product_Name')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Unit_Price')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Tax')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Quantity')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Total_Price')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Action')</th>
                             </tr>
                         </thead>
                         <tbody class="text-center" id="product_output">
@@ -170,19 +170,19 @@
                                 <td class="border-2 border-primary py-2 px-2" colspan="2">
                                     <div class="" id="subtotal">{{ $order->sub_total }}</div>
                                 </td>
-                                <td class="border-2 border-primary py-1" colspan="2">
-                                    <div class="flex gap-2 w-[80%] mx-auto items-center">
+                                <td class="border-2 border-primary py-1 " colspan="2">
+                                    <div class="flex gap-2   mx-5 items-center">
                                         <label class="text-[14px] font-normal"
                                             for="discount">@lang('lang.Discount'):</label>
                                         <input type="number"
-                                            class="w-[50%] border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                            class="lg:w-[50%] border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                                             name="order_vat" id="discount" min="0"
                                             value="{{ $order->discount }}">
 
                                         <label class="text-[14px] font-normal"
                                             for="delivery_charges">@lang('lang.Delivery_Charges'):</label>
                                         <input type="number"
-                                            class="w-[50%] border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                            class="lg:w-[50%] border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                                             name="delivery_charges" id="delivery_charges"
                                             placeholder="@lang('lang.Delivery_Charges')" value="{{ $order->delivery_charges }}">
 
