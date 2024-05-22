@@ -54,10 +54,10 @@
                                     <div class="flex gap-5 items-center justify-center">
 
                                         <button data-modal-target="Updateproductmodal"
-                                            data-modal-toggle="Updateproductmodal" class=" updateBtn cursor-pointer  "
+                                            data-modal-toggle="Updateproductmodal" class=" updateBtn cursor-pointer  w-[42px] md:w-full "
                                             updateId="{{ $data->id }}"><img width="38px"
                                                 src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
-                                        <a href="../delProduct/{{ $data->id }}"><img width="38px"
+                                        <a class="w-[42px] md:w-full" href="../delProduct/{{ $data->id }}"><img width="38px"
                                                 src="{{ asset('images/icons/delete.svg') }}"
                                                 alt="update"></button></a>
                                     </div>
