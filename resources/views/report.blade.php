@@ -1,31 +1,31 @@
 @include('layouts.header')
 @include('layouts.nav')
-<div class="mx-4 mt-12">
+<div class="md:mx-4 mt-12">
     <div>
         <h1 class=" font-semibold   text-2xl ">@lang('lang.All_Reports')</h1>
     </div>
     <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
         <div>
-            <div class="flex justify-between px-[20px] mb-3">
-                <h3 class="text-[20px] text-black">@lang('lang.Reports_List')</h3>
+            <div class="flex justify-end lg:justify-between px-[20px] mb-3">
+                <h3 class="text-[20px] text-black hidden lg:block">@lang('lang.Reports_List')</h3>
                 <form action="../report" method="get">
-                    <div class="flex gap-4 items-center">
+                    <div class="flex gap-x-4 gap-y-0 items-center flex-wrap justify-end">
 
-                        <div class="mb-1">
+                        <div class="mb-1  w-full  md:w-auto">
                             <label class="text-[14px] font-normal" for="from_date">@lang('lang.From_Date')</label>
                             <br>
                             <input type="date"
-                                class="w-70 border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                                 name="from_date" id="from_date">
                         </div>
-                        <div class="mb-1">
+                        <div class="mb-1  w-full  md:w-auto">
                             <label class="text-[14px] font-normal" for="to_date">@lang('lang.To_Date')</label>
                             <br>
                             <input type="date"
-                                class="w-70 border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                class=" border-[#DEE2E6] rounded-[4px] w-full focus:border-primary   h-[40px] text-[14px]"
                                 name="to_date" id="to_date">
                         </div>
-                        <div class="w-36  mt-5">
+                        <div class="md:w-36  mt-5   w-full ">
                             <select
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                                 name="interval" id="interval">
@@ -51,12 +51,13 @@
                     <thead class="py-6 bg-primary text-white">
                         <tr>
                             <th class="py-3">@lang('lang.STN')</th>
-                            <th class="border-2 border-primary">@lang('lang.Customer_Name')</th>
-                            <th class="border-2 border-primary">@lang('lang.Customer_phone')</th>
-                            <th class="border-2 border-primary">@lang('lang.Customer_Address')</th>
-                            <th class="border-2 border-primary">@lang('lang.Total')</th>
-                            <th class="border-2 border-primary">@lang('lang.Discount') / @lang('lang.Delivery_Charges') </th>
-                            <th class="border-2 border-primary">@lang('lang.Grand_total')</th>
+                            <th class="border-2 border-primary whitespace-nowrap">@lang('lang.Customer_Name')</th>
+                            <th class="border-2 border-primary whitespace-nowrap">@lang('lang.Customer_phone')</th>
+                            <th class="border-2 border-primary whitespace-nowrap">@lang('lang.Customer_Address')</th>
+                            <th class="border-2 border-primary whitespace-nowrap">@lang('lang.Total')</th>
+                            <th class="border-2 border-primary whitespace-nowrap">@lang('lang.Discount') /
+                                @lang('lang.Delivery_Charges') </th>
+                            <th class="border-2 border-primary whitespace-nowrap">@lang('lang.Grand_total')</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -1,7 +1,7 @@
 @include('layouts.header')
 @include('layouts.nav')
 
-<div class="mx-4 mt-12">
+<div class="lg:mx-4 mt-12">
     <div>
         <h1 class=" font-semibold   text-2xl ">@lang('lang.Setting')</h1>
     </div>
@@ -35,8 +35,8 @@
                     </div>
                     <p class="text-[#ACADAE]  text-[16px]">{{ $user['email'] }}</p>
                 </div>
-                <div class="flex gap-[30px] mt-3">
-                    <div class="w-[50%] mt-4">
+                <div class="md:flex gap-[30px] mt-3">
+                    <div class="md:w-[50%] w-full mt-4">
                         <label class="text-[16px] font-semibold block  text-[#452C88]"
                             for="name">@lang('lang.full_name')</label>
                         <input type="text"
@@ -44,7 +44,7 @@
                             name="name" id="name" placeholder="@lang('lang.Enter_Your_Name')" value="{{ $user['name'] }}">
                     </div>
 
-                    <div class="w-[50%] mt-4">
+                    <div class="md:w-[50%]  w-full mt-4">
                         <label class="text-[16px] font-semibold block  text-[#452C88]"
                             for="phone">@lang('lang.Phone_number')</label>
                         <input type="number"

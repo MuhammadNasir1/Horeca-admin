@@ -1,6 +1,6 @@
 @include('layouts.header')
 @include('layouts.nav')
-<div class="mx-4 mt-12">
+<div class="lg:mx-4  mt-12">
     <div>
         <h1 class=" font-semibold   text-2xl ">@lang('lang.Help')</h1>
     </div>

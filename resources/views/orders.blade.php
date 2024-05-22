@@ -1,6 +1,6 @@
 @include('layouts.header')
 @include('layouts.nav')
-<div class="mx-4 mt-12">
+<div class="md:mx-4 mt-12">
     <div>
         <h1 class=" font-semibold   text-2xl ">@lang('lang.All_Orders')</h1>
     </div>
@@ -15,11 +15,11 @@
                     <thead class="py-6 bg-primary text-white">
                         <tr>
                             <th>@lang('lang.STN')</th>
-                            <th>@lang('lang.Order_Number')</th>
-                            <th>@lang('lang.Order_Date')</th>
-                            <th>@lang('lang.Customer_Name')</th>
-                            <th>@lang('lang.Customer_phone')</th>
-                            <th>@lang('lang.Amount')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Order_Number')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Order_Date')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Customer_Name')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Customer_phone')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Amount')</th>
                             <th class="flex justify-center">@lang('lang.Action')</th>
                         </tr>
                     </thead>

@@ -1,13 +1,13 @@
 @include('layouts.header')
 @include('layouts.nav')
-<div class="mx-4 mt-12">
+<div class="md:mx-4 mt-12">
     <div>
         <h1 class=" font-semibold   text-2xl ">@lang('lang.All_Customers')</h1>
     </div>
     <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
         <div>
-            <div class="flex justify-between px-[20px] mb-3">
-                <h3 class="text-[20px] text-black">@lang('lang.Customer_List')</h3>
+            <div class="flex justify-end sm:justify-between  items-center px-[20px] mb-3">
+                <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Customer_List')</h3>
                 <div>
 
                     <button data-modal-target="addcustomermodal" data-modal-toggle="addcustomermodal"
@@ -16,14 +16,14 @@
                 </div>
             </div>
             <div class="overflow-x-auto">
-                <table id="datatable" class="overflow-scroll">
+                <table id="datatable">
                     <thead class="py-6 bg-primary text-white">
                         <tr>
-                            <th>@lang('lang.STN')</th>
-                            <th>@lang('lang.Name')</th>
-                            <th>@lang('lang.Email')</th>
-                            <th>@lang('lang.Phone_No')</th>
-                            <th>@lang('lang.Role')</th>
+                            <th class="whitespace-nowrap">@lang('lang.STN')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Name')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Email')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Phone_No')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Role')</th>
                             <th class="flex  justify-center">@lang('lang.Action')</th>
                         </tr>
                     </thead>
@@ -62,7 +62,7 @@
 
 {{-- ============ update  customer modal  =========== --}}
 <div id="updatecustomermodal" data-modal-backdrop="static"
-    class="hidden overflow-y-auto overflow-x-hidden fixed  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
     <div class="relative p-4 w-full   max-w-6xl max-h-full ">
         <form id="UpdatecustomerData" method="post" enctype="multipart/form-data">
             @csrf
@@ -83,7 +83,7 @@
                         </svg>
                     </button>
                 </div>
-                <div class="grid grid-cols-3 gap-x-6 mx-6 my-6">
+                <div class="grid grid-cols-3 md:grid-cols-3 gap-6 mx-6 my-6">
                     <div>
                         <label class="text-[14px] font-normal" for="fullName">@lang('lang.Customer_Name')</label>
                         <input type="text" required
@@ -143,7 +143,7 @@
 
 {{-- ============ add  customer modal  =========== --}}
 <div id="addcustomermodal" data-modal-backdrop="static"
-    class="hidden overflow-y-auto overflow-x-hidden fixed  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
     <div class="relative p-4 w-full   max-w-6xl max-h-full ">
         <form id="customerData" method="post" enctype="multipart/form-data">
             @csrf
@@ -162,7 +162,7 @@
                         </svg>
                     </button>
                 </div>
-                <div class="grid grid-cols-3 gap-x-6 mx-6 my-6">
+                <div class="grid md:grid-cols-3 gap-6 mx-6 my-6">
                     <div>
                         <label class="text-[14px] font-normal" for="fullName">@lang('lang.Customer_Name')</label>
                         <input type="text" required

@@ -6,8 +6,8 @@
     </div>
     <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
         <div>
-            <div class="flex justify-between px-[20px] mb-3">
-                <h3 class="text-[20px] text-black">@lang('lang.Categories_List')</h3>
+            <div class="flex justify-end sm:justify-between px-[20px] mb-3">
+                <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Categories_List')</h3>
                 <div>
 
                     <button data-modal-target="addcategorymodal" data-modal-toggle="addcategorymodal"
@@ -65,7 +65,7 @@
 
 {{-- ============ Update  category modal  =========== --}}
 <div id="Updatecategorymodal" data-modal-backdrop="static"
-    class="hidden overflow-y-auto overflow-x-hidden fixed  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
     <div class="relative p-4 w-full   max-w-4xl max-h-full ">
         <form id="UpdatecategoryData" method="post" enctype="multipart/form-data">
             @csrf
@@ -85,7 +85,7 @@
                         </svg>
                     </button>
                 </div>
-                <div class="grid grid-cols-3 gap-x-6 mx-6 my-6">
+                <div class="grid lg:grid-cols-3 gap-6 mx-6 my-6">
                     <div>
                         <label class="text-[14px] font-normal" for="Name">@lang('lang.Category_Name')</label>
                         <input type="text" required
@@ -140,7 +140,7 @@
 </div>
 {{-- ============ add  category modal  =========== --}}
 <div id="addcategorymodal" data-modal-backdrop="static"
-    class="hidden overflow-y-auto overflow-x-hidden fixed  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
     <div class="relative p-4 w-full   max-w-4xl max-h-full ">
         <form id="categoryData" method="post" enctype="multipart/form-data">
             @csrf
@@ -159,7 +159,7 @@
                         </svg>
                     </button>
                 </div>
-                <div class="grid grid-cols-3 gap-x-6 mx-6 my-6">
+                <div class="grid lg:grid-cols-3 gap-6 mx-6 my-6">
                     <div>
                         <label class="text-[14px] font-normal" for="Name">@lang('lang.Category_Name')</label>
                         <input type="text" required
