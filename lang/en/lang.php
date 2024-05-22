@@ -166,5 +166,8 @@ return [
     "Enter_Address" => "Enter Address",
 
 
+    "Alert_on_Quantity" => "Alert on Quantity",
+
+
 
 ];
