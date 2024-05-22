@@ -5,7 +5,7 @@
     <div>
         <h1 class=" font-semibold   text-2xl ">@lang('lang.Dashboard')</h1>
     </div>
-    <div class="grid grid-cols-4 gap-6  mt-4">
+    <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-6  mt-4">
         <div class="card-1 ">
             <div class="bg-white  border border-secondary rounded-[10px] py-5 px-8">
                 <div class="flex gap-1 justify-between items-center">
@@ -70,8 +70,8 @@
 </div>
 
 
-<div class="flex gap-14 mt-16 px-3 ">
-    <div class="w-[60%]">
+<div class="lg:flex gap-14 mt-16 px-3 ">
+    <div class="lg:w-[60%] w-full">
         <div class=" shadow-med p-3 rounded-xl">
             <h2 class="text-xl  font-semibold  ml-6">@lang('lang.Earning')</h2>
             <div id="earningChart" class="mt-4" style="height: 370px; width: 100%;"></div>
@@ -87,9 +87,9 @@
             <div>
                 <div class="pt-3  mt-2 border-t  border-gray-200">
 
-                    <div class="relative">
+                    <div class="relative overflow-auto h-[300px] ">
                         <table class="w-full text-sm text-center ">
-                            <thead class="text-sm text-gray-900 = text-dblue ">
+                            <thead class="text-sm text-gray-900  text-dblue ">
                                 <tr>
                                     <th class="px-6 py-3">
                                         @lang('lang.Code')
@@ -137,7 +137,7 @@
 
         </div>
     </div>
-    <div class="w-[40%]">
+    <div class="lg:w-[40%] w-full">
         <div class=" shadow-med p-3 rounded-xl">
             <h2 class="text-xl  font-semibold ml-6">@lang('lang.Orders')</h2>
             <div id="studentChart" class="mt-4" style="height: 370px; width: 100%;"></div>
