@@ -243,4 +243,68 @@ class ordersController extends Controller
 
         return view('editOrder', ["order" => $order, 'orderItems' => $orderItems, 'products' => $products]);
     }
+
+    public function Addorders(Request $request)
+    {
+        try {
+            $validatedData = $request->validate([
+                'user_id'  => 'required',
+                'order_date'  => 'required|date',
+                'customer_id'  => 'required',
+                'customer_name'  => 'required',
+                'customer_phone'  => 'required',
+                'customer_adress'  => 'required',
+                'product_id'  => 'required',
+                'product_quantity'  => 'required',
+                'grand_total'  => 'required',
+                'sub_total'  => 'required',
+                'payment_type'  => 'required',
+                'order_description'  => 'nullable',
+                'order_note'  => 'nullable',
+                'delivery_charges'  => 'nullable',
+            ]);
+
+            $orders  = orders::create([
+                'user_id' =>  $validatedData['user_id'],
+                'order_date' => $validatedData['order_date'],
+                'customer_id' => $validatedData['customer_id'],
+                'customer_name' => $validatedData['customer_name'],
+                'customer_phone' => $validatedData['customer_phone'],
+                'customer_adress' => $validatedData['customer_adress'],
+                'sub_total' => $validatedData['sub_total'],
+                'discount' => $request['discount'],
+                'grand_total' => $validatedData['grand_total'],
+                'order_description' => $request['order_description'],
+                'order_traking' => true,
+                'order_note' => $request['order_note'],
+                'payment_type' => $validatedData['payment_type'],
+                'order_status' => "pending",
+                'delivery_charges' => $request['delivery_charges'],
+
+            ]);
+            foreach ($validatedData['product_id'] as $j => $productId) {
+                $product = product::find($productId);
+                if ($product) {
+                    $productTotal = $product->rate * $validatedData['product_quantity'][$j];
+                    $order_item = order_items::create([
+                        'order_id' => $orders->id,
+                        'product_id' => $product->id,
+                        'product_rate' => $product->rate,
+                        'product_quantity' => $validatedData['product_quantity'][$j],
+                        'product_tax' => $product->tax,
+                        'product_total' => $productTotal,
+                    ]);
+                    $order_item->save();
+                } else {
+                    return response()->json([
+                        'success' => false,
+                        'message' => "Product with ID $productId not found."
+                    ], 404);
+                }
+            };
+            return response()->json(['success' => true, 'message' => 'Order add successfully'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
 }

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('customer_phone')->nullable();
             $table->text('customer_adress')->nullable();
             $table->string('sub_total');
-            $table->string('order_vat');
+            $table->string('order_vat')->nullable();
             $table->string('discount')->nullable();
             $table->string('grand_total');
             $table->string('order_description')->nullable();

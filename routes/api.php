@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\authController;
 use App\Http\Controllers\coursesController;
+use App\Http\Controllers\ordersController;
 use App\Http\Controllers\parentController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\studentController;
@@ -45,5 +46,10 @@ Route::get('getCategories' , [productController::class  , 'getAllCategories']);
 
 //  products
 Route::get('getProducts' , [productController::class  , 'getAllProducts']);
+
+
+// order
+Route::post('Addorders' , [ordersController::class  , 'Addorders']);
+
 
 
