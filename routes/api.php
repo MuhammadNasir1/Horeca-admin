@@ -50,6 +50,7 @@ Route::get('getProducts' , [productController::class  , 'getAllProducts']);
 
 // order
 Route::post('Addorders' , [ordersController::class  , 'Addorders']);
+Route::get('/orderHistory/{user_id}' , [ordersController::class  , 'getorderHistory']);
 
 
 

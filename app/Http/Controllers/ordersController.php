@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\order_items;
 use App\Models\orders;
 use App\Models\product;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ordersController extends Controller
@@ -303,6 +304,21 @@ class ordersController extends Controller
                 }
             };
             return response()->json(['success' => true, 'message' => 'Order add successfully'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
+
+
+    public function getorderHistory($user_id)
+    {
+        try {
+            $Orders = orders::where('customer_id', $user_id)->get();
+            if (!$Orders) {
+                return response()->json(['success' => false, 'message' => "Order not found"], 500);
+            }
+
+            return response()->json(['success' => true, 'message' => "Order get successfull", 'orders' => $Orders], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
