@@ -41,9 +41,10 @@ class userController extends Controller
                 'email' => 'required|email',
                 'phone_no' => 'required',
                 'address' => 'required',
-
+                'user_id' => 'required'
             ]);
             $customer =  User::create([
+                'user_id' => $validateData['user_id'],
                 'name' => $validateData['name'],
                 'email' => $validateData['email'],
                 'password' => Hash::make(12345678),
@@ -93,6 +94,17 @@ class userController extends Controller
             $customer->address = $validatedData['address'];
             $customer->update();
             return response()->json(['success' => true,  'message' => "Data  Get Successfully", 'customer' => $customer]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false,  'message' => $e->getMessage()]);
+        }
+    }
+
+    public function getCustomer()
+    {
+
+        try {
+            $customers =  User::all();
+            return response()->json(['success' => true,  'message' => "Customer get successfully ", 'customers' => $customers]);
         } catch (\Exception $e) {
             return response()->json(['success' => false,  'message' => $e->getMessage()]);
         }

@@ -41,16 +41,18 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 // category
-Route::get('getCategories' , [productController::class  , 'getAllCategories']);
+Route::get('getCategories', [productController::class, 'getAllCategories']);
 
 
 //  products
-Route::get('getProducts' , [productController::class  , 'getAllProducts']);
+Route::get('getProducts', [productController::class, 'getAllProducts']);
 
 
 // order
-Route::post('Addorders' , [ordersController::class  , 'Addorders']);
-Route::get('/orderHistory/{user_id}' , [ordersController::class  , 'getorderHistory']);
+Route::post('Addorders', [ordersController::class, 'Addorders']);
+Route::get('/orderHistory/{user_id}', [ordersController::class, 'getorderHistory']);
 
 
-
+// customer
+Route::post('AddCustomer', [userController::class, 'addCustomer']);
+Route::get('getCustomer', [userController::class, 'getCustomer']);
