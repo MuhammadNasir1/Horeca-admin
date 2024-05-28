@@ -14,38 +14,29 @@
                 <table id="datatable" class="overflow-scroll">
                     <thead class="py-6 bg-primary text-white">
                         <tr>
-                            <th>@lang('lang.STN')</th>
                             <th class="whitespace-nowrap">@lang('lang.Order_Number')</th>
                             <th class="whitespace-nowrap">@lang('lang.Order_Date')</th>
                             <th class="whitespace-nowrap">@lang('lang.Order_From')</th>
                             <th class="whitespace-nowrap">@lang('lang.Customer_Name')</th>
                             <th class="whitespace-nowrap">@lang('lang.Customer_phone')</th>
                             <th class="whitespace-nowrap">@lang('lang.Amount')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Order_Status')</th>
                             <th class="flex justify-center">@lang('lang.Action')</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($orders as $x => $data)
                             <tr class="pt-4">
-                                <td>{{ $x + 1 }}</td>
                                 <td>{{ $data->id }}</td>
                                 <td>{{ $data->order_date }}</td>
-                                <td>
-                                    @if ($data->order_from == 'App')
-                                        <svg class="w-12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-                                            <path
-                                                d="M420.6 301.9a24 24 0 1 1 24-24 24 24 0 0 1 -24 24m-265.1 0a24 24 0 1 1 24-24 24 24 0 0 1 -24 24m273.7-144.5 47.9-83a10 10 0 1 0 -17.3-10h0l-48.5 84.1a301.3 301.3 0 0 0 -246.6 0L116.2 64.5a10 10 0 1 0 -17.3 10h0l47.9 83C64.5 202.2 8.2 285.6 0 384H576c-8.2-98.5-64.5-181.8-146.9-226.6" />
-                                        </svg>
-                                    @else
-                                        <svg class="w-12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                            <path
-                                                d="M352 256c0 22.2-1.2 43.6-3.3 64H163.3c-2.2-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64H348.7c2.2 20.4 3.3 41.8 3.3 64zm28.8-64H503.9c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64zm112.6-32H376.7c-10-63.9-29.8-117.4-55.3-151.6c78.3 20.7 142 77.5 171.9 151.6zm-149.1 0H167.7c6.1-36.4 15.5-68.6 27-94.7c10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5c11.6 26 20.9 58.2 27 94.7zm-209 0H18.6C48.6 85.9 112.2 29.1 190.6 8.4C165.1 42.6 145.3 96.1 135.3 160zM8.1 192H131.2c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64H8.1C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64zM194.7 446.6c-11.6-26-20.9-58.2-27-94.6H344.3c-6.1 36.4-15.5 68.6-27 94.6c-10.5 23.6-22.2 40.7-33.5 51.5C272.6 508.8 263.3 512 256 512s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5zM135.3 352c10 63.9 29.8 117.4 55.3 151.6C112.2 482.9 48.6 426.1 18.6 352H135.3zm358.1 0c-30 74.1-93.6 130.9-171.9 151.6c25.5-34.2 45.2-87.7 55.3-151.6H493.4z" />
-                                        </svg>
-                                    @endif
-                                </td>
+                                <td>{{ $data->order_from }}</td>
                                 <td>{{ $data->customer_name }}</td>
                                 <td>{{ $data->customer_phone }}</td>
                                 <td>{{ $data->grand_total }}&euro;</td>
+                                <td>
+                                    <button class="px-4 py-2 rounded-md bg-red-600 text-white font-bold">
+                                        {{ $data->order_status }}</button>
+                                </td>
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
                                         <a class="w-[42px] " href="../order/{{ $data->id }}"><img width="38px"
@@ -77,6 +68,10 @@
                                                 </svg>
                                             </div>
                                         </a>
+                                        <button updateId="{{ $data->id }}" data-modal-target="changeStatus"
+                                            data-modal-toggle="changeStatus"
+                                            class="px-4 py-2 rounded-md bg-orange-500 text-white font-bold updateStatusBtn">
+                                            @lang('lang.Change_Status') </button>
                                     </div>
                                 </td>
                             </tr>
@@ -89,7 +84,121 @@
     </div>
 </div>
 
+{{-- ============ modal  =========== --}}
+<div id="changeStatus" data-modal-backdrop="static"
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
+    <div class="relative p-4 w-full   max-w-2xl max-h-full ">
+        <form id="OrderStatusData" method="post" enctype="multipart/form-data">
+            @csrf
+            <input type="hidden" id="update_id">
+            <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
+                <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
+                    <h3 class="text-xl font-semibold text-white ">
+                        @lang('lang.Add_Category')
+                    </h3>
+                    <button type="button"
+                        class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
+                        data-modal-hide="changeStatus">
+                        <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                    </button>
+                </div>
+                <div class=" mx-6 my-6">
+                    <div class="">
+                        <label class="text-[14px] font-normal" for="Status">@lang('lang.Status')</label>
+                        <select
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="order_status" id="Status">
+                            <option selected disabled>@lang('lang.Select_Order_Status')</option>
+                            <option value="pending">@lang('lang.Pending')</option>
+                            <option value="confirmed">@lang('lang.Confirmed')</option>
+                            <option value="Shipped">@lang('lang.Shipped')</option>
+                        </select>
 
+                    </div>
+
+                </div>
+                <div class="flex justify-end ">
+                    <button class="bg-primary text-white py-2 px-6 my-4 rounded-[4px]  mx-6 uaddBtn  font-semibold "
+                        id="addBtn">
+                        <div class=" text-center hidden" id="spinner">
+                            <svg aria-hidden="true"
+                                class="w-5 h-5 mx-auto text-center text-gray-200 animate-spin fill-primary"
+                                viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                    fill="currentColor" />
+                                <path
+                                    d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                    fill="currentFill" />
+                            </svg>
+                        </div>
+                        <div id="text">
+                            @lang('lang.Update')
+                        </div>
+
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div>
+
+        </div>
+
+    </div>
+</div>
 
 
 @include('layouts.footer')
+
+
+<script>
+    $(document).ready(function() {
+        $('.updateStatusBtn').click(function() {
+            var id = $(this).attr('updateId');
+            $('#update_id').val(id);
+        });
+
+        $("#OrderStatusData").submit(function(event) {
+            var updateId = $('#update_id').val();
+            var url = "../updateOrderStatus/" + updateId;
+            event.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: formData,
+                dataType: "json",
+                contentType: false,
+                processData: false,
+                beforeSend: function() {
+                    $('#spinner').removeClass('hidden');
+                    $('#text').addClass('hidden');
+                    $('#addBtn').attr('disabled', true);
+                },
+                success: function(response) {
+                    window.location.href = '../orders';
+
+                },
+                error: function(jqXHR) {
+                    let response = JSON.parse(jqXHR.responseText);
+                    console.log("error");
+                    Swal.fire(
+                        'Warning!',
+                        response.message,
+                        'warning'
+                    );
+
+                    $('#text').removeClass('hidden');
+                    $('#spinner').addClass('hidden');
+                    $('#addBtn').attr('disabled', false);
+                }
+            });
+
+
+        });
+    });
+</script>

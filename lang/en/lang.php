@@ -170,6 +170,13 @@ return [
 
     "Price_Here" => "Price Here",
     "Order_From" => "Order From",
+    "Status&Tracking" => "Status & Tracking",
+    "Tracking_Url" => "Tracking Url",
+    "Url_Here" => "Url Here",
+    "Confirmed" => "Confirmed",
+    "Shipped" => "Shipped",
+    "Change_Status" => "Change Status",
+    "Select_Order_Status" => "Select Order Status",
 
 
 ];

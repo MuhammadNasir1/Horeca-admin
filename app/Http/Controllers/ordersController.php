@@ -359,4 +359,31 @@ class ordersController extends Controller
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
     }
+
+    // get status and tracking data
+
+    public function getOrderStatus($order_id)
+    {
+        try {
+            $order =   orders::find($order_id);
+            return response()->json(['success' => true, 'message' => "Order get successfull", 'status' => $order], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
+    public function updateOrderStatus(Request $request, $order_id)
+    {
+        try {
+            $validatedData = $request->validate([
+                'order_status' => 'required|string', // Add more validation rules as needed
+            ]);
+            $order =   orders::find($order_id);
+            $order->order_status = $validatedData['order_status'];
+            $order->save();
+
+            return response()->json(['success' => true, 'message' => "Order Status successfull Update"], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
 }

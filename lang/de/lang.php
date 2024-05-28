@@ -158,6 +158,14 @@ return [
     "Qty" => "Menge",
     "Biled_To" => "Abgerechnet an",
     "Invoice_Date" => "Rechnungsdatum",
-    "View_all" => "Alle anzeigen"
+    "View_all" => "Alle anzeigen",
+    "Status&Tracking" => "Status & Verfolgung",
+    "Tracking_Url" => "Verfolgungs-Url",
+    "Url_Here" => "Url hier",
+    "Confirmed" => "Bestätigt",
+    "Shipped" => "Versandt",
+    "Change_Status" => "Status ändern",
+    "Select_Order_Status" => "Bestellstatus auswählen",
+
 
 ];
