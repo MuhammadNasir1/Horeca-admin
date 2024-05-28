@@ -7,12 +7,12 @@
 
     <form action="addOrder" method="post" enctype="multipart/form-data" class="pb-5">
         @csrf
+        <input type="hidden" name="order_from" value="Web">
         <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
             <div>
 
 
                 <div class=" lg:grid lg:grid-cols-3 gap-x-6 mx-6 my-6">
-
                     <div class="flex gap-4">
                         <div>
                             <label class="text-[14px] font-normal" for="order_id">@lang('lang.Order_Id')</label>

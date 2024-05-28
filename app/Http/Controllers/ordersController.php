@@ -30,6 +30,7 @@ class ordersController extends Controller
                 'product_quantity'  => 'required',
                 'product_rate'  => 'required',
                 'product_total'  => 'required',
+                'order_from'  => 'required',
             ]);
 
             $userId   = session("user_det")['user_id'];
@@ -50,6 +51,7 @@ class ordersController extends Controller
                 'payment_type' => $request['payment_type'],
                 'order_status' => $request['order_status'],
                 'delivery_charges' => $validatedData['delivery_charges'],
+                'order_from' => $validatedData['order_from'],
 
             ]);
             foreach ($request['product_id'] as $j => $product) {
@@ -281,6 +283,7 @@ class ordersController extends Controller
                 'payment_type' => $validatedData['payment_type'],
                 'order_status' => "pending",
                 'delivery_charges' => $request['delivery_charges'],
+                'order_from' => "App",
 
             ]);
             foreach ($validatedData['product_id'] as $j => $productId) {

@@ -55,7 +55,7 @@
 
                                         <button data-modal-target="Updateproductmodal"
                                             data-modal-toggle="Updateproductmodal"
-                                            class=" updateBtn cursor-pointer  w-[42px] md:w-full "
+                                            class=" updateBtn cursor-pointer  w-[42px]"
                                             updateId="{{ $data->id }}"><img width="38px"
                                                 src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
                                         <a class="w-[42px] md:w-full" href="../delProduct/{{ $data->id }}"><img

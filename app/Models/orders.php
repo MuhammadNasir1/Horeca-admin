@@ -26,6 +26,7 @@ class orders extends Model
         'payment_type',
         'order_status',
         'delivery_charges',
+        'order_from',
 
     ];
     protected $timestamp =  true;
