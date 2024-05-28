@@ -313,10 +313,33 @@ class ordersController extends Controller
     }
 
 
-    public function getorderHistory($user_id)
+    public function getorderHistory($customer_id)
     {
         try {
-            $orders = orders::where('customer_id', $user_id)->get();
+            $orders = orders::where('customer_id', $customer_id)->get();
+            if (!$orders) {
+                return response()->json(['success' => false, 'message' => "Order not found"], 500);
+            }
+            $ordersWithItems = [];
+            foreach ($orders as $order) {
+                // Fetch the order items for each order
+                $orderItems = order_items::where('order_id', $order->id)->get();
+                // Add the order items to the order
+                $orderData = $order->toArray();
+                $orderData['order_items'] = $orderItems;
+                $ordersWithItems[] = $orderData;
+            }
+
+
+            return response()->json(['success' => true, 'message' => "Order get successfull", 'orders' => $ordersWithItems], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
+    public function orderHistoryDistributor($user_id)
+    {
+        try {
+            $orders = orders::where('user_id', $user_id)->get();
             if (!$orders) {
                 return response()->json(['success' => false, 'message' => "Order not found"], 500);
             }
