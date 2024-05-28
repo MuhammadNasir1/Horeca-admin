@@ -168,6 +168,7 @@ return [
 
     "Alert_on_Quantity" => "Alert on Quantity",
 
+    "Price_Here" => "Price Here",
 
 
 ];

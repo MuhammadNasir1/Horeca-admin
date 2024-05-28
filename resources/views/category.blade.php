@@ -22,6 +22,7 @@
                             <th>@lang('lang.STN')</th>
                             <th>@lang('lang.Image')</th>
                             <th>@lang('lang.Name')</th>
+                            <th>@lang('lang.Tax')</th>
                             <th>@lang('lang.Status')</th>
                             <th class="flex  justify-center">@lang('lang.Action')</th>
                         </tr>
@@ -37,16 +38,18 @@
 
                                 </td>
                                 <td>{{ $data->name }}</td>
+                                <td>{{ $data->tax }}</td>
                                 <td>{{ $data->status }}</td>
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
 
                                         <button data-modal-target="Updatecategorymodal"
-                                            data-modal-toggle="Updatecategorymodal" class=" updateBtn cursor-pointer w-[42px] md:w-full "
+                                            data-modal-toggle="Updatecategorymodal"
+                                            class=" updateBtn cursor-pointer w-[42px]  "
                                             updateId="{{ $data->id }}"><img width="38px"
                                                 src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
-                                        <a class="w-[42px] md:w-full" href="../delCategory/{{ $data->id }}"><img width="38px"
-                                                src="{{ asset('images/icons/delete.svg') }}"
+                                        <a class="w-[42px]" href="../delCategory/{{ $data->id }}"><img
+                                                width="38px" src="{{ asset('images/icons/delete.svg') }}"
                                                 alt="update"></button></a>
                                     </div>
                                 </td>
@@ -85,12 +88,18 @@
                         </svg>
                     </button>
                 </div>
-                <div class="grid lg:grid-cols-3 gap-6 mx-6 my-6">
+                <div class="grid lg:grid-cols-2 gap-x-6 gap-y-4 mx-6 my-6">
                     <div>
                         <label class="text-[14px] font-normal" for="Name">@lang('lang.Category_Name')</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="name" id="CategoryName" placeholder=" @lang('lang.Name_Here')">
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="tax">@lang('lang.Tax')</label>
+                        <input type="text"
+                            class="w-full border-[#DEE2E6]  border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="tax" id="tax" placeholder="% @lang('lang.Here')">
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="image">@lang('lang.Image')</label>
@@ -159,12 +168,18 @@
                         </svg>
                     </button>
                 </div>
-                <div class="grid lg:grid-cols-3 gap-6 mx-6 my-6">
+                <div class="grid lg:grid-cols-2 gap-x-6 gap-y-4 mx-6 my-6">
                     <div>
                         <label class="text-[14px] font-normal" for="Name">@lang('lang.Category_Name')</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="name" id="CategoryName" placeholder=" @lang('lang.Name_Here')">
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="tax">@lang('lang.Tax')</label>
+                        <input type="text"
+                            class="w-full border-[#DEE2E6]  border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="tax" id="tax" placeholder="% @lang('lang.Here')">
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="image">@lang('lang.Image')</label>
@@ -267,6 +282,7 @@
                     var category = response.category;
                     $('#update_id').val(category.id);
                     $('#CategoryName').val(category.name);
+                    $('#tax').val(category.tax);
                     $('#Status').val(category.status);
 
 

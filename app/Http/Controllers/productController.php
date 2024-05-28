@@ -153,11 +153,13 @@ class productController extends Controller
                 'name' => 'required',
                 'category_img' => 'nullable|image',
                 'status' => 'required',
+                'tax' => 'required',
 
             ]);
             $Category =  category::create([
                 'name' => $validateData['name'],
                 'status' => $validateData['status'],
+                'tax' => $validateData['tax'],
                 'image' => '',
             ]);
 

@@ -54,11 +54,12 @@
                                     <div class="flex gap-5 items-center justify-center">
 
                                         <button data-modal-target="Updateproductmodal"
-                                            data-modal-toggle="Updateproductmodal" class=" updateBtn cursor-pointer  w-[42px] md:w-full "
+                                            data-modal-toggle="Updateproductmodal"
+                                            class=" updateBtn cursor-pointer  w-[42px] md:w-full "
                                             updateId="{{ $data->id }}"><img width="38px"
                                                 src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
-                                        <a class="w-[42px] md:w-full" href="../delProduct/{{ $data->id }}"><img width="38px"
-                                                src="{{ asset('images/icons/delete.svg') }}"
+                                        <a class="w-[42px] md:w-full" href="../delProduct/{{ $data->id }}"><img
+                                                width="38px" src="{{ asset('images/icons/delete.svg') }}"
                                                 alt="update"></button></a>
                                     </div>
                                 </td>
@@ -112,10 +113,11 @@
                         <div class="w-full">
                             <label class="text-[14px] font-normal" for="category">@lang('lang.Product_Category')</label>
                             <select
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] category"
                                 name="category" id="Ucategory">
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->name }}">{{ $category->name }}</option>
+                                    <option category-tax="{{ $category->tax }}" value="{{ $category->name }}">
+                                        {{ $category->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -137,16 +139,16 @@
                     </div>
                     <div class="grid grid-cols-2  gap-4  mt-4">
                         <div>
-                            <label class="text-[14px] font-normal" for="Rate">@lang('lang.Rate')</label>
-                            <input type="number"
+                            <label class="text-[14px] font-normal" for="Price">@lang('lang.Price')</label>
+                            <input type="text"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="rate" id="Rate" placeholder=" @lang('lang.Rate_Here')">
+                                name="rate" id="Price" placeholder=" @lang('lang.Price_Here')">
                         </div>
                         <div>
                             <label class="text-[14px] font-normal" for="tax">@lang('lang.Tax')%</label>
 
-                            <input type="number"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            <input type="text"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] tax-input"
                                 name="tax" id="tax" placeholder="%  @lang('lang.Here')  ">
                         </div>
                     </div>
@@ -319,10 +321,11 @@
                         <div class="w-full">
                             <label class="text-[14px] font-normal" for="category">@lang('lang.Product_Category')</label>
                             <select
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] category "
                                 name="category" id="category">
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->name }}">{{ $category->name }}</option>
+                                    <option category-tax="{{ $category->tax }}" value="{{ $category->name }}">
+                                        {{ $category->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -345,16 +348,16 @@
                     </div>
                     <div class="grid grid-cols-2  gap-4  mt-4">
                         <div>
-                            <label class="text-[14px] font-normal" for="Rate">@lang('lang.Rate')</label>
-                            <input type="number"
+                            <label class="text-[14px] font-normal" for="Price">@lang('lang.Price')</label>
+                            <input type="text"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="rate" id="Rate" placeholder=" @lang('lang.Rate_Here')">
+                                name="rate" id="Price" placeholder=" @lang('lang.Price_Here')">
                         </div>
                         <div>
                             <label class="text-[14px] font-normal" for="tax">@lang('lang.Tax')%</label>
 
                             <input type="number"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] tax-input"
                                 name="tax" id="tax" placeholder="%  @lang('lang.Here')  ">
                         </div>
                     </div>
@@ -446,12 +449,18 @@
                         </svg>
                     </button>
                 </div>
-                <div class="grid lg:grid-cols-3 gap-6  mx-6 my-6">
+                <div class="grid lg:grid-cols-2 gap-x-6 gap-y-4  mx-6 my-6">
                     <div>
                         <label class="text-[14px] font-normal" for="Name">@lang('lang.Category_Name')</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="name" id="CategoryName" placeholder=" @lang('lang.Name_Here')">
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="tax">@lang('lang.Tax')</label>
+                        <input type="text"
+                            class="w-full border-[#DEE2E6]  border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="tax" id="tax" placeholder="% @lang('lang.Here')">
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="image">@lang('lang.Image')</label>
@@ -504,6 +513,11 @@
 @include('layouts.footer')
 <script>
     $(document).ready(function() {
+        $('.category').change(function() {
+            var selectedOption = $(this).find(':selected');
+            var tax = selectedOption.attr('category-tax');
+            $('.tax-input').val(tax)
+        });
         // insert data
         $("#productdata").submit(function(event) {
             var url = "../addProduct";
@@ -558,7 +572,7 @@
                     $('#Ucategory').val(product.category);
                     $('#subCategory').val(product.sub_category);
                     $('#tags').val(product.tags);
-                    $('#Rate').val(product.rate);
+                    $('#Price').val(product.rate);
                     $('#tax').val(product.tax);
                     $('#quantity').val(product.quantity);
                     $('#quantityAlert').val(product.quantity_alert);
@@ -598,10 +612,12 @@
                 },
                 success: function(response) {
                     var categoryName = response.category.name;
+                    var categoryTax = response.category.tax;
                     $('#category-modal-close').click();
                     var newOption = $('<option>', {
                         value: categoryName,
-                        text: categoryName
+                        text: categoryName,
+                        'category-tax': categoryTax
                     });
                     $('#category').append(newOption);
                 },

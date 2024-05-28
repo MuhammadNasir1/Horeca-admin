@@ -13,6 +13,7 @@ class category extends Model
         'name',
         'image',
         'status',
+        'tax',
     ];
     protected  $timestamp  =  true;
 }
