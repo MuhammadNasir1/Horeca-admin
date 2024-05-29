@@ -112,6 +112,16 @@ class userController extends Controller
         }
     }
 
+
+    public function Dashboard()
+    {
+        $totalOrders = orders::count();
+        $totalProduct = product::count();
+        $pendingOrders = orders::where('order_status', 'pending')->count();
+        $confirmedOrders = orders::where('order_status', 'confirmed')->count();
+        $totalUser = User::count();
+        return view('dashboard', compact('totalOrders', 'totalProduct', 'totalUser', 'pendingOrders', 'confirmedOrders'));
+    }
     public  function getGraphData()
     {
         try {
@@ -120,13 +130,15 @@ class userController extends Controller
             $confirmedOrders = orders::where('order_status', 'confirmed')->count();
             $shippedOrders = orders::where('order_status', 'shipped')->count();
             $cancelOrders = orders::where('order_status', 'cancel')->count();
-            return response()->json(['success' => true,  'message' => "Data get successfully ", 'OrderData' => [
+            $OrderData   = [
                 'totalOrders' => $totalOrders,
                 'pendingOrders' => $pendingOrders,
                 'confirmedOrders' => $confirmedOrders,
                 'shippedOrders' => $shippedOrders,
                 'cancelOrders' => $cancelOrders
-            ]]);
+            ];
+
+            return response()->json(['success' => true,  'message' => "Data get successfully ", 'OrderData' => [$OrderData]]);
         } catch (\Exception $e) {
             return response()->json(['success' => false,  'message' => $e->getMessage()]);
         }

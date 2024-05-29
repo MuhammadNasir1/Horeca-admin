@@ -243,12 +243,4 @@ class authController extends Controller
 
         return view('setting', ['user' => $user]);
     }
-
-    public function Dashboard()
-    {
-        $totalOrders = orders::count();
-        $totalProduct = product::count();
-        $totalUser = User::count();
-        return view('dashboard', compact('totalOrders', 'totalProduct', 'totalUser'));
-    }
 }

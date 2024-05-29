@@ -26,7 +26,7 @@
                 <div class="flex gap-1 justify-between items-center">
                     <div>
                         <p class="text-sm text-[#808191]">@lang('lang.Pending_orders')</p>
-                        <h2 class="text-2xl font-semibold mt-1">0</h2>
+                        <h2 class="text-2xl font-semibold mt-1">{{ $pendingOrders }}</h2>
                     </div>
                     <div>
                         <img width="52px" height=52px" src="{{ asset('images/icons/pending-orders.svg') }}"
@@ -153,11 +153,15 @@
                     <div class="flex justify-around">
                         <div class="flex flex-col items-center">
                             <p class="text-[#CECECE] text-lg font-semibold">@lang('lang.Pending')</p>
-                            <h2 class="text-secondary text-3xl  mt-2 font-bold">84%</h2>
+                            <div class="h-10  w-10 bg-secondary rounded-full">
+
+                            </div>
                         </div>
                         <div class="flex flex-col items-center">
                             <p class="text-[#CECECE] text-lg font-semibold">@lang('lang.Confirm')</p>
-                            <h2 class="text-primary text-3xl  mt-2  font-bold">34%</h2>
+                            <div class="h-10  w-10 bg-primary rounded-full">
+
+                            </div>
                         </div>
 
                     </div>
@@ -314,12 +318,12 @@
                 indexLabelFontColor: "transparent",
                 indexLabelPlacement: "inside",
                 dataPoints: [{
-                        y: 67,
+                        y: {{ $confirmedOrders }},
                         color: "#edbd58",
                         label: "Students"
                     },
                     {
-                        y: 28,
+                        y: {{ $totalOrders }},
                         color: "#027C56",
                         label: "Teachers"
                     },
