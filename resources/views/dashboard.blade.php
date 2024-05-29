@@ -186,8 +186,8 @@
             animationEnabled: true,
             axisX: {
                 valueFormatString: "DDD",
-                minimum: new Date(2017, 1, 5, 23),
-                maximum: new Date(2017, 1, 12, 1)
+                minimum: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
+                maximum: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
             },
             axisY: {
                 gridColor: "#00000016",
@@ -197,79 +197,27 @@
                 shared: true
             },
             data: [{
-                    name: "Received",
-                    type: "area",
-                    fillOpacity: 100,
-                    color: "#edbd58",
-                    markerSize: 0,
-                    dataPoints: [{
-                            x: new Date(2017, 1, 6),
-                            y: 550
-                        },
-                        {
-                            x: new Date(2017, 1, 7),
-                            y: 450
-                        },
-                        {
-                            x: new Date(2017, 1, 8),
-                            y: 500
-                        },
-                        {
-                            x: new Date(2017, 1, 9),
-                            y: 162
-                        },
-                        {
-                            x: new Date(2017, 1, 10),
-                            y: 150
-                        },
-                        {
-                            x: new Date(2017, 1, 11),
-                            y: 400
-                        },
-                        {
-                            x: new Date(2017, 1, 12),
-                            y: 129
-                        }
-                    ]
-                },
-                {
 
-                    name: "Sent",
-                    type: "area",
-                    color: "#027C56",
-                    fillOpacity: 100,
-                    markerSize: 2,
-                    dataPoints: [{
-                            x: new Date(2017, 1, 6),
-                            y: 200
-                        },
+                name: "Sent",
+                type: "area",
+                color: "#027C56",
+                fillOpacity: 100,
+                markerSize: 2,
+                dataPoints: [
+
+                    @foreach ($dailySalesData as $data)
                         {
-                            x: new Date(2017, 1, 7),
+                            x: new Date({{ $data['date'] }}),
+                            y: {{ $data['total'] }}
+                        }, {
+                            x: new Date(2024, 4, 30),
                             y: 150
                         },
-                        {
-                            x: new Date(2017, 1, 8),
-                            y: 300
-                        },
-                        {
-                            x: new Date(2017, 1, 9),
-                            y: 550
-                        },
-                        {
-                            x: new Date(2017, 1, 10),
-                            y: 50
-                        },
-                        {
-                            x: new Date(2017, 1, 11),
-                            y: 80
-                        },
-                        {
-                            x: new Date(2017, 1, 12),
-                            y: 200
-                        }
-                    ]
-                }
-            ]
+                    @endforeach
+
+
+                ]
+            }]
         });
 
         var chart2 = new CanvasJS.Chart("studentChart", {

@@ -144,7 +144,35 @@ class userController extends Controller
             ];
         });
 
-        return view('dashboard', compact('totalOrders', 'totalProduct', 'totalUser', 'pendingOrders', 'confirmedOrders', 'products'), ['orderData' => $results]);
+
+        $sevenDaysAgo = Carbon::now()->subDays(7);
+
+        // Retrieve and sum grand totals for each of the last 7 days
+        $dailySales = orders::select(DB::raw('DATE(created_at) as date'), DB::raw('SUM(grand_total) as total'))
+            ->where('created_at', '>=', $sevenDaysAgo)
+            ->groupBy('date')
+            ->orderBy('date', 'asc')
+            ->get();
+
+        // Initialize an array to store the formatted results
+        $dailySalesData = [];
+
+        // Format the results for the table
+        foreach ($dailySales as $sale) {
+            $date = explode('-', $sale->date);
+            $formattedDate = [
+                'year' => $date[0],
+                'month' => ltrim($date[1], '0') - 1, // Remove leading zeros from month
+                'day' => ltrim($date[2], '0') // Remove leading zeros from day
+            ];
+            $dailySalesData[] = [
+                'date' => implode(', ', $formattedDate),
+                'total' => round($sale->total)
+            ];
+        }
+        // dd($dailySalesData);
+
+        return view('dashboard', compact('totalOrders', 'totalProduct', 'totalUser', 'pendingOrders', 'confirmedOrders', 'products', 'dailySalesData'), ['orderData' => $results]);
     }
     public  function getGraphData()
     {
