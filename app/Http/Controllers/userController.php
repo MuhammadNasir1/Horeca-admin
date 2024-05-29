@@ -9,6 +9,8 @@ use Illuminate\Validation\ValidationException;
 use  Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OtpMail;
+use App\Models\orders;
+use App\Models\product;
 use App\Models\students;
 use App\Models\teacher;
 use App\Models\teacher_rec;
@@ -105,6 +107,26 @@ class userController extends Controller
         try {
             $customers =  User::all();
             return response()->json(['success' => true,  'message' => "Customer get successfully ", 'customers' => $customers]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false,  'message' => $e->getMessage()]);
+        }
+    }
+
+    public  function getGraphData()
+    {
+        try {
+            $totalOrders = orders::count();
+            $pendingOrders = orders::where('order_status', 'pending')->count();
+            $confirmedOrders = orders::where('order_status', 'confirmed')->count();
+            $shippedOrders = orders::where('order_status', 'shipped')->count();
+            $cancelOrders = orders::where('order_status', 'cancel')->count();
+            return response()->json(['success' => true,  'message' => "Data get successfully ", 'OrderData' => [
+                'totalOrders' => $totalOrders,
+                'pendingOrders' => $pendingOrders,
+                'confirmedOrders' => $confirmedOrders,
+                'shippedOrders' => $shippedOrders,
+                'cancelOrders' => $cancelOrders
+            ]]);
         } catch (\Exception $e) {
             return response()->json(['success' => false,  'message' => $e->getMessage()]);
         }
