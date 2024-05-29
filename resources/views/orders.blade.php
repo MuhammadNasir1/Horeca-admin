@@ -34,7 +34,26 @@
                                 <td>{{ $data->customer_phone }}</td>
                                 <td>{{ $data->grand_total }}&euro;</td>
                                 <td>
-                                    <button class="px-4 py-2 rounded-md bg-red-600 text-white font-bold">
+                                    @php
+                                        $bgColorClass = '';
+                                        switch ($data->order_status) {
+                                            case 'pending':
+                                                $bgColorClass = 'bg-red-500';
+                                                break;
+                                            case 'shipped':
+                                                $bgColorClass = 'bg-blue-800';
+                                                break;
+
+                                            case 'confirmed':
+                                                $bgColorClass = 'bg-green-500';
+                                                break;
+
+                                            default:
+                                                $bgColorClass = 'bg-red-600';
+                                                break;
+                                        }
+                                    @endphp
+                                    <button class="px-4 py-2 rounded-md   {{ $bgColorClass }} text-white font-bold">
                                         {{ $data->order_status }}</button>
                                 </td>
                                 <td>
@@ -115,7 +134,7 @@
                             <option selected disabled>@lang('lang.Select_Order_Status')</option>
                             <option value="pending">@lang('lang.Pending')</option>
                             <option value="confirmed">@lang('lang.Confirmed')</option>
-                            <option value="Shipped">@lang('lang.Shipped')</option>
+                            <option value="shipped">@lang('lang.Shipped')</option>
                         </select>
 
                     </div>

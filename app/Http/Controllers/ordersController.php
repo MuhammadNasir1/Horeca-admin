@@ -49,7 +49,7 @@ class ordersController extends Controller
                 'order_traking' => $request['order_traking'],
                 'order_note' => $request['order_note'],
                 'payment_type' => $request['payment_type'],
-                'order_status' => $request['order_status'],
+                'order_status' => "pending",
                 'delivery_charges' => $validatedData['delivery_charges'],
                 'order_from' => $validatedData['order_from'],
 
