@@ -154,9 +154,13 @@ class userController extends Controller
             $confirmedOrders = orders::where('order_status', 'confirmed')->count();
             $shippedOrders = orders::where('order_status', 'shipped')->count();
             $cancelOrders = orders::where('order_status', 'cancel')->count();
-            $totalSale = 2000;
+            $grandTotals = orders::all()->pluck('grand_total');
+
+            // Sum the grand total values
+            $totalSale = $grandTotals->sum();
+            $roundedTotalSale = round($totalSale);
             $OrderData   = [
-                $totalSale,
+                $roundedTotalSale,
                 $totalOrders,
                 $confirmedOrders,
                 $shippedOrders,
