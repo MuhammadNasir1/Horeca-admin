@@ -19,6 +19,7 @@ use App\Models\training;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class userController extends Controller
 {
@@ -119,6 +120,7 @@ class userController extends Controller
     {
         $totalOrders = orders::count();
         $totalProduct = product::count();
+        $totalUser = User::count();
         $pendingOrders = orders::where('order_status', 'pending')->count();
         $confirmedOrders = orders::where('order_status', 'confirmed')->count();
         $topProducts = order_items::select('product_id', DB::raw('count(*) as total'))
@@ -126,16 +128,32 @@ class userController extends Controller
             ->orderBy('total', 'desc')
             ->take(5)
             ->get();
-
-        // Extract the product IDs from the topProducts collection
         $productIds = $topProducts->pluck('product_id');
-
-        // Retrieve the products with the top product IDs
         $products = Product::whereIn('id', $productIds)->get();
 
-        // dd();
-        $totalUser = User::count();
-        return view('dashboard', compact('totalOrders', 'totalProduct', 'totalUser', 'pendingOrders', 'confirmedOrders', 'products'));
+        // get previous  month orders
+        // Get the current date
+        $currentDate = Carbon::now();
+
+        // Get the date 4 months ago
+        $fourMonthsAgo = $currentDate->copy()->subMonths(4)->startOfMonth();
+
+        // Get orders from the start of the month 4 months ago to the end of the current month
+        $orders = orders::whereBetween('created_at', [$fourMonthsAgo, $currentDate->endOfMonth()])
+            ->selectRaw('DATE_FORMAT(created_at, "%Y-%m") as month, COUNT(*) as order_count')
+            ->groupBy('month')
+            ->orderBy('month', 'desc')
+            ->get();
+
+        // Prepare the results to include month names
+        $results = $orders->map(function ($order) {
+            return [
+                'month' => Carbon::createFromFormat('Y-m', $order->month)->format('F Y'),
+                'order_count' => $order->order_count,
+            ];
+        });
+
+        return view('dashboard', compact('totalOrders', 'totalProduct', 'totalUser', 'pendingOrders', 'confirmedOrders', 'products'), ['orderData' => $results]);
     }
     public  function getGraphData()
     {
@@ -145,15 +163,17 @@ class userController extends Controller
             $confirmedOrders = orders::where('order_status', 'confirmed')->count();
             $shippedOrders = orders::where('order_status', 'shipped')->count();
             $cancelOrders = orders::where('order_status', 'cancel')->count();
+            $totalSale = 2000;
             $OrderData   = [
-                'totalOrders' => $totalOrders,
-                'pendingOrders' => $pendingOrders,
-                'confirmedOrders' => $confirmedOrders,
-                'shippedOrders' => $shippedOrders,
-                'cancelOrders' => $cancelOrders
+                $totalSale,
+                $totalOrders,
+                $confirmedOrders,
+                $shippedOrders,
+                $pendingOrders,
+                $cancelOrders
             ];
 
-            return response()->json(['success' => true,  'message' => "Data get successfully ", 'OrderData' => [$OrderData]]);
+            return response()->json(['success' => true,  'message' => "Data get successfully ", 'OrderData' => $OrderData]);
         } catch (\Exception $e) {
             return response()->json(['success' => false,  'message' => $e->getMessage()]);
         }

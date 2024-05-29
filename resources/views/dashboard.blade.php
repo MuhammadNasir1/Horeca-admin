@@ -1,6 +1,11 @@
 @include('layouts.header')
 @include('layouts.nav')
-
+@foreach ($orderData as $data)
+    <tr>
+        <td>{{ $data['month'] }}</td>
+        <td>{{ $data['order_count'] }}</td>
+    </tr>
+@endforeach
 <div class="mx-4 mt-12">
     <div>
         <h1 class=" font-semibold   text-2xl ">@lang('lang.Dashboard')</h1>
