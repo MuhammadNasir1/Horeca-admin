@@ -9,6 +9,7 @@ use Illuminate\Validation\ValidationException;
 use  Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OtpMail;
+use App\Models\order_items;
 use App\Models\orders;
 use App\Models\product;
 use App\Models\students;
@@ -17,6 +18,7 @@ use App\Models\teacher_rec;
 use App\Models\training;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class userController extends Controller
 {
@@ -105,7 +107,7 @@ class userController extends Controller
     {
 
         try {
-            $customers =  User::all();
+            $customers =  User::where('role', "customer");
             return response()->json(['success' => true,  'message' => "Customer get successfully ", 'customers' => $customers]);
         } catch (\Exception $e) {
             return response()->json(['success' => false,  'message' => $e->getMessage()]);
@@ -119,8 +121,21 @@ class userController extends Controller
         $totalProduct = product::count();
         $pendingOrders = orders::where('order_status', 'pending')->count();
         $confirmedOrders = orders::where('order_status', 'confirmed')->count();
+        $topProducts = order_items::select('product_id', DB::raw('count(*) as total'))
+            ->groupBy('product_id')
+            ->orderBy('total', 'desc')
+            ->take(5)
+            ->get();
+
+        // Extract the product IDs from the topProducts collection
+        $productIds = $topProducts->pluck('product_id');
+
+        // Retrieve the products with the top product IDs
+        $products = Product::whereIn('id', $productIds)->get();
+
+        // dd();
         $totalUser = User::count();
-        return view('dashboard', compact('totalOrders', 'totalProduct', 'totalUser', 'pendingOrders', 'confirmedOrders'));
+        return view('dashboard', compact('totalOrders', 'totalProduct', 'totalUser', 'pendingOrders', 'confirmedOrders', 'products'));
     }
     public  function getGraphData()
     {

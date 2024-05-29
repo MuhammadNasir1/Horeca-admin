@@ -106,28 +106,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="bg-white ">
-                                    <td class="px-6 py-3 ">
-                                        11
-                                    </td>
-                                    <td class="px-6 py-3 flex  justify-center">
-                                        <img src="{{ asset('images/favicon(32X32).png') }}" alt="Product">
-                                    </td>
-                                    <td class="px-6 py-3">
-                                        7th Class
-                                    </td>
-                                    <td class="px-6 py-3">
-                                        <div class="flex items-center justify-center flex-col">
-                                            <div>
-                                                <p class="text-dblue flex">95.06%</p>
-                                                <div class="bg-green-100 rounded-xl w-36 h-3 relative  mt-1">
-                                                    <div class="bg-dblue w-[70%] rounded-xl h-full"></div>
+                                @foreach ($products as $i => $product)
+                                    <tr class="bg-white ">
+                                        <td class="px-6 py-3 ">
+                                            {{ $product->id }}
+                                        </td>
+                                        <td class="px-6 py-3 flex  justify-center">
+                                            <img src="{{ isset($product->image) ? asset($product->image) : asset('images/favicon(32X32).png') }}"
+                                                alt="Product">
+                                        </td>
+                                        <td class="px-6 py-3">
+                                            {{ $product->name }}
+                                        </td>
+                                        <td class="px-6 py-3">
+                                            <div class="flex items-center justify-center flex-col">
+                                                <div>
+                                                    <p class="text-dblue flex">{{ $i + 1 }}</p>
+
                                                 </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -320,12 +320,12 @@
                 dataPoints: [{
                         y: {{ $confirmedOrders }},
                         color: "#edbd58",
-                        label: "Students"
+                        label: "Pending Orders"
                     },
                     {
                         y: {{ $totalOrders }},
                         color: "#027C56",
-                        label: "Teachers"
+                        label: "Complete Orders"
                     },
 
                 ]
