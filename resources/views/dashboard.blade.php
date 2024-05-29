@@ -1,11 +1,6 @@
 @include('layouts.header')
 @include('layouts.nav')
-@foreach ($orderData as $data)
-    <tr>
-        <td>{{ $data['month'] }}</td>
-        <td>{{ $data['order_count'] }}</td>
-    </tr>
-@endforeach
+
 <div class="mx-4 mt-12">
     <div>
         <h1 class=" font-semibold   text-2xl ">@lang('lang.Dashboard')</h1>
@@ -290,23 +285,14 @@
             data: [{
                 type: "column",
                 yValueFormatString: "#,##0.0#\"\"",
-                dataPoints: [{
-                        label: "Jan",
+                dataPoints: [
+                    @foreach ($orderData as $data)
+                        {
+                            label: "{{ $data['month'] }}",
 
-                        y: 78
-                    },
-                    {
-                        label: "Feb",
-                        y: 55
-                    },
-                    {
-                        label: "Mar",
-                        y: 80
-                    },
-                    {
-                        label: "Apr",
-                        y: 60
-                    },
+                            y: {{ $data['order_count'] }}
+                        },
+                    @endforeach
 
 
                 ]

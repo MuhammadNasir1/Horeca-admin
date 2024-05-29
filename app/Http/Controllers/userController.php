@@ -2,22 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\parents;
 use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
 use  Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\OtpMail;
 use App\Models\order_items;
 use App\Models\orders;
 use App\Models\product;
-use App\Models\students;
-use App\Models\teacher;
-use App\Models\teacher_rec;
-use App\Models\training;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
@@ -148,7 +139,7 @@ class userController extends Controller
         // Prepare the results to include month names
         $results = $orders->map(function ($order) {
             return [
-                'month' => Carbon::createFromFormat('Y-m', $order->month)->format('F Y'),
+                'month' => Carbon::createFromFormat('Y-m', $order->month)->format('F'),
                 'order_count' => $order->order_count,
             ];
         });
