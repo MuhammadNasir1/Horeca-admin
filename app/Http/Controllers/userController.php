@@ -99,7 +99,7 @@ class userController extends Controller
     {
 
         try {
-            $customers =  User::where('role', "customer");
+            $customers =  User::where('role', "customer")->get();
             return response()->json(['success' => true,  'message' => "Customer get successfully ", 'customers' => $customers]);
         } catch (\Exception $e) {
             return response()->json(['success' => false,  'message' => $e->getMessage()]);
