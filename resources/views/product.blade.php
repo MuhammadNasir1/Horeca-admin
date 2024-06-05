@@ -137,7 +137,7 @@
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="product_tags" id="tags" placeholder=" @lang('lang.Tags_Here')">
                     </div>
-                    <div class="grid grid-cols-2  gap-4  mt-4">
+                    <div class="grid grid-cols-3  gap-4  mt-4">
                         <div>
                             <label class="text-[14px] font-normal" for="Price">@lang('lang.Price')</label>
                             <input type="text"
@@ -150,6 +150,12 @@
                             <input type="text"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] tax-input"
                                 name="tax" id="tax" placeholder="%  @lang('lang.Here')  ">
+                        </div>
+                        <div>
+                            <label class="text-[14px] font-normal" for="TotalPrice">@lang('lang.Total_Price')</label>
+                            <input type="number"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] tax-input"
+                                name="total_price" id="TotalPrice" readonly>
                         </div>
                     </div>
                     <div class="grid grid-cols-2  gap-4  mt-4">
@@ -346,19 +352,25 @@
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="product_tags" id="tags" placeholder=" @lang('lang.Tags_Here')">
                     </div>
-                    <div class="grid grid-cols-2  gap-4  mt-4">
+                    <div class="grid grid-cols-3  gap-4  mt-4">
                         <div>
                             <label class="text-[14px] font-normal" for="Price">@lang('lang.Price')</label>
                             <input type="text"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="rate" id="Price" placeholder=" @lang('lang.Price_Here')">
+                                name="rate" id="WOPrice" placeholder=" @lang('lang.Price_Here')">
                         </div>
                         <div>
-                            <label class="text-[14px] font-normal" for="tax">@lang('lang.Tax')%</label>
+                            <label class="text-[14px] font-normal" for="TaxPrice">@lang('lang.Tax')%</label>
 
                             <input type="number"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] tax-input"
-                                name="tax" id="tax" placeholder="%  @lang('lang.Here')  ">
+                                name="tax" id="TaxPrice" placeholder="%  @lang('lang.Here')  ">
+                        </div>
+                        <div>
+                            <label class="text-[14px] font-normal" for="tax">@lang('lang.Total_Price')</label>
+                            <input type="number"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] tax-input"
+                                name="total_price" id="TotalWTax" readonly>
                         </div>
                     </div>
                     <div class="grid grid-cols-2  gap-4  mt-4">
@@ -513,6 +525,24 @@
 @include('layouts.footer')
 <script>
     $(document).ready(function() {
+        function calculateTotal() {
+            var price = parseFloat($('#WOPrice').val()) || 0;
+            var tax = parseFloat($('#TaxPrice').val()) || 0;
+            var totalPrice = price + (price * (tax / 100));
+            $('#TotalWTax').val(totalPrice.toFixed(2));
+        }
+
+        $('#WOPrice, #TaxPrice').on('input', calculateTotal);
+
+        function calculateTotal2() {
+            var price = parseFloat($('#Price').val()) || 0;
+            var tax = parseFloat($('#tax').val()) || 0;
+            var totalPrice = price + (price * (tax / 100));
+            $('#TotalPrice').val(totalPrice.toFixed(2));
+        }
+        $('#Price').trigger('tax');
+        $('#Price, #tax').on('input', calculateTotal2);
+
         $('.category').change(function() {
             var selectedOption = $(this).find(':selected');
             var tax = selectedOption.attr('category-tax');
