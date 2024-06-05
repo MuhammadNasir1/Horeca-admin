@@ -94,15 +94,51 @@ class productController extends Controller
         }
     }
 
-    public function  importExcelData(Request $request)
+    // public function  importExcelData(Request $request)
+    // {
+    //     $validateData =  $request->validate([
+    //         'excel_file' => 'required|mimes:xlsx,xls',
+    //     ]);
+
+    //     $file = $request->file('excel_file');
+    //     $data = Excel::toArray([], $file);
+    //     foreach ($data[0] as $row) {
+    //         product::create([
+    //             'name' => $row[0],
+    //             'code' => $row[1],
+    //             'category' => $row[2],
+    //             'sub_category' => $row[3],
+    //             'tags' => $row[4],
+    //             'rate' => $row[5],
+    //             'tax' => $row[6],
+    //             'quantity' => $row[7],
+    //             'quantity_alert' => $row[8],
+    //             'status' => $row[9],
+    //             'image' => null,
+    //             'description' => $row[10],
+    //             // Add more columns as needed
+    //         ]);
+    //     }
+
+    //     return redirect()->back();
+    // }
+
+    public function importExcelData(Request $request)
     {
-        $validateData =  $request->validate([
+        // Validate the uploaded file
+        $validateData = $request->validate([
             'excel_file' => 'required|mimes:xlsx,xls',
         ]);
 
+        // Get the uploaded file
         $file = $request->file('excel_file');
+
+        // Convert the Excel data to an array
         $data = Excel::toArray([], $file);
-        foreach ($data[0] as $row) {
+
+        // Start the loop from the second row to skip the header
+        foreach (array_slice($data[0], 1) as $row) {
+            // Create a new product record
             product::create([
                 'name' => $row[0],
                 'code' => $row[1],
@@ -120,8 +156,10 @@ class productController extends Controller
             ]);
         }
 
+        // Redirect back to the previous page
         return redirect()->back();
     }
+
 
 
     public function ProductUpdataData($product_id)

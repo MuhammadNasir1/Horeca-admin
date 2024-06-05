@@ -178,7 +178,8 @@
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="status" id="Status">
                             <option value="active">@lang('lang.Active')</option>
-                            <option value="not active">@lang('lang.Not_Active')</option>
+                            <option value="un-active">@lang('lang.Not_Active')</option>
+                            <option value="un-active">@lang('lang.Not_Active')</option>
                         </select>
 
                     </div>
@@ -393,7 +394,7 @@
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="status" id="Status">
                             <option value="active">@lang('lang.Active')</option>
-                            <option value="not active">@lang('lang.Not_Active')</option>
+                            <option value="un-active">@lang('lang.Not_Active')</option>
                         </select>
 
                     </div>
