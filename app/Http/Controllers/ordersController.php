@@ -38,7 +38,7 @@ class ordersController extends Controller
                 'user_id' =>  $userId,
                 'order_date' => $validatedData['order_date'],
                 'customer_name' => $validatedData['customer_name'],
-                'customer_id' => 0,
+                // 'customer_id' => 0,
                 'customer_phone' => $validatedData['customer_phone'],
                 'customer_adress' => $validatedData['customer_adress'],
                 'sub_total' => $validatedData['sub_total'],
