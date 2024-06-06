@@ -27,6 +27,7 @@ class productController extends Controller
                 'status' => 'required',
                 'product_image' => 'nullable|image',
                 'description' => 'nullable',
+                'food_type' => 'required',
             ]);
 
 
@@ -42,6 +43,8 @@ class productController extends Controller
                 'quantity_alert' => $validateData['quantity_alert'],
                 'status' => $validateData['status'],
                 'description' => $validateData['description'],
+                'food_type' => $validateData['food_type'],
+
 
             ]);
             if ($request->hasFile('product_image')) {
@@ -152,6 +155,7 @@ class productController extends Controller
                 'status' => $row[9],
                 'image' => null,
                 'description' => $row[10],
+                'food_type' => $row[11],
                 // Add more columns as needed
             ]);
         }
@@ -304,6 +308,9 @@ class productController extends Controller
 
                 $category = $request->input('category');
                 $products = Product::where('category', $category)->orWhere('sub_category', $category)->where('status', 'active')->get();
+            } elseif ($request->has('type')) {
+                $type = $request->input('type');
+                $products = Product::where('food_type', $type)->get();
             } else {
                 $products = Product::where('status', 'active')->get();
             }

@@ -195,6 +195,16 @@
                             class="w-full h-24  border-[#DEE2E6] rounded-[4px] focus:border-primary text-[14px] "
                             placeholder="@lang('lang.Start_writing_here')"></textarea>
                     </div>
+                    <div class="mt-1 col-span-3 flex gap-4">
+                        <div>
+                            <label for="halal">Halal</label>
+                            <input type="radio" value="halal" name="food_type" class="text-primary" checked>
+                        </div>
+                        <div>
+                            <label for="Haram">Haram</label>
+                            <input type="radio" value="haram" name="food_type" class="text-primary">
+                        </div>
+                    </div>
                 </div>
 
                 <div class="flex justify-end ">
@@ -410,6 +420,18 @@
                             class="w-full h-24  border-[#DEE2E6] rounded-[4px] focus:border-primary text-[14px] "
                             placeholder="@lang('lang.Start_writing_here')"></textarea>
                     </div>
+
+                    <div class="mt-1 col-span-3 flex gap-4">
+                        <div>
+                            <label for="halal">Halal</label>
+                            <input type="radio" value="halal" name="food_type" class="text-primary" checked>
+                        </div>
+                        <div>
+                            <label for="Haram">Haram</label>
+                            <input type="radio" value="haram" name="food_type" class="text-primary">
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="flex justify-end ">

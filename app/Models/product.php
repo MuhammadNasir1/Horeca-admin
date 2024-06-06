@@ -23,6 +23,7 @@ class product extends Model
         'quantity_alert',
         'status',
         'image',
-        'description'
+        'description',
+        'food_type'
     ];
 }
