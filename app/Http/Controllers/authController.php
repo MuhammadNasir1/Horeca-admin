@@ -222,6 +222,24 @@ class authController extends Controller
                 $user->user_image = 'storage/user_images/' . $imageName;
             }
 
+            if ($request->has('old_password')) {
+                $oldPassword = $request['old_password'];
+                $userOldPass = $user->password;
+
+                if (Hash::check($oldPassword, $userOldPass)) {
+                    if ($request['new_password'] == $request['confirm_password']) {
+                        $user->password = Hash::make($request['new_password']);
+                        $user->save();
+                    } else {
+                        return response()->json(['success' => false, 'message' => 'New password and confirm password do not match'], 401);
+                    }
+                    return response()->json(['success' => true, 'message' => 'Profile Updated!']);
+                } else {
+                    return response()->json(['success' => false, 'message' => 'Old password not matched'], 401);
+                }
+            }
+
+
             session(['user_image' => [
                 'user_image' => $user['user_image'],
 
