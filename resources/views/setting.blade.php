@@ -8,7 +8,7 @@
 
     <div id="reloadDiv" class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
         {{-- <form id="setting_data" method="post"> --}}
-            <form action="../updateSettings" method="post" enctype="multipart/form-data">
+        <form action="../updateSettings" method="post" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="user_id" value="{{ session('user_det')['user_id'] }}" autocomplete="off">
             <div class="p-8">
@@ -59,10 +59,36 @@
                             for="city">@lang('lang.Address')</label>
                         <input type="text"
                             class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                            name="address" id="address" placeholder="@lang('lang.Enter_Address')" value="{{ $user['address'] }}">
+                            name="address" id="address" placeholder="@lang('lang.Enter_Address')"
+                            value="{{ $user['address'] }}">
                     </div>
                 </div>
 
+                <div class="md:flex gap-[30px] mt-3">
+                    <div class=" w-full mt-4">
+                        <label class="text-[16px] font-semibold block  text-[#452C88]"
+                            for="old_password">@lang('lang.Old_password')</label>
+                        <input type="text"
+                            class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
+                            name="old_password" id="old_password" placeholder="@lang('lang.Enter_Old_Password')" value="">
+                    </div>
+
+                    <div class="  w-full mt-4">
+                        <label class="text-[16px] font-semibold block  text-[#452C88]"
+                            for="new_password">@lang('lang.New_Password')</label>
+                        <input type="number"
+                            class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
+                            name="new_password" id="new_password" placeholder="@lang('lang.Enter_New_Password')" value="">
+                    </div>
+                    <div class="  w-full mt-4">
+                        <label class="text-[16px] font-semibold block  text-[#452C88]"
+                            for="confirm_password">@lang('lang.Confirm_Password')</label>
+                        <input type="number"
+                            class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
+                            name="confirm_password" id="confirm_password" placeholder="@lang('lang.Enter_Confirm_Password')"
+                            value="">
+                    </div>
+                </div>
                 <div class="mt-10  flex justify-end">
                     <button class="bg-secondary  text-white h-12 px-3 rounded-[6px]  shadow-sm font-semibold "
                         id="addBtn">

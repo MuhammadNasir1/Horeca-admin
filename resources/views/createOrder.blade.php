@@ -1,9 +1,7 @@
 @include('layouts.header')
 @include('layouts.nav')
 <div class="md:mx-4 mt-12">
-    <div>
-        <h1 class=" font-semibold   text-2xl ">@lang('lang.create_order')</h1>
-    </div>
+
 
     <form action="addOrder" method="post" enctype="multipart/form-data" class="pb-5">
         @csrf
@@ -99,7 +97,7 @@
                         <div class="mt-6 flex">
                             <button id="addProductBtn" type="button"
                                 class="bg-primary toggle-button h-[40px] rounded-[4px]  px-3 font-bold text-white text-sm flex justify-center items-center">
-                                <span class="text-2xl pr-2">+</span> @lang('lang.Add_Product')</button>
+                                <span class="text-2xl">+</span></button>
 
                         </div>
                     </div>

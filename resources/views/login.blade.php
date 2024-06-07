@@ -10,6 +10,13 @@
     <link rel="shortcut icon" href="{{ asset('images/favicon(32X32).png') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        body {
+            background: linear-gradient(rgba(0, 128, 0, 0.538), rgba(0, 128, 0, 0.538)), url("{{ asset('images/login-bg2.jpg') }}");
+            background-position: center;
+            background-size: cover;
+        }
+    </style>
 </head>
 
 <body class="bg-white">

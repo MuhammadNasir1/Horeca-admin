@@ -1,9 +1,7 @@
 @include('layouts.header')
 @include('layouts.nav')
 <div class="md:mx-4 mt-12">
-    <div>
-        <h1 class=" font-semibold   text-2xl ">@lang('lang.All_Orders')</h1>
-    </div>
+
 
     <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
         <div>

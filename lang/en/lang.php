@@ -163,7 +163,13 @@ return [
     "View_all" => "View All",
     "Total_Sale" => "Total Sale",
     "Select_Interval" => "Select Interval",
-    "Enter_Address" => "Enter Address",
+    "Old_Password" => "Enter Address",
+    "Old_password" => "Old Password",
+    "New_Password" => "New Password",
+    "Confirm_Password" => "Confirm Password",
+    "Enter_Old_Password" => "Enter Old Password",
+    "Enter_New_Password" => "Enter New Password",
+    "Enter_Confirm_Password" => "Enter Confirm Password",
 
 
     "Alert_on_Quantity" => "Alert on Quantity",

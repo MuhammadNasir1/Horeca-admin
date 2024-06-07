@@ -1,9 +1,7 @@
 @include('layouts.header')
 @include('layouts.nav')
 <div class="mx-4 mt-12">
-    <div>
-        <h1 class=" font-semibold   text-2xl ">@lang('lang.All_Categories')</h1>
-    </div>
+
     <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
         <div>
             <div class="flex justify-end sm:justify-between px-[20px] mb-3">

@@ -1,9 +1,7 @@
 @include('layouts.header')
 @include('layouts.nav')
 <div class="mx-4 mt-12">
-    <div>
-        <h1 class=" font-semibold   text-2xl ">@lang('lang.Edit_order')</h1>
-    </div>
+
 
     <form action="../addUpdatedOrder/{{ $order->id }}" method="post" enctype="multipart/form-data" class="pb-5">
         @csrf

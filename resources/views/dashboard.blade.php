@@ -113,7 +113,7 @@
                                         </td>
                                         <td class="px-6 py-3 flex  justify-center">
                                             <img src="{{ isset($product->image) ? asset($product->image) : asset('images/favicon(32X32).png') }}"
-                                                alt="Product">
+                                                width="70px" class="rounded-md" alt="Product">
                                         </td>
                                         <td class="px-6 py-3">
                                             {{ $product->name }}
