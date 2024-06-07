@@ -32,6 +32,8 @@
                                 <td>{{ $data->customer_phone }}</td>
                                 <td>{{ $data->grand_total }}&euro;</td>
                                 <td>
+
+
                                     @php
                                         $bgColorClass = '';
                                         switch ($data->order_status) {
@@ -56,7 +58,91 @@
                                 </td>
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
-                                        <a class="w-[42px] " href="../order/{{ $data->id }}"><img width="38px"
+
+
+                                        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
+                                            class="text-white bg-green-500 font-bold rounded-lg px-5 py-2.5 text-center inline-flex items-center "
+                                            type="button">@lang('lang.Select_Action') <svg class="w-2.5 h-2.5 ms-3"
+                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                viewBox="0 0 10 6">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Dropdown menu -->
+                                        <div id="dropdown"
+                                            class="z-10 hidden absolute top-1 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                                                aria-labelledby="dropdownDefaultButton">
+                                                <li class="py-1">
+                                                    <a class="w-[42px] flex items-center gap-3"
+                                                        href="../order/{{ $data->id }}"><img width="38px"
+                                                            src="{{ asset('images/icons/edit.svg') }}"
+                                                            alt="update">@lang('lang.Edit')</a>
+                                                </li>
+                                                <li class="py-1">
+                                                    <a class="w-[42px] flex items-center gap-3"
+                                                        href="../delOrder/{{ $data->id }}"> <img width="38px"
+                                                            src="{{ asset('images/icons/delete-green.svg') }}"
+                                                            alt="update">@lang('lang.Delete')</a>
+                                                </li>
+                                                <li class="py-1">
+                                                    <a href="../invoice/{{ $data->id }}"
+                                                        class="flex items-center gap-3">
+                                                        <div class="bg-primary w-9 rounded-full p-1.5 text-white">
+                                                            <svg class="w-6 h-6 text-gray-800 dark:text-white"
+                                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                                width="24" height="24" fill="currentColor"
+                                                                viewBox="0 0 24 24">
+                                                                <path fill-rule="evenodd"
+                                                                    d="M8 3a2 2 0 0 0-2 2v3h12V5a2 2 0 0 0-2-2H8Zm-3 7a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h1v-4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v4h1a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2H5Zm4 11a1 1 0 0 1-1-1v-4h8v4a1 1 0 0 1-1 1H9Z"
+                                                                    clip-rule="evenodd" />
+                                                            </svg>
+                                                        </div>
+                                                        @lang('lang.Invoice')
+                                                    </a>
+                                                </li>
+                                                <li class="py-1">
+                                                    <a href="../gatepass/{{ $data->id }}"
+                                                        class="flex items-center gap-3">
+                                                        <div
+                                                            class="bg-primary w-9 text-white p-1.5 rounded-full flex items-center gap-3">
+                                                            <svg class="w-6 h-6 text-gray-800 dark:text-white"
+                                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                                width="24" height="24" fill="currentColor"
+                                                                viewBox="0 0 24 24">
+                                                                <path fill-rule="evenodd"
+                                                                    d="M11.403 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6.403a3.01 3.01 0 0 1-1.743-1.612l-3.025 3.025A3 3 0 1 1 9.99 9.768l3.025-3.025A3.01 3.01 0 0 1 11.403 5Z"
+                                                                    clip-rule="evenodd" />
+                                                                <path fill-rule="evenodd"
+                                                                    d="M13.232 4a1 1 0 0 1 1-1H20a1 1 0 0 1 1 1v5.768a1 1 0 1 1-2 0V6.414l-6.182 6.182a1 1 0 0 1-1.414-1.414L17.586 5h-3.354a1 1 0 0 1-1-1Z"
+                                                                    clip-rule="evenodd" />
+                                                            </svg>
+                                                        </div>
+                                                        @lang('lang.Gate_Pass')
+                                                    </a>
+                                                </li>
+                                                <li class="py-1 text-black">
+                                                    <div class="flex items-center gap-3">
+                                                        <div
+                                                            class="bg-primary w-9 text-white p-1.5 rounded-full flex items-center gap-3">
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                viewBox="0 0 512 512" fill="white">
+                                                                <path
+                                                                    d="M105.1 202.6c7.7-21.8 20.2-42.3 37.8-59.8c62.5-62.5 163.8-62.5 226.3 0L386.3 160H352c-17.7 0-32 14.3-32 32s14.3 32 32 32H463.5c0 0 0 0 0 0h.4c17.7 0 32-14.3 32-32V80c0-17.7-14.3-32-32-32s-32 14.3-32 32v35.2L414.4 97.6c-87.5-87.5-229.3-87.5-316.8 0C73.2 122 55.6 150.7 44.8 181.4c-5.9 16.7 2.9 34.9 19.5 40.8s34.9-2.9 40.8-19.5zM39 289.3c-5 1.5-9.8 4.2-13.7 8.2c-4 4-6.7 8.8-8.1 14c-.3 1.2-.6 2.5-.8 3.8c-.3 1.7-.4 3.4-.4 5.1V432c0 17.7 14.3 32 32 32s32-14.3 32-32V396.9l17.6 17.5 0 0c87.5 87.4 229.3 87.4 316.7 0c24.4-24.4 42.1-53.1 52.9-83.7c5.9-16.7-2.9-34.9-19.5-40.8s-34.9 2.9-40.8 19.5c-7.7 21.8-20.2 42.3-37.8 59.8c-62.5 62.5-163.8 62.5-226.3 0l-.1-.1L125.6 352H160c17.7 0 32-14.3 32-32s-14.3-32-32-32H48.4c-1.6 0-3.2 .1-4.8 .3s-3.1 .5-4.6 1z" />
+                                                            </svg>
+                                                        </div>
+                                                        <button updateId="{{ $data->id }}"
+                                                            data-modal-target="changeStatus"
+                                                            data-modal-toggle="changeStatus" class="">
+                                                            @lang('lang.Change_Status') </button>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        {{-- <a class="w-[42px] " href="../order/{{ $data->id }}"><img width="38px"
                                                 src="{{ asset('images/icons/edit.svg') }}" alt="update"></a>
                                         <a class="w-[42px]" href="../delOrder/{{ $data->id }}"> <img width="38px"
                                                 src="{{ asset('images/icons/delete.svg') }}" alt="update"></a>
@@ -88,7 +174,7 @@
                                         <button updateId="{{ $data->id }}" data-modal-target="changeStatus"
                                             data-modal-toggle="changeStatus"
                                             class="px-4 py-2 rounded-md bg-orange-500 text-white font-bold updateStatusBtn">
-                                            @lang('lang.Change_Status') </button>
+                                            @lang('lang.Change_Status') </button> --}}
                                     </div>
                                 </td>
                             </tr>
@@ -118,8 +204,8 @@
                         data-modal-hide="changeStatus">
                         <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                         </svg>
                     </button>
                 </div>

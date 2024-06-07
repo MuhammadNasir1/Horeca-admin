@@ -182,6 +182,8 @@ return [
     "Confirmed" => "Confirmed",
     "Shipped" => "Shipped",
     "Change_Status" => "Change Status",
+    "Select_Action" => "Select Action",
+    "Enter_Address" => "Enter Address",
     "Select_Order_Status" => "Select Order Status",
 
 
