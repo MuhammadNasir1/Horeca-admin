@@ -11,6 +11,7 @@ use App\Models\product;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Database\Seeders\users;
 
 class userController extends Controller
 {
@@ -222,6 +223,24 @@ class userController extends Controller
             return response()->json(['success' => true,  'message' => "Data get successfully ", 'OrderData' => $OrderData]);
         } catch (\Exception $e) {
             return response()->json(['success' => false,  'message' => $e->getMessage()]);
+        }
+    }
+
+    public function changeVerifictionStatus(Request $request, $user_id)
+    {
+
+
+        try {
+            $validatedData = $request->validate([
+                'verification' => 'required|string', // Add more validation rules as needed
+            ]);
+            $user =   User::find($user_id);
+            $user->verification = $validatedData['verification'];
+            $user->save();
+
+            return response()->json(['success' => true, 'message' => "User Status successfull Update"], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
     }
 }

@@ -186,6 +186,11 @@ return [
     "Enter_Address" => "Enter Address",
     "Select_Order_Status" => "Select Order Status",
     "Verification" => "Verification",
+    "Change_Verfication" => "Change Verfication",
+    "Update_Status" => "Update Status",
+    "Select_Verfication_Status" => "Select Verfication Status",
+    "Approved" => "Approved",
+
 
 
 ];

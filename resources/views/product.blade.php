@@ -1,7 +1,9 @@
 @include('layouts.header')
 @include('layouts.nav')
 <div class="md:mx-4 mt-12">
-
+    <div>
+        <h1 class=" font-semibold   text-2xl ">@lang('lang.All_Product')</h1>
+    </div>
     <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
         <div>
             <div class="flex justify-between px-[20px] mb-3">
@@ -99,20 +101,20 @@
                         <label class="text-[14px] font-normal" for="firstName">@lang('lang.Product_Name')</label>
                         <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="name" id="Product_Name" placeholder=" @lang('lang.Name_Here')">
+                            name="name" id="Product_Name" placeholder=" @lang('lang.Name_Here')" required>
                     </div>
                     <div class=" ">
                         <label class="text-[14px] font-normal" for="productCode">@lang('lang.Product_Code')</label>
                         <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="code" id="productCode" placeholder=" @lang('lang.Code_Here')">
+                            name="code" id="productCode" placeholder=" @lang('lang.Code_Here')" required>
                     </div>
                     <div class="flex gap-2">
                         <div class="w-full">
                             <label class="text-[14px] font-normal" for="category">@lang('lang.Product_Category')</label>
                             <select
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] category"
-                                name="category" id="Ucategory">
+                                name="category" id="Ucategory" required>
                                 @foreach ($categories as $category)
                                     <option category-tax="{{ $category->tax }}" value="{{ $category->name }}">
                                         {{ $category->name }}</option>
@@ -127,7 +129,7 @@
                         <label class="text-[14px] font-normal" for="subCategory">@lang('lang.Product_Sub_Category')</label>
                         <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="sub_category" id="subCategory" placeholder=" @lang('lang.Sub_Category_Here')">
+                            name="sub_category" id="subCategory" placeholder=" @lang('lang.Sub_Category_Here')" required>
                     </div>
                     <div class="mt-4  ">
                         <label class="text-[14px] font-normal" for="tags">@lang('lang.Product_Tags')</label>
@@ -140,14 +142,15 @@
                             <label class="text-[14px] font-normal" for="Price">@lang('lang.Price')</label>
                             <input type="text"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="rate" id="Price" placeholder=" @lang('lang.Price_Here')">
+                                name="rate" id="Price" placeholder=" @lang('lang.Price_Here')" required>
                         </div>
                         <div>
                             <label class="text-[14px] font-normal" for="tax">@lang('lang.Tax')%</label>
 
                             <input type="text"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] tax-input"
-                                name="tax" id="tax" placeholder="%  @lang('lang.Here')  ">
+                                name="tax" id="tax" placeholder="%  @lang('lang.Here')  " required
+                                value="0">
                         </div>
                         <div>
                             <label class="text-[14px] font-normal" for="TotalPrice">@lang('lang.Total_Price')</label>
@@ -161,20 +164,21 @@
                             <label class="text-[14px] font-normal" for="quantity">@lang('lang.quantity')</label>
                             <input type="number"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="quantity" id="quantity" placeholder=" @lang('lang.quantity_here')">
+                                name="quantity" id="quantity" placeholder=" @lang('lang.quantity_here')" required>
                         </div>
                         <div>
                             <label class="text-[14px] font-normal" for="quantityAlert">@lang('lang.Alert_on_Quantity')</label>
                             <input type="number"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="quantity_alert" id="quantityAlert" placeholder=" @lang('lang.Alert_Here')">
+                                name="quantity_alert" id="quantityAlert" placeholder=" @lang('lang.Alert_Here')"
+                                value="0" required>
                         </div>
                     </div>
                     <div class="mt-4">
                         <label class="text-[14px] font-normal" for="Status">@lang('lang.Status')</label>
                         <select
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="status" id="Status">
+                            name="status" id="Status" required>
                             <option value="active">@lang('lang.Active')</option>
                             <option value="un-active">@lang('lang.Not_Active')</option>
                             <option value="un-active">@lang('lang.Not_Active')</option>
@@ -189,7 +193,7 @@
                     </div>
                     <div class="mt-4 col-span-3">
                         <label class="text-[14px] font-normal" for="description">@lang('lang.Product_Description')</label>
-                        <textarea name="description" id="description"
+                        <textarea required name="description" id="description"
                             class="w-full h-24  border-[#DEE2E6] rounded-[4px] focus:border-primary text-[14px] "
                             placeholder="@lang('lang.Start_writing_here')"></textarea>
                     </div>
@@ -314,20 +318,20 @@
                         <label class="text-[14px] font-normal" for="firstName">@lang('lang.Product_Name')</label>
                         <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="name" id="request" placeholder=" @lang('lang.Name_Here')">
+                            name="name" id="request" placeholder=" @lang('lang.Name_Here')" required>
                     </div>
                     <div class=" lg:mt-0 mt-4">
                         <label class="text-[14px] font-normal" for="productCode">@lang('lang.Product_Code')</label>
                         <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="code" id="productCode" placeholder=" @lang('lang.Code_Here')">
+                            name="code" id="productCode" placeholder=" @lang('lang.Code_Here')" required>
                     </div>
                     <div class="flex gap-2 lg:mt-0 mt-4">
                         <div class="w-full">
                             <label class="text-[14px] font-normal" for="category">@lang('lang.Product_Category')</label>
                             <select
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] category "
-                                name="category" id="category">
+                                name="category" id="category" required>
                                 @foreach ($categories as $category)
                                     <option category-tax="{{ $category->tax }}" value="{{ $category->name }}">
                                         {{ $category->name }}</option>
@@ -341,7 +345,7 @@
                     </div>
                     <div class="mt-4">
                         <label class="text-[14px] font-normal" for="subCategory">@lang('lang.Product_Sub_Category')</label>
-                        <input type="text"
+                        <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="sub_category" id="subCategory" placeholder=" @lang('lang.Sub_Category_Here')">
                     </div>
@@ -356,14 +360,15 @@
                             <label class="text-[14px] font-normal" for="Price">@lang('lang.Price')</label>
                             <input type="text"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="rate" id="WOPrice" placeholder=" @lang('lang.Price_Here')">
+                                name="rate" id="WOPrice" placeholder=" @lang('lang.Price_Here')" required>
                         </div>
                         <div>
                             <label class="text-[14px] font-normal" for="TaxPrice">@lang('lang.Tax')%</label>
 
                             <input type="number"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] tax-input"
-                                name="tax" id="TaxPrice" placeholder="%  @lang('lang.Here')  ">
+                                name="tax" id="TaxPrice" placeholder="%  @lang('lang.Here')  " required
+                                value="0">
                         </div>
                         <div>
                             <label class="text-[14px] font-normal" for="tax">@lang('lang.Total_Price')</label>
@@ -377,20 +382,21 @@
                             <label class="text-[14px] font-normal" for="quantity">@lang('lang.quantity')</label>
                             <input type="number"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="quantity" id="quantity" placeholder=" @lang('lang.quantity_here')">
+                                name="quantity" id="quantity" placeholder=" @lang('lang.quantity_here')" required>
                         </div>
                         <div>
                             <label class="text-[14px] font-normal" for="quantityAlert">@lang('lang.Alert_on_Quantity')</label>
                             <input type="number"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="quantity_alert" id="quantityAlert" placeholder=" @lang('lang.Alert_Here')">
+                                name="quantity_alert" id="quantityAlert" placeholder=" @lang('lang.Alert_Here')" required
+                                value="0">
                         </div>
                     </div>
                     <div class="mt-4">
                         <label class="text-[14px] font-normal" for="Status">@lang('lang.Status')</label>
                         <select
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="status" id="Status">
+                            name="status" id="Status" required>
                             <option value="active">@lang('lang.Active')</option>
                             <option value="un-active">@lang('lang.Not_Active')</option>
                         </select>
@@ -406,7 +412,7 @@
                         <label class="text-[14px] font-normal" for="description">@lang('lang.Product_Description')</label>
                         <textarea name="description" id="description"
                             class="w-full h-24  border-[#DEE2E6] rounded-[4px] focus:border-primary text-[14px] "
-                            placeholder="@lang('lang.Start_writing_here')"></textarea>
+                            placeholder="@lang('lang.Start_writing_here')" required></textarea>
                     </div>
                 </div>
 
