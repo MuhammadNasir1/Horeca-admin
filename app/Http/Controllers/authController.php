@@ -147,10 +147,13 @@ class authController extends Controller
                 'password' => "required|string|min:8",
             ]);
 
-
-            $user = User::where('email',  $request->email)->where('verification', 'approved')->first();
-            $role = $user->role;
-            $name = $user->name;
+            $user = User::where('email', $request->email)->where('verification', 'approved')->first();
+            if ($user) {
+                $role = $user->role;
+                $name = $user->name;
+            } else {
+                return response()->json(['error' => 'User not found or not approved'], 404);
+            }
             if ($user && Hash::check($request->password, $user->password)) {
 
                 $token = $user->createToken($request->email)->plainTextToken;
