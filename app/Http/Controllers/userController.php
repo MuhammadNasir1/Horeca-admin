@@ -54,6 +54,29 @@ class userController extends Controller
             return response()->json(['success' => true, 'message' => $e->getMessage()]);
         }
     }
+    public function  addAdminCustomer(Request $request)
+    {
+        try {
+            $validateData = $request->validate([
+                'name' => 'required',
+                'email' => 'required|email',
+                'phone_no' => 'required',
+                'address' => 'required',
+            ]);
+            $customer =  User::create([
+                'name' => $validateData['name'],
+                'email' => $validateData['email'],
+                'password' => Hash::make(12345678),
+                'phone' => $validateData['phone_no'],
+                'role' => "customer",
+                'address' => $validateData['address'],
+            ]);
+
+            return response()->json(['success' => true, 'message' => "Customer Add Successfully"]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => true, 'message' => $e->getMessage()]);
+        }
+    }
 
     public function delCustomer($user_id)
     {

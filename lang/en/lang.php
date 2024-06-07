@@ -185,6 +185,7 @@ return [
     "Select_Action" => "Select Action",
     "Enter_Address" => "Enter Address",
     "Select_Order_Status" => "Select Order Status",
+    "Verification" => "Verification",
 
 
 ];

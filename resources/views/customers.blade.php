@@ -22,6 +22,7 @@
                             <th class="whitespace-nowrap">@lang('lang.Email')</th>
                             <th class="whitespace-nowrap">@lang('lang.Phone_No')</th>
                             <th class="whitespace-nowrap">@lang('lang.Role')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Verification')</th>
                             <th class="flex  justify-center">@lang('lang.Action')</th>
                         </tr>
                     </thead>
@@ -33,6 +34,9 @@
                                 <td>{{ $data->email }}</td>
                                 <td>{{ $data->phone }}</td>
                                 <td>{{ $data->role }}</td>
+                                <td> <button
+                                        class="px-4 py-2 rounded-md  {{ $data->verification == 'pending' ? 'bg-red-600' : 'bg-green-700' }}  text-white font-bold">
+                                        {{ $data->verification }}<button></td>
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
 
