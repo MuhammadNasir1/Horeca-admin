@@ -257,12 +257,12 @@
                 indexLabelFontColor: "transparent",
                 indexLabelPlacement: "inside",
                 dataPoints: [{
-                        y: {{ $confirmedOrders }},
+                        y: {{ $pendingOrders }},
                         color: "#edbd58",
                         label: "Pending Orders"
                     },
                     {
-                        y: {{ $totalOrders }},
+                        y: {{ $confirmedOrders }},
                         color: "#027C56",
                         label: "Complete Orders"
                     },
