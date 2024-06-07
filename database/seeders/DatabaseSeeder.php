@@ -26,12 +26,14 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => Hash::make('12345678'),
             'role' => 'admin',
+            'verification' => 'approved',
         ]);
         DB::table('users')->insert([
             'name' => 'Distributor',
             'email' => 'distributor@gmail.com',
             'password' => Hash::make('12345678'),
             'role' => 'distributor',
+            'verification' => 'approved',
         ]);
     }
 }

@@ -51,7 +51,7 @@ class authController extends Controller
                     } else {
                         return response()->json(['success' => false, 'message' => 'New password and confirm password do not match'], 401);
                     }
-                    return response()->json(['success' => true, 'message' => 'Profile Updated!']);
+                    return response()->json(['success' => true, 'message' => 'password Updated!']);
                 } else {
                     return response()->json(['success' => false, 'message' => 'Old password not matched'], 401);
                 }
@@ -148,7 +148,7 @@ class authController extends Controller
             ]);
 
 
-            $user = User::where('email',  $request->email)->first();
+            $user = User::where('email',  $request->email)->where('verification', 'approved')->first();
             $role = $user->role;
             $name = $user->name;
             if ($user && Hash::check($request->password, $user->password)) {

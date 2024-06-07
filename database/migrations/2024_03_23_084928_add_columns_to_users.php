@@ -15,7 +15,7 @@ return new class extends Migration
             $table->text('phone')->nullable();
             $table->text('address')->nullable();
             $table->text('user_image')->nullable();
-            $table->text('v')->nullable();
+            $table->string('verification')->default("pending");
         });
     }
 
