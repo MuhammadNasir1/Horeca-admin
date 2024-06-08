@@ -333,7 +333,7 @@ class ordersController extends Controller
                     $productId = $orderItem->product_id;
                     $product = product::find($productId); // Find the product by its ID
                     $itemData = $orderItem->toArray();
-                    $itemData['product'] = $product; // Add product data to each order item
+                    $itemData['product'][] = $product; // Add product data to each order item
                     $orderData['order_items'][] = $itemData; // Add order item with product data to order
                 }
 
@@ -370,7 +370,7 @@ class ordersController extends Controller
                     $product = product::find($productId); // Find the product by its ID
 
                     $itemData = $orderItem->toArray();
-                    $itemData['product'] = $product; // Add product data to each order item
+                    $itemData['product'][] = $product; // Add product data to each order item
                     $orderData['order_items'][] = $itemData; // Add order item with product data to order
                 }
 
