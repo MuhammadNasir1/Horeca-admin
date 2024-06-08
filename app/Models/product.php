@@ -21,6 +21,7 @@ class product extends Model
         'tax',
         'quantity',
         'quantity_alert',
+        'product_unit',
         'status',
         'image',
         'description'

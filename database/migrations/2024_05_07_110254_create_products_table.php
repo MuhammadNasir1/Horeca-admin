@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('status');
             $table->string('image')->nullable();
             $table->text('description')->nullable();
+            $table->string('product_unit');
             $table->timestamps();
         });
     }

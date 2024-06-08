@@ -190,6 +190,8 @@ return [
     "Update_Status" => "Update Status",
     "Select_Verfication_Status" => "Select Verfication Status",
     "Approved" => "Approved",
+    "Unit" => "Unit",
+    "Unit_Here" => "Unit Here",
 
 
 

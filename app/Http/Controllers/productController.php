@@ -27,6 +27,7 @@ class productController extends Controller
                 'status' => 'required',
                 'product_image' => 'nullable|image',
                 'description' => 'nullable',
+                'product_unit' => 'required',
             ]);
 
 
@@ -42,6 +43,7 @@ class productController extends Controller
                 'quantity_alert' => $validateData['quantity_alert'],
                 'status' => $validateData['status'],
                 'description' => $validateData['description'],
+                'product_unit' => $validateData['product_unit'],
 
             ]);
             if ($request->hasFile('product_image')) {
