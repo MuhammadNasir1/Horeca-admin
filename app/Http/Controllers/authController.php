@@ -253,10 +253,9 @@ class authController extends Controller
                         return response()->json(['success' => false, 'message' => 'New password and confirm password do not match'], 401);
                     }
                     return response()->json(['success' => true, 'message' => 'Profile Updated!']);
-                } else {
-                    return response()->json(['success' => false, 'message' => 'Old password not matched'], 401);
                 }
             }
+
 
 
             session(['user_image' => [
@@ -264,8 +263,8 @@ class authController extends Controller
 
             ]]);
             $user->save();
-            // return redirect('../setting');
-            return response()->json(['success' => true, 'message' => 'Profile Updated!', 'updated_data' => $user], 200);
+            return redirect('../setting');
+            // return response()->json(['success' => true, 'message' => 'Profile Updated!', 'updated_data' => $user], 200);
         } catch (\Exception $e) {
             return redirect('../setting');
             return response()->json(['success' => false, 'message' => $e->getMessage()], 400);

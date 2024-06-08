@@ -7,8 +7,8 @@
     </div>
 
     <div id="reloadDiv" class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
-        {{-- <form id="setting_data" method="post"> --}}
-        <form action="../updateSettings" method="post" enctype="multipart/form-data">
+        <form id="setting_data" method="post" enctype="multipart/form-data">
+            {{-- <form action="../updateSettings" method="post" enctype="multipart/form-data"> --}}
             @csrf
             <input type="hidden" name="user_id" value="{{ session('user_det')['user_id'] }}" autocomplete="off">
             <div class="p-8">
