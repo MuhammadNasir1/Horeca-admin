@@ -317,18 +317,30 @@ class ordersController extends Controller
     {
         try {
             $orders = orders::where('customer_id', $customer_id)->get();
-            if (!$orders) {
-                return response()->json(['success' => false, 'message' => "Order not found"], 500);
+
+            if ($orders->isEmpty()) {
+                return response()->json(['success' => false, 'message' => "Order not found"], 404);
             }
+
             $ordersWithItems = [];
             foreach ($orders as $order) {
-                // Fetch the order items for each order
+                // Fetch all order items for each order
                 $orderItems = order_items::where('order_id', $order->id)->get();
-                // Add the order items to the order
+
                 $orderData = $order->toArray();
-                $orderData['order_items'] = $orderItems;
+                $orderData['order_items'] = [];
+                foreach ($orderItems as $orderItem) {
+                    $productId = $orderItem->product_id;
+                    $product = product::find($productId); // Find the product by its ID
+                    $itemData = $orderItem->toArray();
+                    $itemData['product'] = $product; // Add product data to each order item
+                    $orderData['order_items'][] = $itemData; // Add order item with product data to order
+                }
+
                 $ordersWithItems[] = $orderData;
             }
+
+            return response()->json(['success' => true, 'orders' => $ordersWithItems], 200);
 
 
             return response()->json(['success' => true, 'message' => "Order get successfull", 'orders' => $ordersWithItems], 200);
@@ -340,16 +352,28 @@ class ordersController extends Controller
     {
         try {
             $orders = orders::where('user_id', $user_id)->get();
-            if (!$orders) {
-                return response()->json(['success' => false, 'message' => "Order not found"], 500);
+
+            if ($orders->isEmpty()) {
+                return response()->json(['success' => false, 'message' => "Order not found"], 404);
             }
+
             $ordersWithItems = [];
             foreach ($orders as $order) {
-                // Fetch the order items for each order
+                // Fetch all order items for each order
                 $orderItems = order_items::where('order_id', $order->id)->get();
-                // Add the order items to the order
+
                 $orderData = $order->toArray();
-                $orderData['order_items'] = $orderItems;
+                $orderData['order_items'] = [];
+
+                foreach ($orderItems as $orderItem) {
+                    $productId = $orderItem->product_id;
+                    $product = product::find($productId); // Find the product by its ID
+
+                    $itemData = $orderItem->toArray();
+                    $itemData['product'] = $product; // Add product data to each order item
+                    $orderData['order_items'][] = $itemData; // Add order item with product data to order
+                }
+
                 $ordersWithItems[] = $orderData;
             }
 

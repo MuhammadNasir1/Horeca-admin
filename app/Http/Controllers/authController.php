@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 class authController extends Controller
+
 {
 
     // update UserDetails
