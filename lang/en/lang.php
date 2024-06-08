@@ -158,6 +158,8 @@ return [
     "Prepared_By" => "Prepared By",
     "Recieved_By" => "Recieved By",
     "Qty" => "Qty",
+    "No" => "No",
+    "Yes" => "Yes",
     "Biled_To" => "Build To",
     "Invoice_Date" => "Invoice Date",
     "View_all" => "View All",
@@ -192,6 +194,7 @@ return [
     "Approved" => "Approved",
     "Unit" => "Unit",
     "Unit_Here" => "Unit Here",
+    "Are_You_Sure" => "Are You Sure",
 
 
 
