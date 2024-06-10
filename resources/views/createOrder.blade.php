@@ -2,7 +2,9 @@
 @include('layouts.nav')
 <div class="md:mx-4 mt-12">
 
-
+    <div>
+        <h1 class=" font-semibold   text-2xl ">@lang('lang.Create_Order')</h1>
+    </div>
     <form action="addOrder" method="post" enctype="multipart/form-data" class="pb-5">
         @csrf
         <input type="hidden" name="order_from" value="Web">

@@ -1,9 +1,7 @@
 @include('layouts.header')
 @include('layouts.nav')
 <div class="md:mx-4 mt-12">
-    <div>
-        <h1 class=" font-semibold   text-2xl ">@lang('lang.All_Product')</h1>
-    </div>
+
     <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
         <div>
             <div class="flex justify-between px-[20px] mb-3">
@@ -126,8 +124,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <button data-modal-target="addcategorymodal" data-modal-toggle="addcategorymodal"
-                            type="button"
+                        <button data-modal-target="addcategorymodal" data-modal-toggle="addcategorymodal" type="button"
                             class="bg-primary text-white  rounded-[4px] py-1.5 px-3 mt-6 mb-3 uaddBtn
                             font-semibold">+</button>
                     </div>
