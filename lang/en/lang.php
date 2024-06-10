@@ -169,6 +169,8 @@ return [
     "Old_password" => "Old Password",
     "New_Password" => "New Password",
     "Create_Order" => "Create Order",
+    "Unit_Quantity" => "Unit Quantity",
+    "Quantity_Here" => "Quantity Here",
     "Confirm_Password" => "Confirm Password",
     "Enter_Old_Password" => "Enter Old Password",
     "Enter_New_Password" => "Enter New Password",

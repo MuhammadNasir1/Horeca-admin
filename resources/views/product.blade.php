@@ -411,6 +411,15 @@
                                 name="product_unit" id="product_unit" placeholder=" @lang('lang.Unit_Here')" required>
                         </div>
                         <div>
+                            <label class="text-[14px] font-normal" for="unit_quantity">@lang('lang.Unit_Quantity')</label>
+                            <input type="text"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="unit_quantity" id="unit_quantity" placeholder=" @lang('lang.Quantity_Here')" required>
+
+                        </div>
+                    </div>
+                    <div class="mt-4 flex gap-3">
+                        <div>
                             <label class="text-[14px] font-normal" for="status">@lang('lang.Status')</label>
                             <select
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
@@ -420,12 +429,12 @@
                             </select>
 
                         </div>
-                    </div>
-                    <div class="mt-4">
-                        <label class="text-[14px] font-normal" for="image">@lang('lang.Product_Image')</label>
-                        <input type="file"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="product_image" id="image">
+                        <div>
+                            <label class="text-[14px] font-normal" for="image">@lang('lang.Product_Image')</label>
+                            <input type="file"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="product_image" id="image">
+                        </div>
                     </div>
                     <div class="mt-4 col-span-3">
                         <label class="text-[14px] font-normal" for="description">@lang('lang.Product_Description')</label>
