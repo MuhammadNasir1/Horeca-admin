@@ -48,9 +48,11 @@
                                         {{-- <a class="w-[42px]"  href="../delCustomer/{{ $data->id }}"><img
                                                 width="38px" src="{{ asset('images/icons/delete.svg') }}"
                                                 alt="update"></button></a> --}}
-                                        <img width="38px" src="{{ asset('images/icons/delete.svg') }}" alt="update"
-                                            updateId="{{ $data->id }}" data-modal-target="deleteData"
-                                            data-modal-toggle="deleteData" class="cursor-pointer">
+                                        <button data-modal-target="deleteData" data-modal-toggle="deleteData"
+                                            class="delButton" delId="{{ $data->id }}">
+                                            <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
+                                                alt="delete" class="cursor-pointer">
+                                        </button>
                                         {{-- <button updateId="{{ $data->id }}" data-modal-target="changeStatus"
                                             data-modal-toggle="changeStatus" class="">
                                             @lang('lang.Change_Status') </button> --}}
@@ -184,7 +186,7 @@
                         <button class="bg-primary px-7 py-3 text-white rounded-md">
                             @lang('lang.No')
                         </button>
-                        <a class="" href="../delCustomer/{{ $data->id }}">
+                        <a class="" id="delLink" href="">
 
                             <button class=" bg-red-600 px-7 py-3 text-white rounded-md">
                                 @lang('lang.Yes')
@@ -353,6 +355,10 @@
 @include('layouts.footer')
 <script>
     $(document).ready(function() {
+        $('.delButton').click(function() {
+            var id = $(this).attr('delId');
+            $('#delLink').attr('href', '../delCustomer/' + id);
+        });
         $('.updateVerBtn').click(function() {
             var id = $(this).attr('updateId');
             $('#updateid').val(id);
