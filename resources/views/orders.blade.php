@@ -82,11 +82,20 @@
                                                             src="{{ asset('images/icons/edit.svg') }}"
                                                             alt="update">@lang('lang.Edit')</a>
                                                 </li>
-                                                <li class="py-1">
-                                                    <a class="w-[42px] flex items-center gap-3"
+                                                <li class="py-1 ">
+                                                    {{-- <a class="w-[42px] flex items-center gap-3"
                                                         href="../delOrder/{{ $data->id }}"> <img width="38px"
                                                             src="{{ asset('images/icons/delete-green.svg') }}"
-                                                            alt="update">@lang('lang.Delete')</a>
+                                                            alt="update">@lang('lang.Delete')</a> --}}
+                                                    <button data-modal-target="deleteData"
+                                                        data-modal-toggle="deleteData"
+                                                        class="delButton items-center flex gap-3"
+                                                        delId="{{ $data->id }}">
+                                                        <img width="38px"
+                                                            src="{{ asset('images/icons/delete-green.svg') }}"
+                                                            alt="delete" class="cursor-pointer">
+                                                        <p>@lang('lang.Delete')</p>
+                                                    </button>
                                                 </li>
                                                 <li class="py-1">
                                                     <a href="../invoice/{{ $data->id }}"
@@ -189,6 +198,55 @@
     </div>
 </div>
 
+{{-- Delete Data Modal --}}
+<div id="deleteData" data-modal-backdrop="static"
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-   max-h-full ">
+    <div class="relative p-4 w-full   max-w-lg max-h-full ">
+        <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
+            <div class="">
+
+                <button type="button"
+                    class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
+                    data-modal-hide="deleteData">
+                    <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                </button>
+            </div>
+            <div class=" mx-6 my-6 pt-5">
+                <div class="">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100px" class="mx-auto" viewBox="0 0 512 512">
+                        <path
+                            d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                            fill="red" />
+                    </svg>
+                    <h1 class="text-center pt-3 text-4xl">@lang('lang.Are_You_Sure')</h1>
+                    <div class="flex  justify-center gap-5 mx-auto mt-5 pb-5">
+                        <button data-modal-hide="deleteData" class="bg-primary px-7 py-3 text-white rounded-md">
+                            @lang('lang.No')
+                        </button>
+                        <a class="" id="delLink" href="">
+
+                            <button class=" bg-red-600 px-7 py-3 text-white rounded-md">
+                                @lang('lang.Yes')
+                            </button>
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div>
+
+    </div>
+
+</div>
+
 {{-- ============ modal  =========== --}}
 <div id="changeStatus" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
@@ -262,48 +320,55 @@
 
 <script>
     $(document).ready(function() {
-        $('.updateStatusBtn').click(function() {
-            var id = $(this).attr('updateId');
-            $('#update_id').val(id);
+        $('.delButton').click(function() {
+            var id = $(this).attr('delId');
+            $('#delLink').attr('href', '../delOrder/' + id);
+            console.log(id);
         });
-
-        $("#OrderStatusData").submit(function(event) {
-            var updateId = $('#update_id').val();
-            var url = "../updateOrderStatus/" + updateId;
-            event.preventDefault();
-            var formData = new FormData(this);
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: formData,
-                dataType: "json",
-                contentType: false,
-                processData: false,
-                beforeSend: function() {
-                    $('#spinner').removeClass('hidden');
-                    $('#text').addClass('hidden');
-                    $('#addBtn').attr('disabled', true);
-                },
-                success: function(response) {
-                    window.location.href = '../orders';
-
-                },
-                error: function(jqXHR) {
-                    let response = JSON.parse(jqXHR.responseText);
-                    console.log("error");
-                    Swal.fire(
-                        'Warning!',
-                        response.message,
-                        'warning'
-                    );
-
-                    $('#text').removeClass('hidden');
-                    $('#spinner').addClass('hidden');
-                    $('#addBtn').attr('disabled', false);
-                }
+        $(document).ready(function() {
+            $('.updateStatusBtn').click(function() {
+                var id = $(this).attr('updateId');
+                $('#update_id').val(id);
             });
 
+            $("#OrderStatusData").submit(function(event) {
+                var updateId = $('#update_id').val();
+                var url = "../updateOrderStatus/" + updateId;
+                event.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: formData,
+                    dataType: "json",
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function() {
+                        $('#spinner').removeClass('hidden');
+                        $('#text').addClass('hidden');
+                        $('#addBtn').attr('disabled', true);
+                    },
+                    success: function(response) {
+                        window.location.href = '../orders';
 
+                    },
+                    error: function(jqXHR) {
+                        let response = JSON.parse(jqXHR.responseText);
+                        console.log("error");
+                        Swal.fire(
+                            'Warning!',
+                            response.message,
+                            'warning'
+                        );
+
+                        $('#text').removeClass('hidden');
+                        $('#spinner').addClass('hidden');
+                        $('#addBtn').attr('disabled', false);
+                    }
+                });
+
+
+            });
         });
     });
 </script>

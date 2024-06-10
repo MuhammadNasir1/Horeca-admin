@@ -58,9 +58,14 @@
                                             class=" updateBtn cursor-pointer  w-[42px]"
                                             updateId="{{ $data->id }}"><img width="38px"
                                                 src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
-                                        <a class="w-[42px] md:w-full" href="../delProduct/{{ $data->id }}"><img
+                                        {{-- <a class="w-[42px] md:w-full" href="../delProduct/{{ $data->id }}"><img
                                                 width="38px" src="{{ asset('images/icons/delete.svg') }}"
-                                                alt="update"></button></a>
+                                                alt="update"></button></a> --}}
+                                        <button data-modal-target="deleteData" data-modal-toggle="deleteData"
+                                            class="delButton" delId="{{ $data->id }}">
+                                            <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
+                                                alt="delete" class="cursor-pointer">
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -121,7 +126,8 @@
                                 @endforeach
                             </select>
                         </div>
-                        <button data-modal-target="addcategorymodal" data-modal-toggle="addcategorymodal" type="button"
+                        <button data-modal-target="addcategorymodal" data-modal-toggle="addcategorymodal"
+                            type="button"
                             class="bg-primary text-white  rounded-[4px] py-1.5 px-3 mt-6 mb-3 uaddBtn
                             font-semibold">+</button>
                     </div>
@@ -461,6 +467,56 @@
 
     </div>
 </div>
+
+{{-- Delete Data Modal --}}
+<div id="deleteData" data-modal-backdrop="static"
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-   max-h-full ">
+    <div class="relative p-4 w-full   max-w-lg max-h-full ">
+        <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
+            <div class="">
+
+                <button type="button"
+                    class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
+                    data-modal-hide="deleteData">
+                    <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                </button>
+            </div>
+            <div class=" mx-6 my-6 pt-5">
+                <div class="">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100px" class="mx-auto" viewBox="0 0 512 512">
+                        <path
+                            d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                            fill="red" />
+                    </svg>
+                    <h1 class="text-center pt-3 text-4xl">@lang('lang.Are_You_Sure')</h1>
+                    <div class="flex  justify-center gap-5 mx-auto mt-5 pb-5">
+                        <button data-modal-hide="deleteData" class="bg-primary px-7 py-3 text-white rounded-md">
+                            @lang('lang.No')
+                        </button>
+                        <a class="" id="delLink" href="">
+
+                            <button class=" bg-red-600 px-7 py-3 text-white rounded-md">
+                                @lang('lang.Yes')
+                            </button>
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div>
+
+    </div>
+
+</div>
+
 {{-- ============ add  category modal  =========== --}}
 <div id="addcategorymodal" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed  top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
@@ -546,186 +602,194 @@
 @include('layouts.footer')
 <script>
     $(document).ready(function() {
-        function calculateTotal() {
-            var price = parseFloat($('#WOPrice').val()) || 0;
-            var tax = parseFloat($('#TaxPrice').val()) || 0;
-            var totalPrice = price + (price * (tax / 100));
-            $('#TotalWTax').val(totalPrice.toFixed(2));
-        }
-
-        $('#WOPrice, #TaxPrice').on('input', calculateTotal);
-
-        function calculateTotal2() {
-            var price = parseFloat($('#Price').val()) || 0;
-            var tax = parseFloat($('#tax').val()) || 0;
-            var totalPrice = price + (price * (tax / 100));
-            $('#TotalPrice').val(totalPrice.toFixed(2));
-        }
-        $('#Price').trigger('tax');
-        $('#Price, #tax').on('input', calculateTotal2);
-
-        $('.category').change(function() {
-            var selectedOption = $(this).find(':selected');
-            var tax = selectedOption.attr('category-tax');
-            $('.tax-input').val(tax)
+        $('.delButton').click(function() {
+            var id = $(this).attr('delId');
+            $('#delLink').attr('href', '../delProduct/' + id);
+            console.log(id);
         });
-        // insert data
-        $("#productdata").submit(function(event) {
-            var url = "../addProduct";
-            event.preventDefault();
-            var formData = new FormData(this);
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: formData,
-                dataType: "json",
-                contentType: false,
-                processData: false,
-                beforeSend: function() {
-                    $('#ispinner').removeClass('hidden');
-                    $('#itext').addClass('hidden');
-                    $('#iaddBtn').attr('disabled', true);
-                },
-                success: function(response) {
-                    window.location.href = '../product';
+        $(document).ready(function() {
+            function calculateTotal() {
+                var price = parseFloat($('#WOPrice').val()) || 0;
+                var tax = parseFloat($('#TaxPrice').val()) || 0;
+                var totalPrice = price + (price * (tax / 100));
+                $('#TotalWTax').val(totalPrice.toFixed(2));
+            }
 
-                },
-                error: function(jqXHR) {
-                    let response = JSON.parse(jqXHR.responseText);
-                    console.log("error");
-                    Swal.fire(
-                        'Warning!',
-                        response.message,
-                        'warning'
-                    );
+            $('#WOPrice, #TaxPrice').on('input', calculateTotal);
 
-                    $('#itext').removeClass('hidden');
-                    $('#ispinner').addClass('hidden');
-                    $('#iaddBtn').attr('disabled', false);
-                }
+            function calculateTotal2() {
+                var price = parseFloat($('#Price').val()) || 0;
+                var tax = parseFloat($('#tax').val()) || 0;
+                var totalPrice = price + (price * (tax / 100));
+                $('#TotalPrice').val(totalPrice.toFixed(2));
+            }
+            $('#Price').trigger('tax');
+            $('#Price, #tax').on('input', calculateTotal2);
+
+            $('.category').change(function() {
+                var selectedOption = $(this).find(':selected');
+                var tax = selectedOption.attr('category-tax');
+                $('.tax-input').val(tax)
             });
-        });
+            // insert data
+            $("#productdata").submit(function(event) {
+                var url = "../addProduct";
+                event.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: formData,
+                    dataType: "json",
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function() {
+                        $('#ispinner').removeClass('hidden');
+                        $('#itext').addClass('hidden');
+                        $('#iaddBtn').attr('disabled', true);
+                    },
+                    success: function(response) {
+                        window.location.href = '../product';
 
-        // update  data
-        $('.updateBtn').click(function() {
-            var updateId = $(this).attr('updateId');
-            var url = "../ProductUpdataData/" + updateId;
-            $.ajax({
-                type: "GET",
-                url: url,
-                dataType: "json",
-                success: function(response) {
-                    var product = response.product;
-                    console.log(product);
-                    $('#update_id').val(product.id);
-                    $('#Product_Name').val(product.name);
-                    $('#productCode').val(product.code);
-                    $('#Ucategory').val(product.category);
-                    $('#subCategory').val(product.sub_category);
-                    $('#tags').val(product.tags);
-                    $('#Price').val(product.rate);
-                    $('#tax').val(product.tax);
-                    $('#quantity').val(product.quantity);
-                    $('#quantityAlert').val(product.quantity_alert);
-                    $('#Status').val(product.status);
-                    $('#description').val(product.description);
-                    $('#product_unit').val(product.product_unit);
+                    },
+                    error: function(jqXHR) {
+                        let response = JSON.parse(jqXHR.responseText);
+                        console.log("error");
+                        Swal.fire(
+                            'Warning!',
+                            response.message,
+                            'warning'
+                        );
 
-                },
-                error: function(jqXHR) {
-                    let response = JSON.parse(jqXHR.responseText);
-                    console.log("error");
-                    Swal.fire(
-                        'Warning!',
-                        'Product Not Found',
-                        'warning'
-                    );
-                }
-            });
-        })
-
-        //  insert category data
-
-        $("#categoryData").submit(function(event) {
-            var url = "../addCategory";
-            event.preventDefault();
-            var formData = new FormData(this);
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: formData,
-                dataType: "json",
-                contentType: false,
-                processData: false,
-                beforeSend: function() {
-                    $('#Cspinner').removeClass('hidden');
-                    $('#Ctext').addClass('hidden');
-                    $('#CaddBtn').attr('disabled', true);
-                },
-                success: function(response) {
-                    var categoryName = response.category.name;
-                    var categoryTax = response.category.tax;
-                    $('#category-modal-close').click();
-                    var newOption = $('<option>', {
-                        value: categoryName,
-                        text: categoryName,
-                        'category-tax': categoryTax
-                    });
-                    $('#category').append(newOption);
-                },
-                error: function(jqXHR) {
-                    let response = JSON.parse(jqXHR.responseText);
-                    console.log("error");
-                    Swal.fire(
-                        'Warning!',
-                        response.message,
-                        'warning'
-                    );
-
-                    $('#Ctext').removeClass('hidden');
-                    $('#Cspinner').addClass('hidden');
-                    $('#CaddBtn').attr('disabled', false);
-                }
-            });
-        });
-        $("#UpdatecategoryData").submit(function(event) {
-            var updateId = $('#update_id').val();
-            var url = "../UpdataProduct/" + updateId;
-            console.log(url);
-            event.preventDefault();
-            var formData = new FormData(this);
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: formData,
-                dataType: "json",
-                contentType: false,
-                processData: false,
-                beforeSend: function() {
-                    $('#uspinner').removeClass('hidden');
-                    $('#utext').addClass('hidden');
-                    $('#uaddBtn').attr('disabled', true);
-                },
-                success: function(response) {
-                    window.location.href = '../product';
-
-
-                },
-                error: function(jqXHR) {
-                    let response = JSON.parse(jqXHR.responseText);
-                    console.log("error");
-                    Swal.fire(
-                        'Warning!',
-                        response.message,
-                        'warning'
-                    );
-
-                    $('#utext').removeClass('hidden');
-                    $('#uspinner').addClass('hidden');
-                    $('#uaddBtn').attr('disabled', false);
-                }
+                        $('#itext').removeClass('hidden');
+                        $('#ispinner').addClass('hidden');
+                        $('#iaddBtn').attr('disabled', false);
+                    }
+                });
             });
 
+            // update  data
+            $('.updateBtn').click(function() {
+                var updateId = $(this).attr('updateId');
+                var url = "../ProductUpdataData/" + updateId;
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    dataType: "json",
+                    success: function(response) {
+                        var product = response.product;
+                        console.log(product);
+                        $('#update_id').val(product.id);
+                        $('#Product_Name').val(product.name);
+                        $('#productCode').val(product.code);
+                        $('#Ucategory').val(product.category);
+                        $('#subCategory').val(product.sub_category);
+                        $('#tags').val(product.tags);
+                        $('#Price').val(product.rate);
+                        $('#tax').val(product.tax);
+                        $('#quantity').val(product.quantity);
+                        $('#quantityAlert').val(product.quantity_alert);
+                        $('#Status').val(product.status);
+                        $('#description').val(product.description);
+                        $('#product_unit').val(product.product_unit);
+
+                    },
+                    error: function(jqXHR) {
+                        let response = JSON.parse(jqXHR.responseText);
+                        console.log("error");
+                        Swal.fire(
+                            'Warning!',
+                            'Product Not Found',
+                            'warning'
+                        );
+                    }
+                });
+            })
+
+            //  insert category data
+
+            $("#categoryData").submit(function(event) {
+                var url = "../addCategory";
+                event.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: formData,
+                    dataType: "json",
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function() {
+                        $('#Cspinner').removeClass('hidden');
+                        $('#Ctext').addClass('hidden');
+                        $('#CaddBtn').attr('disabled', true);
+                    },
+                    success: function(response) {
+                        var categoryName = response.category.name;
+                        var categoryTax = response.category.tax;
+                        $('#category-modal-close').click();
+                        var newOption = $('<option>', {
+                            value: categoryName,
+                            text: categoryName,
+                            'category-tax': categoryTax
+                        });
+                        $('#category').append(newOption);
+                    },
+                    error: function(jqXHR) {
+                        let response = JSON.parse(jqXHR.responseText);
+                        console.log("error");
+                        Swal.fire(
+                            'Warning!',
+                            response.message,
+                            'warning'
+                        );
+
+                        $('#Ctext').removeClass('hidden');
+                        $('#Cspinner').addClass('hidden');
+                        $('#CaddBtn').attr('disabled', false);
+                    }
+                });
+            });
+            $("#UpdatecategoryData").submit(function(event) {
+                var updateId = $('#update_id').val();
+                var url = "../UpdataProduct/" + updateId;
+                console.log(url);
+                event.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: formData,
+                    dataType: "json",
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function() {
+                        $('#uspinner').removeClass('hidden');
+                        $('#utext').addClass('hidden');
+                        $('#uaddBtn').attr('disabled', true);
+                    },
+                    success: function(response) {
+                        window.location.href = '../product';
+
+
+                    },
+                    error: function(jqXHR) {
+                        let response = JSON.parse(jqXHR.responseText);
+                        console.log("error");
+                        Swal.fire(
+                            'Warning!',
+                            response.message,
+                            'warning'
+                        );
+
+                        $('#utext').removeClass('hidden');
+                        $('#uspinner').addClass('hidden');
+                        $('#uaddBtn').attr('disabled', false);
+                    }
+                });
+
+
+            });
 
         });
 

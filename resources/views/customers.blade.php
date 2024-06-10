@@ -183,7 +183,7 @@
                     </svg>
                     <h1 class="text-center pt-3 text-4xl">@lang('lang.Are_You_Sure')</h1>
                     <div class="flex  justify-center gap-5 mx-auto mt-5 pb-5">
-                        <button class="bg-primary px-7 py-3 text-white rounded-md">
+                        <button data-modal-hide="deleteData" class="bg-primary px-7 py-3 text-white rounded-md">
                             @lang('lang.No')
                         </button>
                         <a class="" id="delLink" href="">
