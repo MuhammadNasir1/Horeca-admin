@@ -90,7 +90,7 @@
                         @lang('lang.Update_Product')
                     </h3>
                     <button type="button"
-                        class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
+                        class=" absolute right-5 text-white bg-transparent rounded-lg text-sm w-8 h-8 "
                         data-modal-hide="Updateproductmodal">
                         <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 14 14">
@@ -185,9 +185,19 @@
                                 name="product_unit" id="product_unit" placeholder=" @lang('lang.Unit_Here')" required>
                         </div>
                         <div>
+                            <label class="text-[14px] font-normal" for="unit_quantity">@lang('lang.Unit_Quantity')</label>
+                            <input type="text"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="unit_quantity" id="unit_quantity" placeholder=" @lang('lang.Quantity_Here')" required>
+
+                        </div>
+
+                    </div>
+                    <div class="flex  gap-4  mt-4">
+                        <div>
                             <label class="text-[14px] font-normal" for="Status">@lang('lang.Status')</label>
                             <select
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                class="w-50% border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                                 name="status" id="Status" required>
                                 <option value="active">@lang('lang.Active')</option>
                                 <option value="un-active">@lang('lang.Not_Active')</option>
@@ -195,12 +205,12 @@
                             </select>
 
                         </div>
-                    </div>
-                    <div class="mt-4">
-                        <label class="text-[14px] font-normal" for="image">@lang('lang.Product_Image')</label>
-                        <input type="file"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="product_image" id="image">
+                        <div>
+                            <label class="text-[14px] font-normal" for="image">@lang('lang.Product_Image')</label>
+                            <input type="file"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="product_image" id="image">
+                        </div>
                     </div>
                     <div class="mt-4 col-span-3">
                         <label class="text-[14px] font-normal" for="description">@lang('lang.Product_Description')</label>

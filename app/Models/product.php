@@ -22,6 +22,7 @@ class product extends Model
         'quantity',
         'quantity_alert',
         'product_unit',
+        'unit_quantity',
         'status',
         'image',
         'description'
