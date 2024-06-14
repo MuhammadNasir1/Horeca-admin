@@ -322,19 +322,20 @@ class ordersController extends Controller
                 return response()->json(['success' => false, 'message' => "Order not found"], 404);
             }
 
+            $ordersWithItems = [];
             foreach ($orders as $order) {
-                // Fetch all order items for each order
-                // $orderItems = order_items::where('order_id', $order['id'])->first();
-                $orderItems = order_items::where('order_id', $order['id'])->join('products', 'order_items.product_id', '=', 'products.id')
+                $orderItems = order_items::where('order_id', $order['id'])
+                    ->join('products', 'order_items.product_id', '=', 'products.id')
                     ->select('order_items.*', 'products.name as product_name')
-                    ->first();
-                $order->orderItems = $orderItems;
+                    ->get(); // Fetch all items, not just the first one
+
+                // Convert order items to array and add to order
+                $order['orderItems'] = $orderItems->toArray();
+
+                // Add the order with items to the result array
+                $ordersWithItems[] = $order;
             }
-
-            return response()->json(['success' => true, 'orders' => $orders], 200);
-
-
-            return response()->json(['success' => true, 'message' => "Order get successfull", 'orders' => $orders], 200);
+            return response()->json(['success' => true, 'message' => "Order get successfull", 'orders' => $ordersWithItems], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
