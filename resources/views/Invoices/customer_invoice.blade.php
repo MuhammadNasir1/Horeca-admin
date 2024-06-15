@@ -81,6 +81,11 @@
             text-align: end;
         }
 
+        .header-div2 .logo {
+            display: flex;
+            justify-content: flex-end;
+        }
+
         .header-div2 .logo img {
             padding-left: 67px;
             width: 250px;
@@ -264,11 +269,13 @@
             font-size: 14px;
         }
 
-        .company-heading {
+        .logo-text {
 
             color: white;
-            font-size: 50px;
-            margin-right: 10px;
+            font-size: 14px;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: right;
+            margin: 0;
         }
     </style>
 </head>
@@ -290,21 +297,23 @@
                     <li>{{ $order->customer_adress }}</li>
                 </ul>
             </div>
-            {{-- <div class="header-div2">
-                <div class="logo"><img src="{{ asset('images/Horeca-White.svg') }}" alt="" /></div>
-
+            <div class="header-div2">
+                <div class="logo"><img src="{{ asset('images/Horeca-White.svg') }}" alt="Logo" /></div>
+                <p class="logo-text">@lang('lang.Food_Service_By') Kaya Markt</p>
                 <div>
+                    <ul>
+                        <li>Kaya Markt GmbH & Co. KG, <br> Naubornerstraße 60, 35578 Wetzlar</li>
+                    </ul>
+                </div>
+                {{-- <div>
                     <ul>
                         <li>Business Address</li>
                         <li>City, State, IN - 000 000</li>
                         <li>TAX ID 00XXXXX1234X0XX</li>
                     </ul>
-                </div>
-            </div> --}}
-            <div class="header-div2">
-                <h1 class="company-heading">Kaya Markt</h1>
-
+                </div> --}}
             </div>
+
         </div>
 
         <!-- Content -->
