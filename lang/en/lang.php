@@ -198,7 +198,9 @@ return [
     "Unit" => "Unit",
     "Unit_Here" => "Unit Here",
     "Are_You_Sure" => "Are You Sure",
-
+    "Sales_Tax" => "Sales Tax",
+    "from" => "from",
+    "net" => "net",
 
     "Tax_Number" => "Tax Number",
     "Tax_Number_Here" => "Tax Number Here",
@@ -208,6 +210,7 @@ return [
     "City_Here" => "City Here",
     "Note" => "Note",
     "Postal_Code_Here" => "Postal Code Here",
+
 
 
 

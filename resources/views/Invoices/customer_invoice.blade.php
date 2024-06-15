@@ -332,6 +332,14 @@
                         <h2 class="color">{{ $order->sub_total }}&euro;</h2>
                     </div>
                     <div class="div2-left">
+                        <h2>@lang('lang.Sales_Tax') 7% (@lang('lang.from') &euro;0.00 @lang('lang.net') )</h2>
+                        <h2 class="color">-</h2>
+                    </div>
+                    <div class="div2-left">
+                        <h2>@lang('lang.Sales_Tax') 19% (@lang('lang.from') &euro;0.00 @lang('lang.net') )</h2>
+                        <h2 class="color">-</h2>
+                    </div>
+                    <div class="div2-left">
                         <h2>@lang('lang.Delivery_Charges')</h2>
                         <h2 class="color">{{ $order->delivery_charges }}&euro;</h2>
                     </div>

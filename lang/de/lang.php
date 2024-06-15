@@ -166,6 +166,9 @@ return [
     "Shipped" => "Versandt",
     "Change_Status" => "Status ändern",
     "Select_Order_Status" => "Bestellstatus auswählen",
+    "Sales_Tax" => "Umsatzsteuer",
+    "from" => "aus",
+    "net" => "netto",
 
 
 ];
