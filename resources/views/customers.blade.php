@@ -122,21 +122,21 @@
                 <div class="grid grid-cols-2 gap-4 mx-6">
                     <div>
                         <label class="text-[14px] font-normal" for="TaxNo">@lang('lang.Tax_Number')</label>
-                        <input type="number"
+                        <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="tax_number" id="TaxNo" placeholder=" @lang('lang.Tax_Number_Here')">
 
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="clientType">@lang('lang.Type_Of_Client')</label>
-                        <input type="number"
+                        <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="client_type" id="clientType" placeholder=" @lang('lang.Type_Here')">
 
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="postalCode">@lang('lang.Postal_Code')</label>
-                        <input type="number"
+                        <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="postal_code" id="postalCode" placeholder=" @lang('lang.Postal_Code_Here')">
 
@@ -144,7 +144,7 @@
 
                     <div>
                         <label class="text-[14px] font-normal" for="City">@lang('lang.city')</label>
-                        <input type="number"
+                        <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="city" id="City" placeholder=" @lang('lang.City_Here')">
 
@@ -291,21 +291,21 @@
                 <div class="grid grid-cols-2 gap-4 mx-6">
                     <div>
                         <label class="text-[14px] font-normal" for="TaxNo">@lang('lang.Tax_Number')</label>
-                        <input type="number"
+                        <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="tax_number" id="TaxNo" placeholder=" @lang('lang.Tax_Number_Here')">
 
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="clientType">@lang('lang.Type_Of_Client')</label>
-                        <input type="number"
+                        <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="client_type" id="clientType" placeholder=" @lang('lang.Type_Here')">
 
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="postalCode">@lang('lang.Postal_Code')</label>
-                        <input type="number"
+                        <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="postal_code" id="postalCode" placeholder=" @lang('lang.Postal_Code_Here')">
 
@@ -313,7 +313,7 @@
 
                     <div>
                         <label class="text-[14px] font-normal" for="City">@lang('lang.city')</label>
-                        <input type="number"
+                        <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="city" id="City" placeholder=" @lang('lang.City_Here')">
 
