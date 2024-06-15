@@ -66,7 +66,8 @@ class productController extends Controller
     {
         $products = product::all();
         $categories = category::where('status', "active")->get();
-        return view('product',  ['products' => $products, 'categories' => $categories]);
+        $Subcategories =  product::select('sub_category')->distinct()->get();
+        return view('product',  ['products' => $products, 'categories' => $categories, 'Subcategories' => $Subcategories]);
     }
 
     public function delete($id)

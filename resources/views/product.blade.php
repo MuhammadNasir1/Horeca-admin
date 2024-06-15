@@ -368,7 +368,13 @@
                         <label class="text-[14px] font-normal" for="subCategory">@lang('lang.Product_Sub_Category')</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="sub_category" id="subCategory" placeholder=" @lang('lang.Sub_Category_Here')">
+                            name="sub_category" list="subcategory" id="subCategory"
+                            placeholder=" @lang('lang.Sub_Category_Here')">
+                        <datalist id="subcategory">
+                            @foreach ($Subcategories as $Subcategory)
+                                <option value="{{ $Subcategory->sub_category }}">
+                            @endforeach
+                        </datalist>
                     </div>
                     <div class="mt-4  ">
                         <label class="text-[14px] font-normal" for="tags">@lang('lang.Product_Tags')</label>
