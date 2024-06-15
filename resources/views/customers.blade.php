@@ -119,11 +119,50 @@
 
                     </div>
                 </div>
-                <div class="mt-2  mx-6">
-                    <label class="text-[14px] font-normal" for="Address">@lang('lang.Address')</label>
-                    <textarea name="address" id="Address"
-                        class="w-full h-24  border-[#DEE2E6] rounded-[4px] focus:border-primary text-[14px] "
-                        placeholder="@lang('lang.Address_Here')"></textarea>
+                <div class="grid grid-cols-2 gap-4 mx-6">
+                    <div>
+                        <label class="text-[14px] font-normal" for="TaxNo">@lang('lang.Tax_Number')</label>
+                        <input type="number"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="tax_number" id="TaxNo" placeholder=" @lang('lang.Tax_Number_Here')">
+
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="clientType">@lang('lang.Type_Of_Client')</label>
+                        <input type="number"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="client_type" id="clientType" placeholder=" @lang('lang.Type_Here')">
+
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="postalCode">@lang('lang.Postal_Code')</label>
+                        <input type="number"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="postal_code" id="postalCode" placeholder=" @lang('lang.Postal_Code_Here')">
+
+                    </div>
+
+                    <div>
+                        <label class="text-[14px] font-normal" for="City">@lang('lang.city')</label>
+                        <input type="number"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="city" id="City" placeholder=" @lang('lang.City_Here')">
+
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 mx-6 gap-4 mt-3">
+                    <div class="mt-2  ">
+                        <label class="text-[14px] font-normal" for="note">@lang('lang.Note')</label>
+                        <textarea name="note" id="note"
+                            class="w-full h-24  border-[#DEE2E6] rounded-[4px] focus:border-primary text-[14px] "
+                            placeholder="@lang('lang.Note_Here')"></textarea>
+                    </div>
+                    <div class="mt-2 ">
+                        <label class="text-[14px] font-normal" for="Address">@lang('lang.Address')</label>
+                        <textarea name="address" id="Address"
+                            class="w-full h-24  border-[#DEE2E6] rounded-[4px] focus:border-primary text-[14px] "
+                            placeholder="@lang('lang.Address_Here')"></textarea>
+                    </div>
                 </div>
 
                 <div class="flex justify-end ">
@@ -249,11 +288,50 @@
 
                     </div>
                 </div>
-                <div class="mt-2  mx-6">
-                    <label class="text-[14px] font-normal" for="Address">@lang('lang.Address')</label>
-                    <textarea name="address" id="Address"
-                        class="w-full h-24  border-[#DEE2E6] rounded-[4px] focus:border-primary text-[14px] "
-                        placeholder="@lang('lang.Address_Here')"></textarea>
+                <div class="grid grid-cols-2 gap-4 mx-6">
+                    <div>
+                        <label class="text-[14px] font-normal" for="TaxNo">@lang('lang.Tax_Number')</label>
+                        <input type="number"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="tax_number" id="TaxNo" placeholder=" @lang('lang.Tax_Number_Here')">
+
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="clientType">@lang('lang.Type_Of_Client')</label>
+                        <input type="number"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="client_type" id="clientType" placeholder=" @lang('lang.Type_Here')">
+
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="postalCode">@lang('lang.Postal_Code')</label>
+                        <input type="number"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="postal_code" id="postalCode" placeholder=" @lang('lang.Postal_Code_Here')">
+
+                    </div>
+
+                    <div>
+                        <label class="text-[14px] font-normal" for="City">@lang('lang.city')</label>
+                        <input type="number"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="city" id="City" placeholder=" @lang('lang.City_Here')">
+
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 mx-6 gap-4 mt-3">
+                    <div class="mt-2  ">
+                        <label class="text-[14px] font-normal" for="note">@lang('lang.Note')</label>
+                        <textarea name="note" id="note"
+                            class="w-full h-24  border-[#DEE2E6] rounded-[4px] focus:border-primary text-[14px] "
+                            placeholder="@lang('lang.Note_Here')"></textarea>
+                    </div>
+                    <div class="mt-2 ">
+                        <label class="text-[14px] font-normal" for="Address">@lang('lang.Address')</label>
+                        <textarea name="address" id="Address"
+                            class="w-full h-24  border-[#DEE2E6] rounded-[4px] focus:border-primary text-[14px] "
+                            placeholder="@lang('lang.Address_Here')"></textarea>
+                    </div>
                 </div>
 
                 <div class="flex justify-end ">
@@ -491,6 +569,11 @@
                     $('#email').val(customer.email);
                     $('#PhoneNO').val(customer.phone);
                     $('#Address').val(customer.address);
+                    $('#TaxNo').val(customer.tax_number);
+                    $('#clientType').val(customer.client_type);
+                    $('#postalCode').val(customer.postal_code);
+                    $('#City').val(customer.city);
+                    $('#note').val(customer.note);
 
 
                 },

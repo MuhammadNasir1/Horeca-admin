@@ -71,6 +71,11 @@ class userController extends Controller
                 'phone' => $validateData['phone_no'],
                 'role' => "customer",
                 'address' => $validateData['address'],
+                'tax_number' => $request['tax_number'],
+                'client_type' => $request['client_type'],
+                'postal_code' => $request['postal_code'],
+                'city' => $request['city'],
+                'note' => $request['note'],
             ]);
 
             return response()->json(['success' => true, 'message' => "Customer Add Successfully"]);

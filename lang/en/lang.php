@@ -200,5 +200,16 @@ return [
     "Are_You_Sure" => "Are You Sure",
 
 
+    "Tax_Number" => "Tax Number",
+    "Tax_Number_Here" => "Tax Number Here",
+    "Type_Of_Client" => "Type Of Client",
+    "Type_Here" => "Type Here",
+    "Postal_Code" => "Postal Code",
+    "City_Here" => "City Here",
+    "Note" => "Note",
+    "Postal_Code_Here" => "Postal Code Here",
+
+
+
 
 ];
