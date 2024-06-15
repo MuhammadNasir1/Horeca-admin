@@ -170,5 +170,37 @@ return [
     "from" => "aus",
     "net" => "netto",
 
+    "Alert_on_Quantity" => "Alarm bei Menge",
+
+    "Price_Here" => "Preis Hier",
+    "Order_From" => "Bestellung Von",
+    "Status&Tracking" => "Status & Verfolgung",
+    "Tracking_Url" => "Verfolgungs-Url",
+    "Url_Here" => "Url Hier",
+    "Confirmed" => "Bestätigt",
+    "Shipped" => "Versandt",
+    "Change_Status" => "Status Ändern",
+    "Select_Action" => "Aktion Auswählen",
+    "Enter_Address" => "Adresse Eingeben",
+    "Select_Order_Status" => "Bestellstatus Auswählen",
+    "Verification" => "Verifizierung",
+    "Change_Verification" => "Verifizierung Ändern",
+    "Update_Status" => "Status Aktualisieren",
+    "Select_Verification_Status" => "Verifizierungsstatus Auswählen",
+    "Approved" => "Genehmigt",
+    "Unit" => "Einheit",
+    "Unit_Here" => "Einheit Hier",
+    "Are_You_Sure" => "Sind Sie Sicher",
+
+    "Tax_Number" => "Steuernummer",
+    "Tax_Number_Here" => "Steuernummer Hier",
+    "Type_Of_Client" => "Kundentyp",
+    "Type_Here" => "Typ Hier",
+    "Postal_Code" => "Postleitzahl",
+    "City_Here" => "Stadt Hier",
+    "Note" => "Notiz",
+    "Postal_Code_Here" => "Postleitzahl Hier"
+
+
 
 ];
