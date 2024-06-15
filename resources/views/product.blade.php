@@ -618,6 +618,12 @@
 @include('layouts.footer')
 <script>
     $(document).ready(function() {
+        $('#WOPrice , #Price').on('input', function() {
+            var inputValue = $(this).val();
+            $(this).val(inputValue.replace(/,/g, '.'));
+        });
+
+
         $('.delButton').click(function() {
             var id = $(this).attr('delId');
             $('#delLink').attr('href', '../delProduct/' + id);
