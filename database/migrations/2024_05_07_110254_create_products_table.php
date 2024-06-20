@@ -27,6 +27,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('product_unit');
             $table->string('unit_quantity');
+            $table->string('brand');
             $table->timestamps();
         });
     }

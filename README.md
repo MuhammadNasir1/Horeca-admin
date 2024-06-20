@@ -1,1 +1,1 @@
-ALTER TABLE `users` ADD `user_id` INT(255) NULL AFTER `id`;
+ALTER TABLE `products` ADD `brand` VARCHAR(255) NOT NULL AFTER `unit_quantity`;

@@ -25,6 +25,7 @@ class product extends Model
         'unit_quantity',
         'status',
         'image',
-        'description'
+        'description',
+        'brand'
     ];
 }
