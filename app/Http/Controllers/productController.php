@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brands;
 use App\Models\category;
 use App\Models\product;
 use Illuminate\Http\Request;
@@ -67,7 +68,8 @@ class productController extends Controller
         $products = product::all();
         $categories = category::where('status', "active")->get();
         $Subcategories =  product::select('sub_category')->distinct()->get();
-        return view('product',  ['products' => $products, 'categories' => $categories, 'Subcategories' => $Subcategories]);
+        $brands = Brands::all();
+        return view('product',  ['products' => $products, 'categories' => $categories, 'Subcategories' => $Subcategories, "brands" => $brands]);
     }
 
     public function delete($id)

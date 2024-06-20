@@ -124,7 +124,6 @@ return [
     "Day_Report" => "Day Report",
     "Customer_Email" => "Customer Email",
     "Total" => "Total",
-
     "Grand_total" => "Grand total",
     "Download_Example" => "Download Example",
     "full_name" => "ٖFull Name",
@@ -175,10 +174,7 @@ return [
     "Enter_Old_Password" => "Enter Old Password",
     "Enter_New_Password" => "Enter New Password",
     "Enter_Confirm_Password" => "Enter Confirm Password",
-
-
     "Alert_on_Quantity" => "Alert on Quantity",
-
     "Price_Here" => "Price Here",
     "Order_From" => "Order From",
     "Status&Tracking" => "Status & Tracking",
@@ -201,7 +197,6 @@ return [
     "Sales_Tax" => "Sales Tax",
     "from" => "from",
     "net" => "net",
-
     "Tax_Number" => "Tax Number",
     "Tax_Number_Here" => "Tax Number Here",
     "Type_Of_Client" => "Type Of Client",
@@ -213,6 +208,9 @@ return [
     "Food_Service_By" => "FoodService By",
 
 
+    "Brands_List" => "Brands List",
+    "Add_Brand" => "Add Brand",
+    "Brand_Name" => "Brand Name",
 
 
 
