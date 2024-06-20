@@ -212,6 +212,7 @@ return [
     "Add_Brand" => "Add Brand",
     "Brand_Name" => "Brand Name",
     "Purchase_Price" => "Purchase Price",
+    "Brands" => "Brands",
 
 
 
