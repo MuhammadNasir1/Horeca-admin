@@ -140,11 +140,36 @@
                             @endforeach
                         </datalist>
                     </div>
+                    <div>
+                        <div class="flex gap-2  mt-4">
+                            <div class="w-full">
+                                <label class="text-[14px] font-normal" for="Ubrands">@lang('lang.Brand_Name')</label>
+                                <select
+                                    class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] category "
+                                    name="brand" id="Ubrands" required>
+                                    @foreach ($brands as $brand)
+                                        <option value="{{ $brand->name }}">
+                                            {{ $brand->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <button data-modal-target="addbrandmodal" data-modal-toggle="addbrandmodal"
+                                type="button"
+                                class="bg-primary text-white  rounded-[4px] py-1.5 px-3 mt-6 mb-3 uaddBtn
+                            font-semibold">+</button>
+                        </div>
+                    </div>
                     <div class="mt-4  ">
                         <label class="text-[14px] font-normal" for="tags">@lang('lang.Product_Tags')</label>
                         <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="product_tags" id="tags" placeholder=" @lang('lang.Tags_Here')">
+                    </div>
+                    <div class="mt-4 ">
+                        <label class="text-[14px] font-normal" for="purchasePrice">@lang('lang.Purchase_Price')</label>
+                        <input type="text"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="purchase_price" id="purchasePrice" placeholder=" @lang('lang.Price_Here')">
                     </div>
                     <div class="grid grid-cols-3  gap-4  mt-4">
                         <div>
@@ -199,24 +224,22 @@
                         </div>
 
                     </div>
-                    <div class="flex  gap-4  mt-4">
-                        <div>
-                            <label class="text-[14px] font-normal" for="Status">@lang('lang.Status')</label>
-                            <select
-                                class="w-50% border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="status" id="Status" required>
-                                <option value="active">@lang('lang.Active')</option>
-                                <option value="un-active">@lang('lang.Not_Active')</option>
-                                <option value="un-active">@lang('lang.Not_Active')</option>
-                            </select>
+                    <div class="mt-4">
+                        <label class="text-[14px] font-normal" for="Status">@lang('lang.Status')</label>
+                        <select
+                            class="w-50% border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="status" id="Status" required>
+                            <option value="active">@lang('lang.Active')</option>
+                            <option value="un-active">@lang('lang.Not_Active')</option>
+                            <option value="un-active">@lang('lang.Not_Active')</option>
+                        </select>
 
-                        </div>
-                        <div>
-                            <label class="text-[14px] font-normal" for="image">@lang('lang.Product_Image')</label>
-                            <input type="file"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="product_image" id="image">
-                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <label class="text-[14px] font-normal" for="image">@lang('lang.Product_Image')</label>
+                        <input type="file"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="product_image" id="image">
                     </div>
                     <div class="mt-4 col-span-3">
                         <label class="text-[14px] font-normal" for="description">@lang('lang.Product_Description')</label>
@@ -408,6 +431,12 @@
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="product_tags" id="tags" placeholder=" @lang('lang.Tags_Here')">
                     </div>
+                    <div class="mt-4 ">
+                        <label class="text-[14px] font-normal" for="purchasePrice">@lang('lang.Purchase_Price')</label>
+                        <input type="text"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="purchase_price" id="purchasePrice" placeholder=" @lang('lang.Price_Here')">
+                    </div>
                     <div class="grid grid-cols-3  gap-4  mt-4">
                         <div>
                             <label class="text-[14px] font-normal" for="Price">@lang('lang.Price')</label>
@@ -460,23 +489,21 @@
 
                         </div>
                     </div>
-                    <div class="mt-4 flex gap-3">
-                        <div>
-                            <label class="text-[14px] font-normal" for="status">@lang('lang.Status')</label>
-                            <select
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="status" id="status" required>
-                                <option value="active">@lang('lang.Active')</option>
-                                <option value="un-active">@lang('lang.Not_Active')</option>
-                            </select>
+                    <div class="mt-4">
+                        <label class="text-[14px] font-normal" for="statusa">@lang('lang.Status')</label>
+                        <select
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="status" id="statusa" required>
+                            <option value="active">@lang('lang.Active')</option>
+                            <option value="un-active">@lang('lang.Not_Active')</option>
+                        </select>
 
-                        </div>
-                        <div>
-                            <label class="text-[14px] font-normal" for="image">@lang('lang.Product_Image')</label>
-                            <input type="file"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="product_image" id="image">
-                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <label class="text-[14px] font-normal" for="image">@lang('lang.Product_Image')</label>
+                        <input type="file"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="product_image" id="image">
                     </div>
                     <div class="mt-4 col-span-3">
                         <label class="text-[14px] font-normal" for="description">@lang('lang.Product_Description')</label>
@@ -811,6 +838,8 @@
                         $('#Status').val(product.status);
                         $('#description').val(product.description);
                         $('#product_unit').val(product.product_unit);
+                        $('#Ubrands').val(product.brand);
+                        $('#purchasePrice').val(product.purchase_price);
 
                     },
                     error: function(jqXHR) {

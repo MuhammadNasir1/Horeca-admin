@@ -31,6 +31,7 @@ class productController extends Controller
                 'product_unit' => 'required',
                 'unit_quantity' => 'required',
                 'brand' => 'required',
+                'purchase_price' => 'required',
             ]);
 
 
@@ -49,6 +50,7 @@ class productController extends Controller
                 'product_unit' => $validateData['product_unit'],
                 'unit_quantity' => $validateData['unit_quantity'],
                 'brand' => $validateData['brand'],
+                'purchase_price' => $validateData['purchase_price'],
 
             ]);
             if ($request->hasFile('product_image')) {
