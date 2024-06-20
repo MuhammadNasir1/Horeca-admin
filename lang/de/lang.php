@@ -199,7 +199,12 @@ return [
     "Postal_Code" => "Postleitzahl",
     "City_Here" => "Stadt Hier",
     "Note" => "Notiz",
-    "Postal_Code_Here" => "Postleitzahl Hier"
+    "Postal_Code_Here" => "Postleitzahl Hier",
+    "Brands_List" => "Markenliste",
+    "Add_Brand" => "Marke hinzufügen",
+    "Brand_Name" => "Markenname",
+    "Purchase_Price" => "Einkaufspreis",
+    "Brands" => "Marken"
 
 
 
