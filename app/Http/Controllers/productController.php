@@ -325,10 +325,20 @@ class productController extends Controller
             $baseUrl = $protocol . $host . '/';
             foreach ($products as $product) {
                 // if ($product->image !== null) {
-                if ($product->image !== null && strpos($product->image, 'storage/') !== 0) {
-                    $product->image = $baseUrl . $product->image;
-                } else {
-                    $product->image = $product->image;
+                //     $product->image = $baseUrl . $product->image;
+                // }
+                if ($product->image !== null) {
+                    // Check if $product->image starts with "storage/"
+                    if (
+                        strpos($product->image, 'storage/') === 0
+                    ) {
+                        // If it starts with "storage/", keep it as is
+                        // You may need to adjust this condition based on your actual folder structure
+                        $product->image = '/' . $product->image; // Assuming it's a relative path
+                    } else {
+                        // If it doesn't start with "storage/", prepend the base URL
+                        $product->image = $baseUrl . $product->image;
+                    }
                 }
             }
             return response()->json(['success' => true, 'message' => "Products get successfully", "products" =>  $products], 200);
