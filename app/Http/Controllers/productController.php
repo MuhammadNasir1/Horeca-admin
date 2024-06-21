@@ -324,7 +324,8 @@ class productController extends Controller
             $host = $_SERVER['HTTP_HOST'];
             $baseUrl = $protocol . $host . '/';
             foreach ($products as $product) {
-                if ($product->image !== null) {
+                // if ($product->image !== null) {
+                if ($product->image !== null && strpos($product->image, 'storage/') !== 0) {
 
                     $product->image = $baseUrl . $product->image;
                 }
