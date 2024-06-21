@@ -50,14 +50,14 @@
                                         <button data-modal-target="updatecustomermodal"
                                             data-modal-toggle="updatecustomermodal"
                                             class=" updateBtn cursor-pointer  w-[42px]"
-                                            updateId="{{ $data->id }}"><img width="38px"
+                                            updateId="{{ $data->id }}"><img width="40px"
                                                 src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
                                         {{-- <a class="w-[42px]"  href="../delCustomer/{{ $data->id }}"><img
                                                 width="38px" src="{{ asset('images/icons/delete.svg') }}"
                                                 alt="update"></button></a> --}}
                                         <button data-modal-target="deleteData" data-modal-toggle="deleteData"
                                             class="delButton" delId="{{ $data->id }}">
-                                            <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
+                                            <img width="40px" src="{{ asset('images/icons/delete.svg') }}"
                                                 alt="delete" class="cursor-pointer">
                                         </button>
                                         {{-- <button updateId="{{ $data->id }}" data-modal-target="changeStatus"
