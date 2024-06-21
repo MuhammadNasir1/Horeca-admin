@@ -177,7 +177,6 @@ return [
     "Status&Tracking" => "Status & Verfolgung",
     "Tracking_Url" => "Verfolgungs-Url",
     "Url_Here" => "Url Hier",
-    "Confirmed" => "Bestätigt",
     "Shipped" => "Versandt",
     "Change_Status" => "Status Ändern",
     "Select_Action" => "Aktion Auswählen",
@@ -204,8 +203,31 @@ return [
     "Add_Brand" => "Marke hinzufügen",
     "Brand_Name" => "Markenname",
     "Purchase_Price" => "Einkaufspreis",
-    "Brands" => "Marken"
+    "Brands" => "Marken",
 
 
+    "Old_Password" => "Altes Passwort",
+    "Old_password" => "Altes Passwort",
+    "New_Password" => "Neues Passwort",
+    "Create_Order" => "Bestellung Erstellen",
+    "Unit_Quantity" => "Mengeneinheit",
+    "Quantity_Here" => "Menge Hier",
+    "Confirm_Password" => "Passwort Bestätigen",
+    "Enter_Old_Password" => "Altes Passwort Eingeben",
+    "Enter_New_Password" => "Neues Passwort Eingeben",
+    "Enter_Confirm_Password" => "Bestätigungspasswort Eingeben",
+    "Select_Interval" => "Intervall Auswählen",
+    "Total_Sale" => "Gesamtverkauf",
 
+
+    "pending" => "Ausstehend",
+    "shipped" => "Versandt",
+    "confirmed" => "Bestätigt",
+    "active" => "Aktiv",
+    "un-active" => "Inaktiv",
+    "not-active" => "Nicht Aktiv",
+    "approved" => "Genehmigt",
+    "Select_Verfication_Status" => "Überprüfungsstatus Auswählen",
+    "No" => "NEIN",
+    "Yes" => "Ja",
 ];

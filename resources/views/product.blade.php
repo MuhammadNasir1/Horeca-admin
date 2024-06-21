@@ -26,10 +26,14 @@
                         <tr>
                             <th>@lang('lang.STN')</th>
                             <th class="whitespace-nowrap">@lang('lang.Image')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Code')</th>
                             <th class="whitespace-nowrap">@lang('lang.Name')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Brands')</th>
                             <th class="whitespace-nowrap">@lang('lang.Category/Sub-Category')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Tax')</th>
                             <th class="whitespace-nowrap">@lang('lang.Price')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Unit')</th>
+                            <th class="whitespace-nowrap">@lang('lang.quantity')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Alert')</th>
                             <th class="whitespace-nowrap">@lang('lang.Status')</th>
                             <th class="flex  justify-center">@lang('lang.Action')</th>
                         </tr>
@@ -43,11 +47,19 @@
                                         src="{{ isset($data->image) ? asset($data->image) : asset('images/favicon(32X32).png') }}"
                                         alt="product Image">
                                 </td>
-                                <td>{{ $data->code }}</td>
                                 <td>{{ $data->name }}</td>
+                                <td>{{ $data->brand }}</td>
                                 <td>{{ $data->category }} / {{ $data->sub_category }}</td>
+                                <td>{{ $data->tax }}</td>
                                 <td>{{ $data->rate }}</td>
-                                <td>{{ $data->status }}</td>
+                                <td>{{ $data->product_unit }}</td>
+                                <td>{{ $data->quantity }}</td>
+                                <td><button
+                                        class="p-1 rounded-md min-w-10 font-bold text-white {{ $data->quantity_alert > $data->quantity ? 'bg-green-700' : 'bg-red-600' }}">
+                                        {{ $data->quantity_alert }}</button></td>
+                                <td class="whitespace-nowrap"> <button
+                                        class="p-1 rounded-md min-w-10 font-bold text-white {{ $data->status == 'active' ? 'bg-green-700' : 'bg-red-600' }}">
+                                        @lang('lang.' . $data->status)</button>
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
 
@@ -124,7 +136,8 @@
                                 @endforeach
                             </select>
                         </div>
-                        <button data-modal-target="addcategorymodal" data-modal-toggle="addcategorymodal" type="button"
+                        <button data-modal-target="addcategorymodal" data-modal-toggle="addcategorymodal"
+                            type="button"
                             class="bg-primary text-white  rounded-[4px] py-1.5 px-3 mt-6 mb-3 uaddBtn
                             font-semibold">+</button>
                     </div>

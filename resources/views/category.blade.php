@@ -37,7 +37,10 @@
                                 </td>
                                 <td>{{ $data->name }}</td>
                                 <td>{{ $data->tax }}</td>
-                                <td>{{ $data->status }}</td>
+
+                                <td class="whitespace-nowrap"> <button
+                                        class="p-1 rounded-md min-w-10 font-bold text-white {{ $data->status == 'active' ? 'bg-green-700' : 'bg-red-600' }}">
+                                        @lang('lang.' . $data->status)
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
 

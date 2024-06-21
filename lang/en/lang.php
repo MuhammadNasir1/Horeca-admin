@@ -206,14 +206,20 @@ return [
     "Note" => "Note",
     "Postal_Code_Here" => "Postal Code Here",
     "Food_Service_By" => "FoodService By",
-
-
     "Brands_List" => "Brands List",
     "Add_Brand" => "Add Brand",
     "Brand_Name" => "Brand Name",
     "Purchase_Price" => "Purchase Price",
     "Brands" => "Brands",
+    "Alert" => "Alert",
 
+    "pending" => "pending",
+    "confirmed" => "confirmed",
+    "shipped" => "shipped",
 
+    "active" => "Active",
+    "un-active" => "Un-Active",
+    "not-active" => "Not-Active",
+    "approved" => "Approved",
 
 ];

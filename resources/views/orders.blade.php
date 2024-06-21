@@ -29,7 +29,8 @@
                                 <td>{{ $data->order_date }}</td>
                                 <td>{{ $data->order_from }}</td>
                                 <td>{{ $data->customer_name }}</td>
-                                <td>{{ $data->customer_phone }}</td>
+                                <td><a class="text-blue-700"
+                                        href="tel:{{ $data->customer_phone }}">{{ $data->customer_phone }}</a></td>
                                 <td>{{ $data->grand_total }}&euro;</td>
                                 <td>
 
@@ -53,8 +54,8 @@
                                                 break;
                                         }
                                     @endphp
-                                    <button class="px-4 py-2 rounded-md   {{ $bgColorClass }} text-white font-bold">
-                                        {{ $data->order_status }}</button>
+                                    <button class="p-1 rounded-md   {{ $bgColorClass }} text-white font-bold">
+                                        @lang('lang.' . $data->order_status)</button>
                                 </td>
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
@@ -63,7 +64,7 @@
                                         <button id="dropdownDefaultButton{{ $x }}"
                                             data-dropdown-toggle="dropdown{{ $x }}"
                                             class="text-white bg-green-500 font-bold rounded-lg px-5 py-2.5 text-center inline-flex items-center "
-                                            type="button">@lang('lang.Select_Action') <svg class="w-2.5 h-2.5 ms-3"
+                                            type="button">@lang('lang.Action') <svg class="w-2.5 h-2.5 ms-3"
                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                                                 viewBox="0 0 10 6">
                                                 <path stroke="currentColor" stroke-linecap="round"

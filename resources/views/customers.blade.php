@@ -19,9 +19,11 @@
                         <tr>
                             <th class="whitespace-nowrap">@lang('lang.STN')</th>
                             <th class="whitespace-nowrap">@lang('lang.Name')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Email')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Phone_No')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Email') / @lang('lang.Phone_No')</th>
+                            <th class="whitespace-nowrap">@lang('lang.city')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Tax_Number')</th>
                             <th class="whitespace-nowrap">@lang('lang.Role')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Type_Of_Client')</th>
                             <th class="whitespace-nowrap">@lang('lang.Verification')</th>
                             <th class="flex  justify-center">@lang('lang.Action')</th>
                         </tr>
@@ -31,12 +33,17 @@
                             <tr class="pt-4">
                                 <td>{{ $x + 1 }}</td>
                                 <td>{{ $data->name }}</td>
-                                <td>{{ $data->email }}</td>
-                                <td>{{ $data->phone }}</td>
+                                <td><a class="text-blue-700" href="mailto:{{ $data->email }} ">{{ $data->email }}</a>
+                                    <br>
+                                    <a class="text-blue-700" href="tel:{{ $data->phone }}">{{ $data->phone }}</a>
+                                </td>
+                                <td>{{ $data->city }}</td>
+                                <td>{{ $data->tax_number }}</td>
                                 <td>{{ $data->role }}</td>
+                                <td>{{ $data->client_type }}</td>
                                 <td> <button
-                                        class="px-4 py-2 rounded-md  {{ $data->verification == 'pending' ? 'bg-red-600' : 'bg-green-700' }}  text-white font-bold">
-                                        {{ $data->verification }}<button></td>
+                                        class="px-1 py-1 rounded-md  {{ $data->verification == 'pending' ? 'bg-red-600' : 'bg-green-700' }}  text-white font-bold">
+                                        @lang('lang.' . $data->verification)<button></td>
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
 
@@ -56,10 +63,19 @@
                                         {{-- <button updateId="{{ $data->id }}" data-modal-target="changeStatus"
                                             data-modal-toggle="changeStatus" class="">
                                             @lang('lang.Change_Status') </button> --}}
-                                        <button updateId="{{ $data->id }}" data-modal-target="changeStatus"
+                                        {{-- <button updateId="{{ $data->id }}" data-modal-target="changeStatus"
                                             data-modal-toggle="changeStatus"
                                             class="px-4 py-3 rounded-md  bg-primary  text-white font-bold updateVerBtn">
-                                            @lang('lang.Change_Verfication')<button>
+                                            @lang('lang.Change_Verfication')<button> --}}
+
+                                        <button updateId="{{ $data->id }}" data-modal-target="changeStatus"
+                                            data-modal-toggle="changeStatus">
+                                            <svg class="h-[40px] w-[40px]" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                                <path
+                                                    d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z" />
+                                            </svg>
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
