@@ -334,10 +334,10 @@ class productController extends Controller
                     ) {
                         // If it starts with "storage/", keep it as is
                         // You may need to adjust this condition based on your actual folder structure
-                        $product->image = '/' . $product->image; // Assuming it's a relative path
+                        $product->image = $baseUrl .  $product->image; // Assuming it's a relative path
                     } else {
                         // If it doesn't start with "storage/", prepend the base URL
-                        $product->image = $baseUrl . $product->image;
+                        $product->image = $product->image;
                     }
                 }
             }
