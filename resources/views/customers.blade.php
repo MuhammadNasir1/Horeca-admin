@@ -17,15 +17,15 @@
                 <table id="datatable">
                     <thead class="py-1 bg-primary text-white">
                         <tr>
-                            <th class="whitespace-nowrap">@lang('lang.STN')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Name')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Email') / @lang('lang.Phone_No')</th>
-                            <th class="whitespace-nowrap">@lang('lang.city')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Tax_Number')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Role')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Type_Of_Client')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Verification')</th>
-                            <th class="flex  justify-center">@lang('lang.Action')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.STN')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Name')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Email') / @lang('lang.Phone_No')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.city')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Tax_Number')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Role')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Type_Of_Client')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Verification')</th>
+                            <th class="flex text-sm justify-center">@lang('lang.Action')</th>
                         </tr>
                     </thead>
                     <tbody>

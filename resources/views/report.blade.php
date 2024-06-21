@@ -61,13 +61,14 @@
                     <tbody>
                         @foreach ($reports as $i => $report)
                             <tr>
-                                <td>{{ $i + 1 }}</td>
-                                <td>{{ $report->customer_name }}</td>
-                                <td>{{ $report->customer_phone }}</td>
-                                <td>{{ $report->customer_adress }}</td>
-                                <td>{{ $report->sub_total }}</td>
-                                <td>{{ $report->discount }}% / {{ $report->delivery_charges }}&euro;</td>
-                                <td class="grandTotal">{{ $report->grand_total }}</td>
+                                <td class="text-sm">{{ $i + 1 }}</td>
+                                <td class="text-sm">{{ $report->customer_name }}</td>
+                                <td class="text-sm">{{ $report->customer_phone }}</td>
+                                <td class="text-sm">{{ $report->customer_adress }}</td>
+                                <td class="text-sm">{{ $report->sub_total }}</td>
+                                <td class="text-sm">{{ $report->discount }}% / {{ $report->delivery_charges }}&euro;
+                                </td>
+                                <td class="grandTotal text-sm">{{ $report->grand_total }}</td>
 
                             </tr>
                         @endforeach

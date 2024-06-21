@@ -17,12 +17,12 @@
                 <table id="datatable" class="overflow-scroll">
                     <thead class="py-6 bg-primary text-white">
                         <tr>
-                            <th>@lang('lang.STN')</th>
-                            <th>@lang('lang.Image')</th>
-                            <th>@lang('lang.Name')</th>
-                            <th>@lang('lang.Tax')</th>
-                            <th>@lang('lang.Status')</th>
-                            <th class="flex  justify-center">@lang('lang.Action')</th>
+                            <th class="text-sm">@lang('lang.STN')</th>
+                            <th class="text-sm">@lang('lang.Image')</th>
+                            <th class="text-sm">@lang('lang.Name')</th>
+                            <th class="text-sm">@lang('lang.Tax')</th>
+                            <th class="text-sm">@lang('lang.Status')</th>
+                            <th class="flex  justify-center text-sm">@lang('lang.Action')</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,16 +47,28 @@
                                         <button data-modal-target="Updatecategorymodal"
                                             data-modal-toggle="Updatecategorymodal"
                                             class=" updateBtn cursor-pointer w-[42px]  "
-                                            updateId="{{ $data->id }}"><img width="38px"
-                                                src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
-                                        {{-- <a class="w-[42px]" href="../delCategory/{{ $data->id }}"><img
-                                                width="38px" src="{{ asset('images/icons/delete.svg') }}"
-                                                alt="update"></button></a> --}}
+                                            updateId="{{ $data->id }}"><svg class="h-[40px] w-[40px]" width="40"
+                                                height="40" viewBox="0 0 36 36" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="18" cy="18" r="18" fill="#027C55E7" />
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M16.1627 23.6197L22.3132 15.666C22.6474 15.2371 22.7663 14.7412 22.6549 14.2363C22.5583 13.7773 22.276 13.3408 21.8526 13.0097L20.8201 12.1895C19.9213 11.4747 18.8071 11.5499 18.1683 12.3701L17.4775 13.2663C17.3883 13.3785 17.4106 13.544 17.522 13.6343C17.522 13.6343 19.2676 15.0339 19.3048 15.064C19.4236 15.1769 19.5128 15.3274 19.5351 15.508C19.5722 15.8616 19.3271 16.1927 18.9631 16.2379C18.7922 16.2605 18.6288 16.2078 18.51 16.11L16.6752 14.6502C16.5861 14.5832 16.4524 14.5975 16.3781 14.6878L12.0178 20.3314C11.7355 20.6851 11.639 21.1441 11.7355 21.588L12.2927 24.0035C12.3224 24.1314 12.4338 24.2217 12.5675 24.2217L15.0188 24.1916C15.4645 24.1841 15.8804 23.9809 16.1627 23.6197ZM19.5948 22.8676H23.5918C23.9818 22.8676 24.299 23.1889 24.299 23.5839C24.299 23.9797 23.9818 24.3003 23.5918 24.3003H19.5948C19.2048 24.3003 18.8876 23.9797 18.8876 23.5839C18.8876 23.1889 19.2048 22.8676 19.5948 22.8676Z"
+                                                    fill="white" />
+                                            </svg>
+                                        </button>
+
 
                                         <button data-modal-target="deleteData" data-modal-toggle="deleteData"
                                             class="delButton" delId="{{ $data->id }}">
-                                            <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
-                                                alt="delete" class="cursor-pointer">
+                                            <svg class="h-[40px] w-[40px]" viewBox="0 0 36 36" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <circle opacity="0.1" cx="18" cy="18" r="18"
+                                                    fill="#DF6F79" />
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M23.4905 13.7433C23.7356 13.7433 23.9396 13.9468 23.9396 14.2057V14.4451C23.9396 14.6977 23.7356 14.9075 23.4905 14.9075H13.0493C12.8036 14.9075 12.5996 14.6977 12.5996 14.4451V14.2057C12.5996 13.9468 12.8036 13.7433 13.0493 13.7433H14.8862C15.2594 13.7433 15.5841 13.478 15.6681 13.1038L15.7642 12.6742C15.9137 12.0889 16.4058 11.7002 16.9688 11.7002H19.5704C20.1273 11.7002 20.6249 12.0889 20.7688 12.6433L20.8718 13.1032C20.9551 13.478 21.2798 13.7433 21.6536 13.7433H23.4905ZM22.5573 22.4946C22.7491 20.7073 23.0849 16.4611 23.0849 16.4183C23.0971 16.2885 23.0548 16.1656 22.9709 16.0667C22.8808 15.9741 22.7669 15.9193 22.6412 15.9193H13.9028C13.7766 15.9193 13.6565 15.9741 13.5732 16.0667C13.4886 16.1656 13.447 16.2885 13.4531 16.4183C13.4542 16.4261 13.4663 16.5757 13.4864 16.8258C13.5759 17.9366 13.8251 21.0305 13.9861 22.4946C14.1001 23.5731 14.8078 24.251 15.8328 24.2756C16.6238 24.2938 17.4387 24.3001 18.272 24.3001C19.0569 24.3001 19.854 24.2938 20.6696 24.2756C21.7302 24.2573 22.4372 23.5914 22.5573 22.4946Z"
+                                                    fill="#D11A2A" />
+                                            </svg>
+
                                         </button>
                                     </div>
                                 </td>
@@ -137,8 +149,8 @@
                         data-modal-hide="Updatecategorymodal">
                         <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                         </svg>
                     </button>
                 </div>
