@@ -7,6 +7,7 @@ use App\Models\category;
 use App\Models\product;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Validated;
+use Illuminate\Support\Facades\URL;
 use Maatwebsite\Excel\Facades\Excel;
 
 class productController extends Controller
@@ -317,6 +318,16 @@ class productController extends Controller
                 $products = Product::where('category', $category)->orWhere('sub_category', $category)->where('status', 'active')->get();
             } else {
                 $products = Product::where('status', 'active')->get();
+            }
+            $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
+
+            $host = $_SERVER['HTTP_HOST'];
+            $baseUrl = $protocol . $host . '/';
+            foreach ($products as $product) {
+                if ($product->image !== null) {
+
+                    $product->image = $baseUrl . $product->image;
+                }
             }
             return response()->json(['success' => true, 'message' => "Products get successfully", "products" =>  $products], 200);
         } catch (\Exception $e) {
