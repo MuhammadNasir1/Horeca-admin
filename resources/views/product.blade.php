@@ -137,7 +137,32 @@
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="code" id="productCode" placeholder=" @lang('lang.Code_Here')" required>
                     </div>
-                    <div class="flex gap-2">
+                    <div class="">
+                        <label class="text-[14px] font-normal" for="tags">@lang('lang.Product_Tags')</label>
+                        <input type="text"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="product_tags" id="tags" placeholder=" @lang('lang.Tags_Here')">
+                    </div>
+                    <div>
+                        <div class="flex gap-2  mt-4">
+                            <div class="w-full">
+                                <label class="text-[14px] font-normal" for="Ubrands">@lang('lang.Brand_Name')</label>
+                                <select
+                                    class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] category "
+                                    name="brand" id="Ubrands" required>
+                                    @foreach ($brands as $brand)
+                                        <option value="{{ $brand->name }}">
+                                            {{ $brand->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <button data-modal-target="addbrandmodal" data-modal-toggle="addbrandmodal"
+                                type="button"
+                                class="bg-primary text-white  rounded-[4px] py-1.5 px-3 mt-6 mb-3 uaddBtn
+                            font-semibold">+</button>
+                        </div>
+                    </div>
+                    <div class="flex mt-4 gap-2">
                         <div class="w-full">
                             <label class="text-[14px] font-normal" for="category">@lang('lang.Product_Category')</label>
                             <select
@@ -165,31 +190,6 @@
                                 <option value="{{ $Subcategory->sub_category }}">
                             @endforeach
                         </datalist>
-                    </div>
-                    <div>
-                        <div class="flex gap-2  mt-4">
-                            <div class="w-full">
-                                <label class="text-[14px] font-normal" for="Ubrands">@lang('lang.Brand_Name')</label>
-                                <select
-                                    class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] category "
-                                    name="brand" id="Ubrands" required>
-                                    @foreach ($brands as $brand)
-                                        <option value="{{ $brand->name }}">
-                                            {{ $brand->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <button data-modal-target="addbrandmodal" data-modal-toggle="addbrandmodal"
-                                type="button"
-                                class="bg-primary text-white  rounded-[4px] py-1.5 px-3 mt-6 mb-3 uaddBtn
-                            font-semibold">+</button>
-                        </div>
-                    </div>
-                    <div class="mt-4  ">
-                        <label class="text-[14px] font-normal" for="tags">@lang('lang.Product_Tags')</label>
-                        <input type="text"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="product_tags" id="tags" placeholder=" @lang('lang.Tags_Here')">
                     </div>
                     <div class="mt-4 ">
                         <label class="text-[14px] font-normal" for="purchasePrice">@lang('lang.Purchase_Price')</label>
@@ -402,34 +402,11 @@
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="code" id="productCode" placeholder=" @lang('lang.Code_Here')" required>
                     </div>
-                    <div class="flex gap-2 lg:mt-0 mt-4">
-                        <div class="w-full">
-                            <label class="text-[14px] font-normal" for="category">@lang('lang.Product_Category')</label>
-                            <select
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] category "
-                                name="category" id="category" required>
-                                @foreach ($categories as $category)
-                                    <option category-tax="{{ $category->tax }}" value="{{ $category->name }}">
-                                        {{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <button data-modal-target="addcategorymodal" data-modal-toggle="addcategorymodal"
-                            type="button"
-                            class="bg-primary text-white  rounded-[4px] py-1.5 px-3 mt-6 mb-3 uaddBtn
-                            font-semibold">+</button>
-                    </div>
-                    <div class="mt-4">
-                        <label class="text-[14px] font-normal" for="subCategory">@lang('lang.Product_Sub_Category')</label>
-                        <input type="text" required
+                    <div class=" lg:mt-0 mt-4">
+                        <label class="text-[14px] font-normal" for="tags">@lang('lang.Product_Tags')</label>
+                        <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="sub_category" list="subcategory" id="subCategory"
-                            placeholder=" @lang('lang.Sub_Category_Here')">
-                        <datalist id="subcategory">
-                            @foreach ($Subcategories as $Subcategory)
-                                <option value="{{ $Subcategory->sub_category }}">
-                            @endforeach
-                        </datalist>
+                            name="product_tags" id="tags" placeholder=" @lang('lang.Tags_Here')">
                     </div>
                     <div>
                         <div class="flex gap-2  mt-4">
@@ -450,12 +427,36 @@
                             font-semibold">+</button>
                         </div>
                     </div>
-
-                    <div class="mt-4  ">
-                        <label class="text-[14px] font-normal" for="tags">@lang('lang.Product_Tags')</label>
-                        <input type="text"
+                    <div>
+                        <div class="flex gap-2  mt-4">
+                            <div class="w-full">
+                                <label class="text-[14px] font-normal" for="category">@lang('lang.Product_Category')</label>
+                                <select
+                                    class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] category "
+                                    name="category" id="category" required>
+                                    @foreach ($categories as $category)
+                                        <option category-tax="{{ $category->tax }}" value="{{ $category->name }}">
+                                            {{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <button data-modal-target="addcategorymodal" data-modal-toggle="addcategorymodal"
+                                type="button"
+                                class="bg-primary text-white  rounded-[4px] py-1.5 px-3 mt-6 mb-3 uaddBtn
+                            font-semibold">+</button>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <label class="text-[14px] font-normal" for="subCategory">@lang('lang.Product_Sub_Category')</label>
+                        <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="product_tags" id="tags" placeholder=" @lang('lang.Tags_Here')">
+                            name="sub_category" list="subcategory" id="subCategory"
+                            placeholder=" @lang('lang.Sub_Category_Here')">
+                        <datalist id="subcategory">
+                            @foreach ($Subcategories as $Subcategory)
+                                <option value="{{ $Subcategory->sub_category }}">
+                            @endforeach
+                        </datalist>
                     </div>
                     <div class="mt-4 ">
                         <label class="text-[14px] font-normal" for="purchasePrice">@lang('lang.Purchase_Price')</label>
