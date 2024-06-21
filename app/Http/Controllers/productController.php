@@ -327,6 +327,8 @@ class productController extends Controller
                 // if ($product->image !== null) {
                 if ($product->image !== null && strpos($product->image, 'storage/') == 0) {
 
+
+
                     $product->image = $baseUrl . $product->image;
                 }
             }
