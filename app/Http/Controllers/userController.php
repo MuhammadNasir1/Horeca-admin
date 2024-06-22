@@ -26,7 +26,7 @@ class userController extends Controller
     // dashboard  Users Couny
     public function customers()
     {
-        $customers =  User::where('role', 'customer')->get();
+        $customers =  User::where('role', 'customer')->orWhere('role',  'distributor')->get();
         return view('customers', ['customers'  => $customers]);
     }
 
@@ -140,7 +140,7 @@ class userController extends Controller
     {
         $totalOrders = orders::count();
         $totalProduct = product::count();
-        $totalUser = User::count();
+        $totalUser = User::where('role', 'customer')->orWhere('role',  'distributor')->count();
         $pendingOrders = orders::where('order_status', 'pending')->count();
         $confirmedOrders = orders::where('order_status', 'confirmed')->count();
         $topProducts = order_items::select('product_id', DB::raw('count(*) as total'))
