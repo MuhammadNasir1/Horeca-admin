@@ -72,7 +72,7 @@
 
                                         </button>
                                         <button updateId="{{ $data->id }}" data-modal-target="changeStatus"
-                                            data-modal-toggle="changeStatus">
+                                            data-modal-toggle="changeStatus" class="updateVerBtn">
                                             <svg class="h-[40px] w-[40px]" xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                                                 <path
