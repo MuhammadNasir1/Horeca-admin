@@ -5,12 +5,12 @@
     <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
         <div>
             <div class="flex justify-end sm:justify-between px-[20px] mb-3">
-                <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Categories_List')</h3>
+                <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Brands_List')</h3>
                 <div>
 
-                    <button data-modal-target="addcategorymodal" data-modal-toggle="addcategorymodal"
+                    <button data-modal-target="addbrandmodal" data-modal-toggle="addbrandmodal"
                         class="bg-primary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
-                        @lang('lang.Add_Category')</button>
+                        @lang('lang.Add_Brand')</button>
                 </div>
             </div>
             <div class="overflow-x-auto">
@@ -20,13 +20,12 @@
                             <th class="text-sm">@lang('lang.STN')</th>
                             <th class="text-sm">@lang('lang.Image')</th>
                             <th class="text-sm">@lang('lang.Name')</th>
-                            <th class="text-sm">@lang('lang.Tax')</th>
-                            <th class="text-sm">@lang('lang.Status')</th>
-                            <th class="flex  justify-center text-sm">@lang('lang.Action')</th>
+                            <th class="flex text-sm  justify-center">@lang('lang.Action')</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($categories as $x => $data)
+
+                        @foreach ($brands as $x => $data)
                             <tr class="pt-4">
                                 <td>{{ $x + 1 }}</td>
                                 <td class="w-[220px]">
@@ -36,11 +35,6 @@
 
                                 </td>
                                 <td>{{ $data->name }}</td>
-                                <td>{{ $data->tax }}</td>
-
-                                <td class="whitespace-nowrap"> <button
-                                        class="p-1 rounded-md min-w-10 font-bold text-white {{ $data->status == 'active' ? 'bg-green-700' : 'bg-red-600' }}">
-                                        @lang('lang.' . $data->status)
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
 
@@ -136,7 +130,7 @@
 <div id="Updatecategorymodal" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
     <div class="relative p-4 w-full   max-w-4xl max-h-full ">
-        <form id="UpdatecategoryData" method="post" enctype="multipart/form-data">
+        <form id="UpdatebrandData" method="post" enctype="multipart/form-data">
             @csrf
             <input type="hidden" id="update_id">
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
@@ -159,7 +153,7 @@
                         <label class="text-[14px] font-normal" for="Name">@lang('lang.Category_Name')</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="name" id="CategoryName" placeholder=" @lang('lang.Name_Here')">
+                            name="name" id="brandName" placeholder=" @lang('lang.Name_Here')">
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="tax">@lang('lang.Tax')</label>
@@ -213,20 +207,20 @@
 
     </div>
 </div>
-{{-- ============ add  category modal  =========== --}}
-<div id="addcategorymodal" data-modal-backdrop="static"
+{{-- ============ add  Brand modal  =========== --}}
+<div id="addbrandmodal" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
     <div class="relative p-4 w-full   max-w-4xl max-h-full ">
-        <form id="categoryData" method="post" enctype="multipart/form-data">
+        <form id="brandData" method="post" enctype="multipart/form-data">
             @csrf
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                 <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
                     <h3 class="text-xl font-semibold text-white ">
-                        @lang('lang.Add_Category')
+                        @lang('lang.Add_Brand')
                     </h3>
                     <button type="button"
                         class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
-                        data-modal-hide="addcategorymodal">
+                        data-modal-hide="addbrandmodal">
                         <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 14 14">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -236,32 +230,16 @@
                 </div>
                 <div class="grid lg:grid-cols-2 gap-x-6 gap-y-4 mx-6 my-6">
                     <div>
-                        <label class="text-[14px] font-normal" for="Name">@lang('lang.Category_Name')</label>
+                        <label class="text-[14px] font-normal" for="Name">@lang('lang.Brand_Name')</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="name" id="CategoryName" placeholder=" @lang('lang.Name_Here')">
-                    </div>
-                    <div>
-                        <label class="text-[14px] font-normal" for="tax">@lang('lang.Tax')</label>
-                        <input type="text"
-                            class="w-full border-[#DEE2E6]  border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="tax" id="tax" placeholder="% @lang('lang.Here')">
+                            name="name" id="brandName" placeholder=" @lang('lang.Name_Here')">
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="image">@lang('lang.Image')</label>
                         <input type="file"
                             class="w-full border-[#DEE2E6]  border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="category_img" id="image">
-                    </div>
-                    <div class="">
-                        <label class="text-[14px] font-normal" for="Status">@lang('lang.Status')</label>
-                        <select
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="status" id="Status">
-                            <option value="active">@lang('lang.Active')</option>
-                            <option value="not-active">@lang('lang.Not_Active')</option>
-                        </select>
-
+                            name="image" id="image">
                     </div>
                 </div>
                 <div class="flex justify-end ">
@@ -301,13 +279,13 @@
     $(document).ready(function() {
         $('.delButton').click(function() {
             var id = $(this).attr('delId');
-            $('#delLink').attr('href', '../delCategory/' + id);
+            $('#delLink').attr('href', '../delBrand/' + id);
             console.log(id);
         });
         $(document).ready(function() {
             // insert data
-            $("#categoryData").submit(function(event) {
-                var url = "../addCategory";
+            $("#brandData").submit(function(event) {
+                var url = "../addBrand";
                 event.preventDefault();
 
                 var formData = new FormData(this);
@@ -324,7 +302,7 @@
                         $('#addBtn').attr('disabled', true);
                     },
                     success: function(response) {
-                        window.location.href = '../category';
+                        window.location.href = '../brands';
 
                     },
                     error: function(jqXHR) {
@@ -346,7 +324,7 @@
             // update  data
             $('.updateBtn').click(function() {
                 var updateId = $(this).attr('updateId');
-                var url = "../getCategoryData/" + updateId;
+                var url = "../getbrandData/" + updateId;
                 $.ajax({
                     type: "GET",
                     url: url,
@@ -354,7 +332,7 @@
                     success: function(response) {
                         var category = response.category;
                         $('#update_id').val(category.id);
-                        $('#CategoryName').val(category.name);
+                        $('#brandName').val(category.name);
                         $('#tax').val(category.tax);
                         $('#Status').val(category.status);
 
@@ -373,7 +351,7 @@
             })
 
 
-            $("#UpdatecategoryData").submit(function(event) {
+            $("#UpdatebrandData").submit(function(event) {
                 var updateId = $('#update_id').val();
                 var url = "../updateCategory/" + updateId;
                 event.preventDefault();
@@ -391,7 +369,7 @@
                         $('#uaddBtn').attr('disabled', true);
                     },
                     success: function(response) {
-                        window.location.href = '../category';
+                        window.location.href = '../brands';
 
 
                     },

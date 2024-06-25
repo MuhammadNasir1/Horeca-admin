@@ -27,6 +27,11 @@ class User extends Authenticatable
         'address',
         'user_image',
         'verification',
+        'tax_number',
+        'client_type',
+        'postal_code',
+        'city',
+        'note',
     ];
 
     /**

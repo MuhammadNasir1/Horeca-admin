@@ -24,14 +24,18 @@
                 <table id="datatable" class="overflow-scroll">
                     <thead class="py-6 bg-primary text-white">
                         <tr>
-                            <th>@lang('lang.STN')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Image')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Code')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Name')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Category/Sub-Category')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Price')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Status')</th>
-                            <th class="flex  justify-center">@lang('lang.Action')</th>
+                            <th class="text-sm">@lang('lang.STN')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Image')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Name')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Brands')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Category/Sub-Category')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Tax')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Price')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Unit')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.quantity')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Alert')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Status')</th>
+                            <th class="flex text-sm  justify-center">@lang('lang.Action')</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,26 +47,47 @@
                                         src="{{ isset($data->image) ? asset($data->image) : asset('images/favicon(32X32).png') }}"
                                         alt="product Image">
                                 </td>
-                                <td>{{ $data->code }}</td>
                                 <td>{{ $data->name }}</td>
+                                <td>{{ $data->brand }}</td>
                                 <td>{{ $data->category }} / {{ $data->sub_category }}</td>
+                                <td>{{ $data->tax }}</td>
                                 <td>{{ $data->rate }}</td>
-                                <td>{{ $data->status }}</td>
+                                <td>{{ $data->product_unit }}</td>
+                                <td>{{ $data->quantity }}</td>
+                                <td><button
+                                        class="p-1 rounded-md min-w-10 font-bold text-white {{ $data->quantity_alert > $data->quantity ? 'bg-green-700' : 'bg-red-600' }}">
+                                        {{ $data->quantity_alert }}</button></td>
+                                <td class="whitespace-nowrap"> <button
+                                        class="p-1 rounded-md min-w-10 font-bold text-white {{ $data->status == 'active' ? 'bg-green-700' : 'bg-red-600' }}">
+                                        @lang('lang.' . $data->status)</button>
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
 
                                         <button data-modal-target="Updateproductmodal"
                                             data-modal-toggle="Updateproductmodal"
                                             class=" updateBtn cursor-pointer  w-[42px]"
-                                            updateId="{{ $data->id }}"><img width="38px"
-                                                src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
-                                        {{-- <a class="w-[42px] md:w-full" href="../delProduct/{{ $data->id }}"><img
-                                                width="38px" src="{{ asset('images/icons/delete.svg') }}"
-                                                alt="update"></button></a> --}}
+                                            updateId="{{ $data->id }}"><svg class="h-[40px] w-[40px]"
+                                                width="40" height="40" viewBox="0 0 36 36" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="18" cy="18" r="18" fill="#027C55E7" />
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M16.1627 23.6197L22.3132 15.666C22.6474 15.2371 22.7663 14.7412 22.6549 14.2363C22.5583 13.7773 22.276 13.3408 21.8526 13.0097L20.8201 12.1895C19.9213 11.4747 18.8071 11.5499 18.1683 12.3701L17.4775 13.2663C17.3883 13.3785 17.4106 13.544 17.522 13.6343C17.522 13.6343 19.2676 15.0339 19.3048 15.064C19.4236 15.1769 19.5128 15.3274 19.5351 15.508C19.5722 15.8616 19.3271 16.1927 18.9631 16.2379C18.7922 16.2605 18.6288 16.2078 18.51 16.11L16.6752 14.6502C16.5861 14.5832 16.4524 14.5975 16.3781 14.6878L12.0178 20.3314C11.7355 20.6851 11.639 21.1441 11.7355 21.588L12.2927 24.0035C12.3224 24.1314 12.4338 24.2217 12.5675 24.2217L15.0188 24.1916C15.4645 24.1841 15.8804 23.9809 16.1627 23.6197ZM19.5948 22.8676H23.5918C23.9818 22.8676 24.299 23.1889 24.299 23.5839C24.299 23.9797 23.9818 24.3003 23.5918 24.3003H19.5948C19.2048 24.3003 18.8876 23.9797 18.8876 23.5839C18.8876 23.1889 19.2048 22.8676 19.5948 22.8676Z"
+                                                    fill="white" />
+                                            </svg>
+                                        </button>
+
+
                                         <button data-modal-target="deleteData" data-modal-toggle="deleteData"
                                             class="delButton" delId="{{ $data->id }}">
-                                            <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
-                                                alt="delete" class="cursor-pointer">
+                                            <svg class="h-[40px] w-[40px]" viewBox="0 0 36 36" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <circle opacity="0.1" cx="18" cy="18" r="18"
+                                                    fill="#DF6F79" />
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M23.4905 13.7433C23.7356 13.7433 23.9396 13.9468 23.9396 14.2057V14.4451C23.9396 14.6977 23.7356 14.9075 23.4905 14.9075H13.0493C12.8036 14.9075 12.5996 14.6977 12.5996 14.4451V14.2057C12.5996 13.9468 12.8036 13.7433 13.0493 13.7433H14.8862C15.2594 13.7433 15.5841 13.478 15.6681 13.1038L15.7642 12.6742C15.9137 12.0889 16.4058 11.7002 16.9688 11.7002H19.5704C20.1273 11.7002 20.6249 12.0889 20.7688 12.6433L20.8718 13.1032C20.9551 13.478 21.2798 13.7433 21.6536 13.7433H23.4905ZM22.5573 22.4946C22.7491 20.7073 23.0849 16.4611 23.0849 16.4183C23.0971 16.2885 23.0548 16.1656 22.9709 16.0667C22.8808 15.9741 22.7669 15.9193 22.6412 15.9193H13.9028C13.7766 15.9193 13.6565 15.9741 13.5732 16.0667C13.4886 16.1656 13.447 16.2885 13.4531 16.4183C13.4542 16.4261 13.4663 16.5757 13.4864 16.8258C13.5759 17.9366 13.8251 21.0305 13.9861 22.4946C14.1001 23.5731 14.8078 24.251 15.8328 24.2756C16.6238 24.2938 17.4387 24.3001 18.272 24.3001C19.0569 24.3001 19.854 24.2938 20.6696 24.2756C21.7302 24.2573 22.4372 23.5914 22.5573 22.4946Z"
+                                                    fill="#D11A2A" />
+                                            </svg>
+
                                         </button>
                                     </div>
                                 </td>
@@ -90,7 +115,7 @@
                         @lang('lang.Update_Product')
                     </h3>
                     <button type="button"
-                        class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
+                        class=" absolute right-5 text-white bg-transparent rounded-lg text-sm w-8 h-8 "
                         data-modal-hide="Updateproductmodal">
                         <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 14 14">
@@ -112,7 +137,32 @@
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="code" id="productCode" placeholder=" @lang('lang.Code_Here')" required>
                     </div>
-                    <div class="flex gap-2">
+                    <div class="">
+                        <label class="text-[14px] font-normal" for="tags">@lang('lang.Product_Tags')</label>
+                        <input type="text"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="product_tags" id="tags" placeholder=" @lang('lang.Tags_Here')">
+                    </div>
+                    <div>
+                        <div class="flex gap-2  mt-4">
+                            <div class="w-full">
+                                <label class="text-[14px] font-normal" for="Ubrands">@lang('lang.Brand_Name')</label>
+                                <select
+                                    class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] category "
+                                    name="brand" id="Ubrands" required>
+                                    @foreach ($brands as $brand)
+                                        <option value="{{ $brand->name }}">
+                                            {{ $brand->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <button data-modal-target="addbrandmodal" data-modal-toggle="addbrandmodal"
+                                type="button"
+                                class="bg-primary text-white  rounded-[4px] py-1.5 px-3 mt-6 mb-3 uaddBtn
+                            font-semibold">+</button>
+                        </div>
+                    </div>
+                    <div class="flex mt-4 gap-2">
                         <div class="w-full">
                             <label class="text-[14px] font-normal" for="category">@lang('lang.Product_Category')</label>
                             <select
@@ -124,7 +174,8 @@
                                 @endforeach
                             </select>
                         </div>
-                        <button data-modal-target="addcategorymodal" data-modal-toggle="addcategorymodal" type="button"
+                        <button data-modal-target="addcategorymodal" data-modal-toggle="addcategorymodal"
+                            type="button"
                             class="bg-primary text-white  rounded-[4px] py-1.5 px-3 mt-6 mb-3 uaddBtn
                             font-semibold">+</button>
                     </div>
@@ -132,13 +183,19 @@
                         <label class="text-[14px] font-normal" for="subCategory">@lang('lang.Product_Sub_Category')</label>
                         <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="sub_category" id="subCategory" placeholder=" @lang('lang.Sub_Category_Here')" required>
+                            name="sub_category" id="subCategory" list="subcategories"
+                            placeholder=" @lang('lang.Sub_Category_Here')" required>
+                        <datalist id="subcategories">
+                            @foreach ($Subcategories as $Subcategory)
+                                <option value="{{ $Subcategory->sub_category }}">
+                            @endforeach
+                        </datalist>
                     </div>
-                    <div class="mt-4  ">
-                        <label class="text-[14px] font-normal" for="tags">@lang('lang.Product_Tags')</label>
+                    <div class="mt-4 ">
+                        <label class="text-[14px] font-normal" for="purchasePrice">@lang('lang.Purchase_Price')</label>
                         <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="product_tags" id="tags" placeholder=" @lang('lang.Tags_Here')">
+                            name="purchase_price" id="purchasePrice" placeholder=" @lang('lang.Price_Here')">
                     </div>
                     <div class="grid grid-cols-3  gap-4  mt-4">
                         <div>
@@ -187,6 +244,7 @@
                         <div>
                             <label class="text-[14px] font-normal" for="unit_quantity">@lang('lang.Unit_Quantity')</label>
                             <input type="text"
+<<<<<<< HEAD
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                                 name="unit_quantity" id="unit_quantity" placeholder=" @lang('lang.Quantity_Here')" required>
 
@@ -197,19 +255,38 @@
                         <div>
                             <label class="text-[14px] font-normal" for="Status">@lang('lang.Status')</label>
                             <select
+=======
+>>>>>>> 7aed460a113544a91ae07bc9a13b655d39f4dda8
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="status" id="Status" required>
-                                <option value="active">@lang('lang.Active')</option>
-                                <option value="un-active">@lang('lang.Not_Active')</option>
-                                <option value="un-active">@lang('lang.Not_Active')</option>
-                            </select>
+                                name="unit_quantity" id="unit_quantity" placeholder=" @lang('lang.Quantity_Here')" required>
 
                         </div>
+<<<<<<< HEAD
                         <div> <label class="text-[14px] font-normal" for="image">@lang('lang.Product_Image')</label>
                             <input type="file"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                                 name="product_image" id="image">
                         </div>
+=======
+
+                    </div>
+                    <div class="mt-4">
+                        <label class="text-[14px] font-normal" for="Status">@lang('lang.Status')</label>
+                        <select
+                            class="w-50% border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="status" id="Status" required>
+                            <option value="active">@lang('lang.Active')</option>
+                            <option value="un-active">@lang('lang.Not_Active')</option>
+                            <option value="un-active">@lang('lang.Not_Active')</option>
+                        </select>
+
+                    </div>
+                    <div class="mt-4">
+                        <label class="text-[14px] font-normal" for="image">@lang('lang.Product_Image')</label>
+                        <input type="file"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="product_image" id="image">
+>>>>>>> 7aed460a113544a91ae07bc9a13b655d39f4dda8
                     </div>
                     <div class="mt-4 col-span-3">
                         <label class="text-[14px] font-normal" for="description">@lang('lang.Product_Description')</label>
@@ -346,34 +423,67 @@
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="code" id="productCode" placeholder=" @lang('lang.Code_Here')" required>
                     </div>
-                    <div class="flex gap-2 lg:mt-0 mt-4">
-                        <div class="w-full">
-                            <label class="text-[14px] font-normal" for="category">@lang('lang.Product_Category')</label>
-                            <select
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] category "
-                                name="category" id="category" required>
-                                @foreach ($categories as $category)
-                                    <option category-tax="{{ $category->tax }}" value="{{ $category->name }}">
-                                        {{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <button data-modal-target="addcategorymodal" data-modal-toggle="addcategorymodal"
-                            type="button"
-                            class="bg-primary text-white  rounded-[4px] py-1.5 px-3 mt-6 mb-3 uaddBtn
+                    <div class=" lg:mt-0 mt-4">
+                        <label class="text-[14px] font-normal" for="tags">@lang('lang.Product_Tags')</label>
+                        <input type="text"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="product_tags" id="tags" placeholder=" @lang('lang.Tags_Here')">
+                    </div>
+                    <div>
+                        <div class="flex gap-2  mt-4">
+                            <div class="w-full">
+                                <label class="text-[14px] font-normal" for="brands">@lang('lang.Brand_Name')</label>
+                                <select
+                                    class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] category "
+                                    name="brand" id="brands" required>
+                                    @foreach ($brands as $brand)
+                                        <option value="{{ $brand->name }}">
+                                            {{ $brand->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <button data-modal-target="addbrandmodal" data-modal-toggle="addbrandmodal"
+                                type="button"
+                                class="bg-primary text-white  rounded-[4px] py-1.5 px-3 mt-6 mb-3 uaddBtn
                             font-semibold">+</button>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex gap-2  mt-4">
+                            <div class="w-full">
+                                <label class="text-[14px] font-normal" for="category">@lang('lang.Product_Category')</label>
+                                <select
+                                    class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] category "
+                                    name="category" id="category" required>
+                                    @foreach ($categories as $category)
+                                        <option category-tax="{{ $category->tax }}" value="{{ $category->name }}">
+                                            {{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <button data-modal-target="addcategorymodal" data-modal-toggle="addcategorymodal"
+                                type="button"
+                                class="bg-primary text-white  rounded-[4px] py-1.5 px-3 mt-6 mb-3 uaddBtn
+                            font-semibold">+</button>
+                        </div>
                     </div>
                     <div class="mt-4">
                         <label class="text-[14px] font-normal" for="subCategory">@lang('lang.Product_Sub_Category')</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="sub_category" id="subCategory" placeholder=" @lang('lang.Sub_Category_Here')">
+                            name="sub_category" list="subcategory" id="subCategory"
+                            placeholder=" @lang('lang.Sub_Category_Here')">
+                        <datalist id="subcategory">
+                            @foreach ($Subcategories as $Subcategory)
+                                <option value="{{ $Subcategory->sub_category }}">
+                            @endforeach
+                        </datalist>
                     </div>
-                    <div class="mt-4  ">
-                        <label class="text-[14px] font-normal" for="tags">@lang('lang.Product_Tags')</label>
+                    <div class="mt-4 ">
+                        <label class="text-[14px] font-normal" for="purchasePrice">@lang('lang.Purchase_Price')</label>
                         <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="product_tags" id="tags" placeholder=" @lang('lang.Tags_Here')">
+                            name="purchase_price" id="purchasePrice" placeholder=" @lang('lang.Price_Here')">
                     </div>
                     <div class="grid grid-cols-3  gap-4  mt-4">
                         <div>
@@ -427,23 +537,21 @@
 
                         </div>
                     </div>
-                    <div class="mt-4 flex gap-3">
-                        <div>
-                            <label class="text-[14px] font-normal" for="status">@lang('lang.Status')</label>
-                            <select
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="status" id="status" required>
-                                <option value="active">@lang('lang.Active')</option>
-                                <option value="un-active">@lang('lang.Not_Active')</option>
-                            </select>
+                    <div class="mt-4">
+                        <label class="text-[14px] font-normal" for="statusa">@lang('lang.Status')</label>
+                        <select
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="status" id="statusa" required>
+                            <option value="active">@lang('lang.Active')</option>
+                            <option value="un-active">@lang('lang.Not_Active')</option>
+                        </select>
 
-                        </div>
-                        <div>
-                            <label class="text-[14px] font-normal" for="image">@lang('lang.Product_Image')</label>
-                            <input type="file"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="product_image" id="image">
-                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <label class="text-[14px] font-normal" for="image">@lang('lang.Product_Image')</label>
+                        <input type="file"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="product_image" id="image">
                     </div>
                     <div class="mt-4 col-span-3">
                         <label class="text-[14px] font-normal" for="description">@lang('lang.Product_Description')</label>
@@ -614,9 +722,80 @@
 </div>
 
 
+{{-- ============ add  Brand modal  =========== --}}
+<div id="addbrandmodal" data-modal-backdrop="static"
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
+    <div class="relative p-4 w-full   max-w-4xl max-h-full ">
+        <form id="brandData" method="post" enctype="multipart/form-data">
+            @csrf
+            <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
+                <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
+                    <h3 class="text-xl font-semibold text-white ">
+                        @lang('lang.Add_Brand')
+                    </h3>
+                    <button id="brandCloseBtn" type="button"
+                        class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
+                        data-modal-hide="addbrandmodal">
+                        <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-x-6 gap-y-4 mx-6 my-6">
+                    <div>
+                        <label class="text-[14px] font-normal" for="Name">@lang('lang.Brand_Name')</label>
+                        <input type="text" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="name" id="brandName" placeholder=" @lang('lang.Name_Here')">
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="image">@lang('lang.Image')</label>
+                        <input type="file"
+                            class="w-full border-[#DEE2E6]  border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="image" id="image">
+                    </div>
+                </div>
+                <div class="flex justify-end ">
+                    <button class="bg-primary text-white py-2 px-6 my-4 rounded-[4px]  mx-6 uaddBtn  font-semibold "
+                        id="addBtn">
+                        <div class=" text-center hidden" id="spinner">
+                            <svg aria-hidden="true"
+                                class="w-5 h-5 mx-auto text-center text-gray-200 animate-spin fill-primary"
+                                viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                    fill="currentColor" />
+                                <path
+                                    d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                    fill="currentFill" />
+                            </svg>
+                        </div>
+                        <div id="text">
+                            @lang('lang.Save')
+                        </div>
+
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div>
+
+        </div>
+
+    </div>
+</div>
+
 @include('layouts.footer')
 <script>
     $(document).ready(function() {
+        $('#WOPrice , #Price').on('input', function() {
+            var inputValue = $(this).val();
+            $(this).val(inputValue.replace(/,/g, '.'));
+        });
+
+
         $('.delButton').click(function() {
             var id = $(this).attr('delId');
             $('#delLink').attr('href', '../delProduct/' + id);
@@ -707,6 +886,8 @@
                         $('#Status').val(product.status);
                         $('#description').val(product.description);
                         $('#product_unit').val(product.product_unit);
+                        $('#Ubrands').val(product.brand);
+                        $('#purchasePrice').val(product.purchase_price);
 
                     },
                     error: function(jqXHR) {
@@ -806,6 +987,49 @@
 
             });
 
+        });
+
+        $("#brandData").submit(function(event) {
+            var url = "../addBrand";
+            event.preventDefault();
+
+            var formData = new FormData(this);
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: formData,
+                dataType: "json",
+                contentType: false,
+                processData: false,
+                beforeSend: function() {
+                    $('#spinner').removeClass('hidden');
+                    $('#text').addClass('hidden');
+                    $('#addBtn').attr('disabled', true);
+                },
+                success: function(response) {
+                    $('#brandCloseBtn').click();
+                    var brandName = response.brand;
+                    console.log(brandName);
+                    var newOption = $('<option>', {
+                        value: brandName,
+                        text: brandName,
+                    });
+                    $('#brands').append(newOption);
+                },
+                error: function(jqXHR) {
+                    let response = JSON.parse(jqXHR.responseText);
+                    console.log("error");
+                    Swal.fire(
+                        'Warning!',
+                        response.message,
+                        'warning'
+                    );
+
+                    $('#text').removeClass('hidden');
+                    $('#spinner').addClass('hidden');
+                    $('#addBtn').attr('disabled', false);
+                }
+            });
         });
 
     });

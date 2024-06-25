@@ -38,6 +38,7 @@
             width: 210mm;
             background-color: #ffffff;
             margin: auto;
+            position: relative
         }
 
         .header {
@@ -80,6 +81,11 @@
             text-align: end;
         }
 
+        .header-div2 .logo {
+            display: flex;
+            justify-content: flex-end;
+        }
+
         .header-div2 .logo img {
             padding-left: 67px;
             width: 250px;
@@ -115,7 +121,7 @@
         .content-div2 {
             border: 0.5px solid #d7dae0;
             border-radius: 16px;
-            height: 800px;
+            height: 750px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -230,19 +236,46 @@
             margin-top: 20px;
         }
 
+        .footerdata {
+            text-align: center;
+            margin-top: 30px;
+            font-family: Arial, Helvetica, sans-serif;
+
+        }
+
+        .footerdata p {
+            font-size: 14px !important;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
         footer {
+            position: absolute;
+            bottom: 0;
+            margin-top: 50px;
+            width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 50px;
+            height: 35px;
             background-color: #027c56;
-            margin-top: 25px;
             font-family: "Poppins", sans-serif;
-            font-size: 10px;
+        }
+
+        footer h1 {
+            line-height: 15px margin: 0;
             font-weight: 700;
-            line-height: 14px;
-            text-align: center;
             color: #ffffff;
+            font-size: 14px;
+        }
+
+        .logo-text {
+
+            color: white;
+            font-size: 14px;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: right;
+            margin: 0;
         }
     </style>
 </head>
@@ -265,16 +298,22 @@
                 </ul>
             </div>
             <div class="header-div2">
-                <div class="logo"><img src="{{ asset('images/Horeca-White.svg') }}" alt="" /></div>
-
+                <div class="logo"><img src="{{ asset('images/Horeca-White.svg') }}" alt="Logo" /></div>
+                <p class="logo-text">@lang('lang.Food_Service_By') Kaya Markt</p>
                 <div>
+                    <ul>
+                        <li>Kaya Markt GmbH & Co. KG, <br> Naubornerstraße 60, 35578 Wetzlar</li>
+                    </ul>
+                </div>
+                {{-- <div>
                     <ul>
                         <li>Business Address</li>
                         <li>City, State, IN - 000 000</li>
                         <li>TAX ID 00XXXXX1234X0XX</li>
                     </ul>
-                </div>
+                </div> --}}
             </div>
+
         </div>
 
         <!-- Content -->
@@ -332,6 +371,14 @@
                         <h2 class="color">{{ $order->sub_total }}&euro;</h2>
                     </div>
                     <div class="div2-left">
+                        <h2>@lang('lang.Sales_Tax') 7% (@lang('lang.from') &euro;0.00 @lang('lang.net') )</h2>
+                        <h2 class="color">-</h2>
+                    </div>
+                    <div class="div2-left">
+                        <h2>@lang('lang.Sales_Tax') 19% (@lang('lang.from') &euro;0.00 @lang('lang.net') )</h2>
+                        <h2 class="color">-</h2>
+                    </div>
+                    <div class="div2-left">
                         <h2>@lang('lang.Delivery_Charges')</h2>
                         <h2 class="color">{{ $order->delivery_charges }}&euro;</h2>
                     </div>
@@ -353,6 +400,12 @@
                 <h4>@lang('lang.Prepared_By'): _______________</h4>
 
                 <h4>@lang('lang.Recieved_By'): _______________</h4>
+            </div>
+        </div>
+        <div>
+            <div class="footerdata">
+                <p>Amtsgericht Wetzlar HRA 7813 UST.-ID: DE331023882</p>
+                <p>Kaya Markt GmbH & Co. KG Sparkasse Wetzlar IBAN: DE94 5155 0035 0002 1188 59 BIC: HELADEF1WET</p>
             </div>
         </div>
         <footer>

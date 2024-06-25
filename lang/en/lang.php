@@ -124,7 +124,6 @@ return [
     "Day_Report" => "Day Report",
     "Customer_Email" => "Customer Email",
     "Total" => "Total",
-
     "Grand_total" => "Grand total",
     "Download_Example" => "Download Example",
     "full_name" => "ٖFull Name",
@@ -175,10 +174,7 @@ return [
     "Enter_Old_Password" => "Enter Old Password",
     "Enter_New_Password" => "Enter New Password",
     "Enter_Confirm_Password" => "Enter Confirm Password",
-
-
     "Alert_on_Quantity" => "Alert on Quantity",
-
     "Price_Here" => "Price Here",
     "Order_From" => "Order From",
     "Status&Tracking" => "Status & Tracking",
@@ -198,7 +194,32 @@ return [
     "Unit" => "Unit",
     "Unit_Here" => "Unit Here",
     "Are_You_Sure" => "Are You Sure",
+    "Sales_Tax" => "Sales Tax",
+    "from" => "from",
+    "net" => "net",
+    "Tax_Number" => "Tax Number",
+    "Tax_Number_Here" => "Tax Number Here",
+    "Type_Of_Client" => "Type Of Client",
+    "Type_Here" => "Type Here",
+    "Postal_Code" => "Postal Code",
+    "City_Here" => "City Here",
+    "Note" => "Note",
+    "Postal_Code_Here" => "Postal Code Here",
+    "Food_Service_By" => "FoodService By",
+    "Brands_List" => "Brands List",
+    "Add_Brand" => "Add Brand",
+    "Brand_Name" => "Brand Name",
+    "Purchase_Price" => "Purchase Price",
+    "Brands" => "Brands",
+    "Alert" => "Alert",
 
+    "pending" => "pending",
+    "confirmed" => "confirmed",
+    "shipped" => "shipped",
 
+    "active" => "Active",
+    "un-active" => "Un-Active",
+    "not-active" => "Not-Active",
+    "approved" => "Approved",
 
 ];

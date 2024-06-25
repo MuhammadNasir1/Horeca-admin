@@ -113,13 +113,13 @@
                     <table class="w-full">
                         <thead class=" border-2 border-primary bg-primary text-white">
                             <tr>
-                                <th class="py-3">@lang('lang.Code')</th>
-                                <th class="whitespace-nowrap">@lang('lang.Product_Name')</th>
-                                <th class="whitespace-nowrap">@lang('lang.Unit_Price')</th>
-                                <th class="whitespace-nowrap">@lang('lang.Tax')</th>
-                                <th class="whitespace-nowrap">@lang('lang.Quantity')</th>
-                                <th class="whitespace-nowrap">@lang('lang.Total_Price')</th>
-                                <th class="whitespace-nowrap">@lang('lang.Action')</th>
+                                <th class="py-3 text-sm">@lang('lang.Code')</th>
+                                <th class="whitespace-nowrap text-sm">@lang('lang.Product_Name')</th>
+                                <th class="whitespace-nowrap text-sm">@lang('lang.Unit_Price')</th>
+                                <th class="whitespace-nowrap text-sm">@lang('lang.Tax')</th>
+                                <th class="whitespace-nowrap text-sm">@lang('lang.Quantity')</th>
+                                <th class="whitespace-nowrap text-sm">@lang('lang.Total_Price')</th>
+                                <th class="whitespace-nowrap text-sm">@lang('lang.Action')</th>
                             </tr>
                         </thead>
                         <tbody class="text-center" id="product_output">

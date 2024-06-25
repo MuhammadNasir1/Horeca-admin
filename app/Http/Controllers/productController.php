@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brands;
 use App\Models\category;
 use App\Models\product;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Validated;
+use Illuminate\Support\Facades\URL;
 use Maatwebsite\Excel\Facades\Excel;
 
 class productController extends Controller
@@ -28,6 +30,9 @@ class productController extends Controller
                 'product_image' => 'nullable|image',
                 'description' => 'nullable',
                 'product_unit' => 'required',
+                'unit_quantity' => 'required',
+                'brand' => 'required',
+                'purchase_price' => 'required',
             ]);
 
 
@@ -44,6 +49,9 @@ class productController extends Controller
                 'status' => $validateData['status'],
                 'description' => $validateData['description'],
                 'product_unit' => $validateData['product_unit'],
+                'unit_quantity' => $validateData['unit_quantity'],
+                'brand' => $validateData['brand'],
+                'purchase_price' => $validateData['purchase_price'],
 
             ]);
             if ($request->hasFile('product_image')) {
@@ -64,7 +72,9 @@ class productController extends Controller
     {
         $products = product::all();
         $categories = category::where('status', "active")->get();
-        return view('product',  ['products' => $products, 'categories' => $categories]);
+        $Subcategories =  product::select('sub_category')->distinct()->get();
+        $brands = Brands::all();
+        return view('product',  ['products' => $products, 'categories' => $categories, 'Subcategories' => $Subcategories, "brands" => $brands]);
     }
 
     public function delete($id)
@@ -127,39 +137,48 @@ class productController extends Controller
 
     public function importExcelData(Request $request)
     {
-        // Validate the uploaded file
-        $validateData = $request->validate([
-            'excel_file' => 'required|mimes:xlsx,xls',
-        ]);
+        try {
 
-        // Get the uploaded file
-        $file = $request->file('excel_file');
-
-        // Convert the Excel data to an array
-        $data = Excel::toArray([], $file);
-
-        // Start the loop from the second row to skip the header
-        foreach (array_slice($data[0], 1) as $row) {
-            // Create a new product record
-            product::create([
-                'name' => $row[0],
-                'code' => $row[1],
-                'category' => $row[2],
-                'sub_category' => $row[3],
-                'tags' => $row[4],
-                'rate' => $row[5],
-                'tax' => $row[6],
-                'quantity' => $row[7],
-                'quantity_alert' => $row[8],
-                'status' => $row[9],
-                'image' => null,
-                'description' => $row[10],
-                // Add more columns as needed
+            // Validate the uploaded file
+            $validateData = $request->validate([
+                'excel_file' => 'required|mimes:xlsx,xls',
             ]);
-        }
 
-        // Redirect back to the previous page
-        return redirect()->back();
+            // Get the uploaded file
+            $file = $request->file('excel_file');
+
+            // Convert the Excel data to an array
+            $data = Excel::toArray([], $file);
+
+            // Start the loop from the second row to skip the header
+            foreach (array_slice($data[0], 1) as $row) {
+                // Create a new product record
+                product::create([
+                    'name' => $row[0],
+                    'code' => $row[1],
+                    'tags' => $row[2],
+                    'brand' => $row[3],
+                    'category' => $row[4],
+                    'sub_category' => $row[5],
+                    'purchase_price' => $row[6],
+                    'rate' => $row[7],
+                    'tax' => $row[8],
+                    'quantity' => $row[9],
+                    'quantity_alert' => $row[10],
+                    'product_unit' => $row[11],
+                    'unit_quantity' => $row[12],
+                    'image' => $row[13],
+                    'status' => $row[14],
+                    'description' => $row[15],
+                ]);
+            }
+
+            // Redirect back to the previous page
+            return redirect()->back();
+        } catch (\Exception $e) {
+
+            return redirect()->back();
+        }
     }
 
 
@@ -308,6 +327,28 @@ class productController extends Controller
                 $products = Product::where('category', $category)->orWhere('sub_category', $category)->where('status', 'active')->get();
             } else {
                 $products = Product::where('status', 'active')->get();
+            }
+            $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
+
+            $host = $_SERVER['HTTP_HOST'];
+            $baseUrl = $protocol . $host . '/';
+            foreach ($products as $product) {
+                // if ($product->image !== null) {
+                //     $product->image = $baseUrl . $product->image;
+                // }
+                if ($product->image !== null) {
+                    // Check if $product->image starts with "storage/"
+                    if (
+                        strpos($product->image, 'storage/') === 0
+                    ) {
+                        // If it starts with "storage/", keep it as is
+                        // You may need to adjust this condition based on your actual folder structure
+                        $product->image = $baseUrl .  $product->image; // Assuming it's a relative path
+                    } else {
+                        // If it doesn't start with "storage/", prepend the base URL
+                        $product->image = $product->image;
+                    }
+                }
             }
             return response()->json(['success' => true, 'message' => "Products get successfully", "products" =>  $products], 200);
         } catch (\Exception $e) {

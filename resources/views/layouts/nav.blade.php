@@ -76,6 +76,19 @@
                 </a>
             </li>
             <li>
+                <a href="../brands"
+                    class="mt-3 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <svg width="20px" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                        <path fill="#ffffff"
+                            d="M264.5 5.2c14.9-6.9 32.1-6.9 47 0l218.6 101c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 149.8C37.4 145.8 32 137.3 32 128s5.4-17.9 13.9-21.8L264.5 5.2zM476.9 209.6l53.2 24.6c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 277.8C37.4 273.8 32 265.3 32 256s5.4-17.9 13.9-21.8l53.2-24.6 152 70.2c23.4 10.8 50.4 10.8 73.8 0l152-70.2zm-152 198.2l152-70.2 53.2 24.6c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 405.8C37.4 401.8 32 393.3 32 384s5.4-17.9 13.9-21.8l53.2-24.6 152 70.2c23.4 10.8 50.4 10.8 73.8 0z" />
+                    </svg>
+
+
+                    <span class="flex-1 ms-3 whitespace-nowrap"> @lang('lang.Brands')</span>
+                </a>
+            </li>
+            <li>
                 <a href="../product"
                     class="mt-3 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <svg width="20" height="22" viewBox="0 0 22 22" fill="none"
@@ -357,7 +370,8 @@
                             @lang('lang.Notifications')
                         </div>
                         <div class="divide-y divide-white mr-5">
-                            <a href="#" class="flex px-4 pt-3 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="text-center my-3">No Recent Notification</p>
+                            {{-- <a href="#" class="flex px-4 pt-3 hover:bg-gray-100 dark:hover:bg-gray-700">
 
                                 <div class="w-full ps-3 pb-3 border-b-2 border-primary">
                                     <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">New message from <span
@@ -365,34 +379,8 @@
                                         what's up? All set for the presentation?"</div>
                                     <div class="text-xs text-blue-600 dark:text-blue-500">a few moments ago</div>
                                 </div>
-                            </a>
-                            <a href="#" class="flex px-4 pt-3 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            </a> --}}
 
-                                <div class="w-full ps-3 pb-3 border-b-2 border-primary">
-                                    <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">New message from <span
-                                            class="font-semibold text-gray-900 dark:text-white">Jese Leos</span>: "Hey,
-                                        what's up? All set for the presentation?"</div>
-                                    <div class="text-xs text-blue-600 dark:text-blue-500">a few moments ago</div>
-                                </div>
-                            </a>
-                            <a href="#" class="flex px-4 pt-3 hover:bg-gray-100 dark:hover:bg-gray-700">
-
-                                <div class="w-full ps-3 pb-3 border-b-2 border-primary">
-                                    <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">New message from <span
-                                            class="font-semibold text-gray-900 dark:text-white">Jese Leos</span>: "Hey,
-                                        what's up? All set for the presentation?"</div>
-                                    <div class="text-xs text-blue-600 dark:text-blue-500">a few moments ago</div>
-                                </div>
-                            </a>
-                            <a href="#" class="flex px-4 pt-3 hover:bg-gray-100 dark:hover:bg-gray-700">
-
-                                <div class="w-full ps-3 pb-3 border-b-2 border-primary">
-                                    <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">New message from <span
-                                            class="font-semibold text-gray-900 dark:text-white">Jese Leos</span>: "Hey,
-                                        what's up? All set for the presentation?"</div>
-                                    <div class="text-xs text-blue-600 dark:text-blue-500">a few moments ago</div>
-                                </div>
-                            </a>
 
 
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\authController;
+use App\Http\Controllers\BrandsController;
 use App\Http\Controllers\ordersController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\userController;
@@ -83,8 +84,13 @@ Route::middleware('custom')->group(function () {
     Route::get('/getCategoryData/{id}', [productController::class,  'getUpdateCategoryData']);
     Route::post('/updateCategory/{id}', [productController::class,  'updateCategory']);
 
-    // crud
     Route::get('/order/{id}', [ordersController::class,  'EditOrder']);
+
+
+    // brands CRUD
+    Route::get('/brands', [BrandsController::class,  'index']);
+    Route::post('/addBrand', [BrandsController::class,  'insert']);
+    Route::get('/delBrand/{id}', [BrandsController::class,  'delete']);
 });
 
 

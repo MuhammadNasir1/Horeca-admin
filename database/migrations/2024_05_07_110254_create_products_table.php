@@ -26,6 +26,9 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->text('description')->nullable();
             $table->string('product_unit');
+            $table->string('unit_quantity');
+            $table->string('brand');
+            $table->string('purchase_price');
             $table->timestamps();
         });
     }
