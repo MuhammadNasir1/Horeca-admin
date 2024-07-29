@@ -215,13 +215,13 @@
                     <input type="hidden" value="${price}" name="product_rate[]">
                     <input type="hidden" value="${tax}" name="product_tax[]">
                     <input type="hidden" value="${quantity}" name="product_quantity[]">
-                    <input type="hidden" value="${total}" name="product_total[]">
+                    <input type="hidden" value="${total.toFixed(2)}" name="product_total[]">
                 ${code}</td>
             <td class="border-2 border-primary productName">${product}</td>
             <td class="border-2 border-primary">${price}</td>
             <td class="border-2 border-primary px-5">${tax}%</td>
             <td class="border-2 border-primary py-2 quantity">${quantity}</td>
-            <td class="border-2 border-primary py-2  total">${total}</td>
+            <td class="border-2 border-primary py-2  total">${total.toFixed(2)}</td>
             <td class="border-2 border-primary">
                 <div class="flex justify-center">
                     <button class="delete-btn">
@@ -242,9 +242,9 @@
                         subTotal += parseFloat($(this).text());
                         $('#subtotal').html(subTotal);
                         console.log("Sub Total is" + subTotal);
-                        $('#grandTotal').html(subTotal);
-                        $('#grand_total').val(subTotal);
-                        $('#sub_total').val(subTotal);
+                        $('#grandTotal').html(subTotal.toFixed(2));
+                        $('#grand_total').val(subTotal.toFixed(2));
+                        $('#sub_total').val(subTotal.toFixed(2));
                     });
                 }
             });
@@ -273,7 +273,7 @@
                 success: function(response) {
                     var products = response
                         .products; // Assuming response.products is an array of objects
-
+                    console.log(response);
                     // Clear existing options from the select element
                     // $('#product').empty();
                     $('#product').html($('<option></option>').attr('value', "").text(
@@ -288,6 +288,9 @@
                         // Append a new option with the product name to the select element
                         $('#product').append($('<option></option>').attr('value', productName)
                             .attr('productId', productId).text(productName));
+                        $('#product').append($('<option></option>').attr('value', productName)
+                            .attr('productId', productId).text(productName + "" + "(" +
+                                product.product_unit + ")"));
                     });
                 },
                 error: function(jqXHR) {
