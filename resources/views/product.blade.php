@@ -5,7 +5,7 @@
     <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
         <div>
             <div class="flex justify-between px-[20px] mb-3">
-                <h3 class="text-[20px] text-black hidden sm:block">@lang('.product_List')</h3>
+                <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.product_List')</h3>
                 <div class="flex">
 
                     <button data-modal-target="addproductmodal" data-modal-toggle="addproductmodal"
