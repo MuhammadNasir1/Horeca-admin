@@ -212,14 +212,17 @@ return [
     "Purchase_Price" => "Purchase Price",
     "Brands" => "Brands",
     "Alert" => "Alert",
-
     "pending" => "pending",
     "confirmed" => "confirmed",
     "shipped" => "shipped",
-
     "active" => "Active",
     "un-active" => "Un-Active",
     "not-active" => "Not-Active",
     "approved" => "Approved",
+
+
+    "Single" => "Single",
+    "Full_Unit" => "Full Unit",
+    "Select_Unit_Sale" => "Select Unit Sale",
 
 ];

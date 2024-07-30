@@ -59,22 +59,39 @@
                     </div>
                     <input type="hidden" id="productCode">
                     <input type="hidden" id="Product_id">
-                    <div class="mt-4 ">
-                        <label class="text-[14px] font-normal" for="product">@lang('lang.Product')</label>
-                        <select
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="product" id="product">
-                            <option value="">@lang('lang.Product')</option>
+                    <div class="flex gap-3 w-full">
+                        <div class="mt-4 w-full">
+                            <label class="text-[14px] font-normal" for="product">@lang('lang.Product')</label>
+                            <select
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="product" id="product">
+                                <option value="">@lang('lang.Product')</option>
+
+                            </select>
 
 
-                        </select>
+                        </div>
+                        <div class="mt-4 w-full ">
+
+                            <label class="text-[14px] font-normal" for="unitStatus">@lang('lang.Unit')</label>
+                            <select
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="unit_sale" id="unitStatus">
+                                <option disabled>@lang('lang.Select_Unit_Sale')</option>
+                                <option value="single">@lang('lang.Single')</option>
+                                <option value="full_unit">@lang('lang.Full_Unit')</option>
 
 
+                            </select>
+
+
+                        </div>
                     </div>
 
                     <div class="grid grid-cols-2 gap-4  mt-4">
                         <div>
-                            <label class="text-[14px] font-normal" for="Product_Price">@lang('lang.Product_Price')</label>
+                            <label class="text-[14px] font-normal" for="Product_Price"
+                                id="priceLable">@lang('lang.Product_Price')</label>
                             <input type="number"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                                 name="price" id="Product_Price" value="0" readonly>
@@ -288,9 +305,9 @@
                         // Append a new option with the product name to the select element
                         $('#product').append($('<option></option>').attr('value', productName)
                             .attr('productId', productId).text(productName));
-                        $('#product').append($('<option></option>').attr('value', productName)
-                            .attr('productId', productId).text(productName + "" + "(" +
-                                product.product_unit + ")"));
+                        // $('#product').append($('<option></option>').attr('value', productName)
+                        //     .attr('productId', productId).text(productName + "" + "(" +
+                        //         product.product_unit + ")"));
                     });
                 },
                 error: function(jqXHR) {
@@ -319,7 +336,24 @@
                         // Iterate over each product object
                         $.each(products, function(index, product) {
                             var productName = product.name;
-                            $('#Product_Price').val(product.rate);
+
+                            function checkUnitStatus() {
+                                let unitStatus = $('#unitStatus').val();
+                                if (unitStatus == "single") {
+                                    $('#Product_Price').val(product.rate);
+                                    $('#priceLable').html("@lang('lang.Product_Price')");
+                                } else {
+                                    $('#Product_Price').val(product.unit_price);
+                                    $('#priceLable').html("@lang('lang.Unit_Price')");
+                                }
+                            }
+                            console.log(unitStatus);
+                            checkUnitStatus(); // Initial check
+                            $('#unitStatus').change(
+                                checkUnitStatus); // Bind the event handler
+
+
+                            // $('#Product_Price').val(product.rate);
                             $('#Product_id').val(product.id);
                             $('#productCode').val(product.code);
                             $('#tax').val(product.tax);
