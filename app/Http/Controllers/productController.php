@@ -33,6 +33,7 @@ class productController extends Controller
                 'unit_quantity' => 'required',
                 'brand' => 'required',
                 'purchase_price' => 'required',
+                'unit_price' => 'required',
             ]);
 
 
@@ -52,6 +53,7 @@ class productController extends Controller
                 'unit_quantity' => $validateData['unit_quantity'],
                 'brand' => $validateData['brand'],
                 'purchase_price' => $validateData['purchase_price'],
+                'unit_price' => $validateData['unit_price'],
 
             ]);
             if ($request->hasFile('product_image')) {
@@ -170,6 +172,7 @@ class productController extends Controller
                     'image' => $row[13],
                     'status' => $row[14],
                     'description' => $row[15],
+                    'unit_price' => $row[16],
                 ]);
             }
 

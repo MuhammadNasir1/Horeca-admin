@@ -55,7 +55,7 @@
                                 <td>{{ $data->product_unit }}</td>
                                 <td>{{ $data->quantity }}</td>
                                 <td><button
-                                        class="p-1 rounded-md min-w-10 font-bold text-white {{ $data->quantity_alert > $data->quantity ? 'bg-green-700' : 'bg-red-600' }}">
+                                        class="p-1 rounded-md min-w-10 font-bold text-white {{ $data->quantity_alert < $data->quantity ? 'bg-green-700' : 'bg-red-600' }}">
                                         {{ $data->quantity_alert }}</button></td>
                                 <td class="whitespace-nowrap"> <button
                                         class="p-1 rounded-md min-w-10 font-bold text-white {{ $data->status == 'active' ? 'bg-green-700' : 'bg-red-600' }}">
@@ -250,16 +250,24 @@
                         </div>
 
                     </div>
-                    <div class="mt-4">
-                        <label class="text-[14px] font-normal" for="Status">@lang('lang.Status')</label>
-                        <select
-                            class="w-50% border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="status" id="Status" required>
-                            <option value="active">@lang('lang.Active')</option>
-                            <option value="un-active">@lang('lang.Not_Active')</option>
-                            <option value="un-active">@lang('lang.Not_Active')</option>
-                        </select>
+                    <div class="grid grid-cols-2  gap-4  mt-4">
+                        <div>
+                            <label class="text-[14px] font-normal" for="UnitPrice">@lang('lang.Unit_Price')</label>
+                            <input type="text"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="unit_price" id="UnitPrice" placeholder=" @lang('lang.Quantity_Here')" required>
 
+                        </div>
+                        <div>
+                            <label class="text-[14px] font-normal" for="Status">@lang('lang.Status')</label>
+                            <select
+                                class="w-50% border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="status" id="Status" required>
+                                <option value="active">@lang('lang.Active')</option>
+                                <option value="un-active">@lang('lang.Not_Active')</option>
+                            </select>
+
+                        </div>
                     </div>
                     <div class="mt-4">
                         <label class="text-[14px] font-normal" for="image">@lang('lang.Product_Image')</label>
@@ -516,14 +524,24 @@
 
                         </div>
                     </div>
-                    <div class="mt-4">
-                        <label class="text-[14px] font-normal" for="statusa">@lang('lang.Status')</label>
-                        <select
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="status" id="statusa" required>
-                            <option value="active">@lang('lang.Active')</option>
-                            <option value="un-active">@lang('lang.Not_Active')</option>
-                        </select>
+                    <div class="grid grid-cols-2  gap-4  mt-4">
+                        <div>
+                            <label class="text-[14px] font-normal" for="UnitPrice">@lang('lang.Unit_Price')</label>
+                            <input type="text"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="unit_price" id="UnitPrice" placeholder=" @lang('lang.Quantity_Here')" required>
+
+                        </div>
+                        <div>
+                            <label class="text-[14px] font-normal" for="statusa">@lang('lang.Status')</label>
+                            <select
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="status" id="statusa" required>
+                                <option value="active">@lang('lang.Active')</option>
+                                <option value="un-active">@lang('lang.Not_Active')</option>
+                            </select>
+                        </div>
+
 
                     </div>
                     <div class="mt-4">

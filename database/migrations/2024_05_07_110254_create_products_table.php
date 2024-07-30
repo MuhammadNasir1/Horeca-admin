@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('unit_quantity');
             $table->string('brand');
             $table->string('purchase_price');
+            $table->string('unit_price');
             $table->timestamps();
         });
     }
