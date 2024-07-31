@@ -21,11 +21,14 @@ class BrandsController extends Controller
 
             ]);
             $brand = new Brands;
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->storeAs('public/brands_images', $imageName);
-            $brand->image = 'storage/brands_images/' . $imageName;
             $brand->name = $validatedData['name'];
+            $brand->image = "null";
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $image->storeAs('public/brands_images', $imageName);
+                $brand->image = 'storage/brands_images/' . $imageName;
+            }
             $brand->save();
             return response()->json(['success' => true, 'message' => "Data add successfully", 'brand' =>   $brand->name], 201);
         } catch (\Exception $e) {
