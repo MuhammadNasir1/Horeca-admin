@@ -18,6 +18,7 @@ class order_items extends Model
         'product_tax',
         'product_quantity',
         'product_total',
+        'unit_status',
     ];
     protected $timestamp  =  true;
 }

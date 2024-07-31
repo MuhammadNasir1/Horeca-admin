@@ -265,6 +265,7 @@ class ordersController extends Controller
                 'order_description'  => 'nullable',
                 'order_note'  => 'nullable',
                 'delivery_charges'  => 'nullable',
+                'unit_status'  => 'required',
             ]);
 
             $orders  = orders::create([
@@ -297,6 +298,8 @@ class ordersController extends Controller
                         'product_quantity' => $validatedData['product_quantity'][$j],
                         'product_tax' => $product->tax,
                         'product_total' => $productTotal,
+                        'unit_status' => $validatedData['unit_status'][$j],
+
                     ]);
                     $order_item->save();
                 } else {

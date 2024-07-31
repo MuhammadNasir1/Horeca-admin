@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('product_tax');
             $table->integer('product_quantity');
             $table->integer('product_total')->nullable();
+            $table->string('unit_status')->nullable();
             $table->timestamps();
         });
     }
