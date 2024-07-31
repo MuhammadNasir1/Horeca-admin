@@ -222,6 +222,7 @@ return [
 
 
     "Single" => "Single",
+    "Update_Brand" => "update Brand",
     "Full_Unit" => "Full Unit",
     "Select_Unit_Sale" => "Select Unit Sale",
 

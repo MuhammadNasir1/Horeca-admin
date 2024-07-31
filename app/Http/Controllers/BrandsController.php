@@ -42,4 +42,35 @@ class BrandsController extends Controller
         $brands->delete();
         return redirect('../brands');
     }
+
+    public function getBrandUpdateData($id)
+    {
+        $brands = Brands::all();
+        $brandData = Brands::find($id);
+        return view('brands', compact("brands", "brandData"));
+    }
+
+    public function updateBrand(Request $request, $id)
+    {
+
+        try {
+            $validatedData = $request->validate([
+                "name" => "required",
+
+            ]);
+            $brand = Brands::find($id);
+            $brand->name = $validatedData['name'];
+            $brand->image = "null";
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $image->storeAs('public/brands_images', $imageName);
+                $brand->image = 'storage/brands_images/' . $imageName;
+            }
+            $brand->update();
+            return response()->json(['success' => true, 'message' => "Data add successfully", 'brand' =>   $brand->name], 201);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
 }
