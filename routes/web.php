@@ -81,8 +81,8 @@ Route::middleware('custom')->group(function () {
     Route::get('/category', [productController::class,  'categories']);
     Route::post('/addCategory', [productController::class,  'insertCategory']);
     Route::get('/delCategory/{id}', [productController::class,  'deleteCategory']);
-    Route::get('/getCategoryData/{id}', [productController::class,  'getUpdateCategoryData']);
     Route::post('/updateCategory/{id}', [productController::class,  'updateCategory']);
+    Route::get('/updateCategory/{id}', [productController::class,  'updateCategoryData']);
 
     Route::get('/order/{id}', [ordersController::class,  'EditOrder']);
 

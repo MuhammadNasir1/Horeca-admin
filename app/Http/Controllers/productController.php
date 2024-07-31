@@ -274,18 +274,6 @@ class productController extends Controller
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
     }
-    public function getUpdateCategoryData($id)
-    {
-
-        try {
-
-            $category = category::find($id);
-            return response()->json(['success' => true, 'message' => "Category Data Get Successfully", 'category' => $category]);
-        } catch (\Exception $e) {
-            return response()->json(['success' => true, 'message' => $e->getMessage()]);
-        }
-    }
-
     public function UpdataProduct(Request $request, $product_id)
     {
 
@@ -357,5 +345,13 @@ class productController extends Controller
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
+    }
+
+    public function updateCategoryData($id)
+
+    {
+        $categories = category::all();
+        $categoryData = category::find($id);
+        return view('category',   compact('categories', 'categoryData'));
     }
 }
