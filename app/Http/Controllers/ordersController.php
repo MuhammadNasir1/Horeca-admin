@@ -67,6 +67,18 @@ class ordersController extends Controller
 
                 ]);
                 $order_items->save();
+
+
+                $status =  $order_items->unit_status;
+                $getProduct = product::find($order_items->product_id);
+                if ($status == "single") {
+                    $getProduct->quantity = $getProduct->quantity -  $order_items->product_quantity;
+                    $getProduct->update();
+                    // return response()->json($getProduct->quantity);
+                } else {
+                    $getProduct->quantity = $getProduct->quantity - $getProduct->Unit_Pieces *  $order_items->product_quantity;
+                    $getProduct->update();
+                }
             };
             return redirect('invoice/' . $orders->id);
             // return response()->json(['success' => true, 'message' => 'Order add successfully'], 200);
