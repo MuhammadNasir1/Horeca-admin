@@ -225,5 +225,10 @@ return [
     "Update_Brand" => "update Brand",
     "Full_Unit" => "Full Unit",
     "Select_Unit_Sale" => "Select Unit Sale",
+    "Read_Only" => "Read Only",
+    "Total_Quantity" => "Total Quantity",
+    "Unit_Pieces" => "Unit Pieces",
+    "Pieces_Here" => "Pieces Here",
+    "Total_Unit_Quantity" => "Total Unit Quantity",
 
 ];

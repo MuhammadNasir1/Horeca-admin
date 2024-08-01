@@ -103,7 +103,7 @@
 </div>
 
 {{-- ============ Update  product modal  =========== --}}
-<div id="Updateproductmodal" data-modal-backdrop="static"
+{{-- <div id="Updateproductmodal" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed  top-0 left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
     <div class="relative p-4 w-full   max-w-6xl max-h-full ">
         <form id="UpdatecategoryData" method="post" enctype="multipart/form-data">
@@ -311,7 +311,7 @@
         </div>
 
     </div>
-</div>
+</div> --}}
 {{-- ============ add  Excel modal  =========== --}}
 <div id="addExcelSheetmodal" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
@@ -328,8 +328,8 @@
                         data-modal-hide="addExcelSheetmodal">
                         <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                         </svg>
                     </button>
                 </div>
@@ -377,7 +377,10 @@
 </div>
 {{-- ============ add  product modal  =========== --}}
 <div id="addproductmodal" data-modal-backdrop="static"
-    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
+    class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+    <div class="fixed inset-0 transition-opacity">
+        <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
+    </div>
     <div class="relative p-4 w-full   max-w-6xl max-h-full ">
         <form id="productdata" method="post" enctype="multipart/form-data">
             {{-- <form action="addProduct" method="post" enctype="multipart/form-data"> --}}
@@ -496,17 +499,17 @@
                     </div>
                     <div class="grid grid-cols-2  gap-4  mt-4">
                         <div>
-                            <label class="text-[14px] font-normal" for="quantity">@lang('lang.quantity')</label>
+                            <label class="text-[14px] font-normal" for="quantity">@lang('lang.Total_Quantity')</label>
                             <input type="number"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="quantity" id="quantity" placeholder=" @lang('lang.quantity_here')" required>
+                                name="quantity" id="quantity" placeholder=" @lang('lang.Read_Only')" required readonly>
                         </div>
                         <div>
                             <label class="text-[14px] font-normal" for="quantityAlert">@lang('lang.Alert_on_Quantity')</label>
                             <input type="number"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                                 name="quantity_alert" id="quantityAlert" placeholder=" @lang('lang.Alert_Here')" required
-                                value="0">
+                                value="1">
                         </div>
                     </div>
                     <div class="grid grid-cols-2  gap-4  mt-4">
@@ -517,21 +520,29 @@
                                 name="product_unit" id="product_unit" placeholder=" @lang('lang.Unit_Here')" required>
                         </div>
                         <div>
-                            <label class="text-[14px] font-normal" for="unit_quantity">@lang('lang.Unit_Quantity')</label>
-                            <input type="text"
+                            <label class="text-[14px] font-normal" for="unitPieces">@lang('lang.Unit_Pieces')</label>
+                            <input type="number"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="unit_quantity" id="unit_quantity" placeholder=" @lang('lang.Quantity_Here')" required>
+                                name="Unit_Pieces" id="unitPieces" placeholder=" @lang('lang.Pieces_Here')" required>
 
                         </div>
                     </div>
                     <div class="grid grid-cols-2  gap-4  mt-4">
                         <div>
+                            <label class="text-[14px] font-normal" for="unitQuantity">@lang('lang.Total_Unit_Quantity')</label>
+                            <input type="number"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="unit_quantity" id="unitQuantity" placeholder=" @lang('lang.Quantity_Here')" required>
+
+                        </div>
+                        <div>
                             <label class="text-[14px] font-normal" for="UnitPrice">@lang('lang.Unit_Price')</label>
                             <input type="text"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="unit_price" id="UnitPrice" placeholder=" @lang('lang.Quantity_Here')" required>
-
+                                name="unit_price" id="UnitPrice" placeholder=" @lang('lang.Unit_Price')" required>
                         </div>
+                    </div>
+                    <div class="grid grid-cols-2  gap-4  mt-4">
                         <div>
                             <label class="text-[14px] font-normal" for="statusa">@lang('lang.Status')</label>
                             <select
@@ -541,14 +552,12 @@
                                 <option value="un-active">@lang('lang.Not_Active')</option>
                             </select>
                         </div>
-
-
-                    </div>
-                    <div class="mt-4">
-                        <label class="text-[14px] font-normal" for="image">@lang('lang.Product_Image')</label>
-                        <input type="file"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="product_image" id="image">
+                        <div>
+                            <label class="text-[14px] font-normal" for="image">@lang('lang.Product_Image')</label>
+                            <input type="file"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="product_image" id="image">
+                        </div>
                     </div>
                     <div class="mt-4 col-span-3">
                         <label class="text-[14px] font-normal" for="description">@lang('lang.Product_Description')</label>
@@ -787,6 +796,15 @@
 @include('layouts.footer')
 <script>
     $(document).ready(function() {
+        function TotalQuantity() {
+            let unitQuantity = parseFloat($('#unitQuantity').val()) || 1;
+            let unitPieces = parseFloat($('#unitPieces').val()) || 0;
+            let totalQuan = unitPieces * unitQuantity;
+            $('#quantity').val(totalQuan);
+        }
+        $('#unitQuantity, #unitPieces').on('input', TotalQuantity);
+
+
         $('#WOPrice , #Price').on('input', function() {
             var inputValue = $(this).val();
             $(this).val(inputValue.replace(/,/g, '.'));
@@ -798,198 +816,34 @@
             $('#delLink').attr('href', '../delProduct/' + id);
             console.log(id);
         });
-        $(document).ready(function() {
-            function calculateTotal() {
-                var price = parseFloat($('#WOPrice').val()) || 0;
-                var tax = parseFloat($('#TaxPrice').val()) || 0;
-                var totalPrice = price + (price * (tax / 100));
-                $('#TotalWTax').val(totalPrice.toFixed(2));
-            }
 
-            $('#WOPrice, #TaxPrice').on('input', calculateTotal);
+        function calculateTotal() {
+            var price = parseFloat($('#WOPrice').val()) || 0;
+            var tax = parseFloat($('#TaxPrice').val()) || 0;
+            var totalPrice = price + (price * (tax / 100));
+            $('#TotalWTax').val(totalPrice.toFixed(2));
+        }
 
-            function calculateTotal2() {
-                var price = parseFloat($('#Price').val()) || 0;
-                var tax = parseFloat($('#tax').val()) || 0;
-                var totalPrice = price + (price * (tax / 100));
-                $('#TotalPrice').val(totalPrice.toFixed(2));
-            }
-            $('#Price').trigger('tax');
-            $('#Price, #tax').on('input', calculateTotal2);
+        $('#WOPrice, #TaxPrice').on('input', calculateTotal);
 
-            $('.category').change(function() {
-                var selectedOption = $(this).find(':selected');
-                var tax = selectedOption.attr('category-tax');
-                $('.tax-input').val(tax)
-            });
-            // insert data
-            $("#productdata").submit(function(event) {
-                var url = "../addProduct";
-                event.preventDefault();
-                var formData = new FormData(this);
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: formData,
-                    dataType: "json",
-                    contentType: false,
-                    processData: false,
-                    beforeSend: function() {
-                        $('#ispinner').removeClass('hidden');
-                        $('#itext').addClass('hidden');
-                        $('#iaddBtn').attr('disabled', true);
-                    },
-                    success: function(response) {
-                        window.location.href = '../product';
+        function calculateTotal2() {
+            var price = parseFloat($('#Price').val()) || 0;
+            var tax = parseFloat($('#tax').val()) || 0;
+            var totalPrice = price + (price * (tax / 100));
+            $('#TotalPrice').val(totalPrice.toFixed(2));
+        }
+        $('#Price').trigger('tax');
+        $('#Price, #tax').on('input', calculateTotal2);
 
-                    },
-                    error: function(jqXHR) {
-                        let response = JSON.parse(jqXHR.responseText);
-                        console.log("error");
-                        Swal.fire(
-                            'Warning!',
-                            response.message,
-                            'warning'
-                        );
-
-                        $('#itext').removeClass('hidden');
-                        $('#ispinner').addClass('hidden');
-                        $('#iaddBtn').attr('disabled', false);
-                    }
-                });
-            });
-
-            // update  data
-            $('.updateBtn').click(function() {
-                var updateId = $(this).attr('updateId');
-                var url = "../ProductUpdataData/" + updateId;
-                $.ajax({
-                    type: "GET",
-                    url: url,
-                    dataType: "json",
-                    success: function(response) {
-                        var product = response.product;
-                        console.log(product);
-                        $('#update_id').val(product.id);
-                        $('#Product_Name').val(product.name);
-                        $('#productCode').val(product.code);
-                        $('#Ucategory').val(product.category);
-                        $('#subCategory').val(product.sub_category);
-                        $('#tags').val(product.tags);
-                        $('#Price').val(product.rate);
-                        $('#tax').val(product.tax);
-                        $('#quantity').val(product.quantity);
-                        $('#quantityAlert').val(product.quantity_alert);
-                        $('#Status').val(product.status);
-                        $('#description').val(product.description);
-                        $('#product_unit').val(product.product_unit);
-                        $('#Ubrands').val(product.brand);
-                        $('#purchasePrice').val(product.purchase_price);
-
-                    },
-                    error: function(jqXHR) {
-                        let response = JSON.parse(jqXHR.responseText);
-                        console.log("error");
-                        Swal.fire(
-                            'Warning!',
-                            'Product Not Found',
-                            'warning'
-                        );
-                    }
-                });
-            })
-
-            //  insert category data
-
-            $("#categoryData").submit(function(event) {
-                var url = "../addCategory";
-                event.preventDefault();
-                var formData = new FormData(this);
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: formData,
-                    dataType: "json",
-                    contentType: false,
-                    processData: false,
-                    beforeSend: function() {
-                        $('#Cspinner').removeClass('hidden');
-                        $('#Ctext').addClass('hidden');
-                        $('#CaddBtn').attr('disabled', true);
-                    },
-                    success: function(response) {
-                        var categoryName = response.category.name;
-                        var categoryTax = response.category.tax;
-                        $('#category-modal-close').click();
-                        var newOption = $('<option>', {
-                            value: categoryName,
-                            text: categoryName,
-                            'category-tax': categoryTax
-                        });
-                        $('#category').append(newOption);
-                    },
-                    error: function(jqXHR) {
-                        let response = JSON.parse(jqXHR.responseText);
-                        console.log("error");
-                        Swal.fire(
-                            'Warning!',
-                            response.message,
-                            'warning'
-                        );
-
-                        $('#Ctext').removeClass('hidden');
-                        $('#Cspinner').addClass('hidden');
-                        $('#CaddBtn').attr('disabled', false);
-                    }
-                });
-            });
-            $("#UpdatecategoryData").submit(function(event) {
-                var updateId = $('#update_id').val();
-                var url = "../UpdataProduct/" + updateId;
-                console.log(url);
-                event.preventDefault();
-                var formData = new FormData(this);
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: formData,
-                    dataType: "json",
-                    contentType: false,
-                    processData: false,
-                    beforeSend: function() {
-                        $('#uspinner').removeClass('hidden');
-                        $('#utext').addClass('hidden');
-                        $('#uaddBtn').attr('disabled', true);
-                    },
-                    success: function(response) {
-                        window.location.href = '../product';
-
-
-                    },
-                    error: function(jqXHR) {
-                        let response = JSON.parse(jqXHR.responseText);
-                        console.log("error");
-                        Swal.fire(
-                            'Warning!',
-                            response.message,
-                            'warning'
-                        );
-
-                        $('#utext').removeClass('hidden');
-                        $('#uspinner').addClass('hidden');
-                        $('#uaddBtn').attr('disabled', false);
-                    }
-                });
-
-
-            });
-
+        $('.category').change(function() {
+            var selectedOption = $(this).find(':selected');
+            var tax = selectedOption.attr('category-tax');
+            $('.tax-input').val(tax)
         });
-
-        $("#brandData").submit(function(event) {
-            var url = "../addBrand";
+        // insert data
+        $("#productdata").submit(function(event) {
+            var url = "../addProduct";
             event.preventDefault();
-
             var formData = new FormData(this);
             $.ajax({
                 type: "POST",
@@ -999,19 +853,13 @@
                 contentType: false,
                 processData: false,
                 beforeSend: function() {
-                    $('#spinner').removeClass('hidden');
-                    $('#text').addClass('hidden');
-                    $('#addBtn').attr('disabled', true);
+                    $('#ispinner').removeClass('hidden');
+                    $('#itext').addClass('hidden');
+                    $('#iaddBtn').attr('disabled', true);
                 },
                 success: function(response) {
-                    $('#brandCloseBtn').click();
-                    var brandName = response.brand;
-                    console.log(brandName);
-                    var newOption = $('<option>', {
-                        value: brandName,
-                        text: brandName,
-                    });
-                    $('#brands').append(newOption);
+                    window.location.href = '../product';
+
                 },
                 error: function(jqXHR) {
                     let response = JSON.parse(jqXHR.responseText);
@@ -1022,11 +870,180 @@
                         'warning'
                     );
 
-                    $('#text').removeClass('hidden');
-                    $('#spinner').addClass('hidden');
-                    $('#addBtn').attr('disabled', false);
+                    $('#itext').removeClass('hidden');
+                    $('#ispinner').addClass('hidden');
+                    $('#iaddBtn').attr('disabled', false);
                 }
             });
+        });
+
+        // update  data
+        $('.updateBtn').click(function() {
+            var updateId = $(this).attr('updateId');
+            var url = "../ProductUpdataData/" + updateId;
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: "json",
+                success: function(response) {
+                    var product = response.product;
+                    console.log(product);
+                    $('#update_id').val(product.id);
+                    $('#Product_Name').val(product.name);
+                    $('#productCode').val(product.code);
+                    $('#Ucategory').val(product.category);
+                    $('#subCategory').val(product.sub_category);
+                    $('#tags').val(product.tags);
+                    $('#Price').val(product.rate);
+                    $('#tax').val(product.tax);
+                    $('#quantity').val(product.quantity);
+                    $('#quantityAlert').val(product.quantity_alert);
+                    $('#Status').val(product.status);
+                    $('#description').val(product.description);
+                    $('#product_unit').val(product.product_unit);
+                    $('#Ubrands').val(product.brand);
+                    $('#purchasePrice').val(product.purchase_price);
+
+                },
+                error: function(jqXHR) {
+                    let response = JSON.parse(jqXHR.responseText);
+                    console.log("error");
+                    Swal.fire(
+                        'Warning!',
+                        'Product Not Found',
+                        'warning'
+                    );
+                }
+            });
+        })
+
+        //  insert category data
+
+        $("#categoryData").submit(function(event) {
+            var url = "../addCategory";
+            event.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: formData,
+                dataType: "json",
+                contentType: false,
+                processData: false,
+                beforeSend: function() {
+                    $('#Cspinner').removeClass('hidden');
+                    $('#Ctext').addClass('hidden');
+                    $('#CaddBtn').attr('disabled', true);
+                },
+                success: function(response) {
+                    var categoryName = response.category.name;
+                    var categoryTax = response.category.tax;
+                    $('#category-modal-close').click();
+                    var newOption = $('<option>', {
+                        value: categoryName,
+                        text: categoryName,
+                        'category-tax': categoryTax
+                    });
+                    $('#category').append(newOption);
+                },
+                error: function(jqXHR) {
+                    let response = JSON.parse(jqXHR.responseText);
+                    console.log("error");
+                    Swal.fire(
+                        'Warning!',
+                        response.message,
+                        'warning'
+                    );
+
+                    $('#Ctext').removeClass('hidden');
+                    $('#Cspinner').addClass('hidden');
+                    $('#CaddBtn').attr('disabled', false);
+                }
+            });
+        });
+        $("#UpdatecategoryData").submit(function(event) {
+            var updateId = $('#update_id').val();
+            var url = "../UpdataProduct/" + updateId;
+            console.log(url);
+            event.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: formData,
+                dataType: "json",
+                contentType: false,
+                processData: false,
+                beforeSend: function() {
+                    $('#uspinner').removeClass('hidden');
+                    $('#utext').addClass('hidden');
+                    $('#uaddBtn').attr('disabled', true);
+                },
+                success: function(response) {
+                    window.location.href = '../product';
+
+
+                },
+                error: function(jqXHR) {
+                    let response = JSON.parse(jqXHR.responseText);
+                    console.log("error");
+                    Swal.fire(
+                        'Warning!',
+                        response.message,
+                        'warning'
+                    );
+
+                    $('#utext').removeClass('hidden');
+                    $('#uspinner').addClass('hidden');
+                    $('#uaddBtn').attr('disabled', false);
+                }
+            });
+
+
+        });
+
+    });
+
+    $("#brandData").submit(function(event) {
+        var url = "../addBrand";
+        event.preventDefault();
+
+        var formData = new FormData(this);
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: formData,
+            dataType: "json",
+            contentType: false,
+            processData: false,
+            beforeSend: function() {
+                $('#spinner').removeClass('hidden');
+                $('#text').addClass('hidden');
+                $('#addBtn').attr('disabled', true);
+            },
+            success: function(response) {
+                $('#brandCloseBtn').click();
+                var brandName = response.brand;
+                console.log(brandName);
+                var newOption = $('<option>', {
+                    value: brandName,
+                    text: brandName,
+                });
+                $('#brands').append(newOption);
+            },
+            error: function(jqXHR) {
+                let response = JSON.parse(jqXHR.responseText);
+                console.log("error");
+                Swal.fire(
+                    'Warning!',
+                    response.message,
+                    'warning'
+                );
+
+                $('#text').removeClass('hidden');
+                $('#spinner').addClass('hidden');
+                $('#addBtn').attr('disabled', false);
+            }
         });
 
     });

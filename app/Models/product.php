@@ -28,6 +28,7 @@ class product extends Model
         'description',
         'brand',
         'purchase_price',
-        'unit_price'
+        'unit_price',
+        'Unit_Pieces',
     ];
 }
