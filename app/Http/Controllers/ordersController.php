@@ -31,6 +31,7 @@ class ordersController extends Controller
                 'product_rate'  => 'required',
                 'product_total'  => 'required',
                 'order_from'  => 'required',
+                'unit_status'  => 'required',
             ]);
 
             $userId   = session("user_det")['user_id'];
@@ -62,6 +63,7 @@ class ordersController extends Controller
                     'product_quantity' => $validatedData['product_quantity'][$j],
                     'product_tax' => $validatedData['product_tax'][$j],
                     'product_total' => $validatedData['product_total'][$j],
+                    'unit_status' => $validatedData['unit_status'][$j],
 
                 ]);
                 $order_items->save();

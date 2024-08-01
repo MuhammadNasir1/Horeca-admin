@@ -202,13 +202,14 @@
     <script>
         $(document).ready(function() {
             $('#addProductBtn').click(function() {
-                var product = $('#product').val();
-                var price = $('#Product_Price').val();
-                var tax = $('#tax').val();
-                var quantity = $('#order_quantity').val();
-                var code = $('#productCode').val();
-                var Product_id = $('#Product_id').val();
-                var total = (price * quantity) + ((price * quantity) * (tax / 100));
+                let product = $('#product').val();
+                let price = $('#Product_Price').val();
+                let tax = $('#tax').val();
+                let quantity = $('#order_quantity').val();
+                let code = $('#productCode').val();
+                let Product_id = $('#Product_id').val();
+                let unitStatus = $('#unitStatus').val()
+                let total = (price * quantity) + ((price * quantity) * (tax / 100));
                 if (isNaN(parseInt(quantity)) || isNaN(parseFloat(price))) {
                     // If either quantity or price is not a valid number, do not append the row
                     return;
@@ -227,12 +228,13 @@
                     console.log(product);
                     var productData = `<tr>
             <td class="border-2 border-primary">
-                    <input type="hidden" value="${code}" name="product_code[]">
-                    <input type="hidden" value="${Product_id}" name="product_id[]">
-                    <input type="hidden" value="${price}" name="product_rate[]">
-                    <input type="hidden" value="${tax}" name="product_tax[]">
-                    <input type="hidden" value="${quantity}" name="product_quantity[]">
-                    <input type="hidden" value="${total.toFixed(2)}" name="product_total[]">
+                    <input readonly type="hidden" value="${code}" name="product_code[]">
+                    <input readonly type="hidden" value="${Product_id}" name="product_id[]">
+                    <input readonly type="hidden" value="${price}" name="product_rate[]">
+                    <input readonly type="hidden" value="${tax}" name="product_tax[]">
+                    <input readonly type="hidden" value="${quantity}" name="product_quantity[]">
+                    <input readonly type="hidden" value="${total.toFixed(2)}" name="product_total[]">
+                    <input readonly type="hidden" value="${unitStatus}" name="unit_status[]">
                 ${code}</td>
             <td class="border-2 border-primary productName">${product}</td>
             <td class="border-2 border-primary">${price}</td>
@@ -272,8 +274,8 @@
                 var deliveryCharges = parseFloat($('#delivery_charges').val()) ||
                     0; // default to 0 if input is empty
                 var grandTotal = subTotal - (subTotal * (discount / 100)) + deliveryCharges;
-                $('#grandTotal').text(grandTotal);
-                $('#grand_total').val(grandTotal);
+                $('#grandTotal').text(grandTotal.toFixed(2));
+                $('#grand_total').val(grandTotal.toFixed(2));
             });
             // Add click event listener for dynamically generated delete buttons
             $('#product_output').on('click', '.delete-btn', function() {
