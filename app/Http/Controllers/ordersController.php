@@ -76,7 +76,9 @@ class ordersController extends Controller
                     $getProduct->update();
                     // return response()->json($getProduct->quantity);
                 } else {
-                    $getProduct->quantity = $getProduct->quantity - $getProduct->Unit_Pieces *  $order_items->product_quantity;
+                    // $getProduct->quantity = $getProduct->quantity - $getProduct->Unit_Pieces *  $order_items->product_quantity;
+                    $getProduct->quantity = $getProduct->quantity - (float)$getProduct->Unit_Pieces * (float)$order_items->product_quantity;
+
                     $getProduct->update();
                 }
             };
