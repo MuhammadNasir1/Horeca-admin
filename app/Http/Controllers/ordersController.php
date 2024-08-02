@@ -291,7 +291,7 @@ class ordersController extends Controller
                 'customer_phone' => $validatedData['customer_phone'],
                 'customer_adress' => $validatedData['customer_adress'],
                 'sub_total' => $validatedData['sub_total'],
-                'discount' => $request['discount'],
+                'discount' => 0,
                 'grand_total' => $validatedData['grand_total'],
                 'order_description' => $request['order_description'],
                 'order_traking' => true,
@@ -305,7 +305,12 @@ class ordersController extends Controller
             foreach ($validatedData['product_id'] as $j => $productId) {
                 $product = product::find($productId);
                 if ($product) {
-                    $productTotal = $product->rate * $validatedData['product_quantity'][$j];
+                    $productStatus =  $validatedData['unit_status'][$j];
+                    if ($productStatus == "single") {
+                        $productTotal = $product->rate * $validatedData['product_quantity'][$j];
+                    } else {
+                        $productTotal = $product->unit_price * $validatedData['product_quantity'][$j];
+                    }
                     $order_item = order_items::create([
                         'order_id' => $orders->id,
                         'product_id' => $product->id,
