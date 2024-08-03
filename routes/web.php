@@ -52,6 +52,7 @@ Route::middleware('custom')->group(function () {
     Route::get('/ProductUpdataData/{product_id}', [productController::class,  'ProductUpdataData']);
     Route::post('/UpdataProduct/{product_id}', [productController::class,  'UpdataProduct']);
 
+    Route::get('/product/{ids}', [productController::class,  'getProductData']);
 
     // Order
     Route::post('/addOrder', [ordersController::class,  'insert']);

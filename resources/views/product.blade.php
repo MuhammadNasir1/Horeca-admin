@@ -8,7 +8,7 @@
                 <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.product_List')</h3>
                 <div class="flex">
 
-                    <button data-modal-target="addproductmodal" data-modal-toggle="addproductmodal"
+                    <button data-modal-target="productModal" data-modal-toggle="productModal"
                         class="bg-primary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
                         @lang('lang.Add_Product')</button>
                     <div>
@@ -63,8 +63,7 @@
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
 
-                                        <button data-modal-target="Updateproductmodal"
-                                            data-modal-toggle="Updateproductmodal"
+                                        <a href="../product/{{ $data->id }}"
                                             class=" updateBtn cursor-pointer  w-[42px]"
                                             updateId="{{ $data->id }}"><svg class="h-[40px] w-[40px]"
                                                 width="40" height="40" viewBox="0 0 36 36" fill="none"
@@ -74,7 +73,7 @@
                                                     d="M16.1627 23.6197L22.3132 15.666C22.6474 15.2371 22.7663 14.7412 22.6549 14.2363C22.5583 13.7773 22.276 13.3408 21.8526 13.0097L20.8201 12.1895C19.9213 11.4747 18.8071 11.5499 18.1683 12.3701L17.4775 13.2663C17.3883 13.3785 17.4106 13.544 17.522 13.6343C17.522 13.6343 19.2676 15.0339 19.3048 15.064C19.4236 15.1769 19.5128 15.3274 19.5351 15.508C19.5722 15.8616 19.3271 16.1927 18.9631 16.2379C18.7922 16.2605 18.6288 16.2078 18.51 16.11L16.6752 14.6502C16.5861 14.5832 16.4524 14.5975 16.3781 14.6878L12.0178 20.3314C11.7355 20.6851 11.639 21.1441 11.7355 21.588L12.2927 24.0035C12.3224 24.1314 12.4338 24.2217 12.5675 24.2217L15.0188 24.1916C15.4645 24.1841 15.8804 23.9809 16.1627 23.6197ZM19.5948 22.8676H23.5918C23.9818 22.8676 24.299 23.1889 24.299 23.5839C24.299 23.9797 23.9818 24.3003 23.5918 24.3003H19.5948C19.2048 24.3003 18.8876 23.9797 18.8876 23.5839C18.8876 23.1889 19.2048 22.8676 19.5948 22.8676Z"
                                                     fill="white" />
                                             </svg>
-                                        </button>
+                                        </a>
 
 
                                         <button data-modal-target="deleteData" data-modal-toggle="deleteData"
@@ -101,6 +100,7 @@
         </div>
     </div>
 </div>
+
 
 {{-- ============ Update  product modal  =========== --}}
 {{-- <div id="Updateproductmodal" data-modal-backdrop="static"
@@ -376,219 +376,246 @@
     </div>
 </div>
 {{-- ============ add  product modal  =========== --}}
-<div id="addproductmodal" data-modal-backdrop="static"
+<div id="productModal" data-modal-backdrop="static"
     class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
     <div class="fixed inset-0 transition-opacity">
         <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
     </div>
     <div class="relative p-4 w-full   max-w-6xl max-h-full ">
-        <form id="productdata" method="post" enctype="multipart/form-data">
-            {{-- <form action="addProduct" method="post" enctype="multipart/form-data"> --}}
-            @csrf
-            <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
-                <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
-                    <h3 class="text-xl font-semibold text-white ">
-                        @lang('lang.Add_Product')
-                    </h3>
-                    <button type="button"
-                        class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
-                        data-modal-hide="addproductmodal">
+        @if (isset($updateproduct))
+            <form id="productForm" method="post" url="../UpdataProduct/{{ $updateproduct->id }}">
+            @else
+                <form id="productForm" enctype="multipart/form-data" method="post" url="../addProduct">
+        @endif
+        @csrf
+        <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
+            <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
+                <h3 class="text-xl font-semibold text-white ">
+                    @lang(!isset($updateproduct) ? 'lang.Add_Product' : 'lang.Update_Product')
+                </h3>
+                <button type="button"
+                    class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
+                    @if (isset($updateproduct)) <a href="../product">
+                            <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            </svg></a>
+                    @else
                         <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 14 14">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                        </svg>
+                        </svg> @endif
                     </button>
+            </div>
+            <div class="lg:grid  lg:grid-cols-3 grid-cols-2 gap-x-6 gap-y-2 mx-6 my-6">
+                <div class="  ">
+                    <label class="text-[14px] font-normal" for="firstName">@lang('lang.Product_Name')</label>
+                    <input type="text"
+                        class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                        name="name" id="request" placeholder=" @lang('lang.Name_Here')" required
+                        value="{{ $updateproduct->name ?? '' }}">
                 </div>
-                <div class="lg:grid  lg:grid-cols-3 grid-cols-2 gap-x-6 gap-y-2 mx-6 my-6">
-                    <div class="  ">
-                        <label class="text-[14px] font-normal" for="firstName">@lang('lang.Product_Name')</label>
-                        <input type="text"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="name" id="request" placeholder=" @lang('lang.Name_Here')" required>
-                    </div>
-                    <div class=" lg:mt-0 mt-4">
-                        <label class="text-[14px] font-normal" for="productCode">@lang('lang.Product_Code')</label>
-                        <input type="text"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="code" id="productCode" placeholder=" @lang('lang.Code_Here')" required>
-                    </div>
-                    <div class=" lg:mt-0 mt-4">
-                        <label class="text-[14px] font-normal" for="tags">@lang('lang.Product_Tags')</label>
-                        <input type="text"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="product_tags" id="tags" placeholder=" @lang('lang.Tags_Here')">
-                    </div>
-                    <div>
-                        <div class="flex gap-2  mt-4">
-                            <div class="w-full">
-                                <label class="text-[14px] font-normal" for="brands">@lang('lang.Brand_Name')</label>
-                                <select
-                                    class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] category "
-                                    name="brand" id="brands" required>
-                                    @foreach ($brands as $brand)
-                                        <option value="{{ $brand->name }}">
-                                            {{ $brand->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <button data-modal-target="addbrandmodal" data-modal-toggle="addbrandmodal"
-                                type="button"
-                                class="bg-primary text-white  rounded-[4px] py-1.5 px-3 mt-6 mb-3 uaddBtn
-                            font-semibold">+</button>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex gap-2  mt-4">
-                            <div class="w-full">
-                                <label class="text-[14px] font-normal" for="category">@lang('lang.Product_Category')</label>
-                                <select
-                                    class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] category "
-                                    name="category" id="category" required>
-                                    @foreach ($categories as $category)
-                                        <option category-tax="{{ $category->tax }}" value="{{ $category->name }}">
-                                            {{ $category->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <button data-modal-target="addcategorymodal" data-modal-toggle="addcategorymodal"
-                                type="button"
-                                class="bg-primary text-white  rounded-[4px] py-1.5 px-3 mt-6 mb-3 uaddBtn
-                            font-semibold">+</button>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <label class="text-[14px] font-normal" for="subCategory">@lang('lang.Product_Sub_Category')</label>
-                        <input type="text" required
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="sub_category" list="subcategory" id="subCategory"
-                            placeholder=" @lang('lang.Sub_Category_Here')">
-                        <datalist id="subcategory">
-                            @foreach ($Subcategories as $Subcategory)
-                                <option value="{{ $Subcategory->sub_category }}">
-                            @endforeach
-                        </datalist>
-                    </div>
-                    <div class="mt-4 ">
-                        <label class="text-[14px] font-normal" for="purchasePrice">@lang('lang.Purchase_Price')</label>
-                        <input type="text"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="purchase_price" id="purchasePrice" placeholder=" @lang('lang.Price_Here')">
-                    </div>
-                    <div class="grid grid-cols-3  gap-4  mt-4">
-                        <div>
-                            <label class="text-[14px] font-normal" for="Price">@lang('lang.Price')</label>
-                            <input type="text"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="rate" id="WOPrice" placeholder=" @lang('lang.Price_Here')" required>
-                        </div>
-                        <div>
-                            <label class="text-[14px] font-normal" for="TaxPrice">@lang('lang.Tax')%</label>
-
-                            <input type="number"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] tax-input"
-                                name="tax" id="TaxPrice" placeholder="%  @lang('lang.Here')  " required
-                                value="0">
-                        </div>
-                        <div>
-                            <label class="text-[14px] font-normal" for="tax">@lang('lang.Total_Price')</label>
-                            <input type="number"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] tax-input"
-                                name="total_price" id="TotalWTax" readonly>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2  gap-4  mt-4">
-                        <div>
-                            <label class="text-[14px] font-normal" for="quantity">@lang('lang.Total_Quantity')</label>
-                            <input type="number"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="quantity" id="quantity" placeholder=" @lang('lang.Read_Only')" required readonly>
-                        </div>
-                        <div>
-                            <label class="text-[14px] font-normal" for="quantityAlert">@lang('lang.Alert_on_Quantity')</label>
-                            <input type="number"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="quantity_alert" id="quantityAlert" placeholder=" @lang('lang.Alert_Here')" required
-                                value="1">
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2  gap-4  mt-4">
-                        <div>
-                            <label class="text-[14px] font-normal" for="product_unit">@lang('lang.Unit')</label>
-                            <input type="text"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="product_unit" id="product_unit" placeholder=" @lang('lang.Unit_Here')" required>
-                        </div>
-                        <div>
-                            <label class="text-[14px] font-normal" for="unitPieces">@lang('lang.Unit_Pieces')</label>
-                            <input type="number"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="Unit_Pieces" id="unitPieces" placeholder=" @lang('lang.Pieces_Here')" required>
-
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2  gap-4  mt-4">
-                        <div>
-                            <label class="text-[14px] font-normal" for="unitQuantity">@lang('lang.Total_Unit_Quantity')</label>
-                            <input type="number"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="unit_quantity" id="unitQuantity" placeholder=" @lang('lang.Quantity_Here')" required>
-
-                        </div>
-                        <div>
-                            <label class="text-[14px] font-normal" for="UnitPrice">@lang('lang.Unit_Price')</label>
-                            <input type="text"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="unit_price" id="UnitPrice" placeholder=" @lang('lang.Unit_Price')" required>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2  gap-4  mt-4">
-                        <div>
-                            <label class="text-[14px] font-normal" for="statusa">@lang('lang.Status')</label>
+                <div class=" lg:mt-0 mt-4">
+                    <label class="text-[14px] font-normal" for="productCode">@lang('lang.Product_Code')</label>
+                    <input type="text"
+                        class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                        name="code" id="productCode" placeholder=" @lang('lang.Code_Here')" required
+                        value="{{ $updateproduct->code ?? '' }}">
+                </div>
+                <div class=" lg:mt-0 mt-4">
+                    <label class="text-[14px] font-normal" for="tags">@lang('lang.Product_Tags')</label>
+                    <input type="text"
+                        class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                        name="product_tags" id="tags" placeholder=" @lang('lang.Tags_Here')"
+                        value="{{ $updateproduct->tags ?? '' }}">
+                </div>
+                <div>
+                    <div class="flex gap-2  mt-4">
+                        <div class="w-full">
+                            <label class="text-[14px] font-normal" for="brands">@lang('lang.Brand_Name')</label>
                             <select
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="status" id="statusa" required>
-                                <option value="active">@lang('lang.Active')</option>
-                                <option value="un-active">@lang('lang.Not_Active')</option>
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] category "
+                                name="brand" id="brands" required>
+                                @foreach ($brands as $brand)
+                                    <option
+                                        {{ isset($updateproduct->brand) && $updateproduct->brand == $brand->name ? 'selected' : '' }}
+                                        value="{{ $brand->name }}">
+                                        {{ $brand->name }}</option>
+                                @endforeach
                             </select>
                         </div>
-                        <div>
-                            <label class="text-[14px] font-normal" for="image">@lang('lang.Product_Image')</label>
-                            <input type="file"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="product_image" id="image">
-                        </div>
-                    </div>
-                    <div class="mt-4 col-span-3">
-                        <label class="text-[14px] font-normal" for="description">@lang('lang.Product_Description')</label>
-                        <textarea name="description" id="description"
-                            class="w-full h-24  border-[#DEE2E6] rounded-[4px] focus:border-primary text-[14px] "
-                            placeholder="@lang('lang.Start_writing_here')" required></textarea>
+                        <button data-modal-target="addbrandmodal" data-modal-toggle="addbrandmodal" type="button"
+                            class="bg-primary text-white  rounded-[4px] py-1.5 px-3 mt-6 mb-3 uaddBtn
+                            font-semibold">+</button>
                     </div>
                 </div>
-
-                <div class="flex justify-end ">
-                    <button class="bg-primary text-white py-2 px-6 my-4 rounded-[4px]  mx-6 uaddBtn  font-semibold "
-                        id="iaddBtn">
-                        <div class=" text-center hidden" id="ispinner">
-                            <svg aria-hidden="true"
-                                class="w-5 h-5 mx-auto text-center text-gray-200 animate-spin fill-primary"
-                                viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                                    fill="currentColor" />
-                                <path
-                                    d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                                    fill="currentFill" />
-                            </svg>
+                <div>
+                    <div class="flex gap-2  mt-4">
+                        <div class="w-full">
+                            <label class="text-[14px] font-normal" for="category">@lang('lang.Product_Category')</label>
+                            <select
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] category "
+                                name="category" id="category" required>
+                                @foreach ($categories as $category)
+                                    <option
+                                        {{ isset($updateproduct->category) && $updateproduct->category == $category->name ? 'selected' : '' }}
+                                        category-tax="{{ $category->tax }}" value="{{ $category->name }}">
+                                        {{ $category->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
-                        <div id="itext">
-                            @lang('lang.Save')
-                        </div>
+                        <button data-modal-target="addcategorymodal" data-modal-toggle="addcategorymodal"
+                            type="button"
+                            class="bg-primary text-white  rounded-[4px] py-1.5 px-3 mt-6 mb-3 uaddBtn
+                            font-semibold">+</button>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <label class="text-[14px] font-normal" for="subCategory">@lang('lang.Product_Sub_Category')</label>
+                    <input type="text" required
+                        class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                        name="sub_category" list="subcategory" id="subCategory" placeholder=" @lang('lang.Sub_Category_Here')"
+                        value="{{ $updateproduct->sub_category ?? '' }}">
+                    <datalist id="subcategory">
+                        @foreach ($Subcategories as $Subcategory)
+                            <option value="{{ $Subcategory->sub_category }}">
+                        @endforeach
+                    </datalist>
+                </div>
+                <div class="mt-4 ">
+                    <label class="text-[14px] font-normal" for="purchasePrice">@lang('lang.Purchase_Price')</label>
+                    <input type="text"
+                        class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                        name="purchase_price" id="purchasePrice" placeholder=" @lang('lang.Price_Here')"
+                        value="{{ $updateproduct->purchase_price ?? '' }}">
+                </div>
+                <div class="grid grid-cols-3  gap-4  mt-4">
+                    <div>
+                        <label class="text-[14px] font-normal" for="Price">@lang('lang.Price')</label>
+                        <input type="text"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="rate" id="WOPrice" placeholder=" @lang('lang.Price_Here')" required
+                            value="{{ $updateproduct->rate ?? '' }}">
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="TaxPrice">@lang('lang.Tax')%</label>
 
-                    </button>
+                        <input type="number"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] tax-input"
+                            name="tax" id="TaxPrice" placeholder="%  @lang('lang.Here')  " required
+                            value="{{ $updateproduct->tax ?? '' }}" value="0">
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="tax">@lang('lang.Total_Price')</label>
+                        <input type="number"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] tax-input"
+                            name="total_price" id="TotalWTax" readonly
+                            value="{{ $updateproduct->total_price ?? '' }}">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2  gap-4  mt-4">
+                    <div>
+                        <label class="text-[14px] font-normal" for="quantity">@lang('lang.Total_Quantity')</label>
+                        <input type="number"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="quantity" id="quantity" placeholder=" @lang('lang.Read_Only')" required readonly
+                            value="{{ $updateproduct->quantity ?? '' }}">
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="quantityAlert">@lang('lang.Alert_on_Quantity')</label>
+                        <input type="number"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="quantity_alert" id="quantityAlert" placeholder=" @lang('lang.Alert_Here')" required
+                            value="1" value="{{ $updateproduct->quantity_alert ?? '' }}">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2  gap-4  mt-4">
+                    <div>
+                        <label class="text-[14px] font-normal" for="product_unit">@lang('lang.Unit')</label>
+                        <input type="text"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="product_unit" id="product_unit" placeholder=" @lang('lang.Unit_Here')" required
+                            value="{{ $updateproduct->product_unit ?? '' }}">
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="unitPieces">@lang('lang.Unit_Pieces')</label>
+                        <input type="number"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="Unit_Pieces" id="unitPieces" placeholder=" @lang('lang.Pieces_Here')" required
+                            value="{{ $updateproduct->Unit_Pieces ?? '' }}">
+
+                    </div>
+                </div>
+                <div class="grid grid-cols-2  gap-4  mt-4">
+                    <div>
+                        <label class="text-[14px] font-normal" for="unitQuantity">@lang('lang.Total_Unit_Quantity')</label>
+                        <input type="number"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="unit_quantity" id="unitQuantity" placeholder=" @lang('lang.Quantity_Here')" required
+                            value="{{ $updateproduct->unit_quantity ?? '' }}">
+
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="UnitPrice">@lang('lang.Unit_Price')</label>
+                        <input type="text"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="unit_price" id="UnitPrice" placeholder=" @lang('lang.Unit_Price')" required
+                            value="{{ $updateproduct->unit_price ?? '' }}">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2  gap-4  mt-4">
+                    <div>
+                        <label class="text-[14px] font-normal" for="statusa">@lang('lang.Status')</label>
+                        <select
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="status" id="statusa" required>
+                            <option
+                                {{ isset($updateproduct->status) && $updateproduct->status == 'active' ? 'selected' : '' }}
+                                value="active">@lang('lang.Active')</option>
+                            <option
+                                {{ isset($updateproduct->status) && $updateproduct->status == 'un-active' ? 'selected' : '' }}
+                                value="un-active">@lang('lang.Not_Active')</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="image">@lang('lang.Product_Image')</label>
+                        <input type="file"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="product_image" id="image">
+                    </div>
+                </div>
+                <div class="mt-4 col-span-3">
+                    <label class="text-[14px] font-normal" for="description">@lang('lang.Product_Description')</label>
+                    <textarea name="description" id="description"
+                        class="w-full h-24  border-[#DEE2E6] rounded-[4px] focus:border-primary text-[14px] "
+                        placeholder="@lang('lang.Start_writing_here')" required>{{ $updateproduct->description ?? '' }}</textarea>
                 </div>
             </div>
+
+            <div class="flex justify-end ">
+                <button class="bg-primary text-white py-2 px-6 my-4 rounded-[4px]  mx-6 uaddBtn  font-semibold "
+                    id="iaddBtn">
+                    <div class=" text-center hidden" id="ispinner">
+                        <svg aria-hidden="true"
+                            class="w-5 h-5 mx-auto text-center text-gray-200 animate-spin fill-primary"
+                            viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                fill="currentColor" />
+                            <path
+                                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                fill="currentFill" />
+                        </svg>
+                    </div>
+                    <div id="itext">
+                        @lang(!isset($updateproduct) ? 'lang.Save' : 'lang.Update')
+                    </div>
+
+                </button>
+            </div>
+        </div>
         </form>
         <div>
 
@@ -794,6 +821,15 @@
 </div>
 
 @include('layouts.footer')
+@if (isset($updateproduct))
+    <script>
+        $(document).ready(function() {
+            $('#productModal').removeClass("hidden");
+            calculateTotal()
+
+        });
+    </script>
+@endif
 <script>
     $(document).ready(function() {
         function TotalQuantity() {
@@ -805,11 +841,14 @@
         $('#unitQuantity, #unitPieces').on('input', TotalQuantity);
 
 
-        $('#WOPrice , #Price').on('input', function() {
-            var inputValue = $(this).val();
-            $(this).val(inputValue.replace(/,/g, '.'));
-        });
+        function calculateTotal() {
 
+            $('#WOPrice , #Price').on('input', function() {
+                var inputValue = $(this).val();
+                $(this).val(inputValue.replace(/,/g, '.'));
+            });
+        }
+        calculateTotal()
 
         $('.delButton').click(function() {
             var id = $(this).attr('delId');
@@ -841,8 +880,8 @@
             $('.tax-input').val(tax)
         });
         // insert data
-        $("#productdata").submit(function(event) {
-            var url = "../addProduct";
+        $("#productForm").submit(function(event) {
+            var url = $("#productForm").attr('url');
             event.preventDefault();
             var formData = new FormData(this);
             $.ajax({
@@ -877,48 +916,8 @@
             });
         });
 
-        // update  data
-        $('.updateBtn').click(function() {
-            var updateId = $(this).attr('updateId');
-            var url = "../ProductUpdataData/" + updateId;
-            $.ajax({
-                type: "GET",
-                url: url,
-                dataType: "json",
-                success: function(response) {
-                    var product = response.product;
-                    console.log(product);
-                    $('#update_id').val(product.id);
-                    $('#Product_Name').val(product.name);
-                    $('#productCode').val(product.code);
-                    $('#Ucategory').val(product.category);
-                    $('#subCategory').val(product.sub_category);
-                    $('#tags').val(product.tags);
-                    $('#Price').val(product.rate);
-                    $('#tax').val(product.tax);
-                    $('#quantity').val(product.quantity);
-                    $('#quantityAlert').val(product.quantity_alert);
-                    $('#Status').val(product.status);
-                    $('#description').val(product.description);
-                    $('#product_unit').val(product.product_unit);
-                    $('#Ubrands').val(product.brand);
-                    $('#purchasePrice').val(product.purchase_price);
-
-                },
-                error: function(jqXHR) {
-                    let response = JSON.parse(jqXHR.responseText);
-                    console.log("error");
-                    Swal.fire(
-                        'Warning!',
-                        'Product Not Found',
-                        'warning'
-                    );
-                }
-            });
-        })
 
         //  insert category data
-
         $("#categoryData").submit(function(event) {
             var url = "../addCategory";
             event.preventDefault();
@@ -960,46 +959,6 @@
                     $('#CaddBtn').attr('disabled', false);
                 }
             });
-        });
-        $("#UpdatecategoryData").submit(function(event) {
-            var updateId = $('#update_id').val();
-            var url = "../UpdataProduct/" + updateId;
-            console.log(url);
-            event.preventDefault();
-            var formData = new FormData(this);
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: formData,
-                dataType: "json",
-                contentType: false,
-                processData: false,
-                beforeSend: function() {
-                    $('#uspinner').removeClass('hidden');
-                    $('#utext').addClass('hidden');
-                    $('#uaddBtn').attr('disabled', true);
-                },
-                success: function(response) {
-                    window.location.href = '../product';
-
-
-                },
-                error: function(jqXHR) {
-                    let response = JSON.parse(jqXHR.responseText);
-                    console.log("error");
-                    Swal.fire(
-                        'Warning!',
-                        response.message,
-                        'warning'
-                    );
-
-                    $('#utext').removeClass('hidden');
-                    $('#uspinner').addClass('hidden');
-                    $('#uaddBtn').attr('disabled', false);
-                }
-            });
-
-
         });
 
     });

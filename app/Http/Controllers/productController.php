@@ -356,4 +356,18 @@ class productController extends Controller
         $categoryData = category::find($id);
         return view('category',   compact('categories', 'categoryData'));
     }
+
+
+    public function getProductData($id)
+    {
+        $products = product::all();
+        $categories = category::where('status', "active")->get();
+        $Subcategories =  product::select('sub_category')->distinct()->get();
+        $brands = Brands::all();
+
+        $updateproduct = product::find($id);
+
+
+        return view('product',  ['products' => $products, 'categories' => $categories, 'Subcategories' => $Subcategories, "brands" => $brands, "updateproduct" => $updateproduct]);
+    }
 }
