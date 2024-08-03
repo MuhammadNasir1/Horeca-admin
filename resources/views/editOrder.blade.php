@@ -270,14 +270,14 @@
                     <input type="hidden" value="${price}" name="product_rate[]">
                     <input type="hidden" value="${tax}" name="product_tax[]">
                     <input type="hidden" value="${quantity}" name="product_quantity[]">
-                    <input type="hidden" value="${total}" name="product_total[]">
+                    <input type="hidden" value="${total.toFixed(2)}" name="product_total[]">
                 <input readonly type="hidden" value="${unitStatus}" name="unit_status[]">
                 ${code}</td>
             <td class="border-2 border-primary productName">${product}</td>
             <td class="border-2 border-primary">${price}</td>
             <td class="border-2 border-primary px-5">${tax}%</td>
             <td class="border-2 border-primary py-2 quantity">${quantity}</td>
-            <td class="border-2 border-primary py-2  total">${total}</td>
+            <td class="border-2 border-primary py-2  total">${total.toFixed(2)}</td>
             <td class="border-2 border-primary">
                 <div class="flex justify-center">
                     <button class="delete-btn">
@@ -296,11 +296,11 @@
                     var subTotal = 0;
                     $('#product_output .total').each(function() {
                         subTotal += parseFloat($(this).text());
-                        $('#subtotal').html(subTotal);
+                        $('#subtotal').html(subTotal.toFixed(2));
                         console.log("Sub Total is" + subTotal);
-                        $('#grandTotal').html(subTotal);
-                        $('#grand_total').val(subTotal);
-                        $('#sub_total').val(subTotal);
+                        $('#grandTotal').html(subTotal.toFixed(2));
+                        $('#grand_total').val(subTotal.toFixed(2));
+                        $('#sub_total').val(subTotal.toFixed(2));
                     });
                 }
             });
@@ -311,8 +311,8 @@
                 var deliveryCharges = parseFloat($('#delivery_charges').val()) ||
                     0; // default to 0 if input is empty
                 var grandTotal = subTotal - (subTotal * (discount / 100)) + deliveryCharges;
-                $('#grandTotal').text(grandTotal);
-                $('#grand_total').val(grandTotal);
+                $('#grandTotal').text(grandTotal.toFixed(2));
+                $('#grand_total').val(grandTotal).toFixed(2);
             });
             // Add click event listener for dynamically generated delete buttons
             $('#product_output').on('click', '.delete-btn', function() {
@@ -372,6 +372,20 @@
                         // Iterate over each product object
                         $.each(products, function(index, product) {
                             var productName = product.name;
+
+                            function checkUnitStatus() {
+                                let unitStatus = $('#unitStatus').val();
+                                if (unitStatus == "single") {
+                                    $('#Product_Price').val(product.rate);
+                                    $('#priceLable').html("@lang('lang.Product_Price')");
+                                } else {
+                                    $('#Product_Price').val(product.unit_price);
+                                    $('#priceLable').html("@lang('lang.Unit_Price')");
+                                }
+                            }
+                            checkUnitStatus(); // Initial check
+                            $('#unitStatus').change(
+                                checkUnitStatus);
                             $('#Product_Price').val(product.rate);
                             $('#Product_id').val(product.id);
                             $('#productCode').val(product.code);
