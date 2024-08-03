@@ -308,13 +308,15 @@ class ordersController extends Controller
                     $productStatus =  $validatedData['unit_status'][$j];
                     if ($productStatus == "single") {
                         $productTotal = $product->rate * $validatedData['product_quantity'][$j];
+                        $rate = $product->rate;
                     } else {
                         $productTotal = $product->unit_price * $validatedData['product_quantity'][$j];
+                        $rate = $product->unit_price;
                     }
                     $order_item = order_items::create([
                         'order_id' => $orders->id,
                         'product_id' => $product->id,
-                        'product_rate' => $product->rate,
+                        'product_rate' => $rate,
                         'product_quantity' => $validatedData['product_quantity'][$j],
                         'product_tax' => $product->tax,
                         'product_total' => $productTotal,
