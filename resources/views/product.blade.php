@@ -670,7 +670,6 @@
                         </div>
 
                     </div>
-                    console.log('Table redrawn');
                 </div>
             </div>
 
@@ -855,8 +854,7 @@
                 }
                 calculateTotal()
 
-                function deleteData() {
-
+                function deleteDatafun() {
 
                     $('.delButton').click(function() {
                         $('#deleteData').removeClass("hidden");
@@ -864,8 +862,10 @@
                         $('#delLink').attr('href', '../delProduct/' + id);
                         console.log(id);
                     });
+
                 }
-                deleteData();
+                deleteDatafun();
+                var table = $('#datatable').DataTable();
                 datatable.on('draw', function() {
                     deleteData();
                     console.log('Table redrawn');
@@ -980,47 +980,46 @@
             });
 
             $("#brandData").submit(function(event) {
-                        var url = "../addBrand";
-                        event.preventDefault();
+                var url = "../addBrand";
+                event.preventDefault();
 
-                        var formData = new FormData(this);
-                        $.ajax({
-                            type: "POST",
-                            url: url,
-                            data: formData,
-                            dataType: "json",
-                            cont table.on('draw', function() {
-                                entType: false,
-                                processData: false,
-                                beforeSend: function() {
-                                    $('#spinner').removeClass('hidden');
-                                    $('#text').addClass('hidden');
-                                    $('#addBtn').attr('disabled', true);
-                                },
-                                success: function(response) {
-                                    $('#brandCloseBtn').click();
-                                    var brandName = response.brand;
-                                    console.log(brandName);
-                                    var newOption = $('<option>', {
-                                        value: brandName,
-                                        text: brandName,
-                                    });
-                                    $('#brands').append(newOption);
-                                },
-                                error: function(jqXHR) {
-                                    let response = JSON.parse(jqXHR.responseText);
-                                    console.log("error");
-                                    Swal.fire(
-                                        'Warning!',
-                                        response.message,
-                                        'warning'
-                                    );
-
-                                    $('#text').removeClass('hidden');
-                                    $('#spinner').addClass('hidden');
-                                    $('#addBtn').attr('disabled', false);
-                                }
-                            });
-
+                var formData = new FormData(this);
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: formData,
+                    dataType: "json",
+                    entType: false,
+                    processData: false,
+                    beforeSend: function() {
+                        $('#spinner').removeClass('hidden');
+                        $('#text').addClass('hidden');
+                        $('#addBtn').attr('disabled', true);
+                    },
+                    success: function(response) {
+                        $('#brandCloseBtn').click();
+                        var brandName = response.brand;
+                        console.log(brandName);
+                        var newOption = $('<option>', {
+                            value: brandName,
+                            text: brandName,
                         });
+                        $('#brands').append(newOption);
+                    },
+                    error: function(jqXHR) {
+                        let response = JSON.parse(jqXHR.responseText);
+                        console.log("error");
+                        Swal.fire(
+                            'Warning!',
+                            response.message,
+                            'warning'
+                        );
+
+                        $('#text').removeClass('hidden');
+                        $('#spinner').addClass('hidden');
+                        $('#addBtn').attr('disabled', false);
+                    }
+                });
+
+            });
         </script>
