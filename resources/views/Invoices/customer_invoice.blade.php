@@ -366,11 +366,12 @@
                                             @if ($order->order_from == 'App')
                                                 @php
                                                     $total =
+                                                        $orderItem['product_quantity'] * $orderItem['product_rate'] +
                                                         $orderItem['product_quantity'] *
-                                                        $orderItem['product_rate'] *
-                                                        (1 + $orderItem['product_tax']);
+                                                            $orderItem['product_rate'] *
+                                                            ($orderItem['product_tax'] / 100);
                                                 @endphp
-                                                {{ $total }}&euro;
+                                                {{ number_format($total, 2) }}&euro;
                                             @else
                                                 {{ $orderItem['product_total'] }}&euro;
                                             @endif
