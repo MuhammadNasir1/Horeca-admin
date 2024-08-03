@@ -75,9 +75,9 @@
                                             </svg>
                                         </a>
 
-
                                         <button data-modal-target="deleteData" data-modal-toggle="deleteData"
-                                            class="delButton" delId="{{ $data->id }}">
+                                            class="hidden"></button>
+                                        <button class="delButton" delId="{{ $data->id }}">
                                             <svg class="h-[40px] w-[40px]" viewBox="0 0 36 36" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <circle opacity="0.1" cx="18" cy="18" r="18"
@@ -629,50 +629,52 @@
 </div>
 
 {{-- Delete Data Modal --}}
-<div id="deleteData" data-modal-backdrop="static"
-    class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-   max-h-full ">
-    <div class="relative p-4 w-full   max-w-lg max-h-full ">
-        <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
-            <div class="">
-
-                <button type="button"
-                    class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
-                    data-modal-hide="deleteData">
-                    <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                    </svg>
-                </button>
-            </div>
-            <div class=" mx-6 my-6 pt-5">
+<div id="deleteData" data-modal-backdrop="static" class="fixed inset-0   hidden">>
+    <div class="flex justify-center items-center h-full">
+        <div class="fixed inset-0 transition-opacity">
+            <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
+        </div>
+        <div class="relative p-4 w-full   max-w-lg max-h-full ">
+            <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                 <div class="">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="100px" class="mx-auto" viewBox="0 0 512 512">
-                        <path
-                            d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
-                            fill="red" />
-                    </svg>
-                    <h1 class="text-center pt-3 text-4xl">@lang('lang.Are_You_Sure')</h1>
-                    <div class="flex  justify-center gap-5 mx-auto mt-5 pb-5">
-                        <button data-modal-hide="deleteData" class="bg-primary px-7 py-3 text-white rounded-md">
-                            @lang('lang.No')
-                        </button>
-                        <a class="" id="delLink" href="">
 
-                            <button class=" bg-red-600 px-7 py-3 text-white rounded-md">
-                                @lang('lang.Yes')
+                    <button type="button"
+                        class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
+                        data-modal-hide="deleteData">
+                        <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                    </button>
+                </div>
+                <div class=" mx-6 my-6 pt-5">
+                    <div class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100px" class="mx-auto"
+                            viewBox="0 0 512 512">
+                            <path
+                                d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                                fill="red" />
+                        </svg>
+                        <h1 class="text-center pt-3 text-4xl">@lang('lang.Are_You_Sure')</h1>
+                        <div class="flex  justify-center gap-5 mx-auto mt-5 pb-5">
+                            <button data-modal-hide="deleteData" class="bg-primary px-7 py-3 text-white rounded-md">
+                                @lang('lang.No')
                             </button>
-                        </a>
+                            <a class="" id="delLink" href="">
+
+                                <button class=" bg-red-600 px-7 py-3 text-white rounded-md">
+                                    @lang('lang.Yes')
+                                </button>
+                            </a>
+                        </div>
+
                     </div>
 
                 </div>
 
             </div>
-
         </div>
-    </div>
-    <div>
-
     </div>
 
 </div>
@@ -855,6 +857,7 @@
         calculateTotal()
 
         $('.delButton').click(function() {
+            $('#deleteData').removeClass("hidden");
             var id = $(this).attr('delId');
             $('#delLink').attr('href', '../delProduct/' + id);
             console.log(id);
