@@ -363,7 +363,7 @@
 
                                     <td class="color column3">{{ $orderItem['product_tax'] }}</td>
                                     <td class="color column4"><strong>
-                                            @if ($order == 'App')
+                                            @if ($order->order_from == 'App')
                                                 @php
                                                     $total =
                                                         $orderItem['product_quantity'] *
