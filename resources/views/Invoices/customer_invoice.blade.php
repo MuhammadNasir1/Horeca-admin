@@ -414,11 +414,11 @@
                     </div>
                     <div class="div2-left">
                         <h2>@lang('lang.Sales_Tax') 7% (@lang('lang.from') &euro;0.00 @lang('lang.net') )</h2>
-                        <h2 class="color">{{ $seven_per_tax ?? '' }}</h2>
+                        <h2 class="color">{{ number_format($seven_per_tax ?? 0, 2) }}</h2>
                     </div>
                     <div class="div2-left">
                         <h2>@lang('lang.Sales_Tax') 19% (@lang('lang.from') &euro;0.00 @lang('lang.net') )</h2>
-                        <h2 class="color">{{ $per_tax ?? '' }}</h2>
+                        <h2 class="color">{{ number_format($per_tax ?? 0, 2) }}</h2>
                     </div>
                     <div class="div2-left">
                         <h2>@lang('lang.Delivery_Charges')</h2>
