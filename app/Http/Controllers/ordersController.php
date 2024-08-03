@@ -339,7 +339,7 @@ class ordersController extends Controller
     public function getorderHistory($customer_id)
     {
         try {
-            $orders = orders::where('customer_id', $customer_id)->get();
+            $orders = orders::where('user_id', $customer_id)->get();
 
             if ($orders->isEmpty()) {
                 return response()->json(['success' => false, 'message' => "Order not found"], 404);
