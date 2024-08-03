@@ -308,13 +308,14 @@ class ordersController extends Controller
                     $productStatus =  $validatedData['unit_status'][$j];
                     if ($productStatus == "single") {
                         // $productTotal = $product->rate * $validatedData['product_quantity'][$j];
-                        $productTotalWithTax = (float)($product->rate * $validatedData['product_quantity'][$j] * (1 + $product->tax / 100));
-
+                        $productTotalWithTax = (float)((int)($product->rate) * (int)($validatedData['product_quantity'][$j]) * (1 + (int)($product->tax) / 100));
 
                         $rate = $product->rate;
                     } else {
                         // $productTotal = $product->unit_price * $validatedData['product_quantity'][$j];
-                        $productTotalWithTax = (float)($product->unit_price * $validatedData['product_quantity'][$j] * (1 + $product->tax / 100));
+                        // $productTotalWithTax = (float)($product->unit_price * $validatedData['product_quantity'][$j] * (1 + $product->tax / 100));
+                        $productTotalWithTax = (float)((int)($product->rate) * (int)($validatedData['product_quantity'][$j]) * (1 + (int)($product->tax) / 100));
+
 
                         $rate = $product->unit_price;
                     }
