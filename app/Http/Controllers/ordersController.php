@@ -294,7 +294,7 @@ class ordersController extends Controller
                 'discount' => 0,
                 'grand_total' => $validatedData['grand_total'],
                 'order_description' => $request['order_description'],
-                'order_traking' => true,
+                'order_traking' => true,943€
                 'order_note' => $request['order_note'],
                 'payment_type' => $validatedData['payment_type'],
                 'order_status' => "pending",

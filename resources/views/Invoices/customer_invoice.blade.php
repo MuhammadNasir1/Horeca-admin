@@ -362,7 +362,21 @@
                                     <td class="color">{{ $orderItem['product_rate'] }}&euro;</td>
 
                                     <td class="color column3">{{ $orderItem['product_tax'] }}</td>
-                                    <td class="color column4"><strong> {{ $orderItem['product_total'] }}&euro;</strong>
+                                    <td class="color column4"><strong>
+                                            @if ($order == 'App')
+                                                @php
+                                                    $total =
+                                                        $orderItem['product_quantity'] *
+                                                        $orderItem['product_rate'] *
+                                                        (1 + $orderItem['product_tax']);
+                                                @endphp
+                                                {{ $total }}&euro;
+                                            @else
+                                                {{ $orderItem['product_total'] }}&euro;
+                                            @endif
+
+
+                                        </strong>
                                     </td>
                                 </tr>
                             @endforeach
