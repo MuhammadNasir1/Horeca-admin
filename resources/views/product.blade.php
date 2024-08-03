@@ -866,8 +866,8 @@
                 }
                 deleteDatafun();
                 var table = $('#datatable').DataTable();
-                datatable.on('draw', function() {
-                    deleteData();
+                table.on('draw', function() {
+                    deleteDatafun();
                     console.log('Table redrawn');
 
                 });
