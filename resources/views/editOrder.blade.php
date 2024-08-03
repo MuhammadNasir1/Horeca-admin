@@ -271,7 +271,7 @@
                     <input type="hidden" value="${tax}" name="product_tax[]">
                     <input type="hidden" value="${quantity}" name="product_quantity[]">
                     <input type="hidden" value="${total}" name="product_total[]">
-                <input readonly type="text" value="${unitStatus}" name="unit_status[]">
+                <input readonly type="hidden" value="${unitStatus}" name="unit_status[]">
                 ${code}</td>
             <td class="border-2 border-primary productName">${product}</td>
             <td class="border-2 border-primary">${price}</td>
