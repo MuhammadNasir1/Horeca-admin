@@ -101,220 +101,12 @@
     </div>
 </div>
 
-
-{{-- ============ Update  product modal  =========== --}}
-{{-- <div id="Updateproductmodal" data-modal-backdrop="static"
-    class="hidden overflow-y-auto overflow-x-hidden fixed  top-0 left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
-    <div class="relative p-4 w-full   max-w-6xl max-h-full ">
-        <form id="UpdatecategoryData" method="post" enctype="multipart/form-data">
-            @csrf
-            <input type="hidden" id="update_id" name="update_id">
-            <div class="relat   ive bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
-                <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
-                    <h3 class="text-xl font-semibold text-white ">
-                        @lang('lang.Update_Product')
-                    </h3>
-                    <button type="button"
-                        class=" absolute right-5 text-white bg-transparent rounded-lg text-sm w-8 h-8 "
-                        data-modal-hide="Updateproductmodal">
-                        <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="lg:grid  lg:grid-cols-3 grid-cols-2 gap-x-6 gap-y-2 mx-6 my-6">
-                    <div class="  ">
-                        <label class="text-[14px] font-normal" for="firstName">@lang('lang.Product_Name')</label>
-                        <input type="text"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="name" id="Product_Name" placeholder=" @lang('lang.Name_Here')" required>
-                    </div>
-                    <div class=" ">
-                        <label class="text-[14px] font-normal" for="productCode">@lang('lang.Product_Code')</label>
-                        <input type="text"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="code" id="productCode" placeholder=" @lang('lang.Code_Here')" required>
-                    </div>
-                    <div class="">
-                        <label class="text-[14px] font-normal" for="tags">@lang('lang.Product_Tags')</label>
-                        <input type="text"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="product_tags" id="tags" placeholder=" @lang('lang.Tags_Here')">
-                    </div>
-                    <div>
-                        <div class="flex gap-2  mt-4">
-                            <div class="w-full">
-                                <label class="text-[14px] font-normal" for="Ubrands">@lang('lang.Brand_Name')</label>
-                                <select
-                                    class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] category "
-                                    name="brand" id="Ubrands" required>
-                                    @foreach ($brands as $brand)
-                                        <option value="{{ $brand->name }}">
-                                            {{ $brand->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <button data-modal-target="addbrandmodal" data-modal-toggle="addbrandmodal"
-                                type="button"
-                                class="bg-primary text-white  rounded-[4px] py-1.5 px-3 mt-6 mb-3 uaddBtn
-                            font-semibold">+</button>
-                        </div>
-                    </div>
-                    <div class="flex mt-4 gap-2">
-                        <div class="w-full">
-                            <label class="text-[14px] font-normal" for="category">@lang('lang.Product_Category')</label>
-                            <select
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] category"
-                                name="category" id="Ucategory" required>
-                                @foreach ($categories as $category)
-                                    <option category-tax="{{ $category->tax }}" value="{{ $category->name }}">
-                                        {{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <button data-modal-target="addcategorymodal" data-modal-toggle="addcategorymodal"
-                            type="button"
-                            class="bg-primary text-white  rounded-[4px] py-1.5 px-3 mt-6 mb-3 uaddBtn
-                            font-semibold">+</button>
-                    </div>
-                    <div class="mt-4">
-                        <label class="text-[14px] font-normal" for="subCategory">@lang('lang.Product_Sub_Category')</label>
-                        <input type="text"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="sub_category" id="subCategory" list="subcategories"
-                            placeholder=" @lang('lang.Sub_Category_Here')" required>
-                        <datalist id="subcategories">
-                            @foreach ($Subcategories as $Subcategory)
-                                <option value="{{ $Subcategory->sub_category }}">
-                            @endforeach
-                        </datalist>
-                    </div>
-                    <div class="mt-4 ">
-                        <label class="text-[14px] font-normal" for="purchasePrice">@lang('lang.Purchase_Price')</label>
-                        <input type="text"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="purchase_price" id="purchasePrice" placeholder=" @lang('lang.Price_Here')">
-                    </div>
-                    <div class="grid grid-cols-3  gap-4  mt-4">
-                        <div>
-                            <label class="text-[14px] font-normal" for="Price">@lang('lang.Price')</label>
-                            <input type="text"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="rate" id="Price" placeholder=" @lang('lang.Price_Here')" required>
-                        </div>
-                        <div>
-                            <label class="text-[14px] font-normal" for="tax">@lang('lang.Tax')%</label>
-
-                            <input type="text"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] tax-input"
-                                name="tax" id="tax" placeholder="%  @lang('lang.Here')  " required
-                                value="0">
-                        </div>
-                        <div>
-                            <label class="text-[14px] font-normal" for="TotalPrice">@lang('lang.Total_Price')</label>
-                            <input type="number"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] tax-input"
-                                name="total_price" id="TotalPrice" readonly>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2  gap-4  mt-4">
-                        <div>
-                            <label class="text-[14px] font-normal" for="quantity">@lang('lang.quantity')</label>
-                            <input type="number"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="quantity" id="quantity" placeholder=" @lang('lang.quantity_here')" required>
-                        </div>
-                        <div>
-                            <label class="text-[14px] font-normal" for="quantityAlert">@lang('lang.Alert_on_Quantity')</label>
-                            <input type="number"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="quantity_alert" id="quantityAlert" placeholder=" @lang('lang.Alert_Here')"
-                                value="0" required>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2  gap-4  mt-4">
-                        <div>
-                            <label class="text-[14px] font-normal" for="product_unit">@lang('lang.Unit')</label>
-                            <input type="text"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="product_unit" id="product_unit" placeholder=" @lang('lang.Unit_Here')" required>
-                        </div>
-                        <div>
-                            <label class="text-[14px] font-normal" for="unit_quantity">@lang('lang.Unit_Quantity')</label>
-                            <input type="text"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="unit_quantity" id="unit_quantity" placeholder=" @lang('lang.Quantity_Here')" required>
-
-                        </div>
-
-                    </div>
-                    <div class="grid grid-cols-2  gap-4  mt-4">
-                        <div>
-                            <label class="text-[14px] font-normal" for="UnitPrice">@lang('lang.Unit_Price')</label>
-                            <input type="text"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="unit_price" id="UnitPrice" placeholder=" @lang('lang.Quantity_Here')" required>
-
-                        </div>
-                        <div>
-                            <label class="text-[14px] font-normal" for="Status">@lang('lang.Status')</label>
-                            <select
-                                class="w-50% border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="status" id="Status" required>
-                                <option value="active">@lang('lang.Active')</option>
-                                <option value="un-active">@lang('lang.Not_Active')</option>
-                            </select>
-
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <label class="text-[14px] font-normal" for="image">@lang('lang.Product_Image')</label>
-                        <input type="file"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="product_image" id="image">
-                    </div>
-                    <div class="mt-4 col-span-3">
-                        <label class="text-[14px] font-normal" for="description">@lang('lang.Product_Description')</label>
-                        <textarea required name="description" id="description"
-                            class="w-full h-24  border-[#DEE2E6] rounded-[4px] focus:border-primary text-[14px] "
-                            placeholder="@lang('lang.Start_writing_here')"></textarea>
-                    </div>
-                </div>
-
-                <div class="flex justify-end ">
-                    <button class="bg-primary text-white py-2 px-6 my-4 rounded-[4px]  mx-6 uaddBtn  font-semibold "
-                        id="uaddBtn">
-                        <div class=" text-center hidden" id="uspinner">
-                            <svg aria-hidden="true"
-                                class="w-5 h-5 mx-auto text-center text-gray-200 animate-spin fill-primary"
-                                viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                                    fill="currentColor" />
-                                <path
-                                    d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                                    fill="currentFill" />
-                            </svg>
-                        </div>
-                        <div id="utext">
-                            @lang('lang.Update')
-                        </div>
-
-                    </button>
-                </div>
-            </div>
-        </form>
-        <div>
-
-        </div>
-
-    </div>
-</div> --}}
 {{-- ============ add  Excel modal  =========== --}}
 <div id="addExcelSheetmodal" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
+    <div class="fixed inset-0 transition-opacity">
+        <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
+    </div>
     <div class="relative p-4 w-full   max-w-2xl max-h-full ">
         <form action="{{ url('product/import') }}" method="post" enctype="multipart/form-data">
             @csrf
@@ -378,6 +170,9 @@
 {{-- ============ add  product modal  =========== --}}
 <div id="productModal" data-modal-backdrop="static"
     class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+    <div class="fixed inset-0 transition-opacity">
+        <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
+    </div>
     <div class="fixed inset-0 transition-opacity">
         <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
     </div>
@@ -854,128 +649,128 @@
                 }
                 calculateTotal()
 
-                function deleteDatafun() {
+                function delet
+                class =
+                "hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full " >
+                ass("hidden");
+                var id = $(this).attr('delId');
+                $('#delLink').attr('href', '../delProduct/' + id);
+                console.log(id);
+            });
 
-                    $('.delButton').click(function() {
-                        $('#deleteData').removeClass("hidden");
-                        var id = $(this).attr('delId');
-                        $('#delLink').attr('href', '../delProduct/' + id);
-                        console.log(id);
-                    });
-
-                }
+            }
+            deleteDatafun();
+            var table = $('#datatable').DataTable();
+            table.on('draw', function() {
                 deleteDatafun();
-                var table = $('#datatable').DataTable();
-                table.on('draw', function() {
-                    deleteDatafun();
-                    console.log('Table redrawn');
+                console.log('Table redrawn');
 
+            });
+
+            function calculateTotal() {
+                var price = parseFloat($('#WOPrice').val()) || 0;
+                var tax = parseFloat($('#TaxPrice').val()) || 0;
+                var totalPrice = price + (price * (tax / 100));
+                $('#TotalWTax').val(totalPrice.toFixed(2));
+            }
+
+            $('#WOPrice, #TaxPrice').on('input', calculateTotal);
+
+            function calculateTotal2() {
+                var price = parseFloat($('#Price').val()) || 0;
+                var tax = parseFloat($('#tax').val()) || 0;
+                var totalPrice = price + (price * (tax / 100));
+                $('#TotalPrice').val(totalPrice.toFixed(2));
+            }
+            $('#Price').trigger('tax');
+            $('#Price, #tax').on('input', calculateTotal2);
+
+            $('.category').change(function() {
+                var selectedOption = $(this).find(':selected');
+                var tax = selectedOption.attr('category-tax');
+                $('.tax-input').val(tax)
+            });
+            // insert data
+            $("#productForm").submit(function(event) {
+                var url = $("#productForm").attr('url');
+                event.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: formData,
+                    dataType: "json",
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function() {
+                        $('#ispinner').removeClass('hidden');
+                        $('#itext').addClass('hidden');
+                        $('#iaddBtn').attr('disabled', true);
+                    },
+                    success: function(response) {
+                        window.location.href = '../product';
+
+                    },
+                    error: function(jqXHR) {
+                        let response = JSON.parse(jqXHR.responseText);
+                        console.log("error");
+                        Swal.fire(
+                            'Warning!',
+                            response.message,
+                            'warning'
+                        );
+
+                        $('#itext').removeClass('hidden');
+                        $('#ispinner').addClass('hidden');
+                        $('#iaddBtn').attr('disabled', false);
+                    }
                 });
+            });
 
-                function calculateTotal() {
-                    var price = parseFloat($('#WOPrice').val()) || 0;
-                    var tax = parseFloat($('#TaxPrice').val()) || 0;
-                    var totalPrice = price + (price * (tax / 100));
-                    $('#TotalWTax').val(totalPrice.toFixed(2));
-                }
 
-                $('#WOPrice, #TaxPrice').on('input', calculateTotal);
-
-                function calculateTotal2() {
-                    var price = parseFloat($('#Price').val()) || 0;
-                    var tax = parseFloat($('#tax').val()) || 0;
-                    var totalPrice = price + (price * (tax / 100));
-                    $('#TotalPrice').val(totalPrice.toFixed(2));
-                }
-                $('#Price').trigger('tax');
-                $('#Price, #tax').on('input', calculateTotal2);
-
-                $('.category').change(function() {
-                    var selectedOption = $(this).find(':selected');
-                    var tax = selectedOption.attr('category-tax');
-                    $('.tax-input').val(tax)
-                });
-                // insert data
-                $("#productForm").submit(function(event) {
-                    var url = $("#productForm").attr('url');
-                    event.preventDefault();
-                    var formData = new FormData(this);
-                    $.ajax({
-                        type: "POST",
-                        url: url,
-                        data: formData,
-                        dataType: "json",
-                        contentType: false,
-                        processData: false,
-                        beforeSend: function() {
-                            $('#ispinner').removeClass('hidden');
-                            $('#itext').addClass('hidden');
-                            $('#iaddBtn').attr('disabled', true);
-                        },
-                        success: function(response) {
-                            window.location.href = '../product';
-
-                        },
-                        error: function(jqXHR) {
-                            let response = JSON.parse(jqXHR.responseText);
-                            console.log("error");
-                            Swal.fire(
-                                'Warning!',
-                                response.message,
-                                'warning'
-                            );
-
-                            $('#itext').removeClass('hidden');
-                            $('#ispinner').addClass('hidden');
-                            $('#iaddBtn').attr('disabled', false);
-                        }
+            //  insert category data
+            $("#categoryData").submit(function(event) {
+            var url = "../addCategory";
+            event.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: formData,
+                dataType: "json",
+                contentType: false,
+                processData: false,
+                beforeSend: function() {
+                    $('#Cspinner').removeClass('hidden');
+                    $('#Ctext').addClass('hidden');
+                    $('#CaddBtn').attr('disabled', true);
+                },
+                success: function(response) {
+                    var categoryName = response.category.name;
+                    var categoryTax = response.category.tax;
+                    $('#category-modal-close').click();
+                    var newOption = $('<option>', {
+                        value: categoryName,
+                        text: categoryName,
+                        'category-tax': categoryTax
                     });
-                });
+                    $('#category').append(newOption);
+                },
+                error: function(jqXHR) {
+                    let response = JSON.parse(jqXHR.responseText);
+                    console.log("error");
+                    Swal.fire(
+                        'Warning!',
+                        response.message,
+                        'warning'
+                    );
 
-
-                //  insert category data
-                $("#categoryData").submit(function(event) {
-                    var url = "../addCategory";
-                    event.preventDefault();
-                    var formData = new FormData(this);
-                    $.ajax({
-                        type: "POST",
-                        url: url,
-                        data: formData,
-                        dataType: "json",
-                        contentType: false,
-                        processData: false,
-                        beforeSend: function() {
-                            $('#Cspinner').removeClass('hidden');
-                            $('#Ctext').addClass('hidden');
-                            $('#CaddBtn').attr('disabled', true);
-                        },
-                        success: function(response) {
-                            var categoryName = response.category.name;
-                            var categoryTax = response.category.tax;
-                            $('#category-modal-close').click();
-                            var newOption = $('<option>', {
-                                value: categoryName,
-                                text: categoryName,
-                                'category-tax': categoryTax
-                            });
-                            $('#category').append(newOption);
-                        },
-                        error: function(jqXHR) {
-                            let response = JSON.parse(jqXHR.responseText);
-                            console.log("error");
-                            Swal.fire(
-                                'Warning!',
-                                response.message,
-                                'warning'
-                            );
-
-                            $('#Ctext').removeClass('hidden');
-                            $('#Cspinner').addClass('hidden');
-                            $('#CaddBtn').attr('disabled', false);
-                        }
-                    });
-                });
+                    $('#Ctext').removeClass('hidden');
+                    $('#Cspinner').addClass('hidden');
+                    $('#CaddBtn').attr('disabled', false);
+                }
+            });
+            });
 
             });
 

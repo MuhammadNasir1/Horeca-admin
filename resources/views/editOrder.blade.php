@@ -60,17 +60,30 @@
                     </div>
                     <input type="hidden" id="productCode">
                     <input type="hidden" id="Product_id">
-                    <div class="mt-4 ">
-                        <label class="text-[14px] font-normal" for="product">@lang('lang.Product')</label>
-                        <select
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="product" id="product">
-                            <option value="">@lang('lang.Product')</option>
+                    <div class="flex gap-3 w-full">
+                        <div class="mt-4 w-full">
+                            <label class="text-[14px] font-normal" for="product">@lang('lang.Product')</label>
+                            <select
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="product" id="product">
+                                <option value="">@lang('lang.Product')</option>
+                            </select>
+                        </div>
+                        <div class="mt-4 w-full ">
+
+                            <label class="text-[14px] font-normal" for="unitStatus">@lang('lang.Unit')</label>
+                            <select
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="unit_sale" id="unitStatus">
+                                <option disabled>@lang('lang.Select_Unit_Sale')</option>
+                                <option value="single">@lang('lang.Single')</option>
+                                <option value="full_unit">@lang('lang.Full_Unit')</option>
 
 
-                        </select>
+                            </select>
 
 
+                        </div>
                     </div>
 
                     <div class="grid grid-cols-2 gap-4  mt-4">
@@ -99,8 +112,9 @@
                         </div>
                         <div class="mt-6 flex">
                             <button id="addProductBtn" type="button"
-                                class="bg-primary toggle-button h-[40px] rounded-[4px] w-[40px] font-bold text-white text-sm flex justify-center items-center"
-                                style="width: 132px"> <span class="text-2xl pr-2">+</span>@lang('lang.Add_Product')</button>
+                                class="bg-primary toggle-button h-[40px] rounded-[4px]  px-3 font-bold text-white text-sm flex justify-center items-center">
+                                <span class="text-2xl">+</span></button>
+
 
                         </div>
                     </div>
@@ -231,6 +245,7 @@
                 var quantity = $('#order_quantity').val();
                 var code = $('#productCode').val();
                 var Product_id = $('#Product_id').val();
+                let unitStatus = $('#unitStatus').val()
                 var total = (price * quantity) + ((price * quantity) * (tax / 100));
                 if (isNaN(parseInt(quantity)) || isNaN(parseFloat(price))) {
                     // If either quantity or price is not a valid number, do not append the row
@@ -256,6 +271,7 @@
                     <input type="hidden" value="${tax}" name="product_tax[]">
                     <input type="hidden" value="${quantity}" name="product_quantity[]">
                     <input type="hidden" value="${total}" name="product_total[]">
+                <input readonly type="text" value="${unitStatus}" name="unit_status[]">
                 ${code}</td>
             <td class="border-2 border-primary productName">${product}</td>
             <td class="border-2 border-primary">${price}</td>

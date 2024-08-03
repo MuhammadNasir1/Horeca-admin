@@ -230,5 +230,7 @@ return [
     "Unit_Pieces" => "Unit Pieces",
     "Pieces_Here" => "Pieces Here",
     "Total_Unit_Quantity" => "Total Unit Quantity",
+    "Select_User_Role" => "Select User Role",
+    "user_Role" => "user Role",
 
 ];

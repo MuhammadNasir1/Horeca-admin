@@ -40,13 +40,18 @@ class userController extends Controller
                 'address' => 'required',
                 'user_id' => 'required'
             ]);
+            if ($request->has('role')) {
+                $user_role = $request->role;
+            } else {
+                $user_role = "customer";
+            }
             $customer =  User::create([
                 'user_id' => $validateData['user_id'],
                 'name' => $validateData['name'],
                 'email' => $validateData['email'],
                 'password' => Hash::make(12345678),
                 'phone' => $validateData['phone_no'],
-                'role' => "customer",
+                'role' => $user_role,
                 'address' => $validateData['address'],
             ]);
 
@@ -64,12 +69,17 @@ class userController extends Controller
                 'phone_no' => 'required',
                 'address' => 'required',
             ]);
+            if ($request->has('role')) {
+                $user_role = $request['role'];
+            } else {
+                $user_role = "customer";
+            }
             $customer =  User::create([
                 'name' => $validateData['name'],
                 'email' => $validateData['email'],
                 'password' => Hash::make(12345678),
                 'phone' => $validateData['phone_no'],
-                'role' => "customer",
+                'role' => $user_role,
                 'address' => $validateData['address'],
                 'tax_number' => $request['tax_number'],
                 'client_type' => $request['client_type'],
@@ -79,6 +89,7 @@ class userController extends Controller
             ]);
 
             return response()->json(['success' => true, 'message' => "Customer Add Successfully"]);
+            // return response()->json(['success' => true, 'message' => "Customer Add Successfully"]);
         } catch (\Exception $e) {
             return response()->json(['success' => true, 'message' => $e->getMessage()]);
         }
@@ -112,11 +123,16 @@ class userController extends Controller
                 'phone_no' => 'nullable',
                 'address' => 'nullable',
             ]);
-
+            if ($request->has('role')) {
+                $user_role = $request->role;
+            } else {
+                $user_role = "customer";
+            }
             $customer->name = $validatedData['name'];
             $customer->phone = $validatedData['phone_no'];
             $customer->email = $validatedData['email'];
             $customer->address = $validatedData['address'];
+            $customer->role = $user_role;
             $customer->update();
             return response()->json(['success' => true,  'message' => "Data  Get Successfully", 'customer' => $customer]);
         } catch (\Exception $e) {

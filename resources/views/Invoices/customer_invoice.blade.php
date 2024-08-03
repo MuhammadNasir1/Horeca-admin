@@ -351,7 +351,6 @@
                                 <h1></h1>
                                 <tr class="font-size">
                                     <td class="column1">
-
                                         {{ $products->where('id', $orderItem->product_id)->first()->name }}
                                         @if ($orderItem->unit_status !== 'single')
                                             ({{ $products->where('id', $orderItem->product_id)->first()->Unit_Pieces }})

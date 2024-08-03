@@ -138,7 +138,18 @@
 
                     </div>
                 </div>
-                <div class="grid grid-cols-2 gap-4 mx-6">
+                <div class="grid grid-cols-3 gap-4 mx-6">
+                    <div>
+                        <label class="text-[14px] font-normal" for="UserRole">@lang('lang.user_Role')</label>
+                        <select
+                            class="w-full border-[#DEE2E6] rrounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="role" id="UserRole">
+                            <option disabled>@lang('lang.Select_User_Role')</option>
+                            <option value="customer">customer</option>
+                            <option value="distributor">Distributor</option>
+                        </select>
+
+                    </div>
                     <div>
                         <label class="text-[14px] font-normal" for="TaxNo">@lang('lang.Tax_Number')</label>
                         <input type="text"
@@ -218,6 +229,9 @@
 
 <div id="deleteData" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-   max-h-full ">
+    <div class="fixed inset-0 transition-opacity">
+        <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
+    </div>
     <div class="relative p-4 w-full   max-w-lg max-h-full ">
         <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
             <div class="">
@@ -268,6 +282,9 @@
 {{-- ============ add  customer modal  =========== --}}
 <div id="addcustomermodal" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
+    <div class="fixed inset-0 transition-opacity">
+        <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
+    </div>
     <div class="relative p-4 w-full   max-w-6xl max-h-full ">
         <form id="customerData" method="post" enctype="multipart/form-data">
             @csrf
@@ -307,7 +324,18 @@
 
                     </div>
                 </div>
-                <div class="grid grid-cols-2 gap-4 mx-6">
+                <div class="grid grid-cols-3 gap-4 mx-6">
+                    <div>
+                        <label class="text-[14px] font-normal" for="userRole">@lang('lang.user_Role')</label>
+                        <select
+                            class="w-full border-[#DEE2E6] rrounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="role" id="userRole">
+                            <option selected disabled>@lang('lang.Select_User_Role')</option>
+                            <option value="customer">customer</option>
+                            <option value="distributor">distributor</option>
+                        </select>
+
+                    </div>
                     <div>
                         <label class="text-[14px] font-normal" for="TaxNo">@lang('lang.Tax_Number')</label>
                         <input type="text"
@@ -386,6 +414,9 @@
 
 <div id="changeStatus" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
+    <div class="fixed inset-0 transition-opacity">
+        <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
+    </div>
     <div class="relative p-4 w-full   max-w-2xl max-h-full ">
         {{-- <form action="../changeVerStatus/5" method="post" enctype="multipart/form-data"> --}}
         <form id="CustomerStatusData" method="post" enctype="multipart/form-data">
@@ -583,6 +614,7 @@
                 dataType: "json",
                 success: function(response) {
                     var customer = response.customer;
+                    console.log(customer);
                     $('#update_id').val(customer.id);
                     $('#fullName').val(customer.name);
                     $('#email').val(customer.email);
@@ -593,6 +625,7 @@
                     $('#postalCode').val(customer.postal_code);
                     $('#City').val(customer.city);
                     $('#note').val(customer.note);
+                    $('#UserRole').val(customer.role);
 
 
                 },
