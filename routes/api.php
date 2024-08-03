@@ -48,7 +48,7 @@ Route::get('getCategories', [productController::class, 'getAllCategories']);
 Route::get('getProducts', [productController::class, 'getAllProducts']);
 
 
-// order
+// order`
 Route::post('Addorders', [ordersController::class, 'Addorders']);
 Route::get('/orderHistory/{customer_id}', [ordersController::class, 'getorderHistory']);
 Route::get('/orderHistoryDistributor/{user_id}', [ordersController::class, 'orderHistoryDistributor']);

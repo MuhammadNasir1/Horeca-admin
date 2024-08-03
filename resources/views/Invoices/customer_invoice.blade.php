@@ -360,7 +360,7 @@
 
                                     <td class="color">{{ $orderItem['product_quantity'] }}</td>
 
-                                    <td class="color">{{ $orderItem['product_rate'] }}</td>
+                                    <td class="color">{{ $orderItem['product_rate'] }}&euro;</td>
 
                                     <td class="color column3">{{ $orderItem['product_tax'] }}</td>
                                     <td class="color column4"><strong> {{ $orderItem['product_total'] }}&euro;</strong>
