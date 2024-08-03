@@ -370,10 +370,33 @@
                                                         $orderItem['product_quantity'] *
                                                             $orderItem['product_rate'] *
                                                             ($orderItem['product_tax'] / 100);
+
+                                                    $product_total = $total;
                                                 @endphp
                                                 {{ number_format($total, 2) }}&euro;
                                             @else
                                                 {{ $orderItem['product_total'] }}&euro;
+                                                @php
+
+                                                    $product_total = $orderItem['product_total'];
+                                                @endphp
+                                            @endif
+
+
+
+                                            @if ($orderItem['product_tax'] == 7)
+                                                @php
+
+                                                    $seven_per_tax =
+                                                        $orderItem['product_rate'] * $orderItem['product_quantity'] -
+                                                        $product_total;
+                                                @endphp
+                                            @else
+                                                @php
+                                                    $per_tax =
+                                                        $orderItem['product_rate'] * $orderItem['product_quantity'] -
+                                                        $product_total;
+                                                @endphp
                                             @endif
 
 
@@ -391,11 +414,11 @@
                     </div>
                     <div class="div2-left">
                         <h2>@lang('lang.Sales_Tax') 7% (@lang('lang.from') &euro;0.00 @lang('lang.net') )</h2>
-                        <h2 class="color">-</h2>
+                        <h2 class="color">{{ $seven_per_tax ?? '' }}</h2>
                     </div>
                     <div class="div2-left">
                         <h2>@lang('lang.Sales_Tax') 19% (@lang('lang.from') &euro;0.00 @lang('lang.net') )</h2>
-                        <h2 class="color">-</h2>
+                        <h2 class="color">{{ $per_tax ?? '' }}</h2>
                     </div>
                     <div class="div2-left">
                         <h2>@lang('lang.Delivery_Charges')</h2>
