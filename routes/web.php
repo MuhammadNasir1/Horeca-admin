@@ -62,8 +62,7 @@ Route::middleware('custom')->group(function () {
     Route::post('/updateOrderStatus/{order_id}', [ordersController::class,  'updateOrderStatus']);
 
     // Invoice pages
-    Route::get('/invoice/{order_id}', [ordersController::class,  'getOrderData'])->name('invoice');
-    Route::get('/gatepass/{order_id}', [ordersController::class,  'getOrderData'])->name('gatepass');
+
 
     // Excel data import
     Route::post('/product/import', [productController::class,  'importExcelData']);
@@ -95,7 +94,8 @@ Route::middleware('custom')->group(function () {
     Route::get('/updateBrands/{id}', [BrandsController::class,  'getBrandUpdateData']);
     Route::post('/updateBrandData/{id}', [BrandsController::class,  'updateBrand']);
 });
-
+Route::get('/invoice/{order_id}', [ordersController::class,  'getOrderData'])->name('invoice');
+Route::get('/gatepass/{order_id}', [ordersController::class,  'getOrderData'])->name('gatepass');
 
 Route::get('email', function () {
 
