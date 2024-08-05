@@ -9,8 +9,8 @@ class AuthenticateMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        if (!session()->has('user_det')) {
-            return redirect('login') ;
+        if (!session()->has('user_det') || session('user_det')['role'] != "admin") {
+            return redirect('login');
         }
 
         return $next($request);

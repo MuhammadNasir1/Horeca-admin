@@ -387,15 +387,17 @@
                                             @if ($orderItem['product_tax'] == 7)
                                                 @php
 
-                                                    $seven_per_tax =
+                                                    $seven_per_tax = abs(
                                                         $orderItem['product_rate'] * $orderItem['product_quantity'] -
-                                                        $product_total;
+                                                            $product_total,
+                                                    );
                                                 @endphp
                                             @else
                                                 @php
-                                                    $per_tax =
+                                                    $per_tax = abs(
                                                         $orderItem['product_rate'] * $orderItem['product_quantity'] -
-                                                        $product_total;
+                                                            $product_total,
+                                                    );
                                                 @endphp
                                             @endif
 
@@ -414,11 +416,11 @@
                     </div>
                     <div class="div2-left">
                         <h2>@lang('lang.Sales_Tax') 7% (@lang('lang.from') &euro;0.00 @lang('lang.net') )</h2>
-                        <h2 class="color">{{ number_format($seven_per_tax ?? 0, 2) }}</h2>
+                        <h2 class="color">{{ number_format($seven_per_tax ?? 0, 2) }}&euro;</h2>
                     </div>
                     <div class="div2-left">
                         <h2>@lang('lang.Sales_Tax') 19% (@lang('lang.from') &euro;0.00 @lang('lang.net') )</h2>
-                        <h2 class="color">{{ number_format($per_tax ?? 0, 2) }}</h2>
+                        <h2 class="color">{{ number_format($per_tax ?? 0, 2) }}&euro;</h2>
                     </div>
                     <div class="div2-left">
                         <h2>@lang('lang.Delivery_Charges')</h2>
@@ -437,13 +439,13 @@
                 </div>
             </div>
         </div>
-        <div class="contain">
+        {{-- <div class="contain">
             <div class="signature">
                 <h4>@lang('lang.Prepared_By'): _______________</h4>
 
                 <h4>@lang('lang.Recieved_By'): _______________</h4>
             </div>
-        </div>
+        </div> --}}
         <div>
             <div class="footerdata">
                 <p>Amtsgericht Wetzlar HRA 7813 UST.-ID: DE331023882</p>
