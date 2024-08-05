@@ -146,7 +146,7 @@
 
 {{-- ============ add  category modal  =========== --}}
 <div id="categoryModal" data-modal-backdrop="static"
-    class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+    class="absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 ">
     <div class="fixed inset-0 transition-opacity">
         <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
     </div>
