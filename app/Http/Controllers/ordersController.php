@@ -309,10 +309,11 @@ class ordersController extends Controller
                     if ($productStatus == "single") {
                         // $productTotalWithTax = $product->rate * $validatedData['product_quantity'][$j];
                         $productTotalWithTax = (float)($product->rate * $validatedData['product_quantity'][$j] * (1 + $product->tax / 100));
+                        $product_rate = $product->rate;
                     } else {
                         // $productTotalWithTax = $product->unsit_price * $validatedData['product_quantity'][$j];
                         $productTotalWithTax = (float)($product->unit_price * $validatedData['product_quantity'][$j] * (1 + $product->tax / 100));
-
+                        $product_rate = $product->unit_price;
                         // $productTotalWithTax = (float)((int)($product->rate) * (int)($validatedData['product_quantity'][$j]) * (1 + (int)($product->tax) / 100));
 
 
@@ -320,7 +321,7 @@ class ordersController extends Controller
                     $order_item = order_items::create([
                         'order_id' => $orders->id,
                         'product_id' => $product->id,
-                        'product_rate' => $product->rate,
+                        'product_rate' => $product_rate,
                         'product_quantity' => $validatedData['product_quantity'][$j],
                         'product_tax' => $product->tax,
                         'product_total' =>  number_format($productTotalWithTax, 2),
