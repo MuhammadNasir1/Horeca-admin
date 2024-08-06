@@ -38,7 +38,7 @@
                             <th class="flex text-sm  justify-center">@lang('lang.Action')</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tableBody">
                         @foreach ($products as $x => $data)
                             <tr class="pt-4">
                                 <td>{{ $x + 1 }}</td>
@@ -620,7 +620,7 @@
     <script>
         $(document).ready(function() {
             $('#productModal').removeClass("hidden");
-            $('#productModal').addClass("hidden");
+            $('#productModal').addClass("flex");
             calculateTotal()
 
         });
