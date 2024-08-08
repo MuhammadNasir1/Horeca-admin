@@ -6,6 +6,7 @@
     <form action="../addUpdatedOrder/{{ $order->id }}" method="post" enctype="multipart/form-data" class="pb-5">
         @csrf
         <input type="hidden" name="order_from" value="Web">
+        <input type="hidden" name="customer_id" value="{{ $order->customer_id }}">
         <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
             <div>
 
