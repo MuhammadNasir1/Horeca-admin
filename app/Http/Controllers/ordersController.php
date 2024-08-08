@@ -108,6 +108,8 @@ class ordersController extends Controller
                 'grand_total'  => 'required',
                 'order_description'  => 'nullable',
                 'delivery_charges'  => 'nullable',
+                'order_status'  => 'required',
+                'user_id'  => 'required',
 
                 'product_id'  => 'required',
                 'product_tax'  => 'required',
@@ -116,9 +118,8 @@ class ordersController extends Controller
                 'product_total'  => 'required',
             ]);
 
-            $userId   = session("user_det")['user_id'];
             $orders  = orders::create([
-                'user_id' =>  $userId,
+                'user_id' =>  $validatedData['user_id'],
                 'order_date' => $validatedData['order_date'],
                 'customer_name' => $validatedData['customer_name'],
                 'customer_id' => $validatedData['customer_id'],
@@ -132,7 +133,7 @@ class ordersController extends Controller
                 'order_traking' => $request['order_traking'],
                 'order_note' => $request['order_note'],
                 'payment_type' => $request['payment_type'],
-                'order_status' => $request['order_status'],
+                'order_status' => $validatedData['order_status'],
                 'delivery_charges' => $validatedData['delivery_charges'],
 
             ]);

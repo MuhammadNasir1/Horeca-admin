@@ -7,6 +7,8 @@
         @csrf
         <input type="hidden" name="order_from" value="Web">
         <input type="hidden" name="customer_id" value="{{ $order->customer_id }}">
+        <input type="hidden" name="order_status" value="{{ $order->order_status }}">
+        <input type="hidden" name="user_id" value="{{ $order->user_id }}">
         <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
             <div>
 
