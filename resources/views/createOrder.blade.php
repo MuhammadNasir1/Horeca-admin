@@ -5,9 +5,9 @@
     <div>
         <h1 class=" font-semibold   text-2xl ">@lang('lang.Create_Order')</h1>
     </div>
-    <form action="addOrder" method="post" enctype="multipart/form-data" class="pb-5">
+    <form action="../addOrder" method="post" enctype="multipart/form-data" class="pb-5">
         @csrf
-        <input type="hidden" readonly name="platform" value="Web">
+        <input type="text" readonly name="platform" value="web">
         <input type="hidden" readonly name="order_from" value="custom">
         <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
             <div>
