@@ -140,11 +140,16 @@ class userController extends Controller
         }
     }
 
-    public function getCustomer()
+    public function getCustomer(Request $request)
     {
 
         try {
-            $customers =  User::where('role', "customer")->get();
+            if ($request->has('user')) {
+                $customers =  User::where('user_id', $request->user)->get();
+            } else {
+
+                $customers =  User::where('role', "customer")->get();
+            }
             return response()->json(['success' => true,  'message' => "Customer get successfully ", 'customers' => $customers]);
         } catch (\Exception $e) {
             return response()->json(['success' => false,  'message' => $e->getMessage()]);
