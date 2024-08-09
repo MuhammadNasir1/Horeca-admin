@@ -24,13 +24,14 @@ class ordersController extends Controller
                 'grand_total'  => 'required',
                 'order_description'  => 'nullable',
                 'delivery_charges'  => 'nullable',
+                'platform'  => 'required',
+                'order_from'  => 'required',
 
                 'product_id'  => 'required',
                 'product_tax'  => 'required',
                 'product_quantity'  => 'required',
                 'product_rate'  => 'required',
                 'product_total'  => 'required',
-                'order_from'  => 'required',
                 'unit_status'  => 'required',
             ]);
 
@@ -53,7 +54,7 @@ class ordersController extends Controller
                 'order_status' => "pending",
                 'delivery_charges' => $validatedData['delivery_charges'],
                 'platform' => $validatedData['platform'],
-                'order_from' => "custom",
+                'order_from' => $validatedData['order_from'],
 
             ]);
             foreach ($request['product_id'] as $j => $product) {
@@ -302,8 +303,8 @@ class ordersController extends Controller
                 'payment_type' => $validatedData['payment_type'],
                 'order_status' => "pending",
                 'delivery_charges' => $request['delivery_charges'],
-                'platform' => "App",
                 'order_from' => $validatedData['order_from'],
+                'platform' => "App",
 
             ]);
             foreach ($validatedData['product_id'] as $j => $productId) {

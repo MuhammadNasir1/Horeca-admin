@@ -32,7 +32,7 @@
                                         href="tel:{{ $data->customer_phone }}">{{ $data->customer_phone }}</a></td>
                                 <td>{{ $data->grand_total }}&euro;</td>
                                 <td><button
-                                        class="p-1 rounded-md   bg-green text-white font-bold {{ $data->customer_id ? 'bg-slate-900' : 'bg-blue-900' }}">{{ $data->customer_id ? 'Distributor' : 'Custom' }}</button>
+                                        class="p-1 rounded-md   bg-green text-white font-bold {{ $data->customer_id ? 'bg-slate-900' : 'bg-blue-900' }}">{{ $data->order_from }}</button>
                                 </td>
                                 <td>
 
@@ -63,9 +63,8 @@
                                     <div class="flex gap-5 items-center justify-center">
 
 
-                                        <button id="dropdownDefaultButton{{ $x }}"
-                                            data-dropdown-toggle="dropdown{{ $x }}"
-                                            class="text-white bg-green-500 font-bold rounded-lg px-5 py-2.5 text-center inline-flex items-center "
+                                        <button data-dropdown-toggle="dropdown{{ $x }}"
+                                            class="text-white bg-green-500 font-bold rounded-lg px-5 py-2.5 text-center inline-flex items-center dropdown"
                                             type="button">@lang('lang.Action') <svg class="w-2.5 h-2.5 ms-3"
                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                                                 viewBox="0 0 10 6">
@@ -76,7 +75,7 @@
 
                                         <!-- Dropdown menu -->
                                         <div id="dropdown{{ $x }}"
-                                            class="z-10 hidden absolute top-1 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                                            class="z-10 dropdownlist hidden absolute top-1 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                                             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
                                                 aria-labelledby="dropdownDefaultButton{{ $x }}">
                                                 <li class="py-1">
@@ -326,6 +325,12 @@
 
 <script>
     $(document).ready(function() {
+        // $('.dropdown').click(function() {
+        //     $('.dropdownlist').removeClass('hidden')
+
+        // })
+
+
         $('.delButton').click(function() {
             var id = $(this).attr('delId');
             $('#delLink').attr('href', '../delOrder/' + id);

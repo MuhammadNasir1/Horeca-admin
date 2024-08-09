@@ -5,8 +5,8 @@
 
     <form action="../addUpdatedOrder/{{ $order->id }}" method="post" enctype="multipart/form-data" class="pb-5">
         @csrf
-        <input type="hidden" name="platform" value="{{ $order->order_from }}">
-        <input type="hidden" name="order_from" value="Web">
+        <input type="hidden" name="order_from" value="{{ $order->order_from }}">
+        <input type="hidden" name="platform" value="{{ $order->platform }}">
         <input type="hidden" name="customer_id" value="{{ $order->customer_id }}">
         <input type="hidden" name="order_status" value="{{ $order->order_status }}">
         <input type="hidden" name="user_id" value="{{ $order->user_id }}">

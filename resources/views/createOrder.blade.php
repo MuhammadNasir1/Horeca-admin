@@ -7,7 +7,8 @@
     </div>
     <form action="addOrder" method="post" enctype="multipart/form-data" class="pb-5">
         @csrf
-        <input type="hidden" name="platform" value="Web">
+        <input type="hidden" readonly name="platform" value="Web">
+        <input type="hidden" readonly name="order_from" value="custom">
         <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
             <div>
 
