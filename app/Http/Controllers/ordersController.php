@@ -112,6 +112,8 @@ class ordersController extends Controller
                 'delivery_charges'  => 'nullable',
                 'order_status'  => 'required',
                 'user_id'  => 'required',
+                'order_from'  => 'required',
+                'platform'  => 'required',
 
                 'product_id'  => 'required',
                 'product_tax'  => 'required',
@@ -123,7 +125,7 @@ class ordersController extends Controller
             $orders  = orders::create([
                 'user_id' =>  $validatedData['user_id'],
                 'order_date' => $validatedData['order_date'],
-                'customer_name' => $validatedData['customer_name'],
+                'customer_namplatforme' => $validatedData['customer_name'],
                 'customer_id' => $validatedData['customer_id'],
                 'customer_phone' => $validatedData['customer_phone'],
                 'customer_adress' => $validatedData['customer_adress'],
@@ -137,6 +139,8 @@ class ordersController extends Controller
                 'payment_type' => $request['payment_type'],
                 'order_status' => $validatedData['order_status'],
                 'delivery_charges' => $validatedData['delivery_charges'],
+                'order_from' => $validatedData['order_from'],
+                'platform' => $validatedData['platform'],
 
             ]);
             foreach ($request['product_id'] as $j => $product) {
