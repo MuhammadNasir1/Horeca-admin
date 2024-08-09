@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('order_status')->nullable();
             $table->string('delivery_charges')->nullable();
             $table->string('order_from')->nullable();
+            $table->string('platform');
             $table->timestamps();
         });
     }
