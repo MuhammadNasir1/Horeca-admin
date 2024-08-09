@@ -27,7 +27,7 @@
                             <tr class="pt-4">
                                 <td>{{ $data->id }}</td>
                                 <td>{{ $data->order_date }}</td>
-                                <td>{{ $data->Platform }}</td>
+                                <td>{{ $data->platform }}</td>
                                 <td>{{ $data->customer_name }} <br> <a class="text-blue-700"
                                         href="tel:{{ $data->customer_phone }}">{{ $data->customer_phone }}</a></td>
                                 <td>{{ $data->grand_total }}&euro;</td>
