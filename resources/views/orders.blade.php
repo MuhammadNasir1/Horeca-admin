@@ -14,10 +14,10 @@
                         <tr>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Order_Number')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Order_Date')</th>
-                            <th class="whitespace-nowrap text-sm">@lang('lang.Order_From')</th>
-                            <th class="whitespace-nowrap text-sm">@lang('lang.Customer_Name')</th>
-                            <th class="whitespace-nowrap text-sm">@lang('lang.Customer_phone')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Platform')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Customer_Name_Phone') </th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Amount')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Order_From')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Order_Status')</th>
                             <th class="flex text-sm justify-center">@lang('lang.Action')</th>
                         </tr>
@@ -28,10 +28,12 @@
                                 <td>{{ $data->id }}</td>
                                 <td>{{ $data->order_date }}</td>
                                 <td>{{ $data->order_from }}</td>
-                                <td>{{ $data->customer_name }}</td>
-                                <td><a class="text-blue-700"
+                                <td>{{ $data->customer_name }} <br> <a class="text-blue-700"
                                         href="tel:{{ $data->customer_phone }}">{{ $data->customer_phone }}</a></td>
                                 <td>{{ $data->grand_total }}&euro;</td>
+                                <td><button
+                                        class="p-1 rounded-md   bg-green text-white font-bold {{ $data->customer_id ? 'bg-slate-900' : 'bg-blue-900' }}">{{ $data->customer_id ? 'Distributor' : 'Customer' }}</button>
+                                </td>
                                 <td>
 
 
@@ -156,10 +158,7 @@
 
                                         {{-- <a class="w-[42px] " href="../order/{{ $data->id }}"><img width="38px"
                                                 src="{{ asset('images/icons/edit.svg') }}" alt="update"></a>
-                                        <a class="w-[42px]" href="../delOrder/{{ $data->id }}"> <img width="38px"
-                                                src="{{ asset('images/icons/delete.svg') }}" alt="update"></a>
-                                        <a href="../invoice/{{ $data->id }}">
-                                            <div class="bg-primary rounded-full p-1.5 text-white">
+                                        <a class="w-[42px]" href="../delOrder/{{ $data->i	Webtext-white">
                                                 <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                     fill="currentColor" viewBox="0 0 24 24">
@@ -232,7 +231,7 @@
                             @lang('lang.No')
                         </button>
                         <a class="" id="delLink" href="">
-
+                            Web
                             <button class=" bg-red-600 px-7 py-3 text-white rounded-md">
                                 @lang('lang.Yes')
                             </button>

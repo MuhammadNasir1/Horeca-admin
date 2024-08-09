@@ -241,4 +241,6 @@ return [
     "Select_User_Role" => "Benutzerrolle auswählen",
     "user_Role" => "Benutzerrolle",
     "Update_Brand" => "Marke aktualisieren",
+    "Platform" => "Plattform",
+    "Customer_Name_Phone" => "Kundenname / Telefon",
 ];

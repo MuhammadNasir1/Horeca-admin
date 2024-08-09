@@ -220,7 +220,6 @@ return [
     "not-active" => "Not-Active",
     "approved" => "Approved",
 
-
     "Single" => "Single",
     "Update_Brand" => "update Brand",
     "Full_Unit" => "Full Unit",
@@ -232,5 +231,8 @@ return [
     "Total_Unit_Quantity" => "Total Unit Quantity",
     "Select_User_Role" => "Select User Role",
     "user_Role" => "user Role",
+
+    "Platform" => "Platform",
+    "Customer_Name_Phone" => "Customer Name / Phone",
 
 ];
