@@ -284,6 +284,7 @@ class ordersController extends Controller
                 'order_note'  => 'nullable',
                 'delivery_charges'  => 'nullable',
                 'unit_status'  => 'required',
+                'platform'  => 'nullable',
                 'order_from'  => 'required',
             ]);
 
