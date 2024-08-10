@@ -32,7 +32,7 @@
                                         href="tel:{{ $data->customer_phone }}">{{ $data->customer_phone }}</a></td>
                                 <td>{{ $data->grand_total }}&euro;</td>
                                 <td><button
-                                        class="p-1 rounded-md   bg-green text-white font-bold {{ $data->customer_id == 'custom' ? 'bg-slate-900' : 'bg-blue-900' }}">{{ $data->order_from }}</button>
+                                        class="p-1 rounded-md   bg-green text-white font-bold {{ $data->customer_id == 'custom' ? 'bg-slate-900' : 'bg-red-950' }}">{{ $data->order_from }}</button>
                                 </td>
                                 <td>
 
