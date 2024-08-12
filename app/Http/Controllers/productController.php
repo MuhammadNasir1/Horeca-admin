@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\URL;
 use Maatwebsite\Excel\Facades\Excel;
+use PhpOffice\PhpSpreadsheet\Calculation\Category as CalculationCategory;
 
 class productController extends Controller
 {
@@ -175,7 +176,25 @@ class productController extends Controller
                     'status' => $row[14],
                     'description' => $row[15],
                     'unit_price' => $row[16],
+                    'Unit_Pieces' => $row[17],
                 ]);
+                $checkCategory = Category::where('name', $row[4])->first();
+                if (!$checkCategory) {
+                    category::create([
+                        'name' => $row[4],
+                        'tax' => $row[8],
+                        'status' => "active",
+                        'image' => "",
+                    ]);
+                }
+                $checkBrand = Brands::where('name', $row[3])->first();
+                if (!$checkBrand) {
+                    Brands::create([
+                        'name' => $row[3],
+                        'image' => 'null',
+
+                    ]);
+                }
             }
 
             // Redirect back to the previous page
@@ -183,6 +202,8 @@ class productController extends Controller
         } catch (\Exception $e) {
 
             return redirect()->back();
+            // return redirect()->back();
+            return response()->json($e->getMessage());
         }
     }
 

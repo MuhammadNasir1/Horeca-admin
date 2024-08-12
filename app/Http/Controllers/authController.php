@@ -143,6 +143,7 @@ class authController extends Controller
     public function login(Request $request)
     {
         try {
+            session()->put('locale', "de");
             $validatedData = $request->validate([
 
                 'email' => "required",
