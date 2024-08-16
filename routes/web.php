@@ -97,7 +97,4 @@ Route::middleware('custom')->group(function () {
 Route::get('/invoice/{order_id}', [ordersController::class,  'getOrderData'])->name('invoice');
 Route::get('/gatepass/{order_id}', [ordersController::class,  'getOrderData'])->name('gatepass');
 
-Route::get('email', function () {
-
-    return view("emails.parent");
-});
+Route::get('emailsend', [userController::class, 'sendmail']);

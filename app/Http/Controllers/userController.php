@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OtpMail;
 use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
 use  Illuminate\Support\Facades\Hash;
@@ -12,6 +13,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Database\Seeders\users;
+use Illuminate\Support\Facades\Mail;
 
 class userController extends Controller
 {
@@ -268,5 +270,19 @@ class userController extends Controller
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
+    }
+
+    public function sendmail(Request $request)
+    {
+        try {
+
+            $otp = 123456;
+            Mail::to("muhammadnasir.dev@gmail.com")->send(new OtpMail($otp));
+            return response()->json(['success' => true, 'message' => 'email sent.'], 200);
+        } catch (\Exception $e) {
+
+            return response()->json($e->getMessage());
+        }
+        // Mail::to($request['email'])->send(new parentMail());
     }
 }

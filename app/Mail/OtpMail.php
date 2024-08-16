@@ -15,9 +15,7 @@ class OtpMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(private string $title, private string  $body)
-    {
-    }
+    public function __construct(private string $otp) {}
 
     /**
      * Get the message envelope.
@@ -25,7 +23,7 @@ class OtpMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'LMS',
+            subject: 'Horeca-kaya Forgot Password',
         );
     }
 
@@ -35,10 +33,9 @@ class OtpMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'welcome',
+            view: 'emails.otp',
             with: [
-                'title' => $this->title,
-                'body' => $this->body,
+                'otp' => $this->otp,
             ],
         );
     }

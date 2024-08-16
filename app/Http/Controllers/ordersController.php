@@ -41,6 +41,7 @@ class ordersController extends Controller
                 'order_date' => $validatedData['order_date'],
                 'customer_name' => $validatedData['customer_name'],
                 // 'customer_id' => 0,
+                'customer_id' => $userId,
                 'customer_phone' => $validatedData['customer_phone'],
                 'customer_adress' => $validatedData['customer_adress'],
                 'sub_total' => $validatedData['sub_total'],
