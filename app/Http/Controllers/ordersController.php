@@ -98,7 +98,6 @@ class ordersController extends Controller
             foreach ($orderItems as $item) {
                 $item->delete();
             }
-            // $order->d    elete();
             $validatedData = $request->validate([
                 'order_date'  => 'required|date',
                 'customer_name'  => 'nullable',
