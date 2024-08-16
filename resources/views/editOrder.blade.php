@@ -221,7 +221,7 @@
                     </table>
                 </div>
 
-                <input type="hidden" name="grand_total" id="grand_total" value="{{ $order->grand_total }}">
+                <input type="hidden" name="grand_total" value="{{ $order->grand_total }}">
                 <input type="hidden" name="sub_total" id="sub_total" value="{{ $order->sub_total }}"">
                 <div class="py-7 flex justify-end  pr-6">
                     <button
@@ -316,7 +316,7 @@
                     0; // default to 0 if input is empty
                 var grandTotal = subTotal - (subTotal * (discount / 100)) + deliveryCharges;
                 $('#grandTotal').text(grandTotal.toFixed(2));
-                $('#grand_total').val(grandTotal).toFixed(2);
+                $('#grand_total').val(grandTotal.toFixed(2));
             });
             // Add click event listener for dynamically generated delete buttons
             $('#product_output').on('click', '.delete-btn', function() {
