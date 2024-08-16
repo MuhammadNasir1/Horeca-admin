@@ -125,7 +125,7 @@ class ordersController extends Controller
             $orders  = orders::create([
                 'user_id' =>  $validatedData['user_id'],
                 'order_date' => $validatedData['order_date'],
-                'customer_namplatforme' => $validatedData['customer_name'],
+                'customer_name' => $validatedData['customer_name'],
                 'customer_id' => $validatedData['customer_id'],
                 'customer_phone' => $validatedData['customer_phone'],
                 'customer_adress' => $validatedData['customer_adress'],
