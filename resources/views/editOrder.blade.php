@@ -221,7 +221,7 @@
                     </table>
                 </div>
 
-                <input type="text" name="grand_total" id="grand_total" value="{{ $order->grand_total }}">
+                <input type="hidden" name="grand_total" id="grand_total" value="{{ $order->grand_total }}">
                 <input type="hidden" name="sub_total" id="sub_total" value="{{ $order->sub_total }}"">
                 <div class="py-7 flex justify-end  pr-6">
                     <button
