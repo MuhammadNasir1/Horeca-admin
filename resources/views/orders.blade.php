@@ -230,7 +230,6 @@
                             @lang('lang.No')
                         </button>
                         <a class="" id="delLink" href="">
-                            Web
                             <button class=" bg-red-600 px-7 py-3 text-white rounded-md">
                                 @lang('lang.Yes')
                             </button>
