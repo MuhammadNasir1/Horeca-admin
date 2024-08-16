@@ -242,32 +242,32 @@
         $(document).ready(function() {
 
 
-            $('#addProductBtn').click(function() {
-                var product = $('#product').val();
-                var price = $('#Product_Price').val();
-                var tax = $('#tax').val();
-                var quantity = $('#order_quantity').val();
-                var code = $('#productCode').val();
-                var Product_id = $('#Product_id').val();
-                let unitStatus = $('#unitStatus').val()
-                var total = (price * quantity) + ((price * quantity) * (tax / 100));
-                if (isNaN(parseInt(quantity)) || isNaN(parseFloat(price))) {
-                    // If either quantity or price is not a valid number, do not append the row
-                    return;
-                }
-                var existingRow = $('#product_output').find('.productName').filter(function() {
-                    return $(this).text() === product;
-                }).closest('tr');
+                    $('#addProductBtn').click(function() {
+                        var product = $('#product').val();
+                        var price = $('#Product_Price').val();
+                        var tax = $('#tax').val();
+                        var quantity = $('#order_quantity').val();
+                        var code = $('#productCode').val();
+                        var Product_id = $('#Product_id').val();
+                        let unitStatus = $('#unitStatus').val()
+                        var total = (price * quantity) + ((price * quantity) * (tax / 100));
+                        if (isNaN(parseInt(quantity)) || isNaN(parseFloat(price))) {
+                            // If either quantity or price is not a valid number, do not append the row
+                            return;
+                        }
+                        var existingRow = $('#product_output').find('.productName').filter(function() {
+                            return $(this).text() === product;
+                        }).closest('tr');
 
-                if (existingRow.length > 0) {
-                    // If the product already exists, update the quantity
-                    var existingQuantity = parseInt(existingRow.find('.quantity').text());
-                    var updatedQuantity = existingQuantity + parseInt(quantity);
-                    existingRow.find('.quantity').text(updatedQuantity);
-                } else {
-                    // If the product doesn't exist, add a new row
-                    console.log(product);
-                    var productData = `<tr>
+                        if (existingRow.length > 0) {
+                            // If the product already exists, update the quantity
+                            var existingQuantity = parseInt(existingRow.find('.quantity').text());
+                            var updatedQuantity = existingQuantity + parseInt(quantity);
+                            existingRow.find('.quantity').text(updatedQuantity);
+                        } else {
+                            // If the product doesn't exist, add a new row
+                            console.log(product);
+                            var productData = `<tr>
             <td class="border-2 border-primary">
                     <input type="hidden" value="${code}" name="product_code[]">
                     <input type="hidden" value="${Product_id}" name="product_id[]">
@@ -291,123 +291,124 @@
                 </div>
             </td>
         </tr>`;
-                    $('#product_output').append(productData);
-                    // Clear input fields
-                    $('#product').val('');
-                    $('#Product_Price').val('');
-                    $('#tax').val('');
-                    $('#order_quantity').val('');
-                    var subTotal = 0;
-                    $('#product_output .total').each(function() {
-                        subTotal += parseFloat($(this).text());
-                        $('#subtotal').html(subTotal.toFixed(2));
-                        console.log("Sub Total is" + subTotal);
-                        $('#grandTotal').html(subTotal.toFixed(2));
-                        $('#grand_total').val(subTotal.toFixed(2));
-                        $('#sub_total').val(subTotal.toFixed(2));
+                            $('#product_output').append(productData);
+                            // Clear input fields
+                            $('#product').val('');
+                            $('#Product_Price').val('');
+                            $('#tax').val('');
+                            $('#order_quantity').val('');
+                            var subTotal = 0;
+                            $('#product_output .total').each(function() {
+                                subTotal += parseFloat($(this).text());
+                                $('#subtotal').html(subTotal.toFixed(2));
+                                console.log("Sub Total is" + subTotal);
+                                $('#grandTotal').html(subTotal.toFixed(2));
+                                $('#grand_total').val(subTotal.toFixed(2));
+                                $('#sub_total').val(subTotal.toFixed(2));
+                            });
+                        }
                     });
-                }
-            });
-            // Recalculate grand total when discount or delivery charges change
-            $('#discount, #delivery_charges').on('input', function() {
-                var subTotal = parseFloat($('#subtotal').text());
-                var discount = parseFloat($('#discount').val()) || 0; // default to 0 if input is empty
-                var deliveryCharges = parseFloat($('#delivery_charges').val()) ||
-                    0; // default to 0 if input is empty
-                var grandTotal = subTotal - (subTotal * (discount / 100)) + deliveryCharges;
-                $('#grandTotal').text(grandTotal.toFixed(2));
-                $('#grand_total').val(grandTotal).toFixed(2);
-            });
-            // Add click event listener for dynamically generated delete buttons
-            $('#product_output').on('click', '.delete-btn', function() {
-                $(this).closest('tr').remove();
-            });
-
-
-
-            // get product data
-            $.ajax({
-                type: "GET",
-                url: '../productData',
-                dataType: "json",
-                success: function(response) {
-                    var products = response
-                        .products; // Assuming response.products is an array of objects
-
-                    // Clear existing options from the select element
-                    // $('#product').empty();
-                    $('#product').html($('<option></option>').attr('value', "").text(
-                        "@lang('lang.Select_Product')"));
-
-                    // Iterate over each product object
-                    $.each(products, function(index, product) {
-                        var productName = product
-                            .name; // Get the name field from each product object
-                        var productId = product
-                            .id; // Get the name field from each product object
-                        // Append a new option with the product name to the select element
-                        $('#product').append($('<option></option>').attr('value', productName)
-                            .attr('productId', productId).text(productName));
-                    });
-                },
-                error: function(jqXHR) {
-                    let response = JSON.parse(jqXHR.responseText);
-                    console.log("error");
-                    Swal.fire(
-                        'Warning!',
-                        'Student Not Found',
-                        'warning'
-                    );
-                }
-            });
-
-            $('#product').change(function() {
-                var selectedOption = $(this).find(':selected');
-                var productId = selectedOption.attr('productId');
-                var url = '../singleproductData/' + productId;
-                console.log(url);
-                $.ajax({
-                    type: "GET",
-                    url: url,
-                    dataType: "json",
-                    success: function(response) {
-                        var products = response.products;
-
-                        // Iterate over each product object
-                        $.each(products, function(index, product) {
-                            var productName = product.name;
-
-                            function checkUnitStatus() {
-                                let unitStatus = $('#unitStatus').val();
-                                if (unitStatus == "single") {
-                                    $('#Product_Price').val(product.rate);
-                                    $('#priceLable').html("@lang('lang.Product_Price')");
-                                } else {
-                                    $('#Product_Price').val(product.unit_price);
-                                    $('#priceLable').html("@lang('lang.Unit_Price')");
-                                }
-                            }
-                            checkUnitStatus(); // Initial check
-                            $('#unitStatus').change(
-                                checkUnitStatus);
-                            $('#Product_Price').val(product.rate);
-                            $('#Product_id').val(product.id);
-                            $('#productCode').val(product.code);
-                            $('#tax').val(product.tax);
+                    // Recalculate grand total when discount or delivery charges change
+                    $('#discount, #delivery_charges').on('input', function() {
+                            var subTotal = parseFloat($('#subtotal').text());
+                            var discount = parseFloat($('#discount').val()) || 0; // default to 0 if input is empty
+                            var deliveryCharges = parseFloat($('#delivery_charges').val()) ||
+                                0; // default to 0 if input is empty
+                            var grandTotal = subTotal - (subTotal * (discount / 100)) + deliveryCharges;
+                            $('#grandTotal').text(grandTotal.toFixed(2));
+                            $('#grand_total').val(grandTotal.toFixed(2);
+                            });
+                        // Add click event listener for dynamically generated delete buttons
+                        $('#product_output').on('click', '.delete-btn', function() {
+                            $(this).closest('tr').remove();
                         });
-                    },
-                    error: function(jqXHR) {
-                        let response = JSON.parse(jqXHR.responseText);
-                        console.log("error");
-                        Swal.fire(
-                            'Warning!',
-                            'product Not Found',
-                            'warning'
-                        );
-                    }
 
-                });
 
-            });
-        });
+
+                        // get product data
+                        $.ajax({
+                            type: "GET",
+                            url: '../productData',
+                            dataType: "json",
+                            success: function(response) {
+                                var products = response
+                                    .products; // Assuming response.products is an array of objects
+
+                                // Clear existing options from the select element
+                                // $('#product').empty();
+                                $('#product').html($('<option></option>').attr('value', "").text(
+                                    "@lang('lang.Select_Product')"));
+
+                                // Iterate over each product object
+                                $.each(products, function(index, product) {
+                                    var productName = product
+                                        .name; // Get the name field from each product object
+                                    var productId = product
+                                        .id; // Get the name field from each product object
+                                    // Append a new option with the product name to the select element
+                                    $('#product').append($('<option></option>').attr('value',
+                                            productName)
+                                        .attr('productId', productId).text(productName));
+                                });
+                            },
+                            error: function(jqXHR) {
+                                let response = JSON.parse(jqXHR.responseText);
+                                console.log("error");
+                                Swal.fire(
+                                    'Warning!',
+                                    'Student Not Found',
+                                    'warning'
+                                );
+                            }
+                        });
+
+                        $('#product').change(function() {
+                            var selectedOption = $(this).find(':selected');
+                            var productId = selectedOption.attr('productId');
+                            var url = '../singleproductData/' + productId;
+                            console.log(url);
+                            $.ajax({
+                                type: "GET",
+                                url: url,
+                                dataType: "json",
+                                success: function(response) {
+                                    var products = response.products;
+
+                                    // Iterate over each product object
+                                    $.each(products, function(index, product) {
+                                        var productName = product.name;
+
+                                        function checkUnitStatus() {
+                                            let unitStatus = $('#unitStatus').val();
+                                            if (unitStatus == "single") {
+                                                $('#Product_Price').val(product.rate);
+                                                $('#priceLable').html("@lang('lang.Product_Price')");
+                                            } else {
+                                                $('#Product_Price').val(product.unit_price);
+                                                $('#priceLable').html("@lang('lang.Unit_Price')");
+                                            }
+                                        }
+                                        checkUnitStatus(); // Initial check
+                                        $('#unitStatus').change(
+                                            checkUnitStatus);
+                                        $('#Product_Price').val(product.rate);
+                                        $('#Product_id').val(product.id);
+                                        $('#productCode').val(product.code);
+                                        $('#tax').val(product.tax);
+                                    });
+                                },
+                                error: function(jqXHR) {
+                                    let response = JSON.parse(jqXHR.responseText);
+                                    console.log("error");
+                                    Swal.fire(
+                                        'Warning!',
+                                        'product Not Found',
+                                        'warning'
+                                    );
+                                }
+
+                            });
+
+                        });
+                    });
     </script>

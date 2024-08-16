@@ -98,7 +98,7 @@ class ordersController extends Controller
             foreach ($orderItems as $item) {
                 $item->delete();
             }
-            $order->delete();
+            // $order->d    elete();
             $validatedData = $request->validate([
                 'order_date'  => 'required|date',
                 'customer_name'  => 'nullable',
@@ -122,30 +122,32 @@ class ordersController extends Controller
                 'product_total'  => 'required',
             ]);
 
-            $orders  = orders::create([
-                'user_id' =>  $validatedData['user_id'],
-                'order_date' => $validatedData['order_date'],
-                'customer_name' => $validatedData['customer_name'],
-                'customer_id' => $validatedData['customer_id'],
-                'customer_phone' => $validatedData['customer_phone'],
-                'customer_adress' => $validatedData['customer_adress'],
-                'sub_total' => $validatedData['sub_total'],
-                'order_vat' => $validatedData['order_vat'],
-                'discount' => $validatedData['order_vat'],
-                'grand_total' => $validatedData['grand_total'],
-                'order_description' => $request['order_description'],
-                'order_traking' => $request['order_traking'],
-                'order_note' => $request['order_note'],
-                'payment_type' => $request['payment_type'],
-                'order_status' => $validatedData['order_status'],
-                'delivery_charges' => $validatedData['delivery_charges'],
-                'order_from' => $validatedData['order_from'],
-                'platform' => $validatedData['platform'],
+            $order->update($request->all());
 
-            ]);
+            // $orders  = orders::create([
+            //     'user_id' =>  $validatedData['user_id'],
+            //     'order_date' => $validatedData['order_date'],
+            //     'customer_name' => $validatedData['customer_name'],
+            //     'customer_id' => $validatedData['customer_id'],
+            //     'customer_phone' => $validatedData['customer_phone'],
+            //     'customer_adress' => $validatedData['customer_adress'],
+            //     'sub_total' => $validatedData['sub_total'],
+            //     'order_vat' => $validatedData['order_vat'],
+            //     'discount' => $validatedData['order_vat'],
+            //     'grand_total' => $validatedData['grand_total'],
+            //     'order_description' => $request['order_description'],
+            //     'order_traking' => $request['order_traking'],
+            //     'order_note' => $request['order_note'],
+            //     'payment_type' => $request['payment_type'],
+            //     'order_status' => $validatedData['order_status'],
+            //     'delivery_charges' => $validatedData['delivery_charges'],
+            //     'order_from' => $validatedData['order_from'],
+            //     'platform' => $validatedData['platform'],
+
+            // ]);
             foreach ($request['product_id'] as $j => $product) {
                 $order_items  = order_items::create([
-                    'order_id' => $orders->id,
+                    'order_id' => $order->id,
                     'product_id' => $validatedData['product_id'][$j],
                     'product_rate' => $validatedData['product_rate'][$j],
                     'product_quantity' => $validatedData['product_quantity'][$j],
@@ -155,7 +157,7 @@ class ordersController extends Controller
                 ]);
                 $order_items->save();
             };
-            return redirect('invoice/' . $orders->id);
+            return redirect('invoice/' . $order->id);
             // return response()->json(['success' => true, 'message' => 'Order add successfully'], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
