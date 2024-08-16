@@ -394,8 +394,10 @@
                                                 @endphp
                                             @else
                                                 @php
-                                                    $tot = $orderItem['product_rate'] * $orderItem['product_quantity'];
-                                                    $per_tax = abs($product_total - $tot);
+                                                    $per_tax = abs(
+                                                        $orderItem['product_rate'] * $orderItem['product_quantity'] -
+                                                            $product_total,
+                                                    );
                                                 @endphp
                                             @endif
 
