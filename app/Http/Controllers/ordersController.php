@@ -331,7 +331,6 @@ class ordersController extends Controller
                     }
                     $productTotalW = str_replace(',', '', $productTotalWithTax);
                     $productTotalW = (float)$productTotalWithTax;
-                    $productTotalW /= 10;
                     $order_item = order_items::create([
                         'order_id' => $orders->id,
                         'product_id' => $product->id,
