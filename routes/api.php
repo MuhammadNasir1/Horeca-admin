@@ -59,3 +59,4 @@ Route::post('AddCustomer', [userController::class, 'addCustomer']);
 Route::get('getCustomer', [userController::class, 'getCustomer']);
 //  app graph data
 Route::get('getGraphData', [userController::class, 'getGraphData']);
+Route::post('/resetPassword', [userController::class, 'sendmail']);
