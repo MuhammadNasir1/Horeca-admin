@@ -329,14 +329,16 @@ class ordersController extends Controller
 
 
                     }
-                    $proTotal = str_replace(',', '', $productTotalWithTax);
+                    $productTotalW = str_replace(',', '', $productTotalWithTax);
+                    $productTotalW = (float)$productTotalWithTax;
+                    $productTotalW /= 10;
                     $order_item = order_items::create([
                         'order_id' => $orders->id,
                         'product_id' => $product->id,
                         'product_rate' => $product_rate,
                         'product_quantity' => $validatedData['product_quantity'][$j],
                         'product_tax' => $product->tax,
-                        'product_total' =>  number_format($proTotal, 2),
+                        'product_total' =>  $productTotalW,
                         'unit_status' => $validatedData['unit_status'][$j],
 
                     ]);
