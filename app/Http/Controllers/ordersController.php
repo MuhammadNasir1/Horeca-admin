@@ -364,27 +364,45 @@ class ordersController extends Controller
             }
 
             $ordersWithItems = [];
+
             foreach ($orders as $order) {
-                $orderItems = order_items::where('order_id', $order['id'])
+                // Convert the order model to an array
+                $orderArray = $order->toArray();
+
+                $orderItems = order_items::where('order_id', $order->id)
                     ->join('products', 'order_items.product_id', '=', 'products.id')
                     ->select('order_items.*', 'products.name as product_name')
-                    ->get(); // Fetch all items, not just the first one
+                    ->get();
 
-                // Convert order items to array and add to order
-                $order['orderItems'] = $orderItems->toArray();
+                if ($orderItems && !$orderItems->isEmpty()) {
+                    // Convert order items to array
+                    $orderArray['orderItems'] = $orderItems->toArray();
 
-                // Add the order with items to the result array
-                $ordersWithItems[] = $order;
+                    // Iterate over each item within the orderItems array and modify it
+                    foreach ($orderArray['orderItems'] as &$orderItem) {
+                        // $prod_rate = $orderItem['product_rate'];
+                        // $prod_tax = $orderItem['product_tax'];
+                        $total_price = number_format($orderItem['product_rate'] * (1 + $orderItem['product_tax'] / 100), 2);
+
+
+                        $orderItem['product_rate'] = $total_price;
+                    }
+                }
+
+                // Add the modified order array to the result array
+                $ordersWithItems[] = $orderArray;
             }
             return response()->json(['success' => true, 'message' => "Order get successfull", 'orders' => $ordersWithItems], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
     }
+
+    // ============================== v1 ======================================
     // public function getorderHistory($customer_id)
     // {
     //     try {
-    //         $orders = orders::where('customer_id', $customer_id)->get();
+    //         $orders = orders::where('user_id', $customer_id)->get();
 
     //         if ($orders->isEmpty()) {
     //             return response()->json(['success' => false, 'message' => "Order not found"], 404);
@@ -392,75 +410,76 @@ class ordersController extends Controller
 
     //         $ordersWithItems = [];
     //         foreach ($orders as $order) {
-    //             // Fetch all order items for each order
-    //             $orderItems = order_items::where('order_id', $order->id)->get();
+    //             $orderItems = order_items::where('order_id', $order['id'])
+    //                 ->join('products', 'order_items.product_id', '=', 'products.id')
+    //                 ->select('order_items.*', 'products.name as product_name')
+    //                 ->get(); // Fetch all items, not just the first one
 
-    //             $orderData = $order->toArray();
-    //             $orderData['order_items'] = [];
-    //             foreach ($orderItems as $orderItem) {
-    //                 $productId = $orderItem->product_id;
-    //                 $product = product::find($productId); // Find the product by its ID
-    //                 $itemData = $orderItem->toArray();
-    //                 $itemData['product'][] = $product; // Add product data to each order item
-    //                 $orderData['order_items'][] = $itemData; // Add order item with product data to order
-    //             }
+    //             // Convert order items to array and add to order
+    //             $order['orderItems'] = $orderItems->toArray();
 
-    //             $ordersWithItems[] = $orderData;
+    //             // Add the order with items to the result array
+    //             $ordersWithItems[] = $order;
     //         }
-
-    //         return response()->json(['success' => true, 'orders' => $ordersWithItems], 200);
-
-
     //         return response()->json(['success' => true, 'message' => "Order get successfull", 'orders' => $ordersWithItems], 200);
     //     } catch (\Exception $e) {
     //         return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
     //     }
     // }
+
     public function orderHistoryDistributor($user_id)
     {
         try {
             $orders = orders::where('user_id', $user_id)->get();
 
-            // if ($orders->isEmpty()) {
-            //     return response()->json(['success' => false, 'message' => "Order not found"], 404);
-            // }
-
-            // $ordersWithItems = [];
-            // foreach ($orders as $order) {
-            //     // Fetch all order items for each order
-            //     $orderItems = order_items::where('order_id', $order->id)->get();
-
-            //     $orderData = $order->toArray();
-            //     $orderData['order_items'] = [];
-
-            //     foreach ($orderItems as $orderItem) {
-            //         $productId = $orderItem->product_id;
-            //         $product = product::find($productId); // Find the product by its ID
-
-            //         $itemData = $orderItem->toArray();
-            //         $itemData['product'][] = $product; // Add product data to each order item
-            //         $orderData['order_items'][] = $itemData; // Add order item with product data to order
-            //     }
-
-            //     $ordersWithItems[] = $orderData;
-            // }
             if ($orders->isEmpty()) {
                 return response()->json(['success' => false, 'message' => "Order not found"], 404);
             }
 
             $ordersWithItems = [];
+
             foreach ($orders as $order) {
-                $orderItems = order_items::where('order_id', $order['id'])
+                // Convert the order model to an array
+                $orderArray = $order->toArray();
+
+                $orderItems = order_items::where('order_id', $order->id)
                     ->join('products', 'order_items.product_id', '=', 'products.id')
                     ->select('order_items.*', 'products.name as product_name')
-                    ->get(); // Fetch all items, not just the first one
+                    ->get();
 
-                // Convert order items to array and add to order
-                $order['orderItems'] = $orderItems->toArray();
+                if ($orderItems && !$orderItems->isEmpty()) {
+                    // Convert order items to array
+                    $orderArray['orderItems'] = $orderItems->toArray();
 
-                // Add the order with items to the result array
-                $ordersWithItems[] = $order;
+                    // Iterate over each item within the orderItems array and modify it
+                    foreach ($orderArray['orderItems'] as &$orderItem) {
+                        // $prod_rate = $orderItem['product_rate'];
+                        // $prod_tax = $orderItem['product_tax'];
+                        $total_price = number_format($orderItem['product_rate'] * (1 + $orderItem['product_tax'] / 100), 2);
+
+
+                        $orderItem['product_rate'] = $total_price;
+                    }
+                }
+
+                // Add the modified order array to the result array
+                $ordersWithItems[] = $orderArray;
             }
+
+            // $ordersWithItems = [];
+            // foreach ($orders as $order) {
+            //     $orderItems = order_items::where('order_id', $order['id'])
+            //         ->join('products', 'order_items.product_id', '=', 'products.id')
+            //         ->select('order_items.*', 'products.name as product_name')
+            //         ->get(); // Fetch all items, not just the first one
+
+            //     // Convert order items to array and add to order
+            //     $order['orderItems'] = $orderItems->toArray();
+
+            //     // Add the order with items to the result array
+            //     $ordersWithItems[] = $order;
+            // }
+
 
             return response()->json(['success' => true, 'message' => "Order get successfull", 'orders' => $ordersWithItems], 200);
         } catch (\Exception $e) {
