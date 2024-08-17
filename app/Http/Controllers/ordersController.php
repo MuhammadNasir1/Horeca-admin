@@ -337,7 +337,7 @@ class ordersController extends Controller
                         'product_rate' => $product_rate,
                         'product_quantity' => $validatedData['product_quantity'][$j],
                         'product_tax' => $product->tax,
-                        'product_total' =>  $productTotalW,
+                        'product_total' =>  number_format($productTotalW, 2),
                         'unit_status' => $validatedData['unit_status'][$j],
 
                     ]);
