@@ -329,15 +329,14 @@ class ordersController extends Controller
 
 
                     }
-                    $productTotalW = str_replace(',', '', $productTotalWithTax);
-                    $productTotalW = (float)$productTotalWithTax;
+                    $formattedTotal = number_format($productTotalWithTax, 2, '.', '');
                     $order_item = order_items::create([
                         'order_id' => $orders->id,
                         'product_id' => $product->id,
                         'product_rate' => $product_rate,
                         'product_quantity' => $validatedData['product_quantity'][$j],
                         'product_tax' => $product->tax,
-                        'product_total' =>  number_format($productTotalW, 2),
+                        'product_total' =>  $formattedTotal,
                         'unit_status' => $validatedData['unit_status'][$j],
 
                     ]);
