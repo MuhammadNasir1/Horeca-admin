@@ -32,7 +32,7 @@
                                         href="tel:{{ $data->customer_phone }}">{{ $data->customer_phone }}</a></td>
                                 <td>{{ $data->grand_total }}&euro;</td>
                                 <td><button
-                                        class="p-1 rounded-md   bg-green text-white font-bold {{ $data->order_from == 'custom' ? 'bg-slate-900' : 'bg-red-950' }}">{{ $data->order_from }}</button>
+                                        class="p-1 rounded-md   bg-green text-white font-bold {{ $data->order_from == 'custom' ? 'bg-slate-600' : 'bg-red-950' }}">{{ $data->order_from }}</button>
                                 </td>
                                 <td>
 
@@ -60,7 +60,7 @@
                                         @lang('lang.' . $data->order_status)</button>
                                 </td>
                                 <td>
-                                    <div class="flex gap-5 items-center justify-center">
+                                    <div class="flex gap-5 items-center justify-center relative">
 
 
                                         <button data-dropdown-toggle="dropdown{{ $x }}"
@@ -75,7 +75,7 @@
 
                                         <!-- Dropdown menu -->
                                         <div id="dropdown{{ $x }}"
-                                            class="z-10 dropdownlist hidden absolute top-1 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                                            class="z-30 dropdownlist hidden absolute left-0 top-10 mt-1 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                                             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
                                                 aria-labelledby="dropdownDefaultButton{{ $x }}">
                                                 <li class="py-1">
@@ -85,18 +85,17 @@
                                                             alt="update">@lang('lang.Edit')</a>
                                                 </li>
                                                 <li class="py-1 ">
-                                                    {{-- <a class="w-[42px] flex items-center gap-3"
-                                                        href="../delOrder/{{ $data->id }}"> <img width="38px"
-                                                            src="{{ asset('images/icons/delete-green.svg') }}"
-                                                            alt="update">@lang('lang.Delete')</a> --}}
+
+
                                                     <button data-modal-target="deleteData"
-                                                        data-modal-toggle="deleteData"
-                                                        class="delButton items-center flex gap-3"
+                                                        data-modal-toggle="deleteData" class="hidden"></button>
+                                                    <button class="delButton items-center flex gap-3"
                                                         delId="{{ $data->id }}">
                                                         <img width="38px"
                                                             src="{{ asset('images/icons/delete-green.svg') }}"
                                                             alt="delete" class="cursor-pointer">
                                                         <p>@lang('lang.Delete')</p>
+
                                                     </button>
                                                 </li>
                                                 <li class="py-1">
@@ -154,37 +153,6 @@
                                                 </li>
                                             </ul>
                                         </div>
-
-                                        {{-- <a class="w-[42px] " href="../order/{{ $data->id }}"><img width="38px"
-                                                src="{{ asset('images/icons/edit.svg') }}" alt="update"></a>
-                                        <a class="w-[42px]" href="../delOrder/{{ $data->i	Webtext-white">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    fill="currentColor" viewBox="0 0 24 24">
-                                                    <path fill-rule="evenodd"
-                                                        d="M8 3a2 2 0 0 0-2 2v3h12V5a2 2 0 0 0-2-2H8Zm-3 7a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h1v-4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v4h1a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2H5Zm4 11a1 1 0 0 1-1-1v-4h8v4a1 1 0 0 1-1 1H9Z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-                                            </div>
-                                        </a>
-                                        <a href="../gatepass/{{ $data->id }}">
-                                            <div class="bg-primary text-white p-1.5 rounded-full">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    fill="currentColor" viewBox="0 0 24 24">
-                                                    <path fill-rule="evenodd"
-                                                        d="M11.403 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6.403a3.01 3.01 0 0 1-1.743-1.612l-3.025 3.025A3 3 0 1 1 9.99 9.768l3.025-3.025A3.01 3.01 0 0 1 11.403 5Z"
-                                                        clip-rule="evenodd" />
-                                                    <path fill-rule="evenodd"
-                                                        d="M13.232 4a1 1 0 0 1 1-1H20a1 1 0 0 1 1 1v5.768a1 1 0 1 1-2 0V6.414l-6.182 6.182a1 1 0 0 1-1.414-1.414L17.586 5h-3.354a1 1 0 0 1-1-1Z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-                                            </div>
-                                        </a>
-                                        <button updateId="{{ $data->id }}" data-modal-target="changeStatus"
-                                            data-modal-toggle="changeStatus"
-                                            class="px-4 py-2 rounded-md bg-orange-500 text-white font-bold updateStatusBtn">
-                                            @lang('lang.Change_Status') </button> --}}
                                     </div>
                                 </td>
                             </tr>
@@ -199,7 +167,7 @@
 
 {{-- Delete Data Modal --}}
 <div id="deleteData" data-modal-backdrop="static"
-    class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-   max-h-full ">
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="fixed inset-0 transition-opacity">
         <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
     </div>
@@ -323,7 +291,50 @@
 
 
 <script>
+    function dropdownrun() {
+
+        // Select all dropdown buttons
+        const dropdownButtons = document.querySelectorAll('[data-dropdown-toggle]');
+
+        dropdownButtons.forEach(button => {
+            // Get the target dropdown ID from the button's data attribute
+            const dropdownId = button.getAttribute('data-dropdown-toggle');
+            const dropdown = document.getElementById(dropdownId);
+
+            // Add click event listener to the button
+            button.addEventListener('click', function(event) {
+                event.stopPropagation();
+                // Toggle the visibility of the dropdown
+                dropdown.classList.toggle('hidden');
+            });
+
+            // Add click event listener to the document to close dropdown when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!dropdown.contains(event.target) && !button.contains(event.target)) {
+                    dropdown.classList.add('hidden');
+                }
+            });
+        });
+    }
+    dropdownrun();
     $(document).ready(function() {
+        function deleteDatafun() {
+
+            $('.delButton').click(function() {
+                $('#deleteData').removeClass("hidden");
+                $('#deleteData').addClass("flex");
+                var id = $(this).attr('delId');
+                $('#delLink').attr('href', '../delOrder/' + id);
+                console.log(id);
+            });
+
+        }
+        deleteDatafun();
+        var table = $('#datatable').DataTable();
+        table.on('draw', function() {
+            deleteDatafun();
+
+        });
         // $('.dropdown').click(function() {
         //     $('.dropdownlist').removeClass('hidden')
 
