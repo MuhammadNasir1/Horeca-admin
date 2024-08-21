@@ -178,7 +178,7 @@
         @endif
         @csrf
         <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
-            <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
+            <div class="flex itemtexts-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
                 <h3 class="text-xl font-semibold text-white ">
                     @lang(!isset($updateproduct) ? 'lang.Add_Product' : 'lang.Update_Product')
                 </h3>

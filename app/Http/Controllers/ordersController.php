@@ -120,7 +120,7 @@ class ordersController extends Controller
                 'product_rate'  => 'required',
                 'product_total'  => 'required',
             ]);
-
+            $order->discount = $validatedData['order_vat'];
             $order->update($request->all());
 
             // $orders  = orders::create([
@@ -358,7 +358,7 @@ class ordersController extends Controller
     public function getorderHistory($customer_id)
     {
         try {
-            $orders = orders::where('user_id', $customer_id)->get();
+            $orders = orders::where('user_id', $customer_id)->orderBy('id', 'desc')->get();
 
             if ($orders->isEmpty()) {
                 return response()->json(['success' => false, 'message' => "Order not found"], 404);
@@ -431,7 +431,7 @@ class ordersController extends Controller
     public function orderHistoryDistributor($user_id)
     {
         try {
-            $orders = orders::where('user_id', $user_id)->get();
+            $orders = orders::where('user_id', $user_id)->orderBy('id', 'desc')->get();
 
             if ($orders->isEmpty()) {
                 return response()->json(['success' => false, 'message' => "Order not found"], 404);
