@@ -235,4 +235,7 @@ return [
     "Platform" => "Platform",
     "Customer_Name_Phone" => "Customer Name / Phone",
 
+    "Pack" => "Pack",
+    "Category" => "Category",
+    "Brand" => "Brand",
 ];

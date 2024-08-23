@@ -34,7 +34,7 @@
         }
 
         .container {
-            height: 297mm;
+            min-height: 297mm;
             width: 210mm;
             background-color: #ffffff;
             margin: auto;
@@ -121,7 +121,7 @@
         .content-div2 {
             border: 0.5px solid #d7dae0;
             border-radius: 16px;
-            height: 750px;
+            min-height: 750px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -277,6 +277,17 @@
             text-align: right;
             margin: 0;
         }
+
+        .unit {
+
+            font-size: 12px;
+            color: #000000c6
+        }
+
+        .brand {
+
+            font-size: 14px;
+        }
     </style>
 </head>
 
@@ -337,6 +348,7 @@
                             <div class="border-head">
                                 <tr>
                                     <th class="description">@lang('lang.Description')</th>
+                                    <th class="">@lang('lang.Brand')</th>
                                     <th class="column2">@lang('lang.Qty')</th>
                                     <th class="column2">@lang('lang.Rate')</th>
                                     <th class="column3 text-1">@lang('lang.Tax')%</th>
@@ -352,16 +364,24 @@
                                 <tr class="font-size">
                                     <td class="column1">
                                         {{ $products->where('id', $orderItem->product_id)->first()->name }}
+
                                         @if ($orderItem->unit_status !== 'single')
-                                            ({{ $products->where('id', $orderItem->product_id)->first()->Unit_Pieces }})
+                                            <span class="unit"> (@lang('lang.Pack'))</span>
+                                        @else
+                                            <span class="unit"> (@lang('lang.Single'))</span>
                                         @endif
+                                        {{-- @if ($orderItem->unit_status !== 'single')
+                                            ({{ $products->where('id', $orderItem->product_id)->first()->Unit_Pieces }})
+                                        @endif --}}
                                     </td>
 
+                                    <td class="brand">
+                                        {{ $products->where('id', $orderItem->product_id)->first()->brand }}</td>
                                     <td class="color">{{ $orderItem['product_quantity'] }}</td>
 
                                     <td class="color">{{ $orderItem['product_rate'] }}&euro;</td>
 
-                                    <td class="color column3">{{ $orderItem['product_tax'] }}</td>
+                                    <td class="color column3">{{ $orderItem['product_tax'] }}%</td>
                                     <td class="color column4"><strong>
                                             @if ($order->order_from == 'App')
                                                 @php
@@ -453,7 +473,7 @@
             </div>
         </div>
         <footer>
-            <h1>@lang('lang.Software_Developed_By') The Web Concept</h1>
+            {{-- <h1>@lang('lang.Software_Developed_By') The Web Concept</h1> --}}
         </footer>
     </div>
 </body>

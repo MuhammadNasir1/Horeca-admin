@@ -243,4 +243,6 @@ return [
     "Update_Brand" => "Marke aktualisieren",
     "Platform" => "Plattform",
     "Customer_Name_Phone" => "Kundenname / Telefon",
+    "Category" => "Kategorie",
+    "Brand" => "Marken",
 ];
