@@ -266,11 +266,23 @@
 @endif
 <script>
     $(document).ready(function() {
-        $('.delButton').click(function() {
-            var id = $(this).attr('delId');
-            $('#delLink').attr('href', '../delCategory/' + id);
-            console.log(id);
+        function deleteDatafun() {
+
+            $('.delButton').click(function() {
+                $('#deleteData').removeClass("hidden");
+                $('#deleteData').addClass("flex");
+                var id = $(this).attr('delId');
+                $('#delLink').attr('href', '../delCategory/' + id);
+                console.log(id);
+            });
+        }
+        deleteDatafun();
+        var table = $('#datatable').DataTable();
+        table.on('draw', function() {
+            deleteDatafun();
+
         });
+
         // insert data
         $("#categoryForm").submit(function(event) {
             let url = $('#categoryForm').attr('url');
