@@ -245,4 +245,4 @@ return [
     "Customer_Name_Phone" => "Kundenname / Telefon",
     "Category" => "Kategorie",
     "Brand" => "Marken",
-];
+];p
