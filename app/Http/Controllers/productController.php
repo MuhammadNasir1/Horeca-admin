@@ -235,7 +235,7 @@ class productController extends Controller
     {
         try {
             $validateData = $request->validate([
-                'name' => 'required',
+                'name' => 'required|unique:category,name',
                 'category_img' => 'nullable|image',
                 'status' => 'required',
                 'tax' => 'required',

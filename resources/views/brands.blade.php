@@ -79,6 +79,9 @@
 {{-- Delete Data Modal --}}
 <div id="deleteData" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="fixed inset-0 transition-opacity">
+        <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
+    </div>
     <div class="relative p-4 w-full   max-w-lg max-h-full ">
         <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
             <div class="">
@@ -129,6 +132,9 @@
 {{-- ============ add  Brand modal  =========== --}}
 <div id="brandModal" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="fixed inset-0 transition-opacity">
+        <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
+    </div>
     <div class="fixed inset-0 transition-opacity">
         <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
     </div>
@@ -224,10 +230,18 @@
 @endif
 <script>
     $(document).ready(function() {
-        $('.delButton').click(function() {
-            var id = $(this).attr('delId');
-            $('#delLink').attr('href', '../delBrand/' + id);
-            console.log(id);
+
+        function deleteDatafun() {
+            $('.delButton').click(function() {
+                $('#deleteData').removeClass("hidden");
+                $('#deleteData').addClass("flex");
+                var id = $(this).attr('delId');
+                $('#delLink').attr('href', '../delBrand/' + id);
+                console.log(id);
+            });
+        }
+        $('#datatable').on('draw.dt', function() {
+            deleteDatafun();
         });
         $(document).ready(function() {
             // insert data
