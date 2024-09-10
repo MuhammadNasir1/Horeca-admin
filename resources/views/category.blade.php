@@ -196,7 +196,7 @@
                         value="{{ $categoryData->name ?? '' }}">
                 </div>
                 <div>
-                    <label class="text-[14px] font-normal" for="tax">@lang('lang.Tax')</label>
+                    <label class="text-[14px] font-normal" for="tax">@lang('lang.Tax')</label>1
                     <input type="text"
                         class="w-full border-[#DEE2E6]  border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="tax" id="tax" placeholder="% @lang('lang.Here')"

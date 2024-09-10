@@ -202,8 +202,7 @@ class productController extends Controller
         } catch (\Exception $e) {
 
             return redirect()->back();
-            // return redirect()->back();
-            return response()->json($e->getMessage());
+            // return response()->json($e->getMessage());
         }
     }
 
