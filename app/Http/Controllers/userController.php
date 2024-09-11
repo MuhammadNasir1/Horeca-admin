@@ -229,6 +229,9 @@ class userController extends Controller
     public  function getGraphData()
     {
         try {
+
+            $OrderData = [];
+            $weekly_sale = [];
             $totalOrders = orders::count();
             $pendingOrders = orders::where('order_status', 'pending')->count();
             $confirmedOrders = orders::where('order_status', 'confirmed')->count();
@@ -239,16 +242,34 @@ class userController extends Controller
             // Sum the grand total values
             $totalSale = $grandTotals->sum();
             $roundedTotalSale = round($totalSale);
-            $OrderData   = [
-                $roundedTotalSale,
-                $totalOrders,
-                $confirmedOrders,
-                $shippedOrders,
-                $pendingOrders,
-                $cancelOrders
+            $OrderData[]   = [
+                "total_sale" =>  $roundedTotalSale,
+                "total_orders" =>   $totalOrders,
+                "confirm_orders" =>    $confirmedOrders,
+                "shipped_orders" =>  $shippedOrders,
+                "pending_orders" =>  $pendingOrders,
+                "cancel_orders" =>   $cancelOrders
             ];
 
-            return response()->json(['success' => true,  'message' => "Data get successfully ", 'OrderData' => $OrderData]);
+            $startDate = Carbon::now()->subDays(6); // Start date (7 days ago)
+            $endDate = Carbon::now(); // Today
+            $orders = orders::whereBetween('created_at', [$startDate->startOfDay(), $endDate->endOfDay()])
+                ->get()
+                ->groupBy(function ($order) {
+                    return Carbon::parse($order->created_at)->format('l'); // Group by day of the week
+                });
+            $dailySales = $orders->map(function ($dayOrders) {
+                return $dayOrders->sum('grand_total');
+            });
+
+            // Ensure all days are represented, even if no sales occurred
+            $daysOfWeek = collect(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']);
+            $salesForLast7Days = $daysOfWeek->mapWithKeys(function ($day) use ($dailySales) {
+                return [$day => $dailySales->get($day, 0)];
+            });
+            $graphData = [];
+            $graphData[] = $salesForLast7Days;
+            return response()->json(['success' => true,  'message' => "Data get successfully ", 'OrderData' => $OrderData, 'graphData' => $graphData], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false,  'message' => $e->getMessage()]);
         }
