@@ -362,6 +362,13 @@ class productController extends Controller
                         $product->image = $product->image;
                     }
                 }
+
+                $category = category::where('name', $product->category)->first();
+                if ($category && $category->image) {
+                    $product->category_image = $category->image;
+                } else {
+                    $product->category_image = 'null';
+                }
             }
             return response()->json(['success' => true, 'message' => "Products get successfully", "products" =>  $products], 200);
         } catch (\Exception $e) {
