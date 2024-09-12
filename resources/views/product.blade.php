@@ -51,7 +51,7 @@
                                 <td>{{ $data->brand }}</td>
                                 <td>{{ $data->category }} / {{ $data->sub_category }}</td>
                                 <td>{{ $data->tax }}</td>
-                                <td>{{ $data->rate }}</td>
+                                <td>{{ $data->rate }}&euro;</td>
                                 <td>{{ $data->product_unit }}</td>
                                 <td>{{ $data->quantity }}</td>
                                 <td><button
