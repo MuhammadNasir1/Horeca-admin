@@ -652,6 +652,13 @@
         }
         calculateTotal()
 
+        $("#WOPrice").on('input', function() {
+            var inputValue = $(this).val();
+            $(this).val(inputValue.replace(/,/g, '.'));
+
+
+        })
+
         function deleteDatafun() {
 
             $('.delButton').click(function() {
