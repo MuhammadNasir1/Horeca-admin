@@ -314,7 +314,7 @@
                             @lang('lang.Warehouse')</label>
                         <input type="number"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="quantity" id="quantity" placeholder=" @lang('lang.Read_Only')" required readonly
+                            name="quantity" id="quantity" placeholder=" @lang('lang.Quantity_Here')" required
                             value="{{ $updateproduct->quantity ?? '' }}">
                     </div>
                     <div class="w-[206px]">
