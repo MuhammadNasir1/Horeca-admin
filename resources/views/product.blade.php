@@ -351,19 +351,19 @@
                 <div class="grid grid-cols-2  gap-4  mt-4">
 
                     <div>
+                        <label class="text-[14px] font-normal" for="product_unit">@lang('lang.Unit')</label>
+                        <input type="text"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="product_unit" id="product_unit" placeholder=" @lang('lang.Unit_Here')" required
+                            value="{{ $updateproduct->product_unit ?? '' }}">
+                    </div>
+                    <div>
                         <label class="text-[14px] font-normal" for="unitPieces">@lang('lang.Unit_Pieces')</label>
                         <input type="number"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="Unit_Pieces" id="unitPieces" placeholder=" @lang('lang.Pieces_Here')" required
                             value="{{ $updateproduct->Unit_Pieces ?? '' }}">
 
-                    </div>
-                    <div>
-                        <label class="text-[14px] font-normal" for="product_unit">@lang('lang.Unit')</label>
-                        <input type="text"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="product_unit" id="product_unit" placeholder=" @lang('lang.Unit_Here')" required
-                            value="{{ $updateproduct->product_unit ?? '' }}">
                     </div>
                 </div>
                 <div class="grid grid-cols-2  gap-4  mt-4">
