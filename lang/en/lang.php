@@ -244,4 +244,5 @@ return [
     "Content_of_Quantity" => "Content of Quantity",
     "Quantity_Here" => "Quantity Here",
     "Warehouse" => "Warehouse",
+    "Total_Package_Quantity" => "Total Package Quantity",
 ];

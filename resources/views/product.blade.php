@@ -343,9 +343,9 @@
                     </div>
 
                 </div>
-                <div class="grid grid-cols-2  gap-4  mt-4">
+                <div class="flex  gap-4  mt-4">
 
-                    <div>
+                    <div class="w-48">
                         <label class="text-[14px] font-normal" for="unitPieces">@lang('lang.Unit_Pieces')</label>
                         <input type="number"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
@@ -353,8 +353,8 @@
                             value="{{ $updateproduct->Unit_Pieces ?? '' }}">
 
                     </div>
-                    <div>
-                        <label class="text-[14px] font-normal" for="unitQuantity">@lang('lang.Total_Unit_Quantity')</label>
+                    <div class="w-full">
+                        <label class="text-[14px] font-normal" for="unitQuantity">@lang('lang.Total_Package_Quantity')</label>
                         <input type="number"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="unit_quantity" id="unitQuantity" placeholder=" @lang('lang.Quantity_Here')" required
