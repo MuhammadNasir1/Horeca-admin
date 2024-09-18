@@ -365,7 +365,7 @@
                             value="{{ $updateproduct->unit_price ?? '' }}">
                     </div>
                     <div class="w-full">
-                        <label class="text-[14px] font-normal" for="quantity">@lang('lang.Total_Quantity') /
+                        <label class="text-[14px] font-normal" for="quantity">@lang('lang.Total_Unit_Quantity') /
                             @lang('lang.Warehouse')</label>
                         <input type="number"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
