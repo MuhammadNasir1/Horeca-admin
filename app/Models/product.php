@@ -30,5 +30,6 @@ class product extends Model
         'purchase_price',
         'unit_price',
         'Unit_Pieces',
+        'package_quantity',
     ];
 }

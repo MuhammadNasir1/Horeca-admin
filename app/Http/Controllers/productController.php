@@ -36,6 +36,7 @@ class productController extends Controller
                 'purchase_price' => 'required',
                 'unit_price' => 'required',
                 'Unit_Pieces' => 'required',
+                'package_quantity' => 'nullable',
             ]);
 
 
@@ -57,6 +58,7 @@ class productController extends Controller
                 'purchase_price' => $validateData['purchase_price'],
                 'unit_price' => $validateData['unit_price'],
                 'Unit_Pieces' => $validateData['Unit_Pieces'],
+                'package_quantity' => $validateData['package_quantity'],
 
             ]);
             if ($request->hasFile('product_image')) {

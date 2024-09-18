@@ -348,11 +348,11 @@
                     </div>
                     <div class="w-full">
                         <label class="text-[14px] font-normal"
-                            for="unitQuantity">@lang('lang.Total_Package_Quantity')/@lang('lang.Warehouse')</label>
+                            for="packageQuantity">@lang('lang.Total_Package_Quantity')/@lang('lang.Warehouse')</label>
                         <input type="number"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="unit_quantity" id="unitQuantity" placeholder=" @lang('lang.Quantity_Here')" required
-                            value="{{ $updateproduct->unit_quantity ?? '' }}">
+                            name="package_quantity" id="packageQuantity" placeholder=" @lang('lang.Quantity_Here')" required
+                            value="{{ $updateproduct->package_quantity ?? '' }}">
 
                     </div>
                 </div>

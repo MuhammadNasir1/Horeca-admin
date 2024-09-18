@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('purchase_price');
             $table->string('unit_price');
             $table->string('Unit_Pieces');
+            $table->string('package_quantity')->nullable();
             $table->timestamps();
         });
     }
