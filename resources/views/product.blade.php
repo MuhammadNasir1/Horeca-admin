@@ -654,12 +654,12 @@
 <script>
     $(document).ready(function() {
         function TotalQuantity() {
-            let unitQuantity = parseFloat($('#unitQuantity').val()) || 1;
+            let packageQuantity = parseFloat($('#packageQuantity').val()) || 1;
             let unitPieces = parseFloat($('#unitPieces').val()) || 0;
-            let totalQuan = unitPieces * unitQuantity;
+            let totalQuan = unitPieces * packageQuantity;
             $('#quantity').val(totalQuan);
         }
-        $('#unitQuantity, #unitPieces').on('input', TotalQuantity);
+        $('#packageQuantity, #unitPieces').on('input', TotalQuantity);
 
 
         function calculateTotal() {
