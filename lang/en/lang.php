@@ -238,4 +238,9 @@ return [
     "Pack" => "Pack",
     "Category" => "Category",
     "Brand" => "Brand",
+
+
+
+    "Content_of_Quantity" => "Content of Quantity",
+    "Quantity_Here" => "Quantity Here",
 ];

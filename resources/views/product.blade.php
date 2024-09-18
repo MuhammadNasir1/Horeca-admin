@@ -308,13 +308,20 @@
                             value="{{ $updateproduct->total_price ?? '' }}">
                     </div>
                 </div>
-                <div class="grid grid-cols-2  gap-4  mt-4">
+                <div class="grid grid-cols-3  gap-4  mt-4">
                     <div>
                         <label class="text-[14px] font-normal" for="quantity">@lang('lang.Total_Quantity')</label>
                         <input type="number"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="quantity" id="quantity" placeholder=" @lang('lang.Read_Only')" required readonly
                             value="{{ $updateproduct->quantity ?? '' }}">
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="unitQuantity">@lang('lang.Content_of_Quantity')</label>
+                        <input type="number"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="quantity" id="unitQuantity" placeholder=" @lang('lang.Quantity_Here')" required
+                            value="">
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="quantityAlert">@lang('lang.Alert_on_Quantity')</label>
