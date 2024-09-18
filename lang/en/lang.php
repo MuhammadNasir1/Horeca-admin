@@ -174,7 +174,7 @@ return [
     "Enter_Old_Password" => "Enter Old Password",
     "Enter_New_Password" => "Enter New Password",
     "Enter_Confirm_Password" => "Enter Confirm Password",
-    "Alert_on_Quantity" => "Alert  Quantity",
+    "Alert_on_Quantity" => "Alert on Quantity",
     "Price_Here" => "Price Here",
     "Order_From" => "Order From",
     "Status&Tracking" => "Status & Tracking",
@@ -243,5 +243,5 @@ return [
 
     "Content_of_Quantity" => "Content of Quantity",
     "Quantity_Here" => "Quantity Here",
-    "" => "Quantity Here",
+    "Warehouse" => "Warehouse",
 ];

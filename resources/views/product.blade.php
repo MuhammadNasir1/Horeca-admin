@@ -308,13 +308,36 @@
                             value="{{ $updateproduct->total_price ?? '' }}">
                     </div>
                 </div>
-                <div class="grid grid-cols-2  gap-4  mt-4">
-                    <div>
-                        <label class="text-[14px] font-normal" for="quantity">@lang('lang.Total_Quantity')</label>
+                <div class="flex   gap-4  mt-4">
+                    <div class="w-full">
+                        <label class="text-[14px] font-normal" for="quantity">@lang('lang.Total_Quantity') /
+                            @lang('lang.Warehouse')</label>
                         <input type="number"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="quantity" id="quantity" placeholder=" @lang('lang.Read_Only')" required readonly
                             value="{{ $updateproduct->quantity ?? '' }}">
+                    </div>
+                    <div class="w-[206px]">
+                        <label class="text-[14px] font-normal" for="quantityAlert">@lang('lang.Alert_on_Quantity')</label>
+                        <input type="number"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="quantity_alert" id="quantityAlert" placeholder=" @lang('lang.Alert_Here')" required
+                            value="1" value="{{ $updateproduct->quantity_alert ?? '' }}">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2  gap-4  mt-4">
+                    <div>
+                        <label class="text-[14px] font-normal" for="statusa">@lang('lang.Status')</label>
+                        <select
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="status" id="statusa" required>
+                            <option
+                                {{ isset($updateproduct->status) && $updateproduct->status == 'active' ? 'selected' : '' }}
+                                value="active">@lang('lang.Active')</option>
+                            <option
+                                {{ isset($updateproduct->status) && $updateproduct->status == 'un-active' ? 'selected' : '' }}
+                                value="un-active">@lang('lang.Not_Active')</option>
+                        </select>
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="unitQuantity">@lang('lang.Content_of_Quantity')</label>
@@ -323,15 +346,10 @@
                             name="quantity" id="unitQuantity" placeholder=" @lang('lang.Quantity_Here')" required
                             value="">
                     </div>
+
                 </div>
-                <div class="grid grid-cols-3  gap-4  mt-4">
-                    <div class="w-full">
-                        <label class="text-[14px] font-normal" for="quantityAlert">@lang('lang.Alert_on_Quantity')</label>
-                        <input type="number"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="quantity_alert" id="quantityAlert" placeholder=" @lang('lang.Alert_Here')" required
-                            value="1" value="{{ $updateproduct->quantity_alert ?? '' }}">
-                    </div>
+                <div class="grid grid-cols-2  gap-4  mt-4">
+
                     <div>
                         <label class="text-[14px] font-normal" for="unitPieces">@lang('lang.Unit_Pieces')</label>
                         <input type="number"
@@ -365,20 +383,8 @@
                             value="{{ $updateproduct->unit_price ?? '' }}">
                     </div>
                 </div>
-                <div class="grid grid-cols-2  gap-4  mt-4">
-                    <div>
-                        <label class="text-[14px] font-normal" for="statusa">@lang('lang.Status')</label>
-                        <select
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="status" id="statusa" required>
-                            <option
-                                {{ isset($updateproduct->status) && $updateproduct->status == 'active' ? 'selected' : '' }}
-                                value="active">@lang('lang.Active')</option>
-                            <option
-                                {{ isset($updateproduct->status) && $updateproduct->status == 'un-active' ? 'selected' : '' }}
-                                value="un-active">@lang('lang.Not_Active')</option>
-                        </select>
-                    </div>
+
+                <div class="mt-4">
                     <div>
                         <label class="text-[14px] font-normal" for="image">@lang('lang.Product_Image')</label>
                         <input type="file"
