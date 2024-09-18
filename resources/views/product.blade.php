@@ -326,6 +326,51 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-2  gap-4  mt-4">
+
+                    <div>
+                        <label class="text-[14px] font-normal" for="unitQuantity">@lang('lang.Content_of_Quantity')</label>
+                        <input type="number"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="quantity" id="unitQuantity" placeholder=" @lang('lang.Quantity_Here')" required
+                            value="">
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="product_unit">@lang('lang.Unit')</label>
+                        <input type="text"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="product_unit" id="product_unit" placeholder=" @lang('lang.Unit_Here')" required
+                            value="{{ $updateproduct->product_unit ?? '' }}">
+                    </div>
+
+                </div>
+                <div class="grid grid-cols-2  gap-4  mt-4">
+
+                    <div>
+                        <label class="text-[14px] font-normal" for="unitPieces">@lang('lang.Unit_Pieces')</label>
+                        <input type="number"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="Unit_Pieces" id="unitPieces" placeholder=" @lang('lang.Pieces_Here')" required
+                            value="{{ $updateproduct->Unit_Pieces ?? '' }}">
+
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="unitQuantity">@lang('lang.Total_Unit_Quantity')</label>
+                        <input type="number"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="unit_quantity" id="unitQuantity" placeholder=" @lang('lang.Quantity_Here')" required
+                            value="{{ $updateproduct->unit_quantity ?? '' }}">
+
+                    </div>
+                </div>
+                <div class="grid grid-cols-2  gap-4  mt-4">
+                    <div>
+                        <label class="text-[14px] font-normal" for="UnitPrice">@lang('lang.Unit_Price')</label>
+                        <input type="text"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="unit_price" id="UnitPrice" placeholder=" @lang('lang.Unit_Price')" required
+                            value="{{ $updateproduct->unit_price ?? '' }}">
+                    </div>
+
                     <div>
                         <label class="text-[14px] font-normal" for="statusa">@lang('lang.Status')</label>
                         <select
@@ -338,49 +383,6 @@
                                 {{ isset($updateproduct->status) && $updateproduct->status == 'un-active' ? 'selected' : '' }}
                                 value="un-active">@lang('lang.Not_Active')</option>
                         </select>
-                    </div>
-                    <div>
-                        <label class="text-[14px] font-normal" for="unitQuantity">@lang('lang.Content_of_Quantity')</label>
-                        <input type="number"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="quantity" id="unitQuantity" placeholder=" @lang('lang.Quantity_Here')" required
-                            value="">
-                    </div>
-
-                </div>
-                <div class="grid grid-cols-2  gap-4  mt-4">
-
-                    <div>
-                        <label class="text-[14px] font-normal" for="product_unit">@lang('lang.Unit')</label>
-                        <input type="text"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="product_unit" id="product_unit" placeholder=" @lang('lang.Unit_Here')" required
-                            value="{{ $updateproduct->product_unit ?? '' }}">
-                    </div>
-                    <div>
-                        <label class="text-[14px] font-normal" for="unitPieces">@lang('lang.Unit_Pieces')</label>
-                        <input type="number"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="Unit_Pieces" id="unitPieces" placeholder=" @lang('lang.Pieces_Here')" required
-                            value="{{ $updateproduct->Unit_Pieces ?? '' }}">
-
-                    </div>
-                </div>
-                <div class="grid grid-cols-2  gap-4  mt-4">
-                    <div>
-                        <label class="text-[14px] font-normal" for="unitQuantity">@lang('lang.Total_Unit_Quantity')</label>
-                        <input type="number"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="unit_quantity" id="unitQuantity" placeholder=" @lang('lang.Quantity_Here')" required
-                            value="{{ $updateproduct->unit_quantity ?? '' }}">
-
-                    </div>
-                    <div>
-                        <label class="text-[14px] font-normal" for="UnitPrice">@lang('lang.Unit_Price')</label>
-                        <input type="text"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="unit_price" id="UnitPrice" placeholder=" @lang('lang.Unit_Price')" required
-                            value="{{ $updateproduct->unit_price ?? '' }}">
                     </div>
                 </div>
 
