@@ -43,13 +43,6 @@ class BrandsController extends Controller
         return redirect('../brands');
     }
 
-    public function getBrandUpdateData($id)
-    {
-        $brands = Brands::all();
-        $brandData = Brands::find($id);
-        return view('brands', compact("brands", "brandData"));
-    }
-
     public function updateBrand(Request $request, $id)
     {
 
@@ -72,5 +65,12 @@ class BrandsController extends Controller
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
+    }
+
+    public function brandEditData($id)
+    {
+        $brandData = Brands::find($id);
+
+        return response()->json(['success' => true, 'message' => "Data get successfully", 'data' => $brandData], 200);
     }
 }

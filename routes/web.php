@@ -91,8 +91,9 @@ Route::middleware('custom')->group(function () {
     Route::get('/brands', [BrandsController::class,  'index']);
     Route::post('/addBrand', [BrandsController::class,  'insert']);
     Route::get('/delBrand/{id}', [BrandsController::class,  'delete']);
-    Route::get('/updateBrands/{id}', [BrandsController::class,  'getBrandUpdateData']);
-    Route::post('/updateBrandData/{id}', [BrandsController::class,  'updateBrand']);
+    Route::post('/updateBrand/{id}', [BrandsController::class,  'updateBrand']);
+
+    Route::get('/brandEditData/{id}', [BrandsController::class,  'brandEditData']);
 });
 Route::get('/invoice/{order_id}', [ordersController::class,  'getOrderData'])->name('invoice');
 Route::get('/gatepass/{order_id}', [ordersController::class,  'getOrderData'])->name('gatepass');
