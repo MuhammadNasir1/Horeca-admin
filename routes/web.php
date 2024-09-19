@@ -84,6 +84,8 @@ Route::middleware('custom')->group(function () {
     Route::post('/updateCategory/{id}', [productController::class,  'updateCategory']);
     Route::get('/updateCategory/{id}', [productController::class,  'updateCategoryData']);
 
+    Route::get('/categoryEditData/{id}', [productController::class,  'categoryEditData']);
+
     Route::get('/order/{id}', [ordersController::class,  'EditOrder']);
 
 

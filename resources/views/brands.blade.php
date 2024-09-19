@@ -8,7 +8,7 @@
                 <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Brands_List')</h3>
                 <div>
 
-                    <button data-modal-target="brandModal" data-modal-toggle="brandModal"
+                    <button id="modalButton" data-modal-target="brandModal" data-modal-toggle="brandModal"
                         class="bg-primary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
                         @lang('lang.Add_Brand')</button>
                 </div>
@@ -205,15 +205,6 @@
 
 
 @include('layouts.footer')
-@if (isset($brandData))
-    <script>
-        $(document).ready(function() {
-            $('#brandModal').removeClass("hidden");
-            $('#brandModal').addClass("flex");
-
-        });
-    </script>
-@endif
 <script>
     $(document).ready(function() {
 
@@ -299,6 +290,19 @@
                 deleteDatafun();
                 updateData()
             });
+
+
+            function closeModal() {
+                $('#brandForm')[0].reset();
+                $('#brandForm').attr("url", "../addBrand");
+                $('#modalHeading').html("@lang('lang.Add_Brand')");
+                $('#text').html("@lang('lang.Save')");
+            }
+            closeModal()
+
+            $('#modalButton').click(function() {
+                closeModal()
+            })
         });
     });
 </script>

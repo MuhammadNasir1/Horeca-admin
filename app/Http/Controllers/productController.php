@@ -399,4 +399,10 @@ class productController extends Controller
 
         return view('product',  ['products' => $products, 'categories' => $categories, 'Subcategories' => $Subcategories, "brands" => $brands, "updateproduct" => $updateproduct]);
     }
+
+    public function categoryEditData($id)
+    {
+        $categoryData = category::find($id);
+        return response()->json(['success' => true, 'message' => "data get successfully", "data" =>  $categoryData], 200);
+    }
 }
