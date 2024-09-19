@@ -15,7 +15,7 @@ return [
     "Image" => "Bild",
     "Name" => "Name",
     "Save" => "Speichern",
-    "Price" => "Preis",
+    "Price" => "Verkaufspreis Netto",
     "Status" => "Status",
     "Products" => "Produkte",
     "Customers" => "Kunden",
@@ -144,8 +144,8 @@ return [
     "Update_Customer" => "Kunde aktualisieren",
     "Edit_order" => "Bestellung bearbeiten",
     "Update&Print" => "Aktualisieren und drucken",
-    "Unit_Price" => "Stückpreis",
-    "Total_Price" => "Gesamtpreis",
+    "Unit_Price" => " Kartonpreis Netto",
+    "Total_Price" => "Verkaufspreis Brutto",
     "Sub_Total" => "Zwischensumme",
     "Save&Print" => "Speichern & Drucken",
     "Go_Back_To_Orders" => "Zurück zu Bestellungen",
@@ -172,7 +172,7 @@ return [
 
     "Alert_on_Quantity" => "Alarm bei Menge",
 
-    "Price_Here" => "Preis Hier",
+    "Price_Here" => "Verkaufspreis Netto",
     "Order_From" => "Bestellung Von",
     "Status&Tracking" => "Status & Verfolgung",
     "Tracking_Url" => "Verfolgungs-Url",
@@ -202,7 +202,7 @@ return [
     "Brands_List" => "Markenliste",
     "Add_Brand" => "Marke hinzufügen",
     "Brand_Name" => "Markenname",
-    "Purchase_Price" => "Einkaufspreis",
+    "Purchase_Price" => "Einkaufspreis Netto",
     "Brands" => "Marken",
 
 
@@ -235,7 +235,7 @@ return [
     "Select_Unit_Sale" => "Einzelverkauf auswählen",
     "Read_Only" => "Nur lesen",
     "Total_Quantity" => "Gesamtmenge",
-    "Unit_Pieces" => "Einheit Stücke",
+    "Unit_Pieces" => "Anzahl Packungen/Karton",
     "Pieces_Here" => "Stücke hier",
     "Total_Unit_Quantity" => "Gesamteinheitsmenge",
     "Select_User_Role" => "Benutzerrolle auswählen",
@@ -245,4 +245,8 @@ return [
     "Customer_Name_Phone" => "Kundenname / Telefon",
     "Category" => "Kategorie",
     "Brand" => "Marken",
+
+    "Total_Package_Quantity_Warehouse" => "Lagerbestand Kartons",
+    "Total_Unit_Quantity_Warehouse" => "Lagerbestand/Anzahl Packungen",
+    "Content_of_Quantity" => "Inhalt pro Packung ",
 ];

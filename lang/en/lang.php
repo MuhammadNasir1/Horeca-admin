@@ -242,7 +242,6 @@ return [
 
 
     "Content_of_Quantity" => "Content of Quantity",
-    "Quantity_Here" => "Quantity Here",
-    "Warehouse" => "Warehouse",
-    "Total_Package_Quantity" => "Total Package Quantity",
+    "Total_Package_Quantity_Warehouse" => "Total Package Quantity/Warehouse",
+    "Total_Unit_Quantity_Warehouse" => "Total Unit Quantity/Warehouse",
 ];
