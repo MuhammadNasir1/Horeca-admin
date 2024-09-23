@@ -31,7 +31,7 @@ class productController extends Controller
                 'product_image' => 'nullable|image',
                 'description' => 'nullable',
                 'product_unit' => 'required',
-                'unit_quantity' => 'required',
+                'unit_quantity' => 'nullable',
                 'brand' => 'required',
                 'purchase_price' => 'required',
                 'unit_price' => 'required',
@@ -53,7 +53,8 @@ class productController extends Controller
                 'status' => $validateData['status'],
                 'description' => $validateData['description'],
                 'product_unit' => $validateData['product_unit'],
-                'unit_quantity' => $validateData['unit_quantity'],
+                'unit_quantity' =>
+                $request['unit_quantity'] ?? "null",
                 'brand' => $validateData['brand'],
                 'purchase_price' => str_replace(',', '.', $validateData['purchase_price']),
                 'unit_price' => str_replace(',', '.', $validateData['unit_price']),

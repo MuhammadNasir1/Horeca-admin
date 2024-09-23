@@ -324,8 +324,8 @@
                         <label class="text-[14px] font-normal" for="unitQuantity">@lang('lang.Content_of_Quantity')</label>
                         <input type="number"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="quantity" id="unitQuantity" placeholder=" @lang('lang.Quantity_Here')" required
-                            value="">
+                            name="unit_quantity" id="unitQuantity" placeholder=" @lang('lang.Quantity_Here')" required
+                            value="{{ $updateproduct->unit_quantity ?? '' }}">
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="product_unit">@lang('lang.Unit')</label>
