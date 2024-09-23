@@ -46,7 +46,7 @@ class productController extends Controller
                 'category' => $validateData['category'],
                 'sub_category' => $validateData['sub_category'],
                 'tags' => $validateData['product_tags'],
-                'rate' => $validateData['rate'],
+                'rate' =>  str_replace(',', '.', $validateData['rate']),
                 'tax' => $validateData['tax'],
                 'quantity' => $validateData['quantity'],
                 'quantity_alert' => $validateData['quantity_alert'],
@@ -55,8 +55,8 @@ class productController extends Controller
                 'product_unit' => $validateData['product_unit'],
                 'unit_quantity' => $validateData['unit_quantity'],
                 'brand' => $validateData['brand'],
-                'purchase_price' => $validateData['purchase_price'],
-                'unit_price' => $validateData['unit_price'],
+                'purchase_price' => str_replace(',', '.', $validateData['purchase_price']),
+                'unit_price' => str_replace(',', '.', $validateData['unit_price']),
                 'Unit_Pieces' => $validateData['Unit_Pieces'],
                 'package_quantity' => $validateData['package_quantity'],
 
@@ -167,8 +167,10 @@ class productController extends Controller
                     'brand' => $row[3],
                     'category' => $row[4],
                     'sub_category' => $row[5],
-                    'purchase_price' => $row[6],
-                    'rate' => $row[7],
+                    'purchase_price' =>
+                    str_replace(',', '.', $row[6]),
+                    'rate' =>
+                    str_replace(',', '.', $row[7]),
                     'tax' => $row[8],
                     'quantity' => $row[9],
                     'quantity_alert' => $row[10],
@@ -177,8 +179,10 @@ class productController extends Controller
                     'image' => $row[13],
                     'status' => $row[14],
                     'description' => $row[15],
-                    'unit_price' => $row[16],
+                    'unit_price' => str_replace(',', '.', $row[16]),
                     'Unit_Pieces' => $row[17],
+                    'package_quantity' =>
+                    $row[18],
                 ]);
                 $checkCategory = Category::where('name', $row[4])->first();
                 if (!$checkCategory) {

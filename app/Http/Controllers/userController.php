@@ -174,7 +174,7 @@ class userController extends Controller
         $productIds = $topProducts->pluck('product_id');
         $products = Product::whereIn('id', $productIds)->get();
 
-        // get previous  month orders
+        // get previous  month
         // Get the current date
         $currentDate = Carbon::now();
 
