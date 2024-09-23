@@ -43,7 +43,7 @@
                             <tr class="pt-4">
                                 <td>{{ $x + 1 }}</td>
                                 <td class="md:w-[220px] w-full">
-                                    <img class="h-20 w-20 rounded-full"
+                                    <img class="h-20 w-20 rounded-full bg-black object-contain"
                                         src="{{ isset($data->image) ? asset($data->image) : asset('images/favicon(32X32).png') }}"
                                         alt="product Image">
                                 </td>
@@ -336,9 +336,8 @@
                     </div>
 
                 </div>
-                <div class="flex  gap-4  mt-4">
-
-                    <div class="w-[103px]">
+                <div class="flex col-span-2  gap-3  mt-4">
+                    <div class="max-w-[103px]">
                         <label class="text-[14px] font-normal" for="unitPieces">@lang('lang.Unit_Pieces')</label>
                         <input type="number"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
@@ -346,6 +345,16 @@
                             value="{{ $updateproduct->Unit_Pieces ?? '' }}">
 
                     </div>
+
+                    <div class="max-w-[72px]">
+                        <label class="text-[14px] font-normal" for="UnitPrice">@lang('lang.Unit_Price')</label>
+                        <input type="text"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="unit_price" id="UnitPrice" placeholder=" @lang('lang.Unit_Price')" required
+                            value="{{ $updateproduct->unit_price ?? '' }}">
+                    </div>
+
+
                     <div class="w-full">
                         <label class="text-[14px] font-normal" for="packageQuantity">@lang('lang.Total_Package_Quantity_Warehouse')</label>
                         <input type="number"
@@ -353,15 +362,6 @@
                             name="package_quantity" id="packageQuantity" placeholder=" @lang('lang.Quantity_Here')" required
                             value="{{ $updateproduct->package_quantity ?? '' }}">
 
-                    </div>
-                </div>
-                <div class="flex   gap-4  mt-4">
-                    <div class="w-[120px]">
-                        <label class="text-[14px] font-normal" for="UnitPrice">@lang('lang.Unit_Price')</label>
-                        <input type="text"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="unit_price" id="UnitPrice" placeholder=" @lang('lang.Unit_Price')" required
-                            value="{{ $updateproduct->unit_price ?? '' }}">
                     </div>
                     <div class="w-full">
                         <label class="text-[14px] font-normal" for="quantity">@lang('lang.Total_Unit_Quantity_Warehouse')</label>
