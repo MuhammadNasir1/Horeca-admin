@@ -67,7 +67,7 @@ class userController extends Controller
         try {
             $validateData = $request->validate([
                 'name' => 'required',
-                'email' => 'required|email',
+                'email' => 'required|email|unique:Users,email',
                 'phone_no' => 'required',
                 'address' => 'required',
             ]);
@@ -90,10 +90,10 @@ class userController extends Controller
                 'note' => $request['note'],
             ]);
 
-            return response()->json(['success' => true, 'message' => "Customer Add Successfully"]);
+            return response()->json(['success' => true, 'message' => "Customer Add Successfully"], 200);
             // return response()->json(['success' => true, 'message' => "Customer Add Successfully"]);
         } catch (\Exception $e) {
-            return response()->json(['success' => true, 'message' => $e->getMessage()]);
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 404);
         }
     }
 

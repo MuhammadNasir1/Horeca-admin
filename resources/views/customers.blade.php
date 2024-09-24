@@ -73,11 +73,19 @@
                                         </button>
                                         <button updateId="{{ $data->id }}" data-modal-target="changeStatus"
                                             data-modal-toggle="changeStatus" class="updateVerBtn">
-                                            <svg class="h-[40px] w-[40px]" xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                                <path
-                                                    d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z" />
-                                            </svg>
+                                            @if ($data->verification == 'pending')
+                                                <svg class="h-[40px] w-[40px]" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                                    <path fill="#F40808FF"
+                                                        d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
+                                                </svg>
+                                            @else
+                                                <svg class="h-[40px] w-[40px]" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                                    <path
+                                                        d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z" />
+                                                </svg>
+                                            @endif
                                         </button>
                                     </div>
                                 </td>
@@ -97,6 +105,9 @@
 {{-- ============ update  customer modal  =========== --}}
 <div id="updatecustomermodal" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="fixed inset-0 transition-opacity">
+        <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
+    </div>
     <div class="relative p-4 w-full   max-w-6xl max-h-full ">
         <form id="UpdatecustomerData" method="post" enctype="multipart/form-data">
             @csrf
@@ -232,6 +243,9 @@
     <div class="fixed inset-0 transition-opacity">
         <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
     </div>
+    <div class="fixed inset-0 transition-opacity">
+        <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
+    </div>
     <div class="relative p-4 w-full   max-w-lg max-h-full ">
         <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
             <div class="">
@@ -282,6 +296,9 @@
 {{-- ============ add  customer modal  =========== --}}
 <div id="addcustomermodal" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="fixed inset-0 transition-opacity">
+        <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
+    </div>
     <div class="fixed inset-0 transition-opacity">
         <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
     </div>
@@ -417,6 +434,9 @@
     <div class="fixed inset-0 transition-opacity">
         <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
     </div>
+    <div class="fixed inset-0 transition-opacity">
+        <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
+    </div>
     <div class="relative p-4 w-full   max-w-2xl max-h-full ">
         {{-- <form action="../changeVerStatus/5" method="post" enctype="multipart/form-data"> --}}
         <form id="CustomerStatusData" method="post" enctype="multipart/form-data">
@@ -483,14 +503,22 @@
 @include('layouts.footer')
 <script>
     $(document).ready(function() {
-        $('.delButton').click(function() {
-            var id = $(this).attr('delId');
-            $('#delLink').attr('href', '../delCustomer/' + id);
-        });
-        $('.updateVerBtn').click(function() {
-            var id = $(this).attr('updateId');
-            $('#updateid').val(id);
-        });
+        function deleteDatafun() {
+
+            $('.delButton').click(function() {
+                var id = $(this).attr('delId');
+                $('#deleteData').removeClass('hidden').addClass('flex');
+                $('#delLink').attr('href', '../delCustomer/' + id);
+            });
+            $('.updateVerBtn').click(function() {
+                $('#changeStatus').removeClass('hidden').addClass('flex');
+                var id = $(this).attr('updateId');
+                $('#updateid').val(id);
+            });
+        }
+
+        deleteDatafun();
+
         $("#CustomerStatusData").submit(function(event) {
             $userId = $('#updateid').val();
             var url = "../changeVerStatus/" + $userId;
@@ -546,9 +574,25 @@
                 },
                 success: function(response) {
                     window.location.href = '../customers';
+                    // if (response.success == true) {
+
+
+                    // } else {
+
+                    //     Swal.fire(
+                    //         'Warning!',
+                    //         response.message,
+                    //         'warning'
+                    //     );
+
+                    //     $('#text').removeClass('hidden');
+                    //     $('#spinner').addClass('hidden');
+                    //     $('#addBtn').attr('disabled', false);
+                    // }
 
                 },
                 error: function(jqXHR) {
+
                     let response = JSON.parse(jqXHR.responseText);
                     console.log("error");
                     Swal.fire(
@@ -604,42 +648,51 @@
 
 
         });
-        // update  data
-        $('.updateBtn').click(function() {
-            var updateId = $(this).attr('updateId');
-            var url = "../CustomerUpdateData/" + updateId;
-            $.ajax({
-                type: "GET",
-                url: url,
-                dataType: "json",
-                success: function(response) {
-                    var customer = response.customer;
-                    console.log(customer);
-                    $('#update_id').val(customer.id);
-                    $('#fullName').val(customer.name);
-                    $('#email').val(customer.email);
-                    $('#PhoneNO').val(customer.phone);
-                    $('#Address').val(customer.address);
-                    $('#TaxNo').val(customer.tax_number);
-                    $('#clientType').val(customer.client_type);
-                    $('#postalCode').val(customer.postal_code);
-                    $('#City').val(customer.city);
-                    $('#note').val(customer.note);
-                    $('#UserRole').val(customer.role);
+
+        function updateDataFunction() {
+            // update  data
+            $('.updateBtn').click(function() {
+
+                $('#updatecustomermodal').removeClass('hidden').addClass('flex');
+                var updateId = $(this).attr('updateId');
+                var url = "../CustomerUpdateData/" + updateId;
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    dataType: "json",
+                    success: function(response) {
+                        var customer = response.customer;
+                        console.log(customer);
+                        $('#update_id').val(customer.id);
+                        $('#fullName').val(customer.name);
+                        $('#email').val(customer.email);
+                        $('#PhoneNO').val(customer.phone);
+                        $('#Address').val(customer.address);
+                        $('#TaxNo').val(customer.tax_number);
+                        $('#clientType').val(customer.client_type);
+                        $('#postalCode').val(customer.postal_code);
+                        $('#City').val(customer.city);
+                        $('#note').val(customer.note);
+                        $('#UserRole').val(customer.role);
 
 
-                },
-                error: function(jqXHR) {
-                    let response = JSON.parse(jqXHR.responseText);
-                    Swal.fire(
-                        'Warning!',
-                        'Product Not Found',
-                        'warning'
-                    );
-                }
+                    },
+                    error: function(jqXHR) {
+                        let response = JSON.parse(jqXHR.responseText);
+                        Swal.fire(
+                            'Warning!',
+                            'Product Not Found',
+                            'warning'
+                        );
+                    }
+                });
             });
-        });
 
+        }
+        $('#datatable').on('draw.dt', function() {
+            deleteDatafun();
+            updateDataFunction();
+        });
 
 
     });
