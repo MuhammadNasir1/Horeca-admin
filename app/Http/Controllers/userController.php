@@ -37,7 +37,7 @@ class userController extends Controller
         try {
             $validateData = $request->validate([
                 'name' => 'required',
-                'email' => 'required|email',
+                'email' => 'required|email|unique:users,emai',
                 'phone_no' => 'required',
                 'address' => 'required',
                 'user_id' => 'required'
@@ -67,7 +67,7 @@ class userController extends Controller
         try {
             $validateData = $request->validate([
                 'name' => 'required',
-                'email' => 'required|email|unique:Users,email',
+                'email' => 'required|email|unique:users,email',
                 'phone_no' => 'required',
                 'address' => 'required',
             ]);
