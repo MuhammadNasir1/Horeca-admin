@@ -57,9 +57,9 @@ class userController extends Controller
                 'address' => $validateData['address'],
             ]);
 
-            return response()->json(['success' => true, 'message' => "Customer Add Successfully"]);
+            return response()->json(['success' => true, 'message' => "Customer Add Successfully"], 200);
         } catch (\Exception $e) {
-            return response()->json(['success' => true, 'message' => $e->getMessage()]);
+            return response()->json(['success' => true, 'message' => $e->getMessage()], 404);
         }
     }
     public function  addAdminCustomer(Request $request)
