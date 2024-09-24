@@ -409,9 +409,9 @@ class productController extends Controller
     public function getProductData($id)
     {
         $products = product::all();
-        $categories = category::where('status', "active")->get();
+        $categories = category::where('status', "active")->WhereNot('status', 'deleted')->get();
         $Subcategories =  product::select('sub_category')->distinct()->get();
-        $brands = Brands::all();
+        $brands = Brands::WhereNot('status', 'deleted')->get();
 
         $updateproduct = product::find($id);
 

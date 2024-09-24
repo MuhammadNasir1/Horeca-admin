@@ -284,7 +284,7 @@
                         name="purchase_price" id="purchasePrice" placeholder=" @lang('lang.Price_Here')"
                         value="{{ $updateproduct->purchase_price ?? '' }}">
                 </div>
-                <div class="grid grid-cols-3  gap-4  mt-4">
+                <div class="flex col-span-2  gap-4  mt-4 flex-wrap sm:flex-nowrap">
                     <div>
                         <label class="text-[14px] font-normal" for="Price">@lang('lang.Price')</label>
                         <input type="text"
@@ -307,10 +307,9 @@
                             name="total_price" id="TotalWTax" readonly
                             value="{{ $updateproduct->total_price ?? '' }}">
                     </div>
-                </div>
-                <div class="flex   gap-4  mt-4">
 
-                    <div class="w-[206px]">
+
+                    <div class="">
                         <label class="text-[14px] font-normal" for="quantityAlert">@lang('lang.Alert_on_Quantity')</label>
                         <input type="number"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
@@ -336,8 +335,9 @@
                     </div>
 
                 </div>
-                <div class="flex col-span-2  gap-3  mt-4">
-                    <div class="max-w-[103px]">
+                <div class="flex col-span-2  gap-3  mt-4 flex-wrap md:flex-nowrap">
+                    <div>
+                        {{-- <div class="max-w-[103px]"> --}}
                         <label class="text-[14px] font-normal" for="unitPieces">@lang('lang.Unit_Pieces')</label>
                         <input type="number"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
@@ -346,7 +346,7 @@
 
                     </div>
 
-                    <div class="max-w-[72px]">
+                    <div>
                         <label class="text-[14px] font-normal" for="UnitPrice">@lang('lang.Unit_Price')</label>
                         <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
@@ -356,7 +356,7 @@
 
 
                     <div class="w-full">
-                        <label class="text-[14px] font-normal" for="packageQuantity">@lang('lang.Total_Package_Quantity_Warehouse')</label>
+                        <label class="text-[13px] font-normal" for="packageQuantity">@lang('lang.Total_Package_Quantity_Warehouse')</label>
                         <input type="number"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="package_quantity" id="packageQuantity" placeholder=" @lang('lang.Quantity_Here')" required
@@ -364,7 +364,7 @@
 
                     </div>
                     <div class="w-full">
-                        <label class="text-[14px] font-normal" for="quantity">@lang('lang.Total_Unit_Quantity_Warehouse')</label>
+                        <label class="text-[13px] font-normal" for="quantity">@lang('lang.Total_Unit_Quantity_Warehouse')</label>
                         <input type="number"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="quantity" id="quantity" placeholder=" @lang('lang.Quantity_Here')" required
