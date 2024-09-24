@@ -334,9 +334,9 @@ class productController extends Controller
             }
 
             $product->update($request->except('product_image'));
-            return response()->json(['success' => true, 'message' => "Product Update Successfully"]);
+            return response()->json(['success' => true, 'message' => "Product Update Successfully"], 200);
         } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 404);
         }
     }
 
