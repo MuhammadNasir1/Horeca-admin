@@ -689,6 +689,7 @@
             });
 
         }
+        updateDataFunction();
         $('#datatable').on('draw.dt', function() {
             deleteDatafun();
             updateDataFunction();

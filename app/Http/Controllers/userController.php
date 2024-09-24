@@ -37,7 +37,7 @@ class userController extends Controller
         try {
             $validateData = $request->validate([
                 'name' => 'required',
-                'email' => 'required|email|unique:users,emai',
+                'email' => 'required|email|unique:users,email',
                 'phone_no' => 'required',
                 'address' => 'required',
                 'user_id' => 'required'
@@ -129,6 +129,13 @@ class userController extends Controller
                 $user_role = $request->role;
             } else {
                 $user_role = "customer";
+            }
+
+            $emailExists = User::where('email', $request->email)->where('id', '!=', $customer->id)->exists();
+            if ($emailExists) {
+                return response()->json(['success' => false,  'message' => "Email Already Exist"], 404);
+            } else {
+                $customer->email = $request->email;
             }
             $customer->name = $validatedData['name'];
             $customer->phone = $validatedData['phone_no'];
