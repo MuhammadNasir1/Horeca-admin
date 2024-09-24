@@ -263,7 +263,7 @@
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="sub_category" list="subcategory" id="subCategory"
                             placeholder=" @lang('lang.Sub_Category_Here')">
-                        <datalist id="subcategory">
+                        <datalist id="subcategory" class="subcategory">
                             @foreach ($Subcategories as $Subcategory)
                                 <option value="{{ $Subcategory->sub_category }}">
                             @endforeach
@@ -630,18 +630,30 @@
 
 
 @include('layouts.footer')
-@if (isset($updateproduct))
-    <script>
-        $(document).ready(function() {
-            $('#productModal').removeClass("hidden");
-            $('#productModal').addClass("flex");
-            calculateTotal()
-
-        });
-    </script>
-@endif
 <script>
     $(document).ready(function() {
+        $('#category').change(function() {
+            let categoryName = $(this).val();
+            $.ajax({
+                type: "GET", // Use uppercase for GET
+                url: '../subcategoriesFilter', // Fixed the URL string
+                data: {
+                    categoryName: categoryName // Corrected the syntax for data
+                },
+                success: function(response) {
+                    // Handle the response here
+                    console.log(response); // Example: log the response
+                    $('.subcategory').html(`<option value="${response.Subcategories}">`);
+
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors here
+                    console.error("Error: " + error);
+                }
+            });
+        });
+
+
         function updateData() {
             $('.updateBtn').click(function() {
                 let id = $(this).attr('productId');

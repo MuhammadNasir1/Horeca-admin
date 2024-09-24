@@ -86,6 +86,9 @@ Route::middleware('custom')->group(function () {
 
     Route::get('/categoryEditData/{id}', [productController::class,  'categoryEditData']);
 
+
+    Route::get('/subcategoriesFilter', [productController::class,  'subcategoriesFilter']);
+
     Route::get('/order/{id}', [ordersController::class,  'EditOrder']);
 
 

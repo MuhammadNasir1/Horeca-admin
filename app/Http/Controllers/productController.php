@@ -424,4 +424,19 @@ class productController extends Controller
         $categoryData = category::find($id);
         return response()->json(['success' => true, 'message' => "data get successfully", "data" =>  $categoryData], 200);
     }
+
+
+    public function subcategoriesFilter(Request $request)
+    {
+        try {
+            // $Subcategories =  product::select('sub_category')->distinct()->get();
+            $subcategories = product::where('category', $request['categoryName'])
+                ->distinct('sub_category')
+                ->pluck('sub_category');
+
+            return response()->json(['success' => true, 'message' => "Subcategories get successfully", "Subcategories" =>  $subcategories], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
 }
