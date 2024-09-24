@@ -230,7 +230,7 @@ class productController extends Controller
 
     public function categories()
     {
-        $categories = category::all();
+        $categories = category::wherenot('status', "deleted")->get();
         return view('category',   ['categories' => $categories]);
     }
 
@@ -241,42 +241,56 @@ class productController extends Controller
     {
         try {
             $validateData = $request->validate([
-                'name' => 'required|unique:category,name',
+                'name' => 'required',
                 'category_img' => 'nullable|image',
                 'status' => 'required',
                 'tax' => 'required',
 
             ]);
-            $Category =  category::create([
-                'name' => $validateData['name'],
-                'status' => $validateData['status'],
-                'tax' => $validateData['tax'],
-                'image' => '',
-            ]);
 
-            if ($request->hasFile('category_img')) {
-                $category_image = $request->file('category_img');
-                $name = time() . '.' . $category_image->getClientOriginalExtension();
-                $category_image->storeAs('public/category_image', $name);
-                $Category->image = 'storage/category_image/' . $name;
+            $check_category = category::where('name', $validateData['name'])->first();
+            if ($check_category) {
+                if ($check_category->status == "deleted") {
+                    $check_category->status = "active";
+                    $check_category->update();
+                    return response()->json(['success' => true, 'message' => "Category Add Successfully"], 200);
+                } else {
+                    return response()->json(['success' => false, 'message' => "Category Already Exist"], 404);
+                }
+            } else {
+                $Category =  category::create([
+                    'name' => $validateData['name'],
+                    'status' => $validateData['status'],
+                    'tax' => $validateData['tax'],
+                    'image' => '',
+                ]);
+
+                if ($request->hasFile('category_img')) {
+                    $category_image = $request->file('category_img');
+                    $name = time() . '.' . $category_image->getClientOriginalExtension();
+                    $category_image->storeAs('public/category_image', $name);
+                    $Category->image = 'storage/category_image/' . $name;
+                }
+                $Category->save();
             }
-            $Category->save();
-            return response()->json(['success' => true, 'message' => "Category Add Successfully",  'category' =>  $Category]);
+            return response()->json(['success' => true, 'message' => "Category Add Successfully"], 200);
         } catch (\Exception $e) {
-            return response()->json(['success' => true, 'message' => $e->getMessage()]);
+            return response()->json(['success' => true, 'message' => $e->getMessage()], 404);
         }
     }
 
     public function deleteCategory($id)
     {
         $category = category::find($id);
-        $category->delete();
-        if (!empty($category->image)) {
-            $file_path = public_path($category->image);
-            if (file_exists($file_path)) {
-                unlink($file_path);
-            }
-        }
+        $category->status = "deleted";
+        $category->update();
+        // $category->delete();
+        // if (!empty($category->image)) {
+        //     $file_path = public_path($category->image);
+        //     if (file_exists($file_path)) {
+        //         unlink($file_path);
+        //     }
+        // }
         return redirect('category');
     }
 

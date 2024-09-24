@@ -9,7 +9,7 @@ class BrandsController extends Controller
 {
     public function index()
     {
-        $brands = Brands::all();
+        $brands = Brands::WhereNot('status', "deleted")->get();
         return view('brands', compact("brands"));
     }
 
@@ -17,20 +17,32 @@ class BrandsController extends Controller
     {
         try {
             $validatedData = $request->validate([
-                "name" => "required|unique:brands,name",
+                "name" => "required",
 
             ]);
-            $brand = new Brands;
-            $brand->name = $validatedData['name'];
-            $brand->image = "null";
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                $imageName = time() . '.' . $image->getClientOriginalExtension();
-                $image->storeAs('public/brands_images', $imageName);
-                $brand->image = 'storage/brands_images/' . $imageName;
+            $check_brand = Brands::where('name', $validatedData['name'])->first();
+            if ($check_brand) {
+                if ($check_brand->status == "deleted") {
+                    $check_brand->status = "active";
+                    $check_brand->update();
+                    return response()->json(['success' => true, 'message' => "Brand add successfully"], 201);
+                } else {
+                    return response()->json(['success' => false, 'message' => "Brand Already Exist"], 404);
+                }
+            } else {
+                $brand = new Brands;
+                $brand->name = $validatedData['name'];
+                $brand->status = "active";
+                $brand->image = "null";
+                if ($request->hasFile('image')) {
+                    $image = $request->file('image');
+                    $imageName = time() . '.' . $image->getClientOriginalExtension();
+                    $image->storeAs('public/brands_images', $imageName);
+                    $brand->image = 'storage/brands_images/' . $imageName;
+                }
+                $brand->save();
+                return response()->json(['success' => true, 'message' => "Brand add successfully"], 201);
             }
-            $brand->save();
-            return response()->json(['success' => true, 'message' => "Data add successfully", 'brand' =>   $brand->name], 201);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
@@ -38,8 +50,11 @@ class BrandsController extends Controller
 
     public function delete($id)
     {
-        $brands  = Brands::find($id);
-        $brands->delete();
+        // $brands  = Brands::find($id);
+        // $brands->delete();
+        $brand = Brands::find($id);
+        $brand->status = "deleted";
+        $brand->update();
         return redirect('../brands');
     }
 

@@ -217,7 +217,7 @@
                 console.log(id);
             });
         }
-
+        deleteDatafun()
         $(document).ready(function() {
             // insert data
             $("#brandForm").submit(function(event) {
