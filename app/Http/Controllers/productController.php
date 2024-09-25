@@ -430,9 +430,7 @@ class productController extends Controller
     {
         try {
             // $Subcategories =  product::select('sub_category')->distinct()->get();
-            $subcategories = product::where('category', $request['categoryName'])
-                ->distinct('sub_category')
-                ->pluck('sub_category');
+            $subcategories = product::where('category', $request['categoryName'])->whereNotNull('sub_category')->distinct('sub_category')->pluck('sub_category');
 
             return response()->json(['success' => true, 'message' => "Subcategories get successfully", "Subcategories" =>  $subcategories], 200);
         } catch (\Exception $e) {

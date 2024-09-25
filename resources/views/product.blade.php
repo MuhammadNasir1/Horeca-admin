@@ -262,7 +262,7 @@
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="sub_category" list="subcategory" id="subCategory"
-                            placeholder=" @lang('lang.Sub_Category_Here')">
+                            placeholder=" @lang('lang.Sub_Category_Here')" autocomplete="off">
                         <datalist id="subcategory" class="subcategory">
                             @foreach ($Subcategories as $Subcategory)
                                 <option value="{{ $Subcategory->sub_category }}">
@@ -635,19 +635,21 @@
         $('#category').change(function() {
             let categoryName = $(this).val();
             $.ajax({
-                type: "GET", // Use uppercase for GET
-                url: '../subcategoriesFilter', // Fixed the URL string
+                type: "GET",
+                url: '../subcategoriesFilter',
                 data: {
-                    categoryName: categoryName // Corrected the syntax for data
+                    categoryName: categoryName
                 },
                 success: function(response) {
-                    // Handle the response here
-                    console.log(response); // Example: log the response
-                    $('.subcategory').html(`<option value="${response.Subcategories}">`);
+                    let options = '';
+                    response.Subcategories.forEach(function(subcategory) {
+                        options +=
+                            `<option value="${subcategory}">`;
+                    });
+                    $('.subcategory').html(options);
 
                 },
                 error: function(xhr, status, error) {
-                    // Handle errors here
                     console.error("Error: " + error);
                 }
             });
