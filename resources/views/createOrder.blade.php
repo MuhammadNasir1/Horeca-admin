@@ -19,7 +19,9 @@
                             <label class="text-[14px] font-normal" for="order_id">@lang('lang.Order_Id')</label>
                             <input type="number"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="order_id" id="order_id" value="01">
+                                name="order_id" id="order_id"
+                                value="{{ optional(App\Models\orders::orderBy('id', 'desc')->first())->id + 1 }}"
+                                readonly>
                         </div>
                         <div>
                             <label class="text-[14px] font-normal" for="order_date">@lang('lang.Order_Date')</label>
@@ -272,13 +274,13 @@
                     console.log(product);
                     var productData = `<tr>
             <td class="border-2 border-primary">
-                    <input readonly type="text" value="${code}" name="product_code[]">
-                    <input readonly type="text" value="${Product_id}" name="product_id[]">
-                    <input readonly type="text" value="${price}" name="product_rate[]">
-                    <input readonly type="text" value="${tax}" name="product_tax[]">
-                    <input readonly id="quantityinput" type="text" value="${quantity}" name="product_quantity[]">
-                    <input readonly id="totalinput" type="text" value="${total.toFixed(2)}" name="product_total[]">
-                    <input readonly type="text" value="${unitStatus}" name="unit_status[]">
+                    <input readonly type="hidden" value="${code}" name="product_code[]">
+                    <input readonly type="hidden" value="${Product_id}" name="product_id[]">
+                    <input readonly type="hidden" value="${price}" name="product_rate[]">
+                    <input readonly type="hidden" value="${tax}" name="product_tax[]">
+                    <input readonly id="quantityinput" type="hidden" value="${quantity}" name="product_quantity[]">
+                    <input readonly id="totalinput" type="hidden" value="${total.toFixed(2)}" name="product_total[]">
+                    <input readonly type="hidden" value="${unitStatus}" name="unit_status[]">
                 ${code}</td>
             <td class="border-2 border-primary unitStatus hidden">${unitStatus}</td>
             <td class="border-2 border-primary productName">${product}</td>

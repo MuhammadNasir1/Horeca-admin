@@ -154,10 +154,12 @@
                                             name="product_rate[]">
                                         <input type="hidden" value="{{ $orderItem->product_tax }}"
                                             name="product_tax[]">
-                                        <input type="hidden" value=" {{ $orderItem->product_quantity }}"
-                                            name="product_quantity[]">
-                                        <input type="hidden" value="{{ $orderItem->product_total }}"
-                                            name="product_total[]">
+                                        <input type="hidden" id="quantityinput"
+                                            value=" {{ $orderItem->product_quantity }}" name="product_quantity[]">
+                                        <input type="hidden" id="totalinput"
+                                            value="{{ $orderItem->product_total }}" name="product_total[]">
+                                        <input type="hidden" value="{{ $orderItem->unit_status }}"
+                                            name="unit_status[]">
                                         {{ \App\Models\Product::find($orderItem->product_id)->code }}
                                     </td>
                                     <td class="border-2 border-primary productName">
@@ -241,42 +243,85 @@
     <script>
         $(document).ready(function() {
 
-
             $('#addProductBtn').click(function() {
-                var product = $('#product').val();
-                var price = $('#Product_Price').val();
-                var tax = $('#tax').val();
-                var quantity = $('#order_quantity').val();
-                var code = $('#productCode').val();
-                var Product_id = $('#Product_id').val();
+                let product = $('#product').val();
+                let price = $('#Product_Price').val();
+                let tax = $('#tax').val();
+                let quantity = $('#order_quantity').val();
+                let code = $('#productCode').val();
+                let Product_id = $('#Product_id').val();
                 let unitStatus = $('#unitStatus').val()
-                var total = (price * quantity) + ((price * quantity) * (tax / 100));
+                let total = (price * quantity) + ((price * quantity) * (tax / 100));
+                console.log('the total is' + total);
+
                 if (isNaN(parseInt(quantity)) || isNaN(parseFloat(price))) {
                     // If either quantity or price is not a valid number, do not append the row
-                    return;
+                    return Swal.fire(
+                        'Warning!',
+                        'Select the quantity',
+                        'warning'
+                    );;
                 }
+                // var existingRow = $('#product_output').find('.productName').filter(function() {
+                //     return $(this).text() === product;
+                // }).closest('tr');
+
                 var existingRow = $('#product_output').find('.productName').filter(function() {
                     return $(this).text() === product;
-                }).closest('tr');
-
+                }).closest('tr').filter(function() {
+                    return $(this).find('.unitStatus').text() === unitStatus;
+                });
                 if (existingRow.length > 0) {
                     // If the product already exists, update the quantity
                     var existingQuantity = parseInt(existingRow.find('.quantity').text());
                     var updatedQuantity = existingQuantity + parseInt(quantity);
                     existingRow.find('.quantity').text(updatedQuantity);
+                    existingRow.find('#quantityinput').val(updatedQuantity);
+                    existingRow.find('#totalinput').html() + total;
+
+
+                    ////
+
+                    var currentTotal = parseFloat(existingRow.find('.total')
+                        .text()); // Get the current total and convert to number
+                    var incrementValue = parseFloat(total); // Convert 'total' to a number
+
+                    if (!isNaN(currentTotal) && !isNaN(incrementValue)) { // Check if both are valid numbers
+                        var updatedTotal = (currentTotal + incrementValue).toFixed(
+                            2); // Increment and format to 2 decimal places
+                        existingRow.find('.total').text(updatedTotal); // Update the total display
+                        existingRow.find('#totalinput').val(
+                            updatedTotal); // Update the input field with the new total
+                    } else {
+                        console.error("Invalid total value:", total);
+                    }
+
+                    console.log(total);
+
+                    var subTotal = 0;
+                    $('#product_output .total').each(function() {
+                        subTotal += parseFloat($(this).text());
+                        $('#subtotal').html(subTotal);
+                        // console.log("Sub Total is" + subTotal);
+                        $('#grandTotal').html(subTotal.toFixed(2));
+                        $('#grand_total').val(subTotal.toFixed(2));
+                        $('#sub_total').val(subTotal.toFixed(2));
+                    });
+
                 } else {
                     // If the product doesn't exist, add a new row
                     console.log(product);
                     var productData = `<tr>
             <td class="border-2 border-primary">
-                    <input type="hidden" value="${code}" name="product_code[]">
-                    <input type="hidden" value="${Product_id}" name="product_id[]">
-                    <input type="hidden" value="${price}" name="product_rate[]">
-                    <input type="hidden" value="${tax}" name="product_tax[]">
-                    <input type="hidden" value="${quantity}" name="product_quantity[]">
-                    <input type="hidden" value="${total.toFixed(2)}" name="product_total[]">
-                <input readonly type="hidden" value="${unitStatus}" name="unit_status[]">
+                    <input readonly type="hidden" value="${code}" name="product_code[]">
+                    <input readonly type="hidden" value="${Product_id}" name="product_id[]">
+                    <input readonly type="hidden" value="${price}" name="product_rate[]">
+                    <input readonly type="hidden" value="${tax}" name="product_tax[]">
+                    <input readonly id="quantityinput" type="hidden" value="${quantity}" name="product_quantity[]">
+                    <input readonly id="totalinput" type="hidden" value="${total.toFixed(2)}" name="product_total[]">
+                    <input readonly type="hidden" value="${unitStatus}" name="unit_status[]">
                 ${code}</td>
+            <td class="border-2 border-primary unitStatus hidden">${unitStatus}</td>
             <td class="border-2 border-primary productName">${product}</td>
             <td class="border-2 border-primary">${price}</td>
             <td class="border-2 border-primary px-5">${tax}%</td>
@@ -297,15 +342,20 @@
                     $('#Product_Price').val('');
                     $('#tax').val('');
                     $('#order_quantity').val('');
-                    var subTotal = 0;
-                    $('#product_output .total').each(function() {
-                        subTotal += parseFloat($(this).text());
-                        $('#subtotal').html(subTotal.toFixed(2));
-                        console.log("Sub Total is" + subTotal);
-                        $('#grandTotal').html(subTotal.toFixed(2));
-                        $('#grand_total').val(subTotal.toFixed(2));
-                        $('#sub_total').val(subTotal.toFixed(2));
-                    });
+
+                    function calculatetotalvalue() {
+
+                        var subTotal = 0;
+                        $('#product_output .total').each(function() {
+                            subTotal += parseFloat($(this).text());
+                            $('#subtotal').html(subTotal);
+                            // console.log("Sub Total is" + subTotal);
+                            $('#grandTotal').html(subTotal.toFixed(2));
+                            $('#grand_total').val(subTotal.toFixed(2));
+                            $('#sub_total').val(subTotal.toFixed(2));
+                        });
+                    }
+                    calculatetotalvalue()
                 }
             });
             // Recalculate grand total when discount or delivery charges change
