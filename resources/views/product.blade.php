@@ -50,7 +50,7 @@
                                 <td>{{ $data->name }}</td>
                                 <td>{{ $data->brand }}</td>
                                 <td>{{ $data->category }} / {{ $data->sub_category }}</td>
-                                <td>{{ $data->tax }}</td>
+                                <td>{{ $data->tax }}%</td>
                                 <td>{{ $data->rate }}&euro;</td>
                                 <td>{{ $data->product_unit }}</td>
                                 <td>{{ $data->quantity }}</td>
@@ -224,7 +224,7 @@
                             <div class="w-full">
                                 <label class="text-[14px] font-normal" for="brands">@lang('lang.Brand_Name')</label>
                                 <select
-                                    class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] category "
+                                    class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]  "
                                     name="brand" id="brands" required>
                                     @foreach ($brands as $brand)
                                         <option value="{{ $brand->name }}">
@@ -293,7 +293,7 @@
                         <div>
                             <label class="text-[14px] font-normal" for="tax">@lang('lang.Total_Price')</label>
                             <input type="number"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] tax-input"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] "
                                 name="total_price" id="TotalWTax" readonly>
                         </div>
 
@@ -788,7 +788,8 @@
         $('.category').change(function() {
             var selectedOption = $(this).find(':selected');
             var tax = selectedOption.attr('category-tax');
-            $('.tax-input').val(tax)
+            $('#TaxPrice').val(tax)
+            // $('.tax-input').val(tax)
         });
         // insert data
         $("#productForm").submit(function(event) {
@@ -846,6 +847,8 @@
                     $('#CaddBtn').attr('disabled', true);
                 },
                 success: function(response) {
+                    console.log(response);
+
                     var categoryName = response.category.name;
                     var categoryTax = response.category.tax;
                     $('#category-modal-close').click();
@@ -893,7 +896,7 @@
             },
             success: function(response) {
                 $('#brandCloseBtn').click();
-                var brandName = response.brand;
+                var brandName = response.brand.name;
                 console.log(brandName);
                 var newOption = $('<option>', {
                     value: brandName,

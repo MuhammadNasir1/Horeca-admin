@@ -119,6 +119,7 @@ class ordersController extends Controller
                 'product_quantity'  => 'required',
                 'product_rate'  => 'required',
                 'product_total'  => 'required',
+                'unit_status'  => 'required',
             ]);
             $order->discount = $validatedData['order_vat'];
             $order->update($request->all());
@@ -152,6 +153,7 @@ class ordersController extends Controller
                     'product_quantity' => $validatedData['product_quantity'][$j],
                     'product_tax' => $validatedData['product_tax'][$j],
                     'product_total' => $validatedData['product_total'][$j],
+                    'unit_status' => $validatedData['unit_status'][$j],
 
                 ]);
                 $order_items->save();

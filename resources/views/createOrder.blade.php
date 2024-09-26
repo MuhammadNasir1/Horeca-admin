@@ -267,6 +267,10 @@
                         $('#grandTotal').html(subTotal.toFixed(2));
                         $('#grand_total').val(subTotal.toFixed(2));
                         $('#sub_total').val(subTotal.toFixed(2));
+                        $('#product').val('Select_Product').trigger('change');
+                        $('#Product_Price').val('');
+                        $('#tax').val('');
+                        $('#order_quantity').val('');
                     });
 
                 } else {
@@ -299,7 +303,7 @@
         </tr>`;
                     $('#product_output').append(productData);
                     // Clear input fields
-                    $('#product').val('');
+                    $('#product').val('Select_Product').trigger('change');
                     $('#Product_Price').val('');
                     $('#tax').val('');
                     $('#order_quantity').val('');
@@ -347,18 +351,18 @@
                     console.log(response);
                     // Clear existing options from the select element
                     // $('#product').empty();
-                    $('#product').html($('<option></option>').attr('value', "").text(
+                    $('#product').html($('<option></option>').attr('value', "Select_Product").text(
                         "@lang('lang.Select_Product')"));
 
                     // Iterate over each product object
                     $.each(products, function(index, product) {
-                        var productName = product
-                            .name; // Get the name field from each product object
-                        var productId = product
-                            .id; // Get the name field from each product object
-                        // Append a new option with the product name to the select element
+                        var productName = product.name;
+                        var productBrand = product.brand
+                        var productId = product.id;
                         $('#product').append($('<option></option>').attr('value', productName)
-                            .attr('productId', productId).text(productName));
+                            .attr('productId', productId).html(productName +
+                                ` <span class="ml-4">(${productBrand})</span>`)
+                        );
                         // $('#product').append($('<option></option>').attr('value', productName)
                         //     .attr('productId', productId).text(productName + "" + "(" +
                         //         product.product_unit + ")"));

@@ -5,6 +5,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Horeca</title>
+    <script>
+        window.onload = function() {
+            window.print();
+        };
+    </script>
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
@@ -472,9 +477,9 @@
                 <p>Kaya Markt GmbH & Co. KG Sparkasse Wetzlar IBAN: DE94 5155 0035 0002 1188 59 BIC: HELADEF1WET</p>
             </div>
         </div>
-        <footer>
-            {{-- <h1>@lang('lang.Software_Developed_By') The Web Concept</h1> --}}
-        </footer>
+        {{-- <footer>
+            <h1>@lang('lang.Software_Developed_By') The Web Concept</h1>
+        </footer> --}}
     </div>
 </body>
 

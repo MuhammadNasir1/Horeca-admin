@@ -241,7 +241,7 @@ class productController extends Controller
     {
         try {
             $validateData = $request->validate([
-                'name' => 'required',
+                'name' => 'required|unique:category,name',
                 'category_img' => 'nullable|image',
                 'status' => 'required',
                 'tax' => 'required',
@@ -258,8 +258,15 @@ class productController extends Controller
                         $category_image->storeAs('public/category_image', $name);
                         $check_category->image = 'storage/category_image/' . $name;
                     }
+                    if ($request->has('tax')) {
+                        $check_category->tax = $validateData['tax'];
+                    }
+                    if ($request->has('status')) {
+                        $check_category->status = $validateData['status'];
+                    }
+
                     $check_category->update();
-                    return response()->json(['success' => true, 'message' => "Category Add Successfully"], 200);
+                    return response()->json(['success' => true, 'message' => "Category Add Successfully", "category" => $check_category], 200);
                 } else {
                     return response()->json(['success' => false, 'message' => "Category Already Exist"], 404);
                 }
@@ -279,7 +286,7 @@ class productController extends Controller
                 }
                 $Category->save();
             }
-            return response()->json(['success' => true, 'message' => "Category Add Successfully"], 200);
+            return response()->json(['success' => true, 'message' => "Category Add Successfully",  "category" => $Category], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => true, 'message' => $e->getMessage()], 404);
         }
@@ -306,10 +313,16 @@ class productController extends Controller
 
         try {
 
+            $validatedData = $request->validate([
+                'name' => 'required|unique:category,name,' . $id,
+
+            ]);
+
             $category = category::find($id);
             if (!$category) {
                 return response()->json(['success' => false, 'category' => 'category not found'], 422);
             }
+            $category->name = $validatedData['name'];
             if ($request->hasFile('image')) {
                 $category_image = $request->file('image');
                 $name = time() . '.' . $category_image->getClientOriginalExtension();

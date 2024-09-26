@@ -170,6 +170,13 @@ class authController extends Controller
                     'user_image' => $user['user_image'],
 
                 ]]);
+                session(['user_info' => [
+                    'user_image' => $user['user_image'],
+                    'name' => $name,
+                    'email' => $validatedData['email'],
+                    'role' =>  $role,
+
+                ]]);
                 return  response()->json([
                     'token' => $token,
                     'message' => 'login  Successful',
@@ -226,7 +233,7 @@ class authController extends Controller
                 'name' => 'nullable',
                 'phone' => 'nullable',
                 'address' => 'nullable',
-                'upload_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+                'upload_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             ]);
 
             $user = User::where('id', $validatedData['user_id'])->first();
@@ -262,6 +269,13 @@ class authController extends Controller
 
             session(['user_image' => [
                 'user_image' => $user['user_image'],
+
+            ]]);
+            session(['user_info' => [
+                'user_image' => $user['user_image'],
+                'name' => $user['name'],
+                'email' => $user['email'],
+                'role' => $user['role'],
 
             ]]);
             $user->save();

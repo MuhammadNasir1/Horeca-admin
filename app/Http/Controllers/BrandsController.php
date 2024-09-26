@@ -32,7 +32,7 @@ class BrandsController extends Controller
                         $check_brand->image = 'storage/brands_images/' . $imageName;
                     }
                     $check_brand->update();
-                    return response()->json(['success' => true, 'message' => "Brand add successfully"], 201);
+                    return response()->json(['success' => true, 'message' => "Brand add successfully", "brand" => $check_brand], 201);
                 } else {
                     return response()->json(['success' => false, 'message' => "Brand Already Exist"], 404);
                 }
@@ -48,7 +48,7 @@ class BrandsController extends Controller
                     $brand->image = 'storage/brands_images/' . $imageName;
                 }
                 $brand->save();
-                return response()->json(['success' => true, 'message' => "Brand add successfully"], 201);
+                return response()->json(['success' => true, 'message' => "Brand add successfully", "brand" => $brand], 201);
             }
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);

@@ -402,12 +402,12 @@
                 </button>
                 <div class="flex items-center gap-2">
                     <div class="leading-tight  text-end">
-                        <h2 class="text-md">{{ session('user_det')['name'] }}</h2>
-                        <p class="text-xs  text-gray">{{ session('user_det')['role'] }}</p>
+                        <h2 class="text-md">{{ session('user_info')['name'] }}</h2>
+                        <p class="text-xs  text-gray">{{ session('user_info')['role'] }}</p>
                     </div>
                     <div>
                         <img height="42px" width="42px" class="rounded-[5px] h-[42px] object-fill"
-                            src="{{ session()->has('user_image') && session('user_image.user_image') !== null ? asset(session('user_image.user_image')) : asset('images/user.png') }}"
+                            src="{{ session()->has('user_info') && session('user_info.user_image') !== null ? asset(session('user_info.user_image')) : asset('images/user.png') }}"
                             alt="user">
                     </div>
                 </div>
