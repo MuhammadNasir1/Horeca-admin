@@ -712,17 +712,17 @@
                 } else {
                     $('#ErrorPreview').removeClass('hidden').addClass('flex');
                     generateTable(response.data, response.errors);
-                    $('#text').removeClass('hidden');
-                    $('#spinner').addClass('hidden');
-                    $('#addBtn').attr('disabled', false);
+                    $('#Etext').removeClass('hidden');
+                    $('#Espinner').addClass('hidden');
+                    $('#EaddBtn').attr('disabled', false);
 
                 }
             },
             error: function(xhr) {
                 alert('Error occurred during file upload.');
-                $('#text').removeClass('hidden');
-                $('#spinner').addClass('hidden');
-                $('#addBtn').attr('disabled', false);
+                $('#Etext').removeClass('hidden');
+                $('#Espinner').addClass('hidden');
+                $('#EaddBtn').attr('disabled', false);
             }
         });
     });
