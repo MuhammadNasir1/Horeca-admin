@@ -156,8 +156,8 @@
 
                 <div class="flex justify-end ">
                     <button class="bg-primary text-white py-2 px-6 my-4 rounded-[4px]  mx-6 uaddBtn  font-semibold "
-                        id="addBtn">
-                        <div class=" text-center hidden" id="spinner">
+                        id="EaddBtn">
+                        <div class=" text-center hidden" id="Espinner">
                             <svg aria-hidden="true"
                                 class="w-5 h-5 mx-auto text-center text-gray-200 animate-spin fill-primary"
                                 viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -169,7 +169,7 @@
                                     fill="currentFill" />
                             </svg>
                         </div>
-                        <div id="text">
+                        <div id="Etext">
                             @lang('lang.Add_Product')
                         </div>
 
@@ -700,6 +700,11 @@
             data: formData,
             contentType: false,
             processData: false,
+            beforeSend: function() {
+                $('#Espinner').removeClass('hidden');
+                $('#Etext').addClass('hidden');
+                $('#EaddBtn').attr('disabled', true);
+            },
             success: function(response) {
                 // Show Excel data in the table
                 if (response.success == true) {
@@ -707,11 +712,17 @@
                 } else {
                     $('#ErrorPreview').removeClass('hidden').addClass('flex');
                     generateTable(response.data, response.errors);
+                    $('#text').removeClass('hidden');
+                    $('#spinner').addClass('hidden');
+                    $('#addBtn').attr('disabled', false);
 
                 }
             },
             error: function(xhr) {
                 alert('Error occurred during file upload.');
+                $('#text').removeClass('hidden');
+                $('#spinner').addClass('hidden');
+                $('#addBtn').attr('disabled', false);
             }
         });
     });
