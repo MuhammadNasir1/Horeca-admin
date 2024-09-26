@@ -24,6 +24,13 @@ class BrandsController extends Controller
             if ($check_brand) {
                 if ($check_brand->status == "deleted") {
                     $check_brand->status = "active";
+
+                    if ($request->hasFile('image')) {
+                        $image = $request->file('image');
+                        $imageName = time() . '.' . $image->getClientOriginalExtension();
+                        $image->storeAs('public/brands_images', $imageName);
+                        $check_brand->image = 'storage/brands_images/' . $imageName;
+                    }
                     $check_brand->update();
                     return response()->json(['success' => true, 'message' => "Brand add successfully"], 201);
                 } else {
@@ -63,19 +70,18 @@ class BrandsController extends Controller
 
         try {
             $validatedData = $request->validate([
-                "name" => "required",
+                'name' => 'required|unique:brands,name,' . $id,
 
             ]);
             $brand = Brands::find($id);
             $brand->name = $validatedData['name'];
-            $brand->image = "null";
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $imageName = time() . '.' . $image->getClientOriginalExtension();
                 $image->storeAs('public/brands_images', $imageName);
                 $brand->image = 'storage/brands_images/' . $imageName;
             }
-            $brand->update();
+            $brand->update($request->except('image'));
             return response()->json(['success' => true, 'message' => "Data add successfully", 'brand' =>   $brand->name], 201);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);

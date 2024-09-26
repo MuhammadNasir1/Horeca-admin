@@ -252,6 +252,12 @@ class productController extends Controller
             if ($check_category) {
                 if ($check_category->status == "deleted") {
                     $check_category->status = "active";
+                    if ($request->hasFile('image')) {
+                        $category_image = $request->file('image');
+                        $name = time() . '.' . $category_image->getClientOriginalExtension();
+                        $category_image->storeAs('public/category_image', $name);
+                        $check_category->image = 'storage/category_image/' . $name;
+                    }
                     $check_category->update();
                     return response()->json(['success' => true, 'message' => "Category Add Successfully"], 200);
                 } else {
@@ -265,8 +271,8 @@ class productController extends Controller
                     'image' => '',
                 ]);
 
-                if ($request->hasFile('category_img')) {
-                    $category_image = $request->file('category_img');
+                if ($request->hasFile('image')) {
+                    $category_image = $request->file('image');
                     $name = time() . '.' . $category_image->getClientOriginalExtension();
                     $category_image->storeAs('public/category_image', $name);
                     $Category->image = 'storage/category_image/' . $name;
@@ -302,19 +308,19 @@ class productController extends Controller
 
             $category = category::find($id);
             if (!$category) {
-                return response()->json(['success' => false, 'category' => 'category not found'], 500);
+                return response()->json(['success' => false, 'category' => 'category not found'], 422);
             }
-            if ($request->hasFile('category_img')) {
-                $category_image = $request->file('category_img');
+            if ($request->hasFile('image')) {
+                $category_image = $request->file('image');
                 $name = time() . '.' . $category_image->getClientOriginalExtension();
                 $category_image->storeAs('public/category_image', $name);
                 $category->image = 'storage/category_image/' . $name;
             }
 
-            $category->update($request->except('category_img'));
+            $category->update($request->except('image'));
             return response()->json(['success' => true, 'message' => "Category Update Successfully", 'category' => $category]);
         } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 400);
         }
     }
     public function UpdataProduct(Request $request, $product_id)

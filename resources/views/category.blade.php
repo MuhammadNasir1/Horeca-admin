@@ -191,7 +191,8 @@
                     <div>
                         <label class="text-[14px] font-normal" for="image">@lang('lang.Image')</label>
                         <input type="file"
-                            class="w-full border-[#DEE2E6]  border rounded-[4px] focus:border-primary   h-[40px] text-[14px]">
+                            class="w-full border-[#DEE2E6]  border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="image">
                     </div>
                     <div class="">
                         <label class="text-[14px] font-normal" for="Status">@lang('lang.Status')</label>
