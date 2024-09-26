@@ -204,6 +204,8 @@
 
     <script>
         $(document).ready(function() {
+            var today = new Date().toISOString().split('T')[0];
+            $('#order_date').val(today);
             $('#addProductBtn').click(function() {
                 let product = $('#product').val();
                 let price = $('#Product_Price').val();
@@ -262,7 +264,7 @@
                     var subTotal = 0;
                     $('#product_output .total').each(function() {
                         subTotal += parseFloat($(this).text());
-                        $('#subtotal').html(subTotal);
+                        $('#subtotal').html(subTotal.toFixed(2));
                         // console.log("Sub Total is" + subTotal);
                         $('#grandTotal').html(subTotal.toFixed(2));
                         $('#grand_total').val(subTotal.toFixed(2));
@@ -313,7 +315,7 @@
                         var subTotal = 0;
                         $('#product_output .total').each(function() {
                             subTotal += parseFloat($(this).text());
-                            $('#subtotal').html(subTotal);
+                            $('#subtotal').html(subTotal.toFixed(2));
                             // console.log("Sub Total is" + subTotal);
                             $('#grandTotal').html(subTotal.toFixed(2));
                             $('#grand_total').val(subTotal.toFixed(2));

@@ -306,7 +306,7 @@
                     var subTotal = 0;
                     $('#product_output .total').each(function() {
                         subTotal += parseFloat($(this).text());
-                        $('#subtotal').html(subTotal);
+                        $('#subtotal').html(subTotal.toFixed(2));
                         // console.log("Sub Total is" + subTotal);
                         $('#grandTotal').html(subTotal.toFixed(2));
                         $('#grand_total').val(subTotal.toFixed(2));
@@ -358,7 +358,7 @@
                         var subTotal = 0;
                         $('#product_output .total').each(function() {
                             subTotal += parseFloat($(this).text());
-                            $('#subtotal').html(subTotal);
+                            $('#subtotal').html(subTotal.toFixed(2));
                             // console.log("Sub Total is" + subTotal);
                             $('#grandTotal').html(subTotal.toFixed(2));
                             $('#grand_total').val(subTotal.toFixed(2));
