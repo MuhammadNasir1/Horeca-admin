@@ -277,7 +277,13 @@ class productController extends Controller
 
                     $validationErrors[] = [
                         'row' => $key + 2,
-                        'errors' => $validator->errors()->toArray()
+                        // 'errors' => $validator->errors()->toArray()
+                        'errors' => array_combine(
+                            array_map(function ($key) {
+                                return str_replace('_', ' ', $key); // Replace underscores with spaces
+                            }, array_keys($validator->errors()->toArray())),
+                            array_values($validator->errors()->toArray())
+                        )
                     ];
                 }
             }

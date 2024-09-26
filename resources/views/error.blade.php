@@ -39,7 +39,7 @@
             let formData = new FormData(this);
 
             $.ajax({
-                url: '/product/import', // Your backend route here
+                url: '/product/import',
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -47,8 +47,6 @@
                 success: function(response) {
                     // Show Excel data in the table
                     generateTable(response.data, response.errors);
-                    console.log(response.errors);
-
                 },
                 error: function(xhr) {
                     alert('Error occurred during file upload.');
@@ -62,7 +60,6 @@
             const tableHeader = $('#tableHeader');
             const tableBody = $('#tableBody');
 
-            // Clear previous table content
             tableHeader.empty();
             tableBody.empty();
 
@@ -84,11 +81,15 @@
 
                 row.forEach((cell, colIndex) => {
                     let isError = false;
+                    let headerText = headerRow[colIndex].toLowerCase(); // Make it lowercase
+
+                    // Replace spaces with underscores in header for error matching
+                    headerText = headerText.replace(/_/g, ' ').toLowerCase();
 
                     // Check if there's an error for this specific cell (row & column)
                     errors.forEach((error) => {
-                        if (error.row === rowIndex + 2 && error.errors[headerRow[
-                                colIndex]]) { // Adjust rowIndex to match Excel rows
+                        if (error.row === rowIndex + 2 && error.errors[
+                                headerText]) { // Use space-separated headers for error checking
                             isError = true;
                         }
                     });
