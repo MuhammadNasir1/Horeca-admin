@@ -225,76 +225,78 @@ class productController extends Controller
         // Get the uploaded file
         $file = $request->file('excel_file');
 
-        // Convert the Excel data to an array
+        // Convert the Excel data to an array and filter out empty rows
         $data = Excel::toArray([], $file);
+
+        // Filter out rows that are either completely empty or all null
+        $filteredData = array_filter($data[0], function ($row) {
+            // Use array_filter to remove any rows where all fields are null/empty
+            return array_filter($row); // This will return true if the row contains any non-empty value
+        });
 
         // Initialize an array to store validation errors
         $validationErrors = [];
 
         // Start the loop from the second row to skip the header
-        foreach (array_slice($data[0], 1) as $key => $row) {
+        foreach (array_slice($filteredData, 1) as $key => $row) {
             // Define validation rules for each row
-            if (array_filter($row)) {
-                $validator = Validator::make([
-                    'name' => $row[0],
-                    'code' => $row[1],
-                    'tags' => $row[2],
-                    'brand' => $row[3],
-                    'category' => $row[4],
-                    'sub_category' => $row[5],
-                    'purchase_price' => str_replace(',', '.', $row[6]),
-                    'rate' => str_replace(',', '.', $row[7]),
-                    'tax' => $row[8],
-                    'quantity' => $row[9],
-                    'quantity_alert' => $row[10],
-                    'product_unit' => $row[11],
-                    'unit_quantity' => $row[12],
-                    'image' => $row[13],
-                    'status' => $row[14],
-                    'description' => $row[15],
-                    'unit_price' => str_replace(',', '.', $row[16]),
-                    'unit_pieces' => $row[17],
-                    'package_quantity' => $row[18],
-                ], [
-                    'name' => 'required',
-                    'code' => 'required',
-                    'purchase_price' => 'required|numeric',
-                    'rate' => 'required|numeric',
-                    'tax' => 'nullable|numeric',
-                    'quantity' => 'required|integer',
-                    'quantity_alert' => 'nullable|integer',
-                    'product_unit' => 'required',
-                    'unit_quantity' => 'required|numeric',
-                    'image' => 'nullable', // You can add image validation if required
-                    'status' => 'required',
-                    'description' => 'nullable|string',
-                    'unit_price' => 'required|numeric',
-                    'unit_pieces' => 'nullable|integer',
-                    'package_quantity' => 'nullable|integer',
-                ]);
+            $validator = Validator::make([
+                'name' => $row[0],
+                'code' => $row[1],
+                'tags' => $row[2],
+                'brand' => $row[3],
+                'category' => $row[4],
+                'sub_category' => $row[5],
+                'purchase_price' => str_replace(',', '.', $row[6]),
+                'rate' => str_replace(',', '.', $row[7]),
+                'tax' => $row[8],
+                'quantity' => $row[9],
+                'quantity_alert' => $row[10],
+                'product_unit' => $row[11],
+                'unit_quantity' => $row[12],
+                'image' => $row[13],
+                'status' => $row[14],
+                'description' => $row[15],
+                'unit_price' => str_replace(',', '.', $row[16]),
+                'unit_pieces' => $row[17],
+                'package_quantity' => $row[18],
+            ], [
+                'name' => 'required',
+                'brand' => 'required',
+                'code' => 'required',
+                'purchase_price' => 'required|numeric',
+                'rate' => 'required|numeric',
+                'tax' => 'nullable|numeric',
+                'quantity' => 'required|integer',
+                'quantity_alert' => 'nullable|integer',
+                'product_unit' => 'required',
+                'unit_quantity' => 'required|numeric',
+                'image' => 'nullable', // Add image validation if required
+                'status' => 'required',
+                'description' => 'nullable|string',
+                'unit_price' => 'required|numeric',
+                'unit_pieces' => 'nullable|integer',
+                'package_quantity' => 'nullable|integer',
+            ]);
 
-                if ($validator->fails()) {
-
-                    $validationErrors[] = [
-                        'row' => $key + 2,
-                        // 'errors' => $validator->errors()->toArray()
-                        'errors' => array_combine(
-                            array_map(function ($key) {
-                                return str_replace('_', ' ', $key); // Replace underscores with spaces
-                            }, array_keys($validator->errors()->toArray())),
-                            array_values($validator->errors()->toArray())
-                        )
-                    ];
-                }
+            // If validation fails, collect errors for this row
+            if ($validator->fails()) {
+                $validationErrors[] = [
+                    'row' => $key + 2, // Add 2 to account for skipping the header row
+                    'errors' => array_combine(
+                        array_map(function ($key) {
+                            return str_replace('_', ' ', $key); // Replace underscores with spaces
+                        }, array_keys($validator->errors()->toArray())),
+                        array_values($validator->errors()->toArray())
+                    )
+                ];
             }
         }
 
-        // If there are validation errors, return them in JSON format
+        // Check if there are any validation errors and return them
         if (!empty($validationErrors)) {
-
-            // return response()->json(['errors' => $validationErrors], 422);
             return response()->json([
-                'data' => $data[0],
+                'data' => $filteredData,
                 'errors' => $validationErrors,
             ], 200);
         }

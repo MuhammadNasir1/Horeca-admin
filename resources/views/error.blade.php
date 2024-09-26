@@ -15,7 +15,7 @@
 </head>
 
 <body class="bg-gray-100 py-8">
-    <div class="container mx-auto">
+    <div class=" mx-auto ">
         <h2 class="text-2xl font-bold mb-4">Upload Excel File</h2>
 
         <form id="excelForm" enctype="multipart/form-data">
@@ -25,10 +25,15 @@
         </form>
 
         <h2 class="text-2xl font-bold mb-4 mt-6">Uploaded Data</h2>
-        <table id="excelTable" class="min-w-full border-collapse block md:table">
-            <thead id="tableHeader" class="block md:table-header-group"></thead>
-            <tbody id="tableBody" class="block md:table-row-group"></tbody>
-        </table>
+        <div class="flex justify-center">
+            <div class=" w-[98vq] lg:w-[90vw] overflow-auto  px-10 border border-red-300">
+
+                <table id="excelTable" class="min-w-full border-collapse block md:table">
+                    <thead id="tableHeader" class="block md:table-header-group"></thead>
+                    <tbody id="tableBody" class="block md:table-row-group"></tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -64,7 +69,7 @@
             tableBody.empty();
 
             // Generate table header
-            let headerHtml = '<tr class="border border-gray-300 md:table-row">';
+            let headerHtml = '<tr class="border border-gray-300 md:table-row whitespace-nowrap">';
             headerRow.forEach((header) => {
                 headerHtml +=
                     `<th class="p-2 text-left bg-gray-200 font-medium text-sm border border-gray-300">${header}</th>`;
