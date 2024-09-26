@@ -219,7 +219,6 @@ return [
     "un-active" => "Un-Active",
     "not-active" => "Not-Active",
     "approved" => "Approved",
-
     "Single" => "Single",
     "Update_Brand" => "update Brand",
     "Full_Unit" => "Full Unit",
@@ -231,17 +230,16 @@ return [
     "Total_Unit_Quantity" => "Total Unit Quantity",
     "Select_User_Role" => "Select User Role",
     "user_Role" => "user Role",
-
     "Platform" => "Platform",
     "Customer_Name_Phone" => "Customer Name / Phone",
-
     "Pack" => "Pack",
     "Category" => "Category",
     "Brand" => "Brand",
-
-
-
     "Content_of_Quantity" => "Content of Quantity",
     "Total_Package_Quantity_Warehouse" => "Total Package Quantity/Warehouse",
     "Total_Unit_Quantity_Warehouse" => "Total Unit Quantity/Warehouse",
+
+
+    "Select_Category" => "Select Category",
+    "Select_Brand" => "Select Brand",
 ];

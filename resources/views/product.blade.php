@@ -226,6 +226,7 @@
                                 <select
                                     class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]  "
                                     name="brand" id="brands" required>
+                                    <option disabled selected>@lang('lang.Select_Brand')</option>
                                     @foreach ($brands as $brand)
                                         <option value="{{ $brand->name }}">
                                             {{ $brand->name }}</option>
@@ -245,6 +246,7 @@
                                 <select
                                     class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px] category "
                                     name="category" id="category" required>
+                                    <option disabled selected>@lang('lang.Select_Category')</option>
                                     @foreach ($categories as $category)
                                         <option category-tax="{{ $category->tax }}" value="{{ $category->name }}">
                                             {{ $category->name }}</option>

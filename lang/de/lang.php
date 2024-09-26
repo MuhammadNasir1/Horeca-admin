@@ -169,9 +169,7 @@ return [
     "Sales_Tax" => "Umsatzsteuer",
     "from" => "aus",
     "net" => "netto",
-
     "Alert_on_Quantity" => "Alarm bei Menge",
-
     "Price_Here" => "Verkaufspreis Netto",
     "Order_From" => "Bestellung Von",
     "Status&Tracking" => "Status & Verfolgung",
@@ -190,7 +188,6 @@ return [
     "Unit" => "Einheit",
     "Unit_Here" => "Einheit Hier",
     "Are_You_Sure" => "Sind Sie Sicher",
-
     "Tax_Number" => "Steuernummer",
     "Tax_Number_Here" => "Steuernummer Hier",
     "Type_Of_Client" => "Kundentyp",
@@ -204,8 +201,6 @@ return [
     "Brand_Name" => "Markenname",
     "Purchase_Price" => "Einkaufspreis Netto",
     "Brands" => "Marken",
-
-
     "Old_Password" => "Altes Passwort",
     "Old_password" => "Altes Passwort",
     "New_Password" => "Neues Passwort",
@@ -218,8 +213,6 @@ return [
     "Enter_Confirm_Password" => "Bestätigungspasswort Eingeben",
     "Select_Interval" => "Intervall Auswählen",
     "Total_Sale" => "Gesamtverkauf",
-
-
     "pending" => "Ausstehend",
     "shipped" => "Versandt",
     "confirmed" => "Bestätigt",
@@ -245,8 +238,10 @@ return [
     "Customer_Name_Phone" => "Kundenname / Telefon",
     "Category" => "Kategorie",
     "Brand" => "Marken",
-
     "Total_Package_Quantity_Warehouse" => "Lagerbestand Kartons",
     "Total_Unit_Quantity_Warehouse" => "Lagerbestand/Anzahl Packungen",
     "Content_of_Quantity" => "Inhalt pro Packung ",
+
+    "Select_Category" => "Kategorie auswählen",
+    "Select_Brand" => "Marke auswählen",
 ];
