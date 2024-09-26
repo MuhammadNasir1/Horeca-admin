@@ -238,8 +238,9 @@ return [
     "Content_of_Quantity" => "Content of Quantity",
     "Total_Package_Quantity_Warehouse" => "Total Package Quantity/Warehouse",
     "Total_Unit_Quantity_Warehouse" => "Total Unit Quantity/Warehouse",
-
-
     "Select_Category" => "Select Category",
     "Select_Brand" => "Select Brand",
+
+
+    "Excel_Error_Preview" => "Excel Error Preview",
 ];

@@ -1,5 +1,11 @@
 @include('layouts.header')
 @include('layouts.nav')
+<style>
+    .error {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+</style>
 <div class="md:mx-4 mt-12">
 
     <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
@@ -38,7 +44,7 @@
                             <th class="flex text-sm  justify-center">@lang('lang.Action')</th>
                         </tr>
                     </thead>
-                    <tbody id="tableBody">
+                    <tbody id="">
                         @foreach ($products as $x => $data)
                             <tr class="pt-4">
                                 <td>{{ $x + 1 }}</td>
@@ -117,7 +123,8 @@
 <div id="addExcelSheetmodal" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
     <div class="relative p-4 w-full   max-w-2xl max-h-full ">
-        <form action="{{ url('product/import') }}" method="post" enctype="multipart/form-data">
+        <form id="excelForm" method="post" enctype="multipart/form-data">
+            {{-- <form action="{{ url('product/import') }}" method="post" enctype="multipart/form-data"> --}}
             @csrf
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                 <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
@@ -631,9 +638,138 @@
 </div>
 
 
+
+
+
+<button data-modal-target="ErrorPreview" data-modal-toggle="ErrorPreview" class="">assd</button>
+<div id="ErrorPreview" data-modal-backdrop="static"
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0  flex left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
+    <div class="fixed inset-0 transition-opacity">
+        <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
+    </div>
+    <div class="relative p-4 w-full   max-w-full max-h-full ">
+        <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
+            <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-red-700">
+                <h3 class="text-xl font-semibold text-white ">
+                    @lang('lang.Excel_Error_Preview')
+                </h3>
+                <button id="brandCloseBtn" type="button"
+                    class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
+                    data-modal-hide="ErrorPreview">
+                    <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                </button>
+            </div>
+            <div class="flex justify-center px-6 mt-5">
+                <div class="w-full overflow-auto min-h-[300px] ">
+                    <table id="excelTable" class="min-w-full border-collapse block md:table">
+                        <thead id="tableHeader" class="block md:table-header-group"></thead>
+                        <tbody id="tableBody" class="block md:table-row-group"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="pb-5 mx-6">
+
+                <blockquote class="text-lg italic font-semibold text-gray-900 dark:text-white">
+                    <p>"Solve These Error First"</p>
+                </blockquote>
+
+            </div>
+        </div>
+
+        <div>
+
+        </div>
+
+    </div>
+</div>
+
 @include('layouts.footer')
 <script>
+    $('#excelForm').on('submit', function(e) {
+        e.preventDefault();
+
+        let formData = new FormData(this);
+
+        $.ajax({
+            url: '/product/import',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                // Show Excel data in the table
+                if (response.success == true) {
+                    window.location.href = '../product';
+                } else {
+                    $('#ErrorPreview').removeClass('hidden').addClass('flex');
+                    generateTable(response.data, response.errors);
+
+                }
+            },
+            error: function(xhr) {
+                alert('Error occurred during file upload.');
+            }
+        });
+    });
+
+
+    function generateTable(data, errors) {
+        const headerRow = data[0];
+        const bodyRows = data.slice(1);
+        const tableHeader = $('#tableHeader');
+        const tableBody = $('#tableBody');
+
+        tableHeader.empty();
+        tableBody.empty();
+
+        // Generate table header
+        let headerHtml =
+            '<tr class="border border-gray-300 md:table-row whitespace-nowrap bg-primary text-white font-semibold" >';
+        headerRow.forEach((header) => {
+            headerHtml +=
+                `<th class="p-2 text-left bg-gray-200 font-medium text-sm border border-gray">${header}</th>`;
+        });
+        headerHtml += '</tr>';
+        tableHeader.append(headerHtml);
+
+        // Generate table body with potential errors highlighted
+        bodyRows.forEach((row, rowIndex) => {
+            // Check if the row is null or empty, skip it
+            if (!row.some(cell => cell !== null && cell !== "")) return;
+
+            let rowHtml = '<tr class="border border-gray md:table-row">';
+
+            row.forEach((cell, colIndex) => {
+                let isError = false;
+                let headerText = headerRow[colIndex].toLowerCase(); // Make it lowercase
+
+                // Replace spaces with underscores in header for error matching
+                headerText = headerText.replace(/_/g, ' ').toLowerCase();
+
+                // Check if there's an error for this specific cell (row & column)
+                errors.forEach((error) => {
+                    if (error.row === rowIndex + 2 && error.errors[
+                            headerText
+                        ]) { // Use space-separated headers for error checking
+                        isError = true;
+                    }
+                });
+
+                // Highlight only the columns (cells) with errors
+                rowHtml +=
+                    `<td class="p-2 text-left border border-gray ${isError ? 'error' : ''}">${cell ? cell : ''}</td>`;
+            });
+
+            rowHtml += '</tr>';
+            tableBody.append(rowHtml);
+        });
+    }
     $(document).ready(function() {
+
         $('#category').change(function() {
             let categoryName = $(this).val();
             $.ajax({

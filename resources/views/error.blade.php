@@ -51,7 +51,14 @@
                 processData: false,
                 success: function(response) {
                     // Show Excel data in the table
-                    generateTable(response.data, response.errors);
+                    if (response.success == true) {
+
+                        alert("data add");
+                    } else {
+
+                        generateTable(response.data, response.errors);
+
+                    }
                 },
                 error: function(xhr) {
                     alert('Error occurred during file upload.');
