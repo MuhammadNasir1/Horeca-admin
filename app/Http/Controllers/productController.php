@@ -241,7 +241,7 @@ class productController extends Controller
     {
         try {
             $validateData = $request->validate([
-                'name' => 'required|unique:category,name',
+                'name' => 'required',
                 'category_img' => 'nullable|image',
                 'status' => 'required',
                 'tax' => 'required',
@@ -285,8 +285,8 @@ class productController extends Controller
                     $Category->image = 'storage/category_image/' . $name;
                 }
                 $Category->save();
+                return response()->json(['success' => true, 'message' => "Category Add Successfully",  "category" => $Category], 200);
             }
-            return response()->json(['success' => true, 'message' => "Category Add Successfully",  "category" => $Category], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => true, 'message' => $e->getMessage()], 404);
         }
