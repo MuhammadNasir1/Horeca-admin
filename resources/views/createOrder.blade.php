@@ -348,7 +348,7 @@
                 success: function(response) {
                     var products = response
                         .products; // Assuming response.products is an array of objects
-                    console.log(response);
+                    // console.log(response);
                     // Clear existing options from the select element
                     // $('#product').empty();
                     $('#product').html($('<option></option>').attr('value', "Select_Product").text(
@@ -390,18 +390,20 @@
                     dataType: "json",
                     success: function(response) {
                         var products = response.products;
-                        if (products.unit_price == 0) {
-                            $('#unitOption').remove()
-                        } else {
-                            $('#unitStatus').append(
-                                `<option value="full_unit" id="unitOption">@lang('lang.Full_Unit')</option>`
-                            );
-
-                        }
 
                         // Iterate over each product object
                         $.each(products, function(index, product) {
                             var productName = product.name;
+                            if (product.unit_price == 0) {
+                                $('#unitOption').remove()
+                            } else {
+                                if ($('#unitOption').length === 0) {
+                                    $('#unitStatus').append(
+                                        `<option value="full_unit" id="unitOption">@lang('lang.Full_Unit')</option>`
+                                    );
+                                }
+
+                            }
 
                             function checkUnitStatus() {
                                 let unitStatus = $('#unitStatus').val();
