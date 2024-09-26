@@ -437,12 +437,11 @@
                         $.each(products, function(index, product) {
                             var productName = product.name;
                             if (product.unit_price == 0) {
-                                $('#unitOption').remove()
+                                $('#unitOption').prop('disabled', true);
+                                $('#unitStatus').val('single').trigger('change');
                             } else {
-                                $('#unitStatus').append(
-                                    `<option value="full_unit" id="unitOption">@lang('lang.Full_Unit')</option>`
-                                );
-
+                                $('#unitOption').prop('disabled', false);
+                                $('#unitStatus').trigger('change');
                             }
 
                             function checkUnitStatus() {
