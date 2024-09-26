@@ -19,6 +19,9 @@ Route::get('/login', function () {
 Route::get('/notifications', function () {
     return view('notification');
 });
+Route::get('/error', function () {
+    return view('error');
+});
 
 
 Route::middleware('custom')->group(function () {

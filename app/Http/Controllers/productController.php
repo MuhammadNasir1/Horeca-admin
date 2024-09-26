@@ -10,6 +10,8 @@ use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\URL;
 use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpSpreadsheet\Calculation\Category as CalculationCategory;
+use Illuminate\Support\Facades\Validator;
+
 
 class productController extends Controller
 {
@@ -143,24 +145,157 @@ class productController extends Controller
     //     return redirect()->back();
     // }
 
+    // public function importExcelData(Request $request)
+    // {
+    //     try {
+
+    //         // Validate the uploaded file
+    //         $validateData = $request->validate([
+    //             'excel_file' => 'required|mimes:xlsx,xls',
+    //         ]);
+
+    //         // Get the uploaded file
+    //         $file = $request->file('excel_file');
+
+    //         // Convert the Excel data to an array
+    //         $data = Excel::toArray([], $file);
+
+    //         // Start the loop from the second row to skip the header
+    //         foreach (array_slice($data[0], 1) as $row) {
+    //             // Create a new product record
+    //             product::create([
+    //                 'name' => $row[0],
+    //                 'code' => $row[1],
+    //                 'tags' => $row[2],
+    //                 'brand' => $row[3],
+    //                 'category' => $row[4],
+    //                 'sub_category' => $row[5],
+    //                 'purchase_price' =>
+    //                 str_replace(',', '.', $row[6]),
+    //                 'rate' =>
+    //                 str_replace(',', '.', $row[7]),
+    //                 'tax' => $row[8],
+    //                 'quantity' => $row[9],
+    //                 'quantity_alert' => $row[10],
+    //                 'product_unit' => $row[11],
+    //                 'unit_quantity' => $row[12],
+    //                 'image' => $row[13],
+    //                 'status' => $row[14],
+    //                 'description' => $row[15],
+    //                 'unit_price' => str_replace(',', '.', $row[16]),
+    //                 'Unit_Pieces' => $row[17],
+    //                 'package_quantity' =>
+    //                 $row[18],
+    //             ]);
+    //             $checkCategory = Category::where('name', $row[4])->first();
+    //             if (!$checkCategory) {
+    //                 category::create([
+    //                     'name' => $row[4],
+    //                     'tax' => $row[8],
+    //                     'status' => "active",
+    //                     'image' => "",
+    //                 ]);
+    //             }
+    //             $checkBrand = Brands::where('name', $row[3])->first();
+    //             if (!$checkBrand) {
+    //                 Brands::create([
+    //                     'name' => $row[3],
+    //                     'image' => 'null',
+
+    //                 ]);
+    //             }
+    //         }
+
+    //         // Redirect back to the previous page
+    //         return redirect()->back();
+    //     } catch (\Exception $e) {
+
+    //         return redirect()->back();
+    //         // return response()->json($e->getMessage());
+    //     }
+    // }
+
     public function importExcelData(Request $request)
     {
-        try {
 
-            // Validate the uploaded file
-            $validateData = $request->validate([
-                'excel_file' => 'required|mimes:xlsx,xls',
-            ]);
+        $validateData = $request->validate([
+            'excel_file' => 'required|mimes:xlsx,xls',
+        ]);
 
-            // Get the uploaded file
-            $file = $request->file('excel_file');
+        // Get the uploaded file
+        $file = $request->file('excel_file');
 
-            // Convert the Excel data to an array
-            $data = Excel::toArray([], $file);
+        // Convert the Excel data to an array
+        $data = Excel::toArray([], $file);
 
-            // Start the loop from the second row to skip the header
-            foreach (array_slice($data[0], 1) as $row) {
-                // Create a new product record
+        // Initialize an array to store validation errors
+        $validationErrors = [];
+
+        // Start the loop from the second row to skip the header
+        foreach (array_slice($data[0], 1) as $key => $row) {
+            // Define validation rules for each row
+            if (array_filter($row)) {
+                $validator = Validator::make([
+                    'name' => $row[0],
+                    'code' => $row[1],
+                    'tags' => $row[2],
+                    'brand' => $row[3],
+                    'category' => $row[4],
+                    'sub_category' => $row[5],
+                    'purchase_price' => str_replace(',', '.', $row[6]),
+                    'rate' => str_replace(',', '.', $row[7]),
+                    'tax' => $row[8],
+                    'quantity' => $row[9],
+                    'quantity_alert' => $row[10],
+                    'product_unit' => $row[11],
+                    'unit_quantity' => $row[12],
+                    'image' => $row[13],
+                    'status' => $row[14],
+                    'description' => $row[15],
+                    'unit_price' => str_replace(',', '.', $row[16]),
+                    'unit_pieces' => $row[17],
+                    'package_quantity' => $row[18],
+                ], [
+                    'name' => 'required',
+                    'code' => 'required',
+                    'purchase_price' => 'required|numeric',
+                    'rate' => 'required|numeric',
+                    'tax' => 'nullable|numeric',
+                    'quantity' => 'required|integer',
+                    'quantity_alert' => 'nullable|integer',
+                    'product_unit' => 'required',
+                    'unit_quantity' => 'required|numeric',
+                    'image' => 'nullable', // You can add image validation if required
+                    'status' => 'required',
+                    'description' => 'nullable|string',
+                    'unit_price' => 'required|numeric',
+                    'unit_pieces' => 'nullable|integer',
+                    'package_quantity' => 'nullable|integer',
+                ]);
+
+                if ($validator->fails()) {
+
+                    $validationErrors[] = [
+                        'row' => $key + 2,
+                        'errors' => $validator->errors()->toArray()
+                    ];
+                }
+            }
+        }
+
+        // If there are validation errors, return them in JSON format
+        if (!empty($validationErrors)) {
+
+            // return response()->json(['errors' => $validationErrors], 422);
+            return response()->json([
+                'data' => $data[0],
+                'errors' => $validationErrors,
+            ], 200);
+        }
+
+        // If no validation errors, save each row to the database
+        foreach (array_slice($data[0], 1) as $row) {
+            if (array_filter($row)) {
                 product::create([
                     'name' => $row[0],
                     'code' => $row[1],
@@ -168,10 +303,8 @@ class productController extends Controller
                     'brand' => $row[3],
                     'category' => $row[4],
                     'sub_category' => $row[5],
-                    'purchase_price' =>
-                    str_replace(',', '.', $row[6]),
-                    'rate' =>
-                    str_replace(',', '.', $row[7]),
+                    'purchase_price' => str_replace(',', '.', $row[6]),
+                    'rate' => str_replace(',', '.', $row[7]),
                     'tax' => $row[8],
                     'quantity' => $row[9],
                     'quantity_alert' => $row[10],
@@ -182,9 +315,9 @@ class productController extends Controller
                     'description' => $row[15],
                     'unit_price' => str_replace(',', '.', $row[16]),
                     'Unit_Pieces' => $row[17],
-                    'package_quantity' =>
-                    $row[18],
+                    'package_quantity' => $row[18],
                 ]);
+
                 $checkCategory = Category::where('name', $row[4])->first();
                 if (!$checkCategory) {
                     category::create([
@@ -203,17 +336,13 @@ class productController extends Controller
                     ]);
                 }
             }
-
-            // Redirect back to the previous page
-            return redirect()->back();
-        } catch (\Exception $e) {
-
-            return redirect()->back();
-            // return response()->json($e->getMessage());
         }
+
+
+        // Redirect back to the previous page
+        // return redirect()->back();
+        return response()->json(['success' => true,  'message' => 'All rows were successfully imported.'], 200);
     }
-
-
 
     public function ProductUpdataData($product_id)
     {
