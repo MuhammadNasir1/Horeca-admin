@@ -390,7 +390,7 @@
                     dataType: "json",
                     success: function(response) {
                         var products = response.products;
-                        if (product.unit_price == 0) {
+                        if (products.unit_price == 0) {
                             $('#unitOption').remove()
                         } else {
                             $('#unitStatus').append(
