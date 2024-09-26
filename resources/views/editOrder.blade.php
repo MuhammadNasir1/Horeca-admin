@@ -162,8 +162,12 @@
                                             name="unit_status[]">
                                         {{ \App\Models\Product::find($orderItem->product_id)->code }}
                                     </td>
-                                    <td class="border-2 border-primary productName">
-                                        {{ \App\Models\Product::find($orderItem->product_id)->name }}</td>
+                                    @php
+
+                                        $productName = \App\Models\Product::find($orderItem->product_id)->name;
+                                    @endphp
+                                    <td class=" unitStatus hidden">{{ $orderItem->unit_status }}</td>
+                                    <td class="border-2 border-primary productName">{{ $productName }}</td>
                                     <td class="border-2 border-primary">{{ $orderItem->product_rate }}</td>
                                     <td class="border-2 border-primary px-5">{{ $orderItem->product_tax }}%</td>
                                     <td class="border-2 border-primary py-2 quantity">
@@ -253,6 +257,7 @@
                 let unitStatus = $('#unitStatus').val()
                 let total = (price * quantity) + ((price * quantity) * (tax / 100));
                 console.log('the total is' + total);
+                console.log('html is' + $('#product_output').html());
 
                 if (isNaN(parseInt(quantity)) || isNaN(parseFloat(price))) {
                     // If either quantity or price is not a valid number, do not append the row
@@ -321,7 +326,7 @@
                     <input readonly id="totalinput" type="hidden" value="${total.toFixed(2)}" name="product_total[]">
                     <input readonly type="hidden" value="${unitStatus}" name="unit_status[]">
                 ${code}</td>
-            <td class="border-2 border-primary unitStatus hidden">${unitStatus}</td>
+     <td class="border-2 border-primary unitStatus hidden">${unitStatus}</td>
             <td class="border-2 border-primary productName">${product}</td>
             <td class="border-2 border-primary">${price}</td>
             <td class="border-2 border-primary px-5">${tax}%</td>
