@@ -81,7 +81,7 @@
                                 name="unit_sale" id="unitStatus">
                                 <option disabled>@lang('lang.Select_Unit_Sale')</option>
                                 <option value="single">@lang('lang.Single')</option>
-                                <option value="full_unit">@lang('lang.Full_Unit')</option>
+                                <option value="full_unit" id="unitOption">@lang('lang.Full_Unit')</option>
 
 
                             </select>
@@ -436,6 +436,14 @@
                         // Iterate over each product object
                         $.each(products, function(index, product) {
                             var productName = product.name;
+                            if (product.unit_price == 0) {
+                                $('#unitOption').remove()
+                            } else {
+                                $('#unitStatus').append(
+                                    `<option value="full_unit" id="unitOption">@lang('lang.Full_Unit')</option>`
+                                );
+
+                            }
 
                             function checkUnitStatus() {
                                 let unitStatus = $('#unitStatus').val();
