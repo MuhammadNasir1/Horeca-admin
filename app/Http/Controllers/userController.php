@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\auth;
+use App\Mail\authMail;
 use App\Mail\OtpMail;
+use App\Mail\statusMail;
 use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
 use  Illuminate\Support\Facades\Hash;
@@ -76,10 +79,12 @@ class userController extends Controller
             } else {
                 $user_role = "customer";
             }
+
+            $password = 12345678;
             $customer =  User::create([
                 'name' => $validateData['name'],
                 'email' => $validateData['email'],
-                'password' => Hash::make(12345678),
+                'password' => Hash::make($password),
                 'phone' => $validateData['phone_no'],
                 'role' => $user_role,
                 'address' => $validateData['address'],
@@ -88,10 +93,13 @@ class userController extends Controller
                 'postal_code' => $request['postal_code'],
                 'city' => $request['city'],
                 'note' => $request['note'],
+                'verification' => "approved",
             ]);
-
+            $name = $validateData['name'];
+            $email = $validateData['email'];
+            $Mpassword = $password;
+            Mail::to($email)->send(new authMail($email, $Mpassword,  $name));
             return response()->json(['success' => true, 'message' => "Customer Add Successfully"], 200);
-            // return response()->json(['success' => true, 'message' => "Customer Add Successfully"]);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 404);
         }
@@ -291,8 +299,19 @@ class userController extends Controller
                 'verification' => 'required|string', // Add more validation rules as needed
             ]);
             $user =   User::find($user_id);
+            $name = $user->name;
+            $email = $user->email;
+
+            $currentStatus = $user->verification;
+            if ($currentStatus !== 'approved') {
+                $status = 'approved';
+            } else {
+                $status = 'pending';
+            }
             $user->verification = $validatedData['verification'];
             $user->save();
+            Mail::to($email)->send(new statusMail($status, $name));
+
 
             return response()->json(['success' => true, 'message' => "User Status successfull Update"], 200);
         } catch (\Exception $e) {
