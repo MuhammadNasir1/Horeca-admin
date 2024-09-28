@@ -7,7 +7,7 @@
     <title>Horeca</title>
     <script>
         window.onload = function() {
-            window.print();
+            // window.print();
         };
     </script>
     <style>
@@ -364,6 +364,12 @@
                         </thead>
 
                         <tbody>
+                            @php
+                                $seven_per_net = 0; // Initialize a total variable
+                                $seven_per_rate = 0; // Initialize a total variable
+                                $nighteen_per_net = 0; // Initialize a total variable
+                                $nighteen_per_rate = 0; // Initialize a total variable
+                            @endphp
                             @foreach ($orderItems as $orderItem)
                                 <h1></h1>
                                 <tr class="font-size">
@@ -411,20 +417,34 @@
 
                                             @if ($orderItem['product_tax'] == 7)
                                                 @php
+                                                    $seven_per_net += $orderItem['product_total'];
+                                                    $seven_per_rate +=
+                                                        $orderItem['product_rate'] * $orderItem['product_quantity'];
+                                                @endphp
+                                            @elseif($orderItem['product_tax'] == 19)
+                                                @php
+                                                    $nighteen_per_net += $orderItem['product_total'];
+                                                    $nighteen_per_rate +=
+                                                        $orderItem['product_rate'] * $orderItem['product_quantity'];
+
+                                                @endphp
+                                            @endif
+                                            {{-- @if ($orderItem['product_tax'] == 7)
+                                                @php
 
                                                     $seven_per_tax = abs(
                                                         $orderItem['product_rate'] * $orderItem['product_quantity'] -
                                                             $product_total,
                                                     );
                                                 @endphp
-                                            @else
+                                            @elseif($orderItem['product_tax'] == 19)
                                                 @php
                                                     $per_tax = abs(
                                                         $orderItem['product_rate'] * $orderItem['product_quantity'] -
                                                             $product_total,
                                                     );
                                                 @endphp
-                                            @endif
+                                            @endif --}}
 
 
                                         </strong>
@@ -440,12 +460,16 @@
                         <h2 class="color">{{ $order->sub_total }}&euro;</h2>
                     </div>
                     <div class="div2-left">
-                        <h2>@lang('lang.Sales_Tax') 7% (@lang('lang.from') &euro;0.00 @lang('lang.net') )</h2>
-                        <h2 class="color">{{ number_format($seven_per_tax ?? 0, 2) }}&euro;</h2>
+                        <h2>@lang('lang.Sales_Tax') 7% (@lang('lang.from') &euro;{{ number_format($seven_per_net, 2) }}
+                            @lang('lang.net') )
+                        </h2>
+                        <h2 class="color">{{ abs($seven_per_net - $seven_per_rate) }}&euro;</h2>
                     </div>
                     <div class="div2-left">
-                        <h2>@lang('lang.Sales_Tax') 19% (@lang('lang.from') &euro;0.00 @lang('lang.net') )</h2>
-                        <h2 class="color">{{ number_format($per_tax ?? 0, 2) }}&euro;</h2>
+                        <h2>@lang('lang.Sales_Tax') 19% (@lang('lang.from') &euro;{{ number_format($nighteen_per_net, 2) }}
+                            @lang('lang.net')
+                            )</h2>
+                        <h2 class="color">{{ abs($nighteen_per_net - $nighteen_per_rate) }}&euro;</h2>
                     </div>
                     <div class="div2-left">
                         <h2>@lang('lang.Delivery_Charges')</h2>
