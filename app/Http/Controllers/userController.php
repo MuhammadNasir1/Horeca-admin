@@ -118,7 +118,7 @@ class userController extends Controller
                     $exist_customer->role = $user_role;
                     $exist_customer->verification = "approved";
                     $exist_customer->update();
-                    return response()->json(['success' => true, 'message' => 'Customer reactivated successfully']);
+                    return response()->json(['success' => true, 'message' => 'Customer reactivated successfully'], 200);
                 } else {
                     // Email exists but customer is already active
                     return response()->json(['success' => false, 'message' => 'Email  already Taken'], 422);
