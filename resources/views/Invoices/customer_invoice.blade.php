@@ -7,7 +7,7 @@
     <title>Horeca</title>
     <script>
         window.onload = function() {
-            // window.print();
+            window.print();
         };
     </script>
     <style>
@@ -390,7 +390,9 @@
                                         {{ $products->where('id', $orderItem->product_id)->first()->brand }}</td>
                                     <td class="color">{{ $orderItem['product_quantity'] }}</td>
 
-                                    <td class="color">{{ $orderItem['product_rate'] }}&euro;</td>
+                                    <td class="color">
+                                        {{ floor($orderItem['product_rate']) == $orderItem['product_rate'] ? number_format($orderItem['product_rate'], 0) : number_format($orderItem['product_rate'], 2) }}&euro;
+                                    </td>
 
                                     <td class="color column3">{{ $orderItem['product_tax'] }}%</td>
                                     <td class="color column4"><strong>
@@ -406,7 +408,7 @@
                                                 @endphp
                                                 {{ number_format($total, 2) }}&euro;
                                             @else
-                                                {{ $orderItem['product_total'] }}&euro;
+                                                {{ floor($orderItem['product_total']) == $orderItem['product_total'] ? number_format($orderItem['product_total'], 0) : number_format($orderItem['product_total'], 2) }}&euro;
                                                 @php
 
                                                     $product_total = $orderItem['product_total'];
@@ -457,19 +459,20 @@
                 <div class="div2-2">
                     <div class="div2-left">
                         <h2>@lang('lang.Sub_Total')</h2>
-                        <h2 class="color">{{ $order->sub_total }}&euro;</h2>
+                        <h2 class="color">{{ number_format($order->sub_total, 2) }}&euro;</h2>
                     </div>
                     <div class="div2-left">
                         <h2>@lang('lang.Sales_Tax') 7% (@lang('lang.from') &euro;{{ number_format($seven_per_net, 2) }}
                             @lang('lang.net') )
                         </h2>
-                        <h2 class="color">{{ abs($seven_per_net - $seven_per_rate) }}&euro;</h2>
+                        <h2 class="color">{{ number_format(abs($seven_per_net - $seven_per_rate), 2) }}&euro;</h2>
                     </div>
                     <div class="div2-left">
                         <h2>@lang('lang.Sales_Tax') 19% (@lang('lang.from') &euro;{{ number_format($nighteen_per_net, 2) }}
                             @lang('lang.net')
                             )</h2>
-                        <h2 class="color">{{ abs($nighteen_per_net - $nighteen_per_rate) }}&euro;</h2>
+                        <h2 class="color">{{ number_format(abs($nighteen_per_net - $nighteen_per_rate), 2) }}&euro;
+                        </h2>
                     </div>
                     <div class="div2-left">
                         <h2>@lang('lang.Delivery_Charges')</h2>
@@ -482,7 +485,7 @@
                     <div class="table-footer">
                         <div class="footer-content">
                             <h3>@lang('lang.Grand_total') </h3>
-                            <h3>{{ $order->grand_total }}&euro;</h3>
+                            <h3>{{ number_format($order->grand_total, 2) }}&euro;</h3>
                         </div>
                     </div>
                 </div>
