@@ -339,8 +339,7 @@
                             <label class="text-[14px] font-normal" for="unitPieces">@lang('lang.Unit_Pieces')</label>
                             <input type="number"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="unit_pieces" id="unitPieces" placeholder=" @lang('lang.Pieces_Here')" required
-                                >
+                                name="unit_pieces" id="unitPieces" placeholder=" @lang('lang.Pieces_Here')" required>
 
                         </div>
 

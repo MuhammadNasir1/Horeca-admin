@@ -37,7 +37,7 @@ class productController extends Controller
                 'brand' => 'required',
                 'purchase_price' => 'required',
                 'unit_price' => 'required',
-                'unit_Pieces' => 'required',
+                'unit_pieces' => 'required',
                 'package_quantity' => 'nullable',
             ]);
 
@@ -60,7 +60,7 @@ class productController extends Controller
                 'brand' => $validateData['brand'],
                 'purchase_price' => str_replace(',', '.', $validateData['purchase_price']),
                 'unit_price' => str_replace(',', '.', $validateData['unit_price']),
-                'unit_Pieces' => $validateData['unit_Pieces'],
+                'unit_pieces' => $validateData['unit_pieces'],
                 'package_quantity' => $validateData['package_quantity'],
 
             ]);
