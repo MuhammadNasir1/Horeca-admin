@@ -573,22 +573,22 @@
                     $('#addBtn').attr('disabled', true);
                 },
                 success: function(response) {
-                    window.location.href = '../customers';
-                    // if (response.success == true) {
+                    if (response.success == true) {
 
+                        window.location.href = '../customers';
 
-                    // } else {
+                    } else {
 
-                    //     Swal.fire(
-                    //         'Warning!',
-                    //         response.message,
-                    //         'warning'
-                    //     );
+                        Swal.fire(
+                            'Warning!',
+                            response.message,
+                            'warning'
+                        );
 
-                    //     $('#text').removeClass('hidden');
-                    //     $('#spinner').addClass('hidden');
-                    //     $('#addBtn').attr('disabled', false);
-                    // }
+                        $('#text').removeClass('hidden');
+                        $('#spinner').addClass('hidden');
+                        $('#addBtn').attr('disabled', false);
+                    }
 
                 },
                 error: function(jqXHR) {
