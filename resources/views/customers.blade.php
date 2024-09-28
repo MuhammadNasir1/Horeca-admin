@@ -573,28 +573,29 @@
                     $('#addBtn').attr('disabled', true);
                 },
                 success: function(response) {
-                    if (response.success == true) {
+                    console.log(response);
 
-                        window.location.href = '../customers';
+                    window.location.href = '../customers';
+                    // if (response.success == true) {
 
-                    } else {
 
-                        Swal.fire(
-                            'Warning!',
-                            response.message,
-                            'warning'
-                        );
+                    // } else {
 
-                        $('#text').removeClass('hidden');
-                        $('#spinner').addClass('hidden');
-                        $('#addBtn').attr('disabled', false);
-                    }
+                    //     Swal.fire(
+                    //         'Warning!',
+                    //         response.message,
+                    //         'warning'
+                    //     );
+
+                    //     $('#text').removeClass('hidden');
+                    //     $('#spinner').addClass('hidden');
+                    //     $('#addBtn').attr('disabled', false);
+                    // }
 
                 },
                 error: function(jqXHR) {
 
                     let response = JSON.parse(jqXHR.responseText);
-                    console.log("error");
                     Swal.fire(
                         'Warning!',
                         response.message,
