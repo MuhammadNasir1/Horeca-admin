@@ -206,6 +206,13 @@ class userController extends Controller
             $customer->email = $validatedData['email'];
             $customer->address = $validatedData['address'];
             $customer->role = $user_role;
+
+
+            $customer->tax_number = $request['tax_number'];
+            $customer->client_type = $request['client_type'];
+            $customer->postal_code = $request['postal_code'];
+            $customer->city = $request['city'];
+            $customer->note = $request['note'];
             $customer->update();
             return response()->json(['success' => true,  'message' => "Data  Get Successfully", 'customer' => $customer]);
         } catch (\Exception $e) {

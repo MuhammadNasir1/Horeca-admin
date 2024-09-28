@@ -75,7 +75,7 @@ Route::middleware('custom')->group(function () {
     Route::post('/addCustomer', [userController::class,  'addAdminCustomer']);
     Route::get('/delCustomer/{user_id}', [userController::class,  'delCustomer']);
     Route::get('/CustomerUpdateData/{user_id}', [userController::class,  'CustomerUpdateData']);
-    Route::post('/CustomerUpdate/{user_id}', [userController::class,  'CustomerUpdaddUpdatedOrderate']);
+    Route::post('/CustomerUpdate/{user_id}', [userController::class,  'CustomerUpdate']);
     // change user verification
     Route::post('/changeVerStatus/{user_id}', [userController::class,  'changeVerifictionStatus']);
 

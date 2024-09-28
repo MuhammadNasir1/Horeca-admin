@@ -663,7 +663,7 @@
                     dataType: "json",
                     success: function(response) {
                         var customer = response.customer;
-                        console.log(customer);
+                        // console.log(customer);
                         $('#update_id').val(customer.id);
                         $('#fullName').val(customer.name);
                         $('#email').val(customer.email);
