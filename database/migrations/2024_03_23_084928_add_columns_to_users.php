@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('postal_code')->nullable();
             $table->string('city')->nullable();
             $table->text('note')->nullable();
+            $table->string('status')->default('active');
         });
     }
 

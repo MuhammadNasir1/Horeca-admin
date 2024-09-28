@@ -95,20 +95,42 @@ class authController extends Controller
 
     public function register(Request $request)
     {
-
+        // return response()->json($request);
         try {
             $validatedData = $request->validate([
                 'name' => 'required|string',
-                'email' => 'required|email|unique:users,email',
+                'email' => 'required|email',
+                'phone' => 'required',
                 'password' => 'required|string|min:8',
-                // 'role' => 'required|in:teacher,admin,parent',
+                'password' => 'required|string|min:8',
                 'role' => 'required',
             ]);
+            $exist_customer = User::where('email', $validatedData['email'])->first();
+            if ($exist_customer) {
+                if ($exist_customer->status !== "active") {
+                    $exist_customer->status = "active";
+
+                    $exist_customer->name = $validatedData['name'];
+                    $exist_customer->phone = $validatedData['phone_no'];
+                    $exist_customer->address = $validatedData['address'];
+                    $exist_customer->phone = $validatedData['phone'];
+                    $exist_customer->password = hash::make($validatedData['password']);
+
+
+                    $exist_customer->update();
+                    return response()->json(['success' => true, 'message' => 'Customer Add successfully']);
+                } else {
+                    // Email exists but customer is already active
+                    return response()->json(['success' => false, 'message' => 'Email  already Taken'], 422);
+                }
+            }
+
 
             $user = User::create([
                 'name' => $validatedData['name'],
                 'email' => $validatedData['email'],
                 'role' => $validatedData['role'],
+                'phone' => $validatedData['phone'],
                 'password' => Hash::make($validatedData['password']),
             ]);
 

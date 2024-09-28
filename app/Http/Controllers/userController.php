@@ -31,7 +31,7 @@ class userController extends Controller
     // dashboard  Users Couny
     public function customers()
     {
-        $customers =  User::where('role', 'customer')->orWhere('role',  'distributor')->get();
+        $customers =  User::wherenot('role', 'admin')->where('status', 'active')->get();
         return view('customers', ['customers'  => $customers]);
     }
 
@@ -40,11 +40,34 @@ class userController extends Controller
         try {
             $validateData = $request->validate([
                 'name' => 'required',
-                'email' => 'required|email|unique:users,email',
+                'email' => 'required|email',
                 'phone_no' => 'required',
                 'address' => 'required',
                 'user_id' => 'required'
             ]);
+
+            $exist_customer = User::where('email', $validateData['email'])->first();
+
+            if ($exist_customer) {
+                // Check if the customer is inactive before updating status
+                if ($exist_customer->status !== "active") {
+                    $exist_customer->status = "active";
+
+
+                    $exist_customer->name = $validateData['name'] !== $exist_customer->name ? $validateData['name'] : $exist_customer->name;
+                    $exist_customer->phone = $validateData['phone_no'] !== $exist_customer->phone ? $validateData['phone_no'] : $exist_customer->phone;
+                    $exist_customer->address = $validateData['address'] !== $exist_customer->address ? $validateData['address'] : $exist_customer->address;
+
+                    $user_role = $request->has('role') ? $request->input('role') : 'customer';
+                    $exist_customer->role = $user_role;
+                    $exist_customer->update();
+                    return response()->json(['success' => true, 'message' => 'Customer reactivated successfully']);
+                } else {
+                    // Email exists but customer is already active
+                    return response()->json(['success' => false, 'message' => 'Email  already Taken'], 422);
+                }
+            }
+
             if ($request->has('role')) {
                 $user_role = $request->role;
             } else {
@@ -70,10 +93,39 @@ class userController extends Controller
         try {
             $validateData = $request->validate([
                 'name' => 'required',
-                'email' => 'required|email|unique:users,email',
+                'email' => 'required|email',
                 'phone_no' => 'required',
                 'address' => 'required',
             ]);
+
+            $exist_customer = User::where('email', $validateData['email'])->first();
+
+            if ($exist_customer) {
+                // Check if the customer is inactive before updating status
+                if ($exist_customer->status !== "active") {
+                    $exist_customer->status = "active";
+
+                    $exist_customer->name = $validateData['name'] !== $exist_customer->name ? $validateData['name'] : $exist_customer->name;
+                    $exist_customer->phone = $validateData['phone_no'] !== $exist_customer->phone ? $validateData['phone_no'] : $exist_customer->phone;
+                    $exist_customer->address = $validateData['address'] !== $exist_customer->address ? $validateData['address'] : $exist_customer->address;
+                    $exist_customer->tax_number = $request['tax_number'] !== $exist_customer->tax_number ? $request['tax_number'] : $exist_customer->tax_number;
+                    $exist_customer->client_type = $request['client_type'] !== $exist_customer->client_type ? $request['client_type'] : $exist_customer->client_type;
+                    $exist_customer->postal_code = $request['postal_code'] !== $exist_customer->postal_code ? $request['postal_code'] : $exist_customer->postal_code;
+                    $exist_customer->city = $request['city'] !== $exist_customer->city ? $request['city'] : $exist_customer->city;
+                    $exist_customer->note = $request['note'] !== $exist_customer->note ? $request['note'] : $exist_customer->note;
+
+                    $user_role = $request->has('role') ? $request->input('role') : 'customer';
+                    $exist_customer->role = $user_role;
+                    $exist_customer->verification = "approved";
+                    $exist_customer->update();
+                    return response()->json(['success' => true, 'message' => 'Customer reactivated successfully']);
+                } else {
+                    // Email exists but customer is already active
+                    return response()->json(['success' => false, 'message' => 'Email  already Taken'], 422);
+                }
+            }
+
+
             if ($request->has('role')) {
                 $user_role = $request['role'];
             } else {
@@ -108,7 +160,11 @@ class userController extends Controller
     public function delCustomer($user_id)
     {
         $user = User::find($user_id);
-        $user->delete();
+
+        // $user->delete();
+        $user->status = "deleted";
+        $user->verification = "pending";
+        $user->update();
         return redirect('customers');
     }
     public function CustomerUpdateData($user_id)
