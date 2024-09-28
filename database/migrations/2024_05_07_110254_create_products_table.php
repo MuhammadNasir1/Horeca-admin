@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('brand');
             $table->float('purchase_price');
             $table->float('unit_price');
-            $table->integer('unit_Pieces');
+            $table->integer('unit_pieces');
             $table->integer('package_quantity')->nullable();
             $table->timestamps();
         });

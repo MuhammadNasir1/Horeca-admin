@@ -339,7 +339,7 @@
                             <label class="text-[14px] font-normal" for="unitPieces">@lang('lang.Unit_Pieces')</label>
                             <input type="number"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="Unit_Pieces" id="unitPieces" placeholder=" @lang('lang.Pieces_Here')" required
+                                name="unit_pieces" id="unitPieces" placeholder=" @lang('lang.Pieces_Here')" required
                                 >
 
                         </div>
@@ -836,7 +836,7 @@
                         $('#quantityAlert').val(data.quantity_alert);
                         $('#unitQuantity').val(data.unit_quantity);
                         $('#product_unit').val(data.product_unit);
-                        $('#unitPieces').val(data.Unit_Pieces);
+                        $('#unitPieces').val(data.unit_pieces);
                         $('#UnitPrice').val(data.unit_price);
                         $('#packageQuantity').val(data.package_quantity);
                         $('#quantity').val(data.quantity);

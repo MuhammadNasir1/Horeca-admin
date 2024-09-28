@@ -60,7 +60,7 @@ class productController extends Controller
                 'brand' => $validateData['brand'],
                 'purchase_price' => str_replace(',', '.', $validateData['purchase_price']),
                 'unit_price' => str_replace(',', '.', $validateData['unit_price']),
-                'unit_Pieces' => $validateData['Unit_Pieces'],
+                'unit_Pieces' => $validateData['unit_Pieces'],
                 'package_quantity' => $validateData['package_quantity'],
 
             ]);
