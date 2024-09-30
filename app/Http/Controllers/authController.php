@@ -179,7 +179,10 @@ class authController extends Controller
                 $role = $user->role;
                 $name = $user->name;
             } else {
-                return response()->json(['error' => 'User not found or not approved'], 404);
+                return response()->json([
+                    'message' =>  'Invalid credentials',
+                    'success' => false,
+                ], 422);
             }
             if ($user && Hash::check($request->password, $user->password)) {
 
