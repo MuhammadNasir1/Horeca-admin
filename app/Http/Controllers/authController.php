@@ -118,7 +118,7 @@ class authController extends Controller
 
 
                     $exist_customer->update();
-                    return response()->json(['success' => true, 'message' => 'Customer Add successfully', 'user' => $exist_customer], 200);
+                    return response()->json(['success' => true, 'message' => 'Register successful', 'user' => $exist_customer], 200);
                 } else {
                     // Email exists but customer is already active
                     return response()->json(['success' => false, 'message' => 'Email  already Taken'], 422);
@@ -148,7 +148,7 @@ class authController extends Controller
                 'message' => 'Register successful',
                 'user' => $user,
 
-            ], 201);
+            ], 200);
         } catch (ValidationException $e) {
             return response()->json([
                 'success' => false,
