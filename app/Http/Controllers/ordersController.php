@@ -86,7 +86,7 @@ class ordersController extends Controller
             return redirect('invoice/' . $orders->id);
             // return response()->json(['success' => true, 'message' => 'Order add successfully'], 200);
         } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 422);
         }
     }
     public function  addUpdatedOrder(Request $request, $order_id)
@@ -161,7 +161,7 @@ class ordersController extends Controller
             return redirect('invoice/' . $order->id);
             // return response()->json(['success' => true, 'message' => 'Order add successfully'], 200);
         } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 422);
         }
     }
 
@@ -397,7 +397,7 @@ class ordersController extends Controller
             }
             return response()->json(['success' => true, 'message' => "Order get successfull", 'orders' => $ordersWithItems], 200);
         } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 422);
         }
     }
 
@@ -486,7 +486,7 @@ class ordersController extends Controller
 
             return response()->json(['success' => true, 'message' => "Order get successfull", 'orders' => $ordersWithItems], 200);
         } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 422);
         }
     }
 
@@ -498,7 +498,7 @@ class ordersController extends Controller
             $order =   orders::find($order_id);
             return response()->json(['success' => true, 'message' => "Order get successfull", 'status' => $order], 200);
         } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 422);
         }
     }
     public function updateOrderStatus(Request $request, $order_id)
@@ -513,7 +513,7 @@ class ordersController extends Controller
 
             return response()->json(['success' => true, 'message' => "Order Status successfull Update"], 200);
         } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 422);
         }
     }
 }
