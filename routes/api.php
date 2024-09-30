@@ -60,8 +60,3 @@ Route::get('getCustomer', [userController::class, 'getCustomer']);
 //  app graph data
 Route::get('getGraphData', [userController::class, 'getGraphData']);
 Route::post('/resetPassword', [userController::class, 'sendmail']);
-
-
-Route::get('/test-products', function () {
-    return Product::where('status', 'active')->get();
-});

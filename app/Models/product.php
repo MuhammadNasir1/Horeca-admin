@@ -42,7 +42,7 @@ class product extends Model
         'unit_quantity' => 'integer',
         'purchase_price' => 'double',
         'unit_price' => 'double',
-        'unit_pieces	' => 'integer',
-        'package_quantity	' => 'integer',
+        'unit_pieces' => 'integer',
+        'package_quantity' => 'integer',
     ];
 }
