@@ -84,6 +84,7 @@ class productController extends Controller
         $categories = category::where('status', "active")->get();
         $Subcategories =  product::select('sub_category')->distinct()->get();
         $brands = Brands::all();
+
         return view('product',  ['products' => $products, 'categories' => $categories, 'Subcategories' => $Subcategories, "brands" => $brands]);
     }
 
@@ -528,9 +529,10 @@ class productController extends Controller
                 //     $product->image = $baseUrl . $product->image;
                 // }
 
-                $product->rate = number_format($product->rate, 2, '.', '');
-                $product->rate = number_format($product->rate, 2, '.', '');
-                $product->rate = number_format($product->rate, 2, '.', '');
+                $product->rate = number_format((float)$product->rate, 2, '.', '');
+                // $product->rate = number_format((float)$product->rate, 2, '.', '');
+                $product->unit_price = number_format((float)$product->unit_price, 2, '.', '');
+                $product->purchase_price = number_format((float)$product->purchase_price, 2, '.', '');
                 if ($product->image !== null) {
                     // Check if $product->image starts with "storage/"
                     if (
