@@ -180,8 +180,8 @@ class authController extends Controller
                 $name = $user->name;
             } else {
                 return response()->json([
-                    'message' =>  'Invalid credentials',
                     'success' => false,
+                    'message' =>  'Invalid credentials',
                 ], 422);
             }
             if ($user && Hash::check($request->password, $user->password)) {
