@@ -640,7 +640,7 @@
 
 
 
-<button data-modal-target="ErrorPreview" data-modal-toggle="ErrorPreview" class="">assd</button>
+<button data-modal-target="ErrorPreview" data-modal-toggle="ErrorPreview" class="hidden">assd</button>
 <div id="ErrorPreview" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0  flex left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
     <div class="fixed inset-0 transition-opacity">
