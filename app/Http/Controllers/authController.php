@@ -159,7 +159,7 @@ class authController extends Controller
             return response()->json([
                 'success' => false,
                 'error' => $e->getMessage(),
-            ], 500);
+            ], 422);
         }
     }
 
