@@ -527,6 +527,10 @@ class productController extends Controller
                 // if ($product->image !== null) {
                 //     $product->image = $baseUrl . $product->image;
                 // }
+
+                $product->rate = number_format($product->rate, 2, '.', '');
+                $product->rate = number_format($product->rate, 2, '.', '');
+                $product->rate = number_format($product->rate, 2, '.', '');
                 if ($product->image !== null) {
                     // Check if $product->image starts with "storage/"
                     if (

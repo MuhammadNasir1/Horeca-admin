@@ -76,15 +76,15 @@ class authController extends Controller
             }
 
             $userdata = [
-                [
-                    'id' => $user->id,
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'phone' => $user->phone,
-                    'role' => $user->role,
-                    'address' => $user->address,
-                    'user_image' => $user->user_image,
-                ]
+
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'phone' => $user->phone,
+                'role' => $user->role,
+                'address' => $user->address,
+                'user_image' => $user->user_image,
+
             ];
 
             return response()->json(['success' => true, 'message' => 'Data retrieved successfully!', 'userdata' => $userdata], 200);

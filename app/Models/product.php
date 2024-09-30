@@ -35,13 +35,13 @@ class product extends Model
 
 
     protected $casts = [
-        'rate' => 'float',
+        'rate' => 'double',
         'tax' => 'integer',
         'quantity' => 'integer',
         'quantity_alert' => 'integer',
         'unit_quantity' => 'integer',
-        'purchase_price' => 'float',
-        'unit_price' => 'float',
+        'purchase_price' => 'double',
+        'unit_price' => 'double',
         'unit_pieces' => 'integer',
         'package_quantity' => 'integer',
     ];
