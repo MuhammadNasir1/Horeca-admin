@@ -101,7 +101,7 @@ class productController extends Controller
             $products = product::all();
 
             $categories = category::where('status', "active")->get();
-            return response()->json(['success'  => true, 'message' => "produnct get successfully", 'products' => $products,  'categories' => $categories],  200);
+            return response()->json(['success'  => true, 'message' => "product get successfully", 'products' => $products,  'categories' => $categories],  200);
         } catch (\Exception $e) {
             return response()->json(['success'  => false, 'message' => $e->getMessage()],  500);
         }

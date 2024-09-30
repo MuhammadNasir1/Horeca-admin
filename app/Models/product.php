@@ -9,7 +9,7 @@ class product extends Model
 {
     use HasFactory;
 
-    protected $table = "product";
+    protected $table = "products";
     protected $timeStamp   = true;
     protected $fillable = [
         'name',
@@ -31,5 +31,18 @@ class product extends Model
         'unit_price',
         'unit_pieces',
         'package_quantity',
+    ];
+
+
+    protected $casts = [
+        'rate' => 'double',
+        'tax' => 'integer',
+        'quantity' => 'integer',
+        'quantity_alert' => 'integer',
+        'unit_quantity' => 'integer',
+        'purchase_price' => 'double',
+        'unit_price' => 'double',
+        'unit_pieces	' => 'integer',
+        'package_quantity	' => 'integer',
     ];
 }
