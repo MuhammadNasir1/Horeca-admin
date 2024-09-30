@@ -34,15 +34,15 @@ class product extends Model
     ];
 
 
-    protected $casts = [
-        // 'rate' => 'float',
-        'tax' => 'integer',
-        'quantity' => 'integer',
-        'quantity_alert' => 'integer',
-        'unit_quantity' => 'integer',
-        // 'purchase_price' => 'float',
-        // 'unit_price' => 'float',
-        'unit_pieces' => 'integer',
-        'package_quantity' => 'integer',
-    ];
+    // protected $casts = [
+    //     // 'rate' => 'float',
+    //     'tax' => 'integer',
+    //     'quantity' => 'integer',
+    //     'quantity_alert' => 'integer',
+    //     'unit_quantity' => 'integer',
+    //     // 'purchase_price' => 'float',
+    //     // 'unit_price' => 'float',
+    //     'unit_pieces' => 'integer',
+    //     'package_quantity' => 'integer',
+    // ];
 }
