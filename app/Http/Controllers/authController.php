@@ -28,7 +28,7 @@ class authController extends Controller
                 'name' => 'nullable',
                 'phone' => 'nullable',
                 'address' => 'nullable',
-                'upload_image' => 'required',
+                'user_image' => 'nullable',
                 // 'upload_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             ]);
 
@@ -36,11 +36,16 @@ class authController extends Controller
             $user->phone = $validatedData['phone'];
             $user->address = $validatedData['address'];
 
-            if ($request->hasFile('upload_image')) {
-                $image = $request->file('upload_image');
-                $imageName = time() . '.' . $image->getClientOriginalExtension();
-                $image->storeAs('public/user_images', $imageName); // Adjust storage path as needed
-                $user->user_image = 'storage/user_images/' . $imageName;
+            if ($request->hasFile('user_image')) {
+                $image = $request->file('user_image');
+
+                try {
+                    $imageName = time() . '.' . $image->getClientOriginalExtension();
+                    $image->storeAs('public/user_images', $imageName);
+                    $user->user_image = 'storage/user_images/' . $imageName;
+                } catch (\Exception $e) {
+                    return response()->json(['success' => false, 'message' => 'Failed to upload image. ' . $e->getMessage()], 500);
+                }
             }
             if ($request->has('old_password')) {
                 $oldPassword = $request['old_password'];
@@ -58,7 +63,7 @@ class authController extends Controller
                     return response()->json(['success' => false, 'message' => 'Old password not matched'], 401);
                 }
             }
-            $user->save();
+            $user->update();
 
 
             return response()->json(['success' => true, 'message' => 'Profile Updated!', 'updated_data' => $user], 200);
