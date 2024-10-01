@@ -28,7 +28,7 @@ class authController extends Controller
                 'name' => 'nullable',
                 'phone' => 'nullable',
                 'address' => 'nullable',
-                'upload_image' => 'nullable',
+                'upload_image' => 'required',
                 // 'upload_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             ]);
 
