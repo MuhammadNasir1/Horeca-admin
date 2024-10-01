@@ -267,7 +267,7 @@ class productController extends Controller
                 'code' => 'required',
                 'sub_category' => 'required',
                 'purchase_price' => 'required|numeric',
-                'rate' => 'required|numeric',
+                'rate' => 'required|numeric|min:0.01',
                 'tax' => 'nullable|numeric',
                 'quantity' => 'required|integer',
                 'quantity_alert' => 'nullable|integer',
