@@ -223,6 +223,7 @@ class productController extends Controller
             'excel_file' => 'required|mimes:xlsx,xls',
         ]);
 
+
         // Get the uploaded file
         $file = $request->file('excel_file');
 
@@ -267,7 +268,7 @@ class productController extends Controller
                 'code' => 'required',
                 'sub_category' => 'required',
                 'purchase_price' => 'required|numeric',
-                'rate' => 'required|numeric|min:0.01',
+                'rate' => 'required|numeric',
                 'tax' => 'nullable|numeric',
                 'quantity' => 'required|integer',
                 'quantity_alert' => 'nullable|integer',
@@ -277,7 +278,7 @@ class productController extends Controller
                 'status' => 'required',
                 'description' => 'nullable|string',
                 'unit_price' => 'required|numeric',
-                'unit_pieces' => 'nullable|integer',
+                'unit_pieces' => 'required|integer',
                 'package_quantity' => 'nullable|integer',
             ]);
 
@@ -324,7 +325,7 @@ class productController extends Controller
                     'status' => $row[14],
                     'description' => $row[15],
                     'unit_price' => str_replace(',', '.', $row[16]),
-                    'unit_Pieces' => $row[17],
+                    'unit_pieces' => $row[17],
                     'package_quantity' => $row[18],
                 ]);
 

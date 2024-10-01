@@ -716,12 +716,22 @@
                     $('#EaddBtn').attr('disabled', false);
 
                 }
+
             },
             error: function(xhr) {
-                alert('Error occurred during file upload.');
+                // alert('Error occurred during file upload.');
+                console.log(xhr);
+
                 $('#Etext').removeClass('hidden');
                 $('#Espinner').addClass('hidden');
                 $('#EaddBtn').attr('disabled', false);
+                let response = JSON.parse(xhr.responseText);
+
+                Swal.fire(
+                    'Warning!',
+                    response.message,
+                    'warning'
+                )
             }
         });
     });
