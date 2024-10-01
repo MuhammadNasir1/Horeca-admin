@@ -266,7 +266,7 @@ class authController extends Controller
                 'name' => 'nullable',
                 'phone' => 'nullable',
                 'address' => 'nullable',
-                'upload_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+                'user_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             ]);
 
             $user = User::where('id', $validatedData['user_id'])->first();
@@ -276,8 +276,8 @@ class authController extends Controller
 
 
 
-            if ($request->hasFile('upload_image')) {
-                $image = $request->file('upload_image');
+            if ($request->hasFile('user_image')) {
+                $image = $request->file('user_image');
                 $imageName = time() . '.' . $image->getClientOriginalExtension();
                 $image->storeAs('public/user_images', $imageName); // Adjust storage path as needed
                 $user->user_image = 'storage/user_images/' . $imageName;
