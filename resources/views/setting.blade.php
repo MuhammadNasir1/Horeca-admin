@@ -18,7 +18,7 @@
                             src=" {{ isset($user->user_image) ? asset($user->user_image) : 'images/owlicon.svg' }}"
                             alt="user">
                         <input class="absolute top-0 opacity-0     h-[210px] w-[200px] z-50 cursor-pointer "
-                            type="file" name="upload_image" id="user_image">
+                            type="file" name="user_image" id="user_image">
                         <div class="absolute bottom-[6px] right-5  z-10">
                             <button type="button">
                                 <svg width="42" height="42" viewBox="0 0 36 36" fill="none"
