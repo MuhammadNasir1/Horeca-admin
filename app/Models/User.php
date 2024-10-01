@@ -32,7 +32,6 @@ class User extends Authenticatable
         'postal_code',
         'city',
         'note',
-        'upload_image',
     ];
 
     /**

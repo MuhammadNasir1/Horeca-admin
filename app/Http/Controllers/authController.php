@@ -54,7 +54,7 @@ class authController extends Controller
                 if (Hash::check($oldPassword, $userOldPass)) {
                     if ($request['new_password'] == $request['confirm_password']) {
                         $user->password = Hash::make($request['new_password']);
-                        $user->save();
+                        $user->update();
                     } else {
                         return response()->json(['success' => false, 'message' => 'New password and confirm password do not match'], 401);
                     }
