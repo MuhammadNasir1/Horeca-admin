@@ -104,6 +104,6 @@
                 total += value;
             }
         });
-        $('#total-sale').text(total);
+        $('#total-sale').text(total.toFixed(2));
     });
 </script>
