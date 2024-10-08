@@ -245,7 +245,7 @@
                     existingRow.find('.quantity').text(updatedQuantity);
                     existingRow.find('#quantityinput').val(updatedQuantity);
                     existingRow.find('#totalinput').html() + total;
-                    existingRow.find('#totalWeightInput').val(totalWeight);
+                    // existingRow.find('#totalWeightInput').val(totalWeight);
 
                     existingRow.find('#totalWeightInput').val(currentWeight + totalWeight);
                     existingRow.find('#totalWeightColumn').html(currentWeight + totalWeight + "Kg");
@@ -294,6 +294,7 @@
                     <input readonly id="quantityinput" type="hidden" value="${quantity}" name="product_quantity[]">
                     <input readonly id="totalinput" type="hidden" value="${total.toFixed(2)}" name="product_total[]">
                     <input readonly type="hidden" value="${unitStatus}" name="unit_status[]">
+                    <input readonly type="hidden" value="${totalWeight}" id="totalWeightInput" >
                 ${code}</td>
             <td class="border-2 border-primary unitStatus hidden">${unitStatus}</td>
             <td class="border-2 border-primary productName">${product}</td>

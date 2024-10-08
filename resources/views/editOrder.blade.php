@@ -175,7 +175,8 @@
                                             value="{{ $orderItem->product_total }}" name="product_total[]">
                                         <input type="hidden" value="{{ $orderItem->unit_status }}"
                                             name="unit_status[]">
-                                        <input type="hidden" value="{{ $total_weight }}" id="totalWeightInput">
+                                        <input readonly type="hidden" value="{{ $total_weight }}"
+                                            id="totalWeightInput">
 
                                         {{ \App\Models\Product::find($orderItem->product_id)->code }}
                                     </td>
@@ -187,7 +188,9 @@
                                     <td class="border-2 border-primary productName">{{ $productName }}</td>
                                     <td class="border-2 border-primary">{{ $orderItem->product_rate }}</td>
                                     <td class="border-2 border-primary px-5">{{ $orderItem->product_tax }}</td>
-                                    <td class="border-2 border-primary px-5">{{ $total_weight }}Kg</td>
+                                    <td class="border-2 border-primary px-5" id="totalWeightColumn">
+                                        {{ $total_weight }}Kg
+                                    </td>
                                     <td class="border-2 border-primary py-2 quantity">
                                         {{ $orderItem->product_quantity }}</td>
                                     <td class="border-2 border-primary py-2  total">{{ $orderItem->product_total }}
@@ -303,12 +306,13 @@
                     existingRow.find('.quantity').text(updatedQuantity);
                     existingRow.find('#quantityinput').val(updatedQuantity);
                     existingRow.find('#totalinput').html() + total;
-                    existingRow.find('#totalWeightInput').val(totalWeight);
+                    // existingRow.find('#totalWeightInput').val(totalWeight);
 
                     existingRow.find('#totalWeightInput').val(currentWeight + totalWeight);
                     existingRow.find('#totalWeightColumn').html(currentWeight + totalWeight + "Kg");
 
                     ////
+                    console.log('currentWeight', currentWeight + ": " + totalWeight)
 
                     var currentTotal = parseFloat(existingRow.find('.total')
                         .text()); // Get the current total and convert to number
@@ -352,7 +356,7 @@
                     <input readonly id="quantityinput" type="hidden" value="${quantity}" name="product_quantity[]">
                     <input readonly id="totalinput" type="hidden" value="${total.toFixed(2)}" name="product_total[]">
                     <input readonly type="hidden" value="${unitStatus}" name="unit_status[]">
-                    <input readonly type="hidden" value="${totalWeight}" id="totalWeightInput" >
+                     <input readonly type="hidden" value="${totalWeight}" id="totalWeightInput" >
                 ${code}</td>
             <td class="border-2 border-primary unitStatus hidden">${unitStatus}</td>
             <td class="border-2 border-primary productName">${product}</td>
