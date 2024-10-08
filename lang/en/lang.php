@@ -246,4 +246,5 @@ return [
     "Content_Weight" => "Content Weight",
     "Package_Weight" => "Package Weight",
     "Kg" => "(Kg)",
+    "Weight" => "Weight",
 ];

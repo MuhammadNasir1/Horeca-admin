@@ -122,6 +122,7 @@
 
                         </div>
                     </div>
+                    <input type="hidden" id="weight">
 
 
 
@@ -136,6 +137,7 @@
                                 <th class="whitespace-nowrap">@lang('lang.Product_Name')</th>
                                 <th class="whitespace-nowrap">@lang('lang.Unit_Price')</th>
                                 <th class="whitespace-nowrap">@lang('lang.Tax')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Weight')</th>
                                 <th class="whitespace-nowrap">@lang('lang.Quantity')</th>
                                 <th class="whitespace-nowrap">@lang('lang.Total_Price')</th>
                                 <th class="whitespace-nowrap">@lang('lang.Action')</th>
@@ -143,6 +145,19 @@
                         </thead>
                         <tbody class="text-center" id="product_output">
                             @foreach ($orderItems as $orderItem)
+                                @if ($orderItem->unit_status == 'single')
+                                    @php
+                                        $total_weight =
+                                            \App\Models\Product::find($orderItem->product_id)->content_weight *
+                                            $orderItem->product_quantity;
+                                    @endphp
+                                @else
+                                    @php
+                                        $total_weight =
+                                            \App\Models\Product::find($orderItem->product_id)->package_weight *
+                                            $orderItem->product_quantity;
+                                    @endphp
+                                @endif
                                 <tr>
                                     <td class="border-2 border-primary">
                                         <input type="hidden"
@@ -160,6 +175,8 @@
                                             value="{{ $orderItem->product_total }}" name="product_total[]">
                                         <input type="hidden" value="{{ $orderItem->unit_status }}"
                                             name="unit_status[]">
+                                        <input type="hidden" value="{{ $total_weight }}" id="totalWeightInput">
+
                                         {{ \App\Models\Product::find($orderItem->product_id)->code }}
                                     </td>
                                     @php
@@ -169,7 +186,8 @@
                                     <td class=" unitStatus hidden">{{ $orderItem->unit_status }}</td>
                                     <td class="border-2 border-primary productName">{{ $productName }}</td>
                                     <td class="border-2 border-primary">{{ $orderItem->product_rate }}</td>
-                                    <td class="border-2 border-primary px-5">{{ $orderItem->product_tax }}%</td>
+                                    <td class="border-2 border-primary px-5">{{ $orderItem->product_tax }}</td>
+                                    <td class="border-2 border-primary px-5">{{ $total_weight }}Kg</td>
                                     <td class="border-2 border-primary py-2 quantity">
                                         {{ $orderItem->product_quantity }}</td>
                                     <td class="border-2 border-primary py-2  total">{{ $orderItem->product_total }}
@@ -255,9 +273,10 @@
                 let code = $('#productCode').val();
                 let Product_id = $('#Product_id').val();
                 let unitStatus = $('#unitStatus').val()
+                let weight = $('#weight').val()
+                let totalWeight = parseFloat((weight * quantity));
                 let total = (price * quantity) + ((price * quantity) * (tax / 100));
                 console.log('the total is' + total);
-                console.log('html is' + $('#product_output').html());
 
                 if (isNaN(parseInt(quantity)) || isNaN(parseFloat(price))) {
                     // If either quantity or price is not a valid number, do not append the row
@@ -280,10 +299,14 @@
                     // If the product already exists, update the quantity
                     var existingQuantity = parseInt(existingRow.find('.quantity').text());
                     var updatedQuantity = existingQuantity + parseInt(quantity);
+                    let currentWeight = parseFloat(existingRow.find('#totalWeightInput').val());
                     existingRow.find('.quantity').text(updatedQuantity);
                     existingRow.find('#quantityinput').val(updatedQuantity);
                     existingRow.find('#totalinput').html() + total;
+                    existingRow.find('#totalWeightInput').val(totalWeight);
 
+                    existingRow.find('#totalWeightInput').val(currentWeight + totalWeight);
+                    existingRow.find('#totalWeightColumn').html(currentWeight + totalWeight + "Kg");
 
                     ////
 
@@ -311,12 +334,11 @@
                         $('#grandTotal').html(subTotal.toFixed(2));
                         $('#grand_total').val(subTotal.toFixed(2));
                         $('#sub_total').val(subTotal.toFixed(2));
+                        $('#product').val('Select_Product').trigger('change');
+                        $('#Product_Price').val('');
+                        $('#tax').val('');
+                        $('#order_quantity').val('');
                     });
-
-                    $('#product').val('Select_Product').trigger('change');
-                    $('#Product_Price').val('');
-                    $('#tax').val('');
-                    $('#order_quantity').val('');
 
                 } else {
                     // If the product doesn't exist, add a new row
@@ -330,11 +352,13 @@
                     <input readonly id="quantityinput" type="hidden" value="${quantity}" name="product_quantity[]">
                     <input readonly id="totalinput" type="hidden" value="${total.toFixed(2)}" name="product_total[]">
                     <input readonly type="hidden" value="${unitStatus}" name="unit_status[]">
+                    <input readonly type="hidden" value="${totalWeight}" id="totalWeightInput" >
                 ${code}</td>
-     <td class="border-2 border-primary unitStatus hidden">${unitStatus}</td>
+            <td class="border-2 border-primary unitStatus hidden">${unitStatus}</td>
             <td class="border-2 border-primary productName">${product}</td>
             <td class="border-2 border-primary">${price}</td>
             <td class="border-2 border-primary px-5">${tax}%</td>
+            <td class="border-2 border-primary px-5" id="totalWeightColumn">${totalWeight}Kg</td>
             <td class="border-2 border-primary py-2 quantity">${quantity}</td>
             <td class="border-2 border-primary py-2  total">${total.toFixed(2)}</td>
             <td class="border-2 border-primary">
@@ -449,9 +473,11 @@
                                 if (unitStatus == "single") {
                                     $('#Product_Price').val(product.rate);
                                     $('#priceLable').html("@lang('lang.Product_Price')");
+                                    $('#weight').val(product.content_weight);
                                 } else {
                                     $('#Product_Price').val(product.unit_price);
                                     $('#priceLable').html("@lang('lang.Unit_Price')");
+                                    $('#weight').val(product.package_weight);
                                 }
                             }
                             checkUnitStatus(); // Initial check
