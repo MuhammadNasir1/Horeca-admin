@@ -84,7 +84,7 @@ class productController extends Controller
 
     public function productData()
     {
-        $products = product::all();
+        $products = product::wherenot('status', 'deleted')->get();
         $categories = category::where('status', "active")->get();
         $Subcategories =  product::select('sub_category')->distinct()->get();
         $brands = Brands::all();
@@ -96,14 +96,17 @@ class productController extends Controller
     {
 
         $products = product::find($id);
-        $products->delete();
+        // $products->delete();
+        $products->status = "deleted";
+        $products->update();
         return redirect('../product');
     }
 
     function getProducts()
     {
         try {
-            $products = product::all();
+            $products =  product::wherenot('status', 'deleted')->get();;
+            // $products = product::all();
 
             $categories = category::where('status', "active")->get();
             return response()->json(['success'  => true, 'message' => "product get successfully", 'products' => $products,  'categories' => $categories],  200);
@@ -578,7 +581,8 @@ class productController extends Controller
 
     public function getProductData($id)
     {
-        $products = product::all();
+        // $products = product::all();
+        $products =  product::wherenot('status', 'deleted')->get();;
         $categories = category::where('status', "active")->WhereNot('status', 'deleted')->get();
         $Subcategories =  product::select('sub_category')->distinct()->get();
         $brands = Brands::WhereNot('status', 'deleted')->get();

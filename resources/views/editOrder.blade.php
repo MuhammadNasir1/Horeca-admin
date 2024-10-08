@@ -183,9 +183,24 @@
                                     @php
 
                                         $productName = \App\Models\Product::find($orderItem->product_id)->name;
+
+                                        $product_status = \App\Models\Product::find($orderItem->product_id)->status;
+                                        if ($product_status == 'deleted') {
+                                            $p_message = '(Delete From Stock)';
+                                            $color = 'text-red-600';
+                                        } elseif ($product_status == 'deleted') {
+                                            $p_message = '(Un-Active From Stock)';
+                                            $color = 'text-blue-700';
+                                        } else {
+                                            $p_message = '';
+                                            $color = '';
+                                        }
                                     @endphp
                                     <td class=" unitStatus hidden">{{ $orderItem->unit_status }}</td>
-                                    <td class="border-2 border-primary productName">{{ $productName }}</td>
+                                    <td class="border-2 border-primary productName">{{ $productName }}
+                                        <br><span
+                                            class="text-xs font-bold {{ $color }} ">{{ $p_message }}</span>
+                                    </td>
                                     <td class="border-2 border-primary">{{ $orderItem->product_rate }}</td>
                                     <td class="border-2 border-primary px-5">{{ $orderItem->product_tax }}</td>
                                     <td class="border-2 border-primary px-5" id="totalWeightColumn">
@@ -208,7 +223,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td class="border-2 border-primary py-2" colspan="3">
+                                <td class="border-2 border-primary py-2" colspan="4">
                                     <div class="text-right pr-2 w-[100%]">@lang('lang.Sub_Total')</div>
                                 </td>
                                 <td class="border-2 border-primary py-2 px-2" colspan="2">
@@ -234,7 +249,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="border-2 border-primary py-2 px-2" colspan="3">
+                                <td class="border-2 border-primary py-2 px-2" colspan="4">
                                     <div class="text-right    w-[100%] font-bold text-primary">@lang('lang.Grand_total')</div>
                                 </td>
                                 <td class="border-2 border-primary py-2 px-2" colspan="2">

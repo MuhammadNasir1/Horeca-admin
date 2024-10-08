@@ -148,7 +148,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td class="border-2 border-primary py-2" colspan="3">
+                                <td class="border-2 border-primary py-2" colspan="4">
                                     <div class="text-right pr-2 w-[100%]">@lang('lang.Sub_Total'):</div>
                                 </td>
                                 <td class="border-2 border-primary py-2 px-2" colspan="2">
@@ -173,7 +173,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="border-2 border-primary py-2 px-2" colspan="3">
+                                <td class="border-2 border-primary py-2 px-2" colspan="4">
                                     <div class="text-right    w-[100%] font-bold text-primary">@lang('lang.Grand_total')</div>
                                 </td>
                                 <td class="border-2 border-primary py-2 px-2" colspan="2">
