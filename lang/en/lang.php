@@ -243,4 +243,7 @@ return [
 
 
     "Excel_Error_Preview" => "Excel Error Preview",
+    "Content_Weight" => "Content Weight",
+    "Package_Weight" => "Package Weight",
+    "Kg" => "(Kg)",
 ];

@@ -32,6 +32,8 @@ return new class extends Migration
             $table->float('unit_price');
             $table->integer('unit_pieces');
             $table->integer('package_quantity')->nullable();
+            $table->string('content_weight')->nullable();
+            $table->string('package_weight')->nullable();
             $table->timestamps();
         });
     }

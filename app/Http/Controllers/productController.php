@@ -39,6 +39,8 @@ class productController extends Controller
                 'unit_price' => 'required',
                 'unit_pieces' => 'required',
                 'package_quantity' => 'nullable',
+                'content_weight' => 'nullable',
+                'package_weight' => 'nullable',
             ]);
 
 
@@ -62,6 +64,8 @@ class productController extends Controller
                 'unit_price' => str_replace(',', '.', $validateData['unit_price']),
                 'unit_pieces' => $validateData['unit_pieces'],
                 'package_quantity' => $validateData['package_quantity'],
+                'content_weight' => $validateData['content_weight'],
+                'package_weight' => $validateData['package_weight'],
 
             ]);
             if ($request->hasFile('product_image')) {
@@ -327,6 +331,8 @@ class productController extends Controller
                     'unit_price' => str_replace(',', '.', $row[16]),
                     'unit_pieces' => $row[17],
                     'package_quantity' => $row[18],
+                    'content_weight' => $row[19],
+                    'package_weight' => $row[20],
                 ]);
 
                 $checkCategory = Category::where('name', $row[4])->first();

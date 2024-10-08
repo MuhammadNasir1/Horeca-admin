@@ -31,6 +31,8 @@ class product extends Model
         'unit_price',
         'unit_pieces',
         'package_quantity',
+        'content_weight',
+        'package_weight',
     ];
 
 

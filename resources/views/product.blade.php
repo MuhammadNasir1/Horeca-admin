@@ -39,6 +39,7 @@
                             <th class="whitespace-nowrap text-sm">@lang('lang.Price')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Unit')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.quantity')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Content_Weight') <br> @lang('lang.Package_Weight')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Alert')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Status')</th>
                             <th class="flex text-sm  justify-center">@lang('lang.Action')</th>
@@ -60,6 +61,11 @@
                                 <td>{{ number_format($data->rate, 2) }}&euro;</td>
                                 <td>{{ $data->product_unit }}</td>
                                 <td>{{ $data->quantity }}</td>
+                                <td><span
+                                        class="border-b">{{ isset($data->content_weight) ? $data->content_weight . 'Kg' : '' }}</span>
+                                    <br>
+                                    {{ isset($data->package_weight) ? $data->package_weight . 'Kg' : '' }}
+                                </td>
                                 <td><button
                                         class="p-1 rounded-md min-w-10 font-bold text-white {{ $data->quantity_alert < $data->quantity ? 'bg-green-700' : 'bg-red-600' }}">
                                         {{ $data->quantity_alert }}</button></td>
@@ -384,7 +390,20 @@
 
                         <input type="hidden" name="status" value="active">
                     </div>
-
+                        <div class="w-full mt-4">
+                            <label class="text-[13px] font-normal" for="contentWeight">@lang('lang.Content_Weight')@lang('lang.Kg')</label>
+                            <input type="text"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="content_weight" id="contentWeight" placeholder=" @lang('lang.Content_Weight') @lang('lang.Kg')" required value="0"
+                               >
+                        </div>
+                        <div class="w-full mt-4">
+                            <label class="text-[13px] font-normal" for="packageWeight">@lang('lang.Package_Weight')@lang('lang.Kg')</label>
+                            <input type="text"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="package_weight" id="packageWeight" placeholder=" @lang('lang.Package_Weight') @lang('lang.Kg')" required value="0"
+                               >
+                        </div>
                     <div class="mt-4">
                         <div>
                             <label class="text-[14px] font-normal" for="image">@lang('lang.Product_Image')</label>
@@ -393,6 +412,7 @@
                                 name="product_image" id="image">
                         </div>
                     </div>
+
                     <div class="mt-4 col-span-3">
                         <label class="text-[14px] font-normal" for="description">@lang('lang.Product_Description')</label>
                         <textarea name="description" id="description"
@@ -850,6 +870,8 @@
                         $('#packageQuantity').val(data.package_quantity);
                         $('#quantity').val(data.quantity);
                         $('#description').val(data.description);
+                        $('#packageWeight').val(data.package_weight);
+                        $('#contentWeight').val(data.content_weight);
 
 
                         $('#itext').html("@lang('lang.Update')");
