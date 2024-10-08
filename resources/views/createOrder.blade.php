@@ -123,7 +123,7 @@
 
                         </div>
                     </div>
-
+                    <input type="hidden" id="weight">
 
 
 
@@ -137,6 +137,7 @@
                                 <th class="whitespace-nowrap text-sm">@lang('lang.Product_Name')</th>
                                 <th class="whitespace-nowrap text-sm">@lang('lang.Unit_Price')</th>
                                 <th class="whitespace-nowrap text-sm">@lang('lang.Tax')</th>
+                                <th class="whitespace-nowrap text-sm">@lang('lang.Weight')</th>
                                 <th class="whitespace-nowrap text-sm">@lang('lang.Quantity')</th>
                                 <th class="whitespace-nowrap text-sm">@lang('lang.Total_Price')</th>
                                 <th class="whitespace-nowrap text-sm">@lang('lang.Action')</th>
@@ -214,6 +215,8 @@
                 let code = $('#productCode').val();
                 let Product_id = $('#Product_id').val();
                 let unitStatus = $('#unitStatus').val()
+                let weight = $('#weight').val()
+                let totalWeight = parseFloat((weight * quantity));
                 let total = (price * quantity) + ((price * quantity) * (tax / 100));
                 console.log('the total is' + total);
 
@@ -238,10 +241,14 @@
                     // If the product already exists, update the quantity
                     var existingQuantity = parseInt(existingRow.find('.quantity').text());
                     var updatedQuantity = existingQuantity + parseInt(quantity);
+                    let currentWeight = parseFloat(existingRow.find('#totalWeightInput').val());
                     existingRow.find('.quantity').text(updatedQuantity);
                     existingRow.find('#quantityinput').val(updatedQuantity);
                     existingRow.find('#totalinput').html() + total;
+                    existingRow.find('#totalWeightInput').val(totalWeight);
 
+                    existingRow.find('#totalWeightInput').val(currentWeight + totalWeight);
+                    existingRow.find('#totalWeightColumn').html(currentWeight + totalWeight + "Kg");
 
                     ////
 
@@ -287,11 +294,13 @@
                     <input readonly id="quantityinput" type="hidden" value="${quantity}" name="product_quantity[]">
                     <input readonly id="totalinput" type="hidden" value="${total.toFixed(2)}" name="product_total[]">
                     <input readonly type="hidden" value="${unitStatus}" name="unit_status[]">
+                    <input readonly type="text" value="${totalWeight}" id="totalWeightInput" >
                 ${code}</td>
             <td class="border-2 border-primary unitStatus hidden">${unitStatus}</td>
             <td class="border-2 border-primary productName">${product}</td>
             <td class="border-2 border-primary">${price}</td>
             <td class="border-2 border-primary px-5">${tax}%</td>
+            <td class="border-2 border-primary px-5" id="totalWeightColumn">${totalWeight}Kg</td>
             <td class="border-2 border-primary py-2 quantity">${quantity}</td>
             <td class="border-2 border-primary py-2  total">${total.toFixed(2)}</td>
             <td class="border-2 border-primary">
@@ -361,7 +370,8 @@
                         var productName = product.name;
                         var productBrand = product.brand
                         var productId = product.id;
-                        $('#product').append($('<option></option>').attr('value', productName)
+                        $('#product').append($('<option></option>').attr('value',
+                                productName)
                             .attr('productId', productId).html(productName +
                                 ` <span class="ml-4">(${productBrand})</span>`)
                         );
@@ -409,9 +419,11 @@
                                 if (unitStatus == "single") {
                                     $('#Product_Price').val(product.rate);
                                     $('#priceLable').html("@lang('lang.Product_Price')");
+                                    $('#weight').val(product.content_weight);
                                 } else {
                                     $('#Product_Price').val(product.unit_price);
                                     $('#priceLable').html("@lang('lang.Unit_Price')");
+                                    $('#weight').val(product.package_weight);
                                 }
                             }
                             console.log(unitStatus);
@@ -424,6 +436,7 @@
                             $('#Product_id').val(product.id);
                             $('#productCode').val(product.code);
                             $('#tax').val(product.tax);
+
                         });
                     },
                     error: function(jqXHR) {
