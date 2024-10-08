@@ -186,7 +186,7 @@
 
                                         $product_status = \App\Models\Product::find($orderItem->product_id)->status;
                                         if ($product_status == 'deleted') {
-                                            $p_message = '(Delete From Stock)';
+                                            $p_message = __('lang.Delete_From_Stock');
                                             $color = 'text-red-600';
                                         } elseif ($product_status == 'deleted') {
                                             $p_message = '(Un-Active From Stock)';

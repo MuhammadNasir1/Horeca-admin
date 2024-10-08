@@ -369,8 +369,25 @@
                                 $seven_per_rate = 0; // Initialize a total variable
                                 $nighteen_per_net = 0; // Initialize a total variable
                                 $nighteen_per_rate = 0; // Initialize a total variable
+                                $total_weight_sum = 0;
                             @endphp
                             @foreach ($orderItems as $orderItem)
+                                @if ($orderItem->unit_status == 'single')
+                                    @php
+                                        $total_weight =
+                                            \App\Models\Product::find($orderItem->product_id)->content_weight *
+                                            $orderItem->product_quantity;
+                                    @endphp
+                                @else
+                                    @php
+                                        $total_weight =
+                                            \App\Models\Product::find($orderItem->product_id)->package_weight *
+                                            $orderItem->product_quantity;
+                                    @endphp
+                                @endif
+                                @php
+                                    $total_weight_sum += $total_weight; // Accumulate total weight
+                                @endphp
                                 <h1></h1>
                                 <tr class="font-size">
                                     <td class="column1">
@@ -457,6 +474,10 @@
                     </table>
                 </div>
                 <div class="div2-2">
+                    <div class="div2-left">
+                        <h2>@lang('lang.Package_Weight')</h2>
+                        <h2 class="color">{{ $total_weight_sum }}Kg</h2>
+                    </div>
                     <div class="div2-left">
                         <h2>@lang('lang.Sub_Total')</h2>
                         <h2 class="color">{{ number_format($order->sub_total, 2) }}&euro;</h2>

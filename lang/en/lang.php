@@ -247,4 +247,5 @@ return [
     "Package_Weight" => "Package Weight",
     "Kg" => "(Kg)",
     "Weight" => "Weight",
+    "Delete_From_Stock" => "(Delete From Stock)",
 ];

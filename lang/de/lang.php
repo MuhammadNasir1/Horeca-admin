@@ -241,7 +241,13 @@ return [
     "Total_Package_Quantity_Warehouse" => "Lagerbestand Kartons",
     "Total_Unit_Quantity_Warehouse" => "Lagerbestand/Anzahl Packungen",
     "Content_of_Quantity" => "Inhalt pro Packung ",
-
     "Select_Category" => "Kategorie auswählen",
     "Select_Brand" => "Marke auswählen",
+
+    "Excel_Error_Preview" => "Excel-Fehlervorschau",
+    "Content_Weight" => "Inhaltsgewicht",
+    "Package_Weight" => "Paketgewicht",
+    "Kg" => "(Kg)",
+    "Weight" => "Gewicht",
+    "Delete_From_Stock" => "(Aus dem Lager löschen)",
 ];
