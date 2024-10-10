@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('order_items', function (Blueprint $table) {
             $table->id();
-            $table->integer('order_id');
-            $table->integer('product_id');
-            $table->float('product_rate');
-            $table->integer('product_tax');
-            $table->integer('product_quantity');
-            $table->float('product_total')->nullable();
+            $table->string('order_id');
+            $table->string('product_id');
+            $table->string('product_rate');
+            $table->string('product_tax');
+            $table->string('product_quantity');
+            $table->string('product_total')->nullable();
             $table->string('unit_status')->nullable();
             $table->timestamps();
         });

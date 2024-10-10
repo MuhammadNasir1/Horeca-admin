@@ -13,22 +13,22 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->string('user_id');
             $table->date('order_date');
             $table->string('customer_name')->nullable();
-            $table->integer('customer_id')->nullable();
+            $table->string('customer_id')->nullable();
             $table->string('customer_phone')->nullable();
             $table->text('customer_adress')->nullable();
-            $table->float('sub_total');
-            $table->integer('order_vat')->nullable();
-            $table->integer('discount')->nullable();
-            $table->float('grand_total');
+            $table->string('sub_total');
+            $table->string('order_vat')->nullable();
+            $table->string('discount')->nullable();
+            $table->string('grand_total');
             $table->text('order_description')->nullable();
             $table->string('order_tracking')->nullable();
             $table->text('order_note')->nullable();
             $table->string('payment_type')->nullable();
             $table->string('order_status')->nullable();
-            $table->integer('delivery_charges')->nullable();
+            $table->string('delivery_charges')->nullable();
             $table->string('order_from')->nullable();
             $table->string('platform')->nullable();
             $table->timestamps();
