@@ -36,7 +36,7 @@
                             <th class="whitespace-nowrap text-sm">@lang('lang.Brands')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Category/Sub-Category')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Tax')</th>
-                            <th class="whitespace-nowrap text-sm"s>@lang('lang.Price')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Price')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Unit')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.quantity')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Content_Weight') <br> @lang('lang.Package_Weight')</th>

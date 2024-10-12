@@ -156,7 +156,7 @@
                         $('#text').removeClass('hidden');
                         $('#spinner').addClass('hidden');
 
-                        window.location.href = '/setting;
+                        window.location.href = '/setting';
 
                     } else if (response.success == false) {
                         Swal.fire(
