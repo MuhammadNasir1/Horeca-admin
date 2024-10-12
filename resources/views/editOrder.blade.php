@@ -479,7 +479,7 @@
                 }
             });
             // Recalculate grand total when discount or delivery charges change
-            $('#discount, #delivery_charges').on('input', function() {
+            function calculateGrandTotal() {
                 var subTotal = parseFloat($('#subtotal').text());
                 var discount = parseFloat($('#discount').val()) || 0; // default to 0 if input is empty
                 var deliveryCharges = parseFloat($('#delivery_charges').val()) ||
@@ -487,6 +487,9 @@
                 var grandTotal = subTotal - (subTotal * (discount / 100)) + deliveryCharges;
                 $('#grandTotal').text(grandTotal.toFixed(2));
                 $('#grand_total').val(grandTotal.toFixed(2));
+            };
+            $('#discount, #delivery_charges').on('input', function() {
+                calculateGrandTotal();
             });
             // Add click event listener for dynamically generated delete buttons
             $('#product_output').on('click', '.delete-btn', function() {
@@ -502,7 +505,7 @@
 
             });
 
-
+            calculateGrandTotal();
 
             // get product data
             $.ajax({
