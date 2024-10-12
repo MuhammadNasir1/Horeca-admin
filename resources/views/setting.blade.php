@@ -136,50 +136,42 @@
 @include('layouts.footer')
 <script>
     $(document).ready(function() {
+
         $("#settingForm").submit(function(event) {
             event.preventDefault();
-            var formData = $(this).serialize();
-            // Send the AJAX request
+
+            var formData = new FormData(this);
             $.ajax({
                 type: "POST",
-                url: "/updateSettings",
+                url: "updateSettings",
                 data: formData,
                 dataType: "json",
+                contentType: false,
+                processData: false,
                 beforeSend: function() {
                     $('#spinner').removeClass('hidden');
                     $('#text').addClass('hidden');
-                    $('#submitButton').attr('disabled', true);
+                    $('#addBtn').attr('disabled', true);
                 },
                 success: function(response) {
-                    // Handle the success response here
-                    if (response.success == true) {
-                        $('#text').removeClass('hidden');
-                        $('#spinner').addClass('hidden');
+                    window.location.href = '../setting';
 
-                        window.location.href = '/setting';
-
-                    } else if (response.success == false) {
-                        Swal.fire(
-                            'Warning!',
-                            response.message,
-                            'warning'
-                        )
-                    }
                 },
                 error: function(jqXHR) {
-
                     let response = JSON.parse(jqXHR.responseText);
-
+                    console.log("error");
                     Swal.fire(
                         'Warning!',
                         response.message,
                         'warning'
-                    )
+                    );
+
                     $('#text').removeClass('hidden');
                     $('#spinner').addClass('hidden');
-                    $('#submitButton').attr('disabled', false);
+                    $('#addBtn').attr('disabled', false);
                 }
             });
         });
+
     });
 </script>
