@@ -388,9 +388,10 @@
                         </select>
                     </div> --}}
 
-                        <input type="hidden" name="status" value="active">
+                        {{-- <input type="hidden" name="status" value="active"> --}}
                     </div>
-                        <div class="w-full mt-4">
+                    <div class="flex gap-4 col-span-2">
+                                        <div class="w-full mt-4">
                             <label class="text-[13px] font-normal" for="contentWeight">@lang('lang.Content_Weight')@lang('lang.Kg')</label>
                             <input type="text"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
@@ -404,6 +405,16 @@
                                 name="package_weight" id="packageWeight" placeholder=" @lang('lang.Package_Weight') @lang('lang.Kg')" required value="0"
                                >
                         </div>
+                        <div class="mt-4">
+                        <label class="text-[14px] font-normal" for="statusa">@lang('lang.Status')</label>
+                        <select
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="status" id="statusa" required>
+                            <option value="active">@lang('lang.Active')</option>
+                            <option value="un-active">@lang('lang.Not_Active')</option>
+                        </select>
+                    </div>
+                    </div>
                     <div class="mt-4">
                         <div>
                             <label class="text-[14px] font-normal" for="image">@lang('lang.Product_Image')</label>
@@ -850,6 +861,7 @@
                         $('#tags').val(data.tags);
                         $('#brands').val(data.brand).trigger('change');
                         $('#category').val(data.category).trigger('change');
+                        $('#statusa').val(data.status).trigger('change');
 
                         $('#subCategory').val(data.sub_category);
                         $('#purchasePrice').val(data.purchase_price);
