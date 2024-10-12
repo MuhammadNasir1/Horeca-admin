@@ -29,7 +29,7 @@
                             <tr class="pt-4">
                                 <td>{{ $x + 1 }}</td>
                                 <td class="w-[220px]">
-                                    <img class="h-20 w-20 rounded-full"
+                                    <img class="h-20 w-20 rounded-full object-contain"
                                         src="{{ isset($data->image) && $data->image == 'null' ? asset('images/favicon(32X32).png') : asset($data->image) }}"
                                         alt="product Image">
 

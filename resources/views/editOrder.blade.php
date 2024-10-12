@@ -238,14 +238,15 @@
                                         <input type="number"
                                             class="lg:w-[50%] border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                                             name="order_vat" id="discount" min="0"
-                                            value="{{ $order->discount }}">
+                                            value="{{ $order->discount }}" required>
 
                                         <label class="text-[14px] font-normal"
                                             for="delivery_charges">@lang('lang.Delivery_Charges'):</label>
                                         <input type="number"
                                             class="lg:w-[50%] border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                                             name="delivery_charges" id="delivery_charges"
-                                            placeholder="@lang('lang.Delivery_Charges')" value="{{ $order->delivery_charges }}">
+                                            placeholder="@lang('lang.Delivery_Charges')" value="{{ $order->delivery_charges }}"
+                                            required>
 
                                     </div>
                                 </td>

@@ -161,14 +161,14 @@
                                             for="discount">@lang('lang.Discount'):</label>
                                         <input type="number"
                                             class="lg:w-[50%] border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                            name="order_vat" id="discount" value="0" min="0">
+                                            name="order_vat" id="discount" value="0" min="0" required>
 
                                         <label class="text-[14px] font-normal"
                                             for="delivery_charges">@lang('lang.Delivery_Charges'):</label>
                                         <input type="number"
                                             class="lg:w-[50%] border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                                             name="delivery_charges" id="delivery_charges"
-                                            placeholder="@lang('lang.Delivery_Charges')" value="0">
+                                            placeholder="@lang('lang.Delivery_Charges')" value="0" required>
 
                                     </div>
                                 </td>
