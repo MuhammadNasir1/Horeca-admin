@@ -269,6 +269,21 @@
                 });
             });
 
+            function calculatetotalvalue() {
+
+                var subTotal = 0;
+                console.warn("delted");
+                $('#product_output .total').each(function() {
+                    subTotal += parseFloat($(this).text());
+                    $('#subtotal').html(subTotal.toFixed(2));
+                    // console.log("Sub Total is" + subTotal);
+                    $('#grandTotal').html(subTotal.toFixed(2));
+                    $('#grand_total').val(subTotal.toFixed(2));
+                    $('#sub_total').val(subTotal.toFixed(2));
+                    console.warn("the sub totao is" + subTotal);
+                });
+            }
+
 
             var today = new Date().toISOString().split('T')[0];
             $('#order_date').val(today);
@@ -283,7 +298,7 @@
                 let weight = $('#weight').val()
                 let totalWeight = parseFloat((weight * quantity));
                 let total = (price * quantity) + ((price * quantity) * (tax / 100));
-                console.log('the total is' + total);
+                // console.log('the total is' + total);
 
                 if (isNaN(parseInt(quantity)) || isNaN(parseFloat(price))) {
                     // If either quantity or price is not a valid number, do not append the row
@@ -383,19 +398,6 @@
                     $('#Product_Price').val('');
                     $('#tax').val('');
                     $('#order_quantity').val('');
-
-                    function calculatetotalvalue() {
-
-                        var subTotal = 0;
-                        $('#product_output .total').each(function() {
-                            subTotal += parseFloat($(this).text());
-                            $('#subtotal').html(subTotal.toFixed(2));
-                            // console.log("Sub Total is" + subTotal);
-                            $('#grandTotal').html(subTotal.toFixed(2));
-                            $('#grand_total').val(subTotal.toFixed(2));
-                            $('#sub_total').val(subTotal.toFixed(2));
-                        });
-                    }
                     calculatetotalvalue()
                 }
             });
@@ -411,8 +413,14 @@
             });
             // Add click event listener for dynamically generated delete buttons
             $('#product_output').on('click', '.delete-btn', function() {
-                calculatetotalvalue()
                 $(this).closest('tr').remove();
+                if ($('#product_output .total').length === 0) {
+                    console.log('The length is  0')
+                    $('#subtotal').html(0);
+                    $('#grandTotal').html(0);
+                    $('#grand_total').val(0);
+                }
+                calculatetotalvalue()
             });
 
 
@@ -461,7 +469,6 @@
                 var selectedOption = $(this).find(':selected');
                 var productId = selectedOption.attr('productId');
                 var url = '../singleproductData/' + productId;
-                console.log(url);
                 $.ajax({
                     type: "GET",
                     url: url,
