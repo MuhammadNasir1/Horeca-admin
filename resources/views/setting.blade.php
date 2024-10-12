@@ -7,7 +7,8 @@
     </div>
 
     <div id="reloadDiv" class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
-        <form action="../updateSettings" method="post" enctype="multipart/form-data">
+        <form id="settingForm" method="post" enctype="multipart/form-data">
+            {{-- <form action="../updateSettings" method="post" enctype="multipart/form-data"> --}}
             @csrf
             <input type="hidden" name="user_id" value="{{ session('user_det')['user_id'] }}" autocomplete="off">
             <div class="p-8">
@@ -89,7 +90,8 @@
                     </div>
                 </div>
                 <div class="mt-10  flex justify-end">
-                    <button class="bg-secondary  text-white h-12 px-3 rounded-[6px]  shadow-sm font-semibold "
+                    <button
+                        class="bg-secondary  text-white h-12 px-3 rounded-[6px]  shadow-sm font-semibold min-w-[110px]"
                         id="addBtn">
                         <div class=" text-center hidden" id="spinner">
                             <svg aria-hidden="true"
@@ -132,3 +134,52 @@
 </script>
 
 @include('layouts.footer')
+<script>
+    $(document).ready(function() {
+        $("#settingForm").submit(function(event) {
+            event.preventDefault();
+            var formData = $(this).serialize();
+            // Send the AJAX request
+            $.ajax({
+                type: "POST",
+                url: "/updateSettings",
+                data: formData,
+                dataType: "json",
+                beforeSend: function() {
+                    $('#spinner').removeClass('hidden');
+                    $('#text').addClass('hidden');
+                    $('#submitButton').attr('disabled', true);
+                },
+                success: function(response) {
+                    // Handle the success response here
+                    if (response.success == true) {
+                        $('#text').removeClass('hidden');
+                        $('#spinner').addClass('hidden');
+
+                        window.location.href = '/setting;
+
+                    } else if (response.success == false) {
+                        Swal.fire(
+                            'Warning!',
+                            response.message,
+                            'warning'
+                        )
+                    }
+                },
+                error: function(jqXHR) {
+
+                    let response = JSON.parse(jqXHR.responseText);
+
+                    Swal.fire(
+                        'Warning!',
+                        response.message,
+                        'warning'
+                    )
+                    $('#text').removeClass('hidden');
+                    $('#spinner').addClass('hidden');
+                    $('#submitButton').attr('disabled', false);
+                }
+            });
+        });
+    });
+</script>

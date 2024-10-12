@@ -83,8 +83,8 @@ class ordersController extends Controller
                     $getProduct->update();
                 }
             };
-            return redirect('invoice/' . $orders->id);
-            // return response()->json(['success' => true, 'message' => 'Order add successfully'], 200);
+            // return redirect('/' . $orders->id);
+            return response()->json(['success' => true, 'message' => 'Order add successfully', "orderId" => $orders->id], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 422);
         }
