@@ -5,7 +5,7 @@ return [
     'logout' => 'Abmelden',
     'Help' => 'Hilfe',
     'Setting' => 'Einstellungen',
-    'Dashboard' => 'Dashboard',
+    'Dashboard' => 'Armaturenbrett',
     "Action" => "Aktion",
     "Update" => "Aktualisieren",
     "STN" => "STN",

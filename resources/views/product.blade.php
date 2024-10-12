@@ -36,7 +36,7 @@
                             <th class="whitespace-nowrap text-sm">@lang('lang.Brands')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Category/Sub-Category')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Tax')</th>
-                            <th class="whitespace-nowrap text-sm">@lang('lang.Price')</th>
+                            <th class="whitespace-nowrap text-sm"s>@lang('lang.Price')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Unit')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.quantity')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Content_Weight') <br> @lang('lang.Package_Weight')</th>
@@ -51,7 +51,7 @@
                                 <td>{{ $x + 1 }}</td>
                                 <td class="md:w-[220px] w-full">
                                     <img class="h-20 w-20 rounded-full bg-black object-contain"
-                                        src="{{ isset($data->image) ? asset($data->image) : asset('images/favicon(32X32).png') }}"
+                                        src="{{ isset($data->image) ? asset($data->image) : asset('images/circle-logo.png') }}"
                                         alt="product Image">
                                 </td>
                                 <td>{{ $data->name }}</td>
