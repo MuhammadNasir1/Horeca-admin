@@ -359,19 +359,19 @@
 
 
                         <div class="w-full">
+                            <label class="text-[13px] font-normal" for="quantity">@lang('lang.Total_Unit_Quantity_Warehouse')</label>
+                            <input type="number"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="quantity" id="quantity" placeholder=" @lang('lang.Quantity_Here')" required
+                               >
+                        </div>
+                        <div class="w-full">
                             <label class="text-[13px] font-normal" for="packageQuantity">@lang('lang.Total_Package_Quantity_Warehouse')</label>
                             <input type="number"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                                 name="package_quantity" id="packageQuantity" placeholder=" @lang('lang.Quantity_Here')"
                                 required >
 
-                        </div>
-                        <div class="w-full">
-                            <label class="text-[13px] font-normal" for="quantity">@lang('lang.Total_Unit_Quantity_Warehouse')</label>
-                            <input type="number"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="quantity" id="quantity" placeholder=" @lang('lang.Quantity_Here')" required
-                               >
                         </div>
 
                         {{-- <div class="">

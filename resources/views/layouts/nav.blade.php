@@ -17,12 +17,12 @@
     class="fixed  bg-primary text-white top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
     aria-label="Sidebar">
     <div class="flex  justify-center mt-[30px] pr-4 mb-3">
-        <a href="../"> <img class=" w-48" src="{{ asset('images/Horeca-White.svg') }}" alt="Horeca"></a>
+        <a href="../dashboard"> <img class=" w-48" src="{{ asset('images/Horeca-White.svg') }}" alt="Horeca"></a>
     </div>
     <div class="h-full  py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
         <ul class="space-y-2  pl-3 pr-6 font-medium">
             <li class="{{ request()->is('/') ? 'active bg-white text-black rounded-md ' : '' }}">
-                <a href="../"
+                <a href="../dashboard"
                     class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <svg class="{{ request()->is('/*') ? 'text-black' : 'text-white' }}" width="20" height="15"
                         viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">

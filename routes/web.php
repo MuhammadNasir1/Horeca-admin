@@ -24,10 +24,13 @@ Route::get('/error', function () {
 });
 
 
+Route::get('/',  function () {
+    return view('website.home');
+});
 Route::middleware('custom')->group(function () {
     Route::get('/setting', [authController::class, 'settingdata']);
     Route::post('updateSettings', [authController::class, 'updateSet']);
-    Route::get('/', [userController::class, 'Dashboard']);
+    Route::get('/dashboard', [userController::class, 'Dashboard']);
     Route::get('help', function () {
         return view('help');
     });
