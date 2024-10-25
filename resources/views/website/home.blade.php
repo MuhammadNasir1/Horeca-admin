@@ -81,7 +81,7 @@
             <div>
                 <div class="swiper mySwiper mt-4">
                     <div class="swiper-wrapper">
-                        @for ($i = 1; $i < 20; $i++)
+                        {{-- @for ($i = 1; $i < 20; $i++)
                             <div class="swiper-slide">
                                 <div
                                     class=" h-48 bg-[#F2FCE4] rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col items-center justify-center flex-1">
@@ -101,7 +101,7 @@
                                     </div>
                                 </div>
                             </div>
-                        @endfor
+                        @endfor --}}
 
                     </div>
                 </div>
@@ -252,6 +252,50 @@
 @endsection
 @section('js')
     <script>
+        $(document).ready(function() {
+            const defaultLogoUrl = "{{ asset('images/Horeca-green.svg') }}";
+            let baseUrl = 'https://horeca-kaya.com/';
+            $.ajax({
+                type: "GET",
+                url: 'https://horeca-kaya.com/api/getProducts',
+                success: function(response) {
+                    let categories = response.products;
+
+                    // Filter out duplicate categories by name
+                    let uniqueCategories = [];
+                    let categoryNames = new Set();
+
+                    categories.forEach(category => {
+                        if (!categoryNames.has(category.category)) {
+                            uniqueCategories.push(category);
+                            categoryNames.add(category.category);
+                        }
+                    });
+
+                    uniqueCategories.forEach((category, i) => {
+                        let categoryHTML = `
+                 <div class="swiper-slide">
+                     <div class="h-48 bg-[#F2FCE4] rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col items-center justify-center flex-1">
+                         <a href="#" class="w-full flex justify-center">
+                      <img class="rounded-t-lg pt-6 w-[90%] "   src="${category.category_image !== "null" ? baseUrl + category.category_image : defaultLogoUrl}" alt="${category.category}" />
+                         </a>
+                         <div class="p-5 pb-8 text-center w-full">
+                             <a href="#">
+                                 <h5 class="text-lg font-medium tracking-tight text-gray-900 dark:text-white">
+                                     ${category.category}
+                                 </h5>
+                             </a>
+                             <p class="text-sm font-normal text-gray-700 dark:text-gray-400">${category.item_count || '0'} items</p>
+                         </div>
+                     </div>
+                 </div>`;
+                        $('.swiper-wrapper').append(categoryHTML);
+                    });
+
+                }
+
+            });
+        });
         var swiper = new Swiper(".mySwiper", {
             slidesPerView: 2,
             spaceBetween: 25,
