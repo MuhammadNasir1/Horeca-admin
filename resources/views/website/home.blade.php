@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class=" mt-4 lg:mx-6 xl:mx-12   ">
+    <div class=" mt-4 mx-1 lg:mx-6 xl:mx-12   ">
         <div id="header-carousel" class="relative w-full" data-carousel="slide">
             <!-- Carousel wrapper -->
             <div class="relative h-56 overflow-hidden rounded-lg md:h-[34rem]">
@@ -59,7 +59,7 @@
         </div>
     </div>
 
-    <div class="mt-10 mx-16">
+    <div class="mt-10 lg:mx-6 md:mx-4 mx-1 xl:mx-16">
         <div class="category-section">
             <div class="flex gap-6 items-center justify-between ">
                 <h2 class="text-2xl font-semibold">Featured Categories</h2>
@@ -304,17 +304,17 @@
                 <div class="border border-gray rounded-lg shadow-sm p-4">
                     <div class="relative">
                         <a href="tel:12345678">
-                       <img loading="lazy" src="${product.image && product.image !== 'null' ? product.image : defaultLogoUrl}" alt="${product.name}" class="w-full h-40 object-contain" onerror="this.onerror=null; this.src='${defaultLogoUrl}'">
+                       <img loading="lazy" src="${product.image && product.image !== 'null' ? product.image : defaultLogoUrl}" alt="${product.name}" class="w-full md:h-40 h-30 object-contain" onerror="this.onerror=null; this.src='${defaultLogoUrl}'">
                         </a>
                     </div>
                     <div class="mt-4">
-                        <p class="text-sm text-gray-500">${category}</p>
-                        <h2 class="text-md font-semibold">${product.name}</h2>
-                        <p class="text-sm text-gray-500">By <span class="text-primary">${product.brand}</span></p>
+                        <p class="md:text-sm text-xs text-gray-500">${category}</p>
+                        <h2 class="md:text-md text-sm font-semibold">${product.name}</h2>
+                        <p class="text-xs md:text-sm text-gray-500">By <span class="text-primary">${product.brand}</span></p>
                     </div>
                     <div class="mt-4">
                         <a href="tel:${product.contact}">
-                            <button class="bg-[#def9ec] text-primary py-2 px-4 rounded-md w-full font-semibold text-sm shadow-md">
+                            <button class="bg-[#def9ec] text-primary py-2 md:px-4 px-1 rounded-md w-full font-semibold md:text-sm text-xs shadow-md">
                                 <i class="fa fa-shopping-cart p-1"></i> Call For Order
                             </button>
                         </a>
