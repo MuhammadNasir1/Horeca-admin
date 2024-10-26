@@ -1,10 +1,15 @@
 @extends('website.layout')
-
 @section('title')
     Home
 @endsection
 
 @section('content')
+    <style>
+        .highlight {
+            background-color: rgba(0, 128, 0, 0.217);
+            transition: background-color 0.3s ease;
+        }
+    </style>
     <div class=" mt-4 mx-1 lg:mx-6 xl:mx-12   ">
         <div id="header-carousel" class="relative w-full" data-carousel="slide">
             <!-- Carousel wrapper -->
@@ -251,6 +256,43 @@
 @section('js')
     <script>
         $(document).ready(function() {
+            function handleSearch() {
+                $('.search-input').on('keyup', function() {
+                    const searchValue = $(this).val().toLowerCase();
+                    const $products = $('.product');
+
+                    // Remove all highlights if search input is empty
+                    if (!searchValue) {
+                        $products.removeClass('highlight');
+                        $('.match-count').text("Matches: 0");
+                        return; // Exit the function if the input is empty
+                    }
+
+                    // Remove existing highlights
+                    $products.removeClass('highlight');
+
+                    // Find all matching products
+                    const $matchedProducts = $products.filter(function() {
+                        return $(this).text().toLowerCase().includes(searchValue);
+                    });
+
+                    // Highlight all matched products
+                    $matchedProducts.addClass('highlight');
+
+                    // Display the count of matched products
+                    $('#match-count').text($matchedProducts.length);
+
+                    // Scroll to the first matched product if any exist
+                    if ($matchedProducts.length) {
+                        $('html, body').animate({
+                            scrollTop: $matchedProducts.first().offset().top - ($(window).height() /
+                                2) + ($matchedProducts.first().height() / 2)
+                        }, 100);
+                    }
+                });
+
+            }
+            handleSearch();
             let num = "12345687";
 
             function scrollHandle() {
@@ -312,7 +354,7 @@
 
 
                         let categoryData = ` <li>
-                                    <a  href="#category-${category.category}"> <button type="button"
+                                    <a  href="#category-${category.category}" class="scroll-link"> <button type="button"
                                             class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">${category.category}</button></a>
                                 </li>`;
                         $('.category-dropdown').append(categoryData);
@@ -340,7 +382,7 @@
                         products.filter(product => product.category === category).forEach(
                             product => {
                                 $(`#category-${category}`).append(`
-                    <div class="border border-gray rounded-lg shadow-sm p-4 cursor-pointer productCard" productId="${product.id}" >
+                    <div class="border border-gray rounded-lg shadow-sm p-4 cursor-pointer productCard product" productId="${product.id}" >
                                     <a href="tel:${num}">
                         <div class="relative">
                             <div class="min-h-22">
@@ -368,6 +410,7 @@
 
                     });
                     scrollHandle();
+                    handleSearch();
                 }
 
             });

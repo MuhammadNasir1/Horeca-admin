@@ -102,8 +102,11 @@
                         </div>
                         <div class="relative w-full">
                             <input type="search" id="search-input"
-                                class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50  border border-gray-300  focus:border-primary "
+                                class="block search-input p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50  border border-gray-300  focus:border-primary "
                                 placeholder="Search Title ,  Category   product..." required />
+                            <p class="absolute top-1/2 -translate-y-1/2 right-12 text-sm ">Matches: <s1pan
+                                    class="text-red-600 match-count"> 0 </s1pan>
+                            </p>
                             <button type="submit"
                                 class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-primary rounded-e-lg border border-primary  focus:outline-none ">
                                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -284,9 +287,12 @@
                         </ul>
                     </div>
                     <div class="relative w-full">
-                        <input type="search" id="search-dropdown"
-                            class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50  border border-gray-300  focus:border-primary "
-                            placeholder="Search Title ,  Category   product..." required />
+                        <input type="search" id="search-input"
+                            class="block search-input p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50  border border-gray-300  focus:border-primary "
+                            placeholder="Search" required />
+                        <p class="absolute top-1/2 -translate-y-1/2 right-12 text-sm ">Matches: <s1pan
+                                class="text-red-600 match-count"> 0 </s1pan>
+                        </p>
                         <button type="submit"
                             class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-primary rounded-e-lg border border-primary  focus:outline-none ">
                             <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
