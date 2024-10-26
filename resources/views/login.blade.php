@@ -94,7 +94,7 @@
                             $('#text').removeClass('hidden');
                             $('#spinner').addClass('hidden');
 
-                            window.location.href = '/';
+                            window.location.href = '/admin';
 
                         } else if (response.success == false) {
                             Swal.fire(

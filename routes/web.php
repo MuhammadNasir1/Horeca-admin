@@ -30,7 +30,7 @@ Route::get('/',  function () {
 Route::middleware('custom')->group(function () {
     Route::get('/setting', [authController::class, 'settingdata']);
     Route::post('updateSettings', [authController::class, 'updateSet']);
-    Route::get('/dashboard', [userController::class, 'Dashboard']);
+    Route::get('/admin', [userController::class, 'Dashboard']);
     Route::get('help', function () {
         return view('help');
     });
