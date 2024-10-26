@@ -303,8 +303,8 @@
                                 $(`#category-${category}`).append(`
                 <div class="border border-gray rounded-lg shadow-sm p-4">
                     <div class="relative">
-                        <a href="tel:12345678">
-                       <img loading="lazy" src="${product.image && product.image !== 'null' ? product.image : defaultLogoUrl}" alt="${product.name}" class="w-full md:h-40 h-30 object-contain" onerror="this.onerror=null; this.src='${defaultLogoUrl}'">
+                        <a href="tel:12345678" class="min-h-22">
+                       <img loading="lazy" src="${product.image && product.image !== 'null' ? product.image : defaultLogoUrl}" alt="${product.name}" class="w-full md:h-40 h-20  object-contain" onerror="this.onerror=null; this.src='${defaultLogoUrl}'">
                         </a>
                     </div>
                     <div class="mt-4">

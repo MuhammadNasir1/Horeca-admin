@@ -51,8 +51,8 @@
             </div>
 
             <!-- search -->
-            <div
-                class="w-full md:block max-w-xs xl:max-w-lg 2xl:max-w-2xl bg-primary rounded-md hidden md:flex items-center gap-2 py-2  px-4 mx-auto">
+            {{-- <div
+                class="w-full  max-w-xs xl:max-w-lg 2xl:max-w-2xl  rounded-md hidden md:flex items-center gap-2 py-2  px-4 mx-auto">
                 <div class="w-[250px]">
                     <select class=" uppercase font-bold text-sm p-4 mr-4 bg-transparent" name="" id=""
                         style="background: transparent !important;">
@@ -61,19 +61,71 @@
                 </div>
                 <div class="relative w-full">
                     <input
-                        class="border-l border-gray-300 bg-white w-full h-[36px] font-semibold text-sm pl-4 focus:outline-none border-[#e1e1e166] focus:border-none"
+                        class="border-1  rounded-md border-gray bg-white w-full h-[36px] font-semibold text-sm pl-4 focus:outline-none  border-[#e1e1e166] focus:border-primary"
                         type="text" placeholder="Search">
 
-                    <svg class="h-4   text-black   absolute right-3 top-2.5" aria-hidden="true" focusable="false"
-                        data-prefix="far" data-icon="search" role="img" xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 512 512" class="svg-inline--fa fa-search fa-w-16 fa-9x">
-                        <path fill="currentColor"
-                            d="M508.5 468.9L387.1 347.5c-2.3-2.3-5.3-3.5-8.5-3.5h-13.2c31.5-36.5 50.6-84 50.6-136C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c52 0 99.5-19.1 136-50.6v13.2c0 3.2 1.3 6.2 3.5 8.5l121.4 121.4c4.7 4.7 12.3 4.7 17 0l22.6-22.6c4.7-4.7 4.7-12.3 0-17zM208 368c-88.4 0-160-71.6-160-160S119.6 48 208 48s160 71.6 160 160-71.6 160-160 160z">
-                        </path>
-                    </svg>
+                    <div
+                        class="bg-primary rounded-r-md   h-full absolute  right-0 top-0 w-12 flex justify-center items-center">
+                        <svg class="h-4    text-white  " aria-hidden="true" focusable="false" data-prefix="far"
+                            data-icon="search" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                            class="svg-inline--fa fa-search fa-w-16 fa-9x">
+                            <path fill="currentColor"
+                                d="M508.5 468.9L387.1 347.5c-2.3-2.3-5.3-3.5-8.5-3.5h-13.2c31.5-36.5 50.6-84 50.6-136C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c52 0 99.5-19.1 136-50.6v13.2c0 3.2 1.3 6.2 3.5 8.5l121.4 121.4c4.7 4.7 12.3 4.7 17 0l22.6-22.6c4.7-4.7 4.7-12.3 0-17zM208 368c-88.4 0-160-71.6-160-160S119.6 48 208 48s160 71.6 160 160-71.6 160-160 160z">
+                            </path>
+                        </svg>
+                    </div>
                 </div>
-            </div>
+            </div> --}}
 
+            <div class="w-full hidden md:block">
+                <form class=" mx-auto">
+                    <div class="flex">
+                        <button id="dropdown-button" data-dropdown-toggle="dropdown"
+                            class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-r-0  rounded-s-lg hover:bg-gray-200 "
+                            type="button">All categories <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 4 4 4-4" />
+                            </svg></button>
+                        <div id="dropdown"
+                            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
+                                <li>
+                                    <button type="button"
+                                        class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mockups</button>
+                                </li>
+                                <li>
+                                    <button type="button"
+                                        class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Templates</button>
+                                </li>
+                                <li>
+                                    <button type="button"
+                                        class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Design</button>
+                                </li>
+                                <li>
+                                    <button type="button"
+                                        class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Logos</button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="relative w-full">
+                            <input type="search" id="search-dropdown"
+                                class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50  border border-gray-300  focus:border-primary "
+                                placeholder="Search Title ,  Category   product..." required />
+                            <button type="submit"
+                                class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-primary rounded-e-lg border border-primary  focus:outline-none ">
+                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                </svg>
+                                <span class="sr-only">Search</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
 
 
             <!-- logo -->
@@ -220,27 +272,58 @@
                 </svg> <br> <span class="text-white font-semibold ">Download App</span></button>
 
         </div>
-        <div class="w-[90%] mb-2  bg-primary rounded-md  flex items-center gap-2 py-2  px-4 mx-auto md:hidden">
-            <div class="w-[250px]">
-                <select class=" uppercase font-bold text-sm p-4 mr-4 bg-transparent" name="" id=""
-                    style="background: transparent !important;">
-                    <option>all categories</option>
-                </select>
-            </div>
-            <div class="relative w-full">
-                <input
-                    class="border-l border-gray-300 bg-white w-full h-[36px] font-semibold text-sm pl-4 focus:outline-none border-[#e1e1e166] focus:border-none"
-                    type="text" placeholder="search ">
 
-                <svg class="h-4   text-black   absolute right-3 top-2.5" aria-hidden="true" focusable="false"
-                    data-prefix="far" data-icon="search" role="img" xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512" class="svg-inline--fa fa-search fa-w-16 fa-9x">
-                    <path fill="currentColor"
-                        d="M508.5 468.9L387.1 347.5c-2.3-2.3-5.3-3.5-8.5-3.5h-13.2c31.5-36.5 50.6-84 50.6-136C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c52 0 99.5-19.1 136-50.6v13.2c0 3.2 1.3 6.2 3.5 8.5l121.4 121.4c4.7 4.7 12.3 4.7 17 0l22.6-22.6c4.7-4.7 4.7-12.3 0-17zM208 368c-88.4 0-160-71.6-160-160S119.6 48 208 48s160 71.6 160 160-71.6 160-160 160z">
-                    </path>
-                </svg>
-            </div>
+
+        <div class="w-[90%] block mx-auto md:hidden mb-2 ">
+            <form class=" mx-auto">
+                <div class="flex">
+                    <button id="dropdown-button" data-dropdown-toggle="dropdown"
+                        class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-r-0  rounded-s-lg hover:bg-gray-200 "
+                        type="button">All categories <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m1 1 4 4 4-4" />
+                        </svg></button>
+                    <div id="dropdown"
+                        class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
+                            <li>
+                                <button type="button"
+                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mockups</button>
+                            </li>
+                            <li>
+                                <button type="button"
+                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Templates</button>
+                            </li>
+                            <li>
+                                <button type="button"
+                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Design</button>
+                            </li>
+                            <li>
+                                <button type="button"
+                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Logos</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="relative w-full">
+                        <input type="search" id="search-dropdown"
+                            class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50  border border-gray-300  focus:border-primary "
+                            placeholder="Search Title ,  Category   product..." required />
+                        <button type="submit"
+                            class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-primary rounded-e-lg border border-primary  focus:outline-none ">
+                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                            </svg>
+                            <span class="sr-only">Search</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
         </div>
+
         <hr class="border-primary">
     </nav>
 
