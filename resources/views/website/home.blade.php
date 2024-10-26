@@ -12,12 +12,23 @@
                 <!-- Item 1 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
                     <img class="rounded-md" src="{{ asset('images/banners/penne-banner.png') }}"
-                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="penne">
+                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Banner-1">
+                </div>
+
+                <!-- Item 2 -->
+                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                    <img src="{{ asset('images/banners/Ket-banner.png') }}"
+                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Banner-2">
                 </div>
                 <!-- Item 2 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="{{ asset('images/banners/5.png') }}"
-                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    <img src="{{ asset('images/banners/sp-banner.png') }}"
+                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Banner-3">
+                </div>
+                <!-- Item 2 -->
+                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                    <img src="{{ asset('images/banners/sp-banner-2.png') }}"
+                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Banner-4">
                 </div>
 
             </div>
@@ -26,6 +37,10 @@
                 <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1"
                     data-carousel-slide-to="0"></button>
                 <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2"
+                    data-carousel-slide-to="1"></button>
+                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3"
+                    data-carousel-slide-to="1"></button>
+                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4"
                     data-carousel-slide-to="1"></button>
 
             </div>
@@ -236,6 +251,7 @@
 @section('js')
     <script>
         $(document).ready(function() {
+            let num = "12345687";
 
             function scrollHandle() {
 
@@ -293,6 +309,15 @@
                      </a>
                  </div>`;
                         $('.swiper-wrapper').append(categoryHTML);
+
+
+                        let categoryData = ` <li>
+                                    <a  href="#category-${category.category}"> <button type="button"
+                                            class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">${category.category}</button></a>
+                                </li>`;
+                        $('.category-dropdown').append(categoryData);
+
+
                     });
 
 
@@ -315,25 +340,27 @@
                         products.filter(product => product.category === category).forEach(
                             product => {
                                 $(`#category-${category}`).append(`
-                <div class="border border-gray rounded-lg shadow-sm p-4 cursor-pointer productCard" productId="${product.id}" >
-                    <div class="relative">
-                        <div class="min-h-22">
-                       <img loading="lazy" src="${product.image && product.image !== 'null' ? product.image : defaultLogoUrl}" alt="${product.name}" class="w-full md:h-40 h-20  object-contain" onerror="this.onerror=null; this.src='${defaultLogoUrl}'">
+                    <div class="border border-gray rounded-lg shadow-sm p-4 cursor-pointer productCard" productId="${product.id}" >
+                                    <a href="tel:${num}">
+                        <div class="relative">
+                            <div class="min-h-22">
+                           <img loading="lazy" src="${product.image && product.image !== 'null' ? product.image : defaultLogoUrl}" alt="${product.name}" class="w-full md:h-40 h-20  object-contain" onerror="this.onerror=null; this.src='${defaultLogoUrl}'">
+                            </div>
                         </div>
-                    </div>
-                    <div class="mt-4">
-                        <p class="md:text-sm text-xs text-gray-500">${category}</p>
-                        <h2 class="md:text-md text-sm font-semibold">${product.name}</h2>
-                        <p class="text-xs md:text-sm text-gray-500">By <span class="text-primary">${product.brand}</span></p>
-                    </div>
-                    <div class="mt-4">
-                        <a href="tel:${product.contact}">
-                            <button class="bg-[#def9ec] text-primary py-2 md:px-4 px-1 rounded-md w-full font-semibold md:text-sm text-xs shadow-md">
-                                <i class="fa fa-shopping-cart p-1"></i> Call For Order
-                            </button>
+                        <div class="mt-4">
+                            <p class="md:text-sm text-xs text-gray-500">${category}</p>
+                            <h2 class="md:text-md text-sm font-semibold">${product.name}</h2>
+                            <p class="text-xs md:text-sm text-gray-500">By <span class="text-primary">${product.brand}</span></p>
+                        </div>
+                        <div class="mt-4">
+                            <a href="tel:${num}">
+                                <button class="bg-[#def9ec] text-primary py-2 md:px-4 px-1 rounded-md w-full font-semibold md:text-sm text-xs shadow-md">
+                                    <i class="fa fa-shopping-cart p-1"></i> Call For Order
+                                </button>
+                            </a>
+                        </div>
                         </a>
                     </div>
-                </div>
             `);
                             });
 
