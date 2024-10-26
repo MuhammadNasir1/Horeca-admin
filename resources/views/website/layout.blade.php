@@ -82,7 +82,7 @@
             </div> --}}
 
             <div class="w-full hidden md:block">
-                <form class=" mx-auto">
+                <div class=" mx-auto">
                     <div class="flex">
                         <button id="dropdown-category" data-dropdown-toggle="dropdown1"
                             class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-r-0  rounded-s-lg hover:bg-gray-200 "
@@ -103,7 +103,7 @@
                         <div class="relative w-full">
                             <input type="search" id="search-input"
                                 class="block search-input p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50  border border-gray-300  focus:border-primary "
-                                placeholder="Search Title ,  Category   product..." required />
+                                placeholder="@lang('lang.Search')" required />
                             <p class="absolute top-1/2 -translate-y-1/2 right-12 text-sm ">@lang('Matches') : <s1pan
                                     class="text-red-600 match-count"> 0 </s1pan>
                             </p>
@@ -114,11 +114,11 @@
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                         stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                                 </svg>
-                                <span class="sr-only">@lang('lang.')</span>
+                                <span class="sr-only">@lang('lang.Matches')</span>
                             </button>
                         </div>
                     </div>
-                </form>
+                </div>
 
             </div>
 
@@ -302,7 +302,7 @@
                         </button>
                     </div>
                 </div>
-                <p class="  text-sm text-right mr-10 hidden " id="match-count-con">@lang('lang.Download_App') <span
+                <p class="  text-sm text-right mr-10 hidden " id="match-count-con">@lang('lang.Matches') <span
                         class="text-red-600 match-count"> 0
                     </span>
                     </form>
