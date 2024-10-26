@@ -110,7 +110,7 @@
 
 
         <div class="mt-10">
-            <div class="mt-10">
+            {{-- <div class="mt-10">
                 <h2 class="text-2xl font-semibold">Popular Products</h2>
                 <div class="grid xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3  grid-cols-2 gap-4 mt-2">
                     @for ($a = 1; $a < 7; $a++)
@@ -138,37 +138,11 @@
                         </div>
                     @endfor
                 </div>
+            </div> --}}
+
+            <div id="product-container">
+
             </div>
-            <div class="mt-10">
-                <h2 class="text-2xl font-semibold">Snack</h2>
-                <div class="grid xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3  grid-cols-2 gap-4 mt-2">
-                    @for ($a = 1; $a < 5; $a++)
-                        <div class="border border-gray rounded-lg shadow-sm p-4 ">
-                            <div class="relative">
-                                <a href="tel:000000"><img
-                                        src="https://nest-frontend-v6.vercel.app/assets/imgs/shop/product-6-2.jpg"
-                                        alt="Product Image" class="w-full h-40 object-contain "></a>
-                            </div>
-                            <div class="mt-4">
-                                <p class="text-sm text-gray-500">Category</p>
-                                <h2 class="text-md font-semibold">Lorem ipsum dolor sit amet.</h2>
-
-                                <p class="text-sm text-gray-500">By <span class="text-primary">Brand</span> </p>
-                            </div>
-
-                            <!-- Flex Container for Prices and Button -->
-                            <div class="mt-4">
-                                <a href="tel:000000">
-                                    <button
-                                        class="bg-[#def9ec] text-primary py-2 px-4 rounded-md w-full font-semibold text-sm shadow-md"><i
-                                            class="fa fa-shopping-cart p-1 "></i>Call For Order</button>
-                                </a>
-                            </div>
-                        </div>
-                    @endfor
-                </div>
-            </div>
-
             <div>
                 <section class="bg-[#D8F1E5] dark:bg-gray-900 mt-5 rounded-lg ">
                     <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
@@ -204,8 +178,7 @@
                                             class="py-3 px-5 w-full text-sm font-medium text-center text-white rounded-lg border cursor-pointer bg-primary border-primary sm:rounded-none sm:rounded-r-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 ">Subscribe</button>
                                     </div>
                                 </div>
-                                <div
-                                    class="mx-auto max-w-screen-sm text-sm text-left text-gray-500 newsletter-form-footer">
+                                <div class="mx-auto max-w-screen-sm text-sm text-left text-gray-500 newsletter-form-footer">
                                     We care about the protection of your data. <a href="#"
                                         class="font-medium text-primary hover:underline">Read our
                                         Privacy Policy</a>.</div>
@@ -216,7 +189,6 @@
             </div>
 
         </div>
-
 
         <footer class="bg-white rounded-lg  dark:bg-gray-900 m-4">
             <div class="w-full  mx-auto p-4 md:py-8">
@@ -260,11 +232,12 @@
                 url: 'https://horeca-kaya.com/api/getProducts',
                 success: function(response) {
                     let categories = response.products;
+                    let products = response.products;
 
                     // Filter out duplicate categories by name
                     let uniqueCategories = [];
                     let categoryNames = new Set();
-
+                    let catBgColors = ["#F2FCE4", "#D6D3C4FF", "#ECFFEC", "#FEEFEA", "#FFF3FF"];
                     categories.forEach(category => {
                         if (!categoryNames.has(category.category)) {
                             uniqueCategories.push(category);
@@ -273,9 +246,10 @@
                     });
 
                     uniqueCategories.forEach((category, i) => {
+                        let color = catBgColors[i % catBgColors.length];
                         let categoryHTML = `
                  <div class="swiper-slide">
-                     <div class="h-48 bg-[#F2FCE4] rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col items-center justify-center flex-1">
+                     <div class="h-48 bg-[${color}] rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col items-center justify-center flex-1">
                          <a href="#" class="w-full flex justify-center">
                       <img class="rounded-t-lg pt-6 w-[90%] "   src="${category.category_image !== "null" ? baseUrl + category.category_image : defaultLogoUrl}" alt="${category.category}" />
                          </a>
@@ -285,11 +259,56 @@
                                      ${category.category}
                                  </h5>
                              </a>
-                             <p class="text-sm font-normal text-gray-700 dark:text-gray-400">${category.item_count || '0'} items</p>
                          </div>
                      </div>
                  </div>`;
                         $('.swiper-wrapper').append(categoryHTML);
+                    });
+
+
+                    //  product output code
+
+                    // Step 1: Get unique categories from the products array
+                    let uniqueCategory = [...new Set(products.map(product => product.category))];
+
+                    // Step 2: Loop through each category and append products under it
+                    uniqueCategory.forEach(category => {
+                        // Create a category section
+                        $('#product-container').append(`
+            <div class="mt-10">
+                <h2 class="text-2xl font-semibold">${category}</h2>
+                <div class="grid xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 mt-4" id="category-${category}">
+                </div>
+            </div>
+        `);
+                        // Filter products for the current category and append each to the category section
+                        products.filter(product => product.category === category).forEach(
+                            product => {
+                                $(`#category-${category}`).append(`
+                <div class="border border-gray rounded-lg shadow-sm p-4">
+                    <div class="relative">
+                        <a href="tel:12345678">
+                       <img loading="lazy" src="${product.image && product.image !== 'null' ? product.image : defaultLogoUrl}" alt="${product.name}" class="w-full h-40 object-contain" onerror="this.onerror=null; this.src='${defaultLogoUrl}'">
+                        </a>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-sm text-gray-500">${category}</p>
+                        <h2 class="text-md font-semibold">${product.name}</h2>
+                        <p class="text-sm text-gray-500">By <span class="text-primary">${product.brand}</span></p>
+                    </div>
+                    <div class="mt-4">
+                        <a href="tel:${product.contact}">
+                            <button class="bg-[#def9ec] text-primary py-2 px-4 rounded-md w-full font-semibold text-sm shadow-md">
+                                <i class="fa fa-shopping-cart p-1"></i> Call For Order
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            `);
+                            });
+
+
+
                     });
 
                 }
