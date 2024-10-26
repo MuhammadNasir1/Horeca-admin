@@ -240,12 +240,25 @@ return [
     "Total_Unit_Quantity_Warehouse" => "Total Unit Quantity/Warehouse",
     "Select_Category" => "Select Category",
     "Select_Brand" => "Select Brand",
-
-
     "Excel_Error_Preview" => "Excel Error Preview",
     "Content_Weight" => "Content Weight",
     "Package_Weight" => "Package Weight",
     "Kg" => "(Kg)",
     "Weight" => "Weight",
     "Delete_From_Stock" => "(Delete From Stock)",
+
+    "Matches" => "Matches",
+    "Search" => "Search",
+    "Download_App" => "Download App",
+    "Email_address" => "Email_address",
+    "All_Rights_Reserved" => "All Rights Reserved",
+    "Contact" => "Contact",
+    "Licensing" => "Licensing",
+    "Privacy_Policy" => "Privacy Policy",
+    "Enter_your_email" => "Enter your email",
+    "About" => "About",
+    "Read our Privacy Policy" => "Read our Privacy Policy",
+    "Sign up for our newsletter" => "Sign up for our newsletter",
+    "Stay up to date with the roadmap progress, announcements and exclusive discounts feel free to sign up with your email" => "Stay up to date with the roadmap progress, announcements and exclusive discounts feel free to sign up with your email",
+    "We care about the protection of your data" => "We care about the protection of your data",
 ];

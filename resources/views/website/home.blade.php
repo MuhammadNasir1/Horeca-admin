@@ -82,7 +82,7 @@
     <div class="mt-10 lg:mx-6 md:mx-4 mx-1 xl:mx-16">
         <div class="category-section">
             <div class="flex gap-6 items-center justify-between ">
-                <h2 class="text-2xl font-semibold">Featured Categories</h2>
+                <h2 class="text-2xl font-semibold">@lang('lang.Categories')</h2>
                 <div class="flex gap-4">
                     <button class="swiper-prev h-10 w-10 rounded-full bg-slate-300 flex justify-center items-center">
                         <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
@@ -179,17 +179,15 @@
                         <div class="mx-auto max-w-screen-md sm:text-center">
                             <h2
                                 class="mb-4 text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl dark:text-white">
-                                Sign up for our newsletter</h2>
+                                @lang('lang.Sign up for our newsletter')</h2>
                             <p
                                 class="mx-auto mb-8 max-w-2xl font-light text-gray-500 md:mb-12 sm:text-xl dark:text-gray-400">
-                                Stay up to date with the roadmap progress, announcements and exclusive discounts feel free
-                                to sign up with your email.</p>
+                                @lang('lang.Stay up to date with the roadmap progress, announcements and exclusive discounts feel free to sign up with your email').</p>
                             <form action="#">
                                 <div class="items-center mx-auto mb-3 space-y-4 max-w-screen-sm sm:flex sm:space-y-0">
                                     <div class="relative w-full">
                                         <label for="email"
-                                            class="hidden mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email
-                                            address</label>
+                                            class="hidden mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">@lang('lang.Email_address')</label>
                                         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                                             <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
                                                 viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -201,7 +199,8 @@
                                         </div>
                                         <input
                                             class="block p-3 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:rounded-none sm:rounded-l-lg focus:ring-primary-500 focus:border-primary"
-                                            placeholder="Enter your email" type="email" id="email" required="">
+                                            placeholder="@lang('lang.Enter_your_email')" type="email" id="email"
+                                            required="">
                                     </div>
                                     <div>
                                         <button type="submit"
@@ -210,9 +209,9 @@
                                 </div>
                                 <div
                                     class="mx-auto max-w-screen-sm text-sm text-left text-gray-500 newsletter-form-footer">
-                                    We care about the protection of your data. <a href="#"
-                                        class="font-medium text-primary hover:underline">Read our
-                                        Privacy Policy</a>.</div>
+                                    @lang('lang.We care about the protection of your data'). <a href="#" class="font-medium text-primary hover:underline">
+                                        @lang('lang.Read our Privacy Policy')
+                                    </a>.</div>
                             </form>
                         </div>
                     </div>
@@ -230,22 +229,22 @@
                     <ul
                         class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
                         <li>
-                            <a href="#" class="hover:underline me-4 md:me-6">About</a>
+                            <a href="#" class="hover:underline me-4 md:me-6">@lang('lang.About')</a>
                         </li>
                         <li>
-                            <a href="#" class="hover:underline me-4 md:me-6">Privacy Policy</a>
+                            <a href="#" class="hover:underline me-4 md:me-6">@lang('lang.Privacy_Policy')</a>
                         </li>
                         <li>
-                            <a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
+                            <a href="#" class="hover:underline me-4 md:me-6">@lang('lang.Licensing')</a>
                         </li>
                         <li>
-                            <a href="#" class="hover:underline">Contact</a>
+                            <a href="#" class="hover:underline">@lang('lang.Contact')</a>
                         </li>
                     </ul>
                 </div>
                 <hr class="my-6 border-primary sm:mx-auto  lg:my-8" />
                 <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a
-                        href="https://horeca-kaya.com/" class="hover:underline">Horeca</a>. All Rights Reserved.</span>
+                        href="https://horeca-kaya.com/" class="hover:underline">Horeca</a> @lang('lang.All_Rights_Reserved').</span>
             </div>
         </footer>
 
