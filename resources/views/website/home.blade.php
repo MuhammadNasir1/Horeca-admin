@@ -236,6 +236,22 @@
 @section('js')
     <script>
         $(document).ready(function() {
+
+            function scrollHandle() {
+
+                $('.scroll-link').on('click', function(e) {
+                    e.preventDefault();
+
+                    let target = $(this).attr('href');
+                    let offset = 150;
+                    $('html, body').animate({
+                        scrollTop: $(target).offset().top - offset
+                    }, 400);
+                });
+
+
+            }
+            scrollHandle();
             const defaultLogoUrl = "{{ asset('images/Horeca-green.svg') }}";
             let baseUrl = 'https://horeca-kaya.com/';
             $.ajax({
@@ -265,18 +281,16 @@
                         let color = catBgColors[i % catBgColors.length];
                         let categoryHTML = `
                  <div class="swiper-slide">
-                     <div class="h-48 bg-[${color}] rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col items-center justify-center flex-1">
-                         <a href="#" class="w-full flex justify-center">
+                     <a  href="#category-${category.category}" class="h-48 bg-[${color}] rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col items-center justify-center flex-1 scroll-link">
+                         <div class="w-full h-28 flex justify-center">
                       <img class="rounded-t-lg pt-6 w-[90%] "   src="${category.category_image !== "null" ? baseUrl + category.category_image : defaultLogoUrl}" alt="${category.category}" />
-                         </a>
+                         </div>
                          <div class="p-5 pb-8 text-center w-full">
-                             <a href="#">
                                  <h5 class="text-lg font-medium tracking-tight text-gray-900 dark:text-white">
                                      ${category.category}
                                  </h5>
-                             </a>
                          </div>
-                     </div>
+                     </a>
                  </div>`;
                         $('.swiper-wrapper').append(categoryHTML);
                     });
@@ -301,11 +315,11 @@
                         products.filter(product => product.category === category).forEach(
                             product => {
                                 $(`#category-${category}`).append(`
-                <div class="border border-gray rounded-lg shadow-sm p-4">
+                <div class="border border-gray rounded-lg shadow-sm p-4 cursor-pointer productCard" productId="${product.id}" >
                     <div class="relative">
-                        <a href="tel:12345678" class="min-h-22">
+                        <div class="min-h-22">
                        <img loading="lazy" src="${product.image && product.image !== 'null' ? product.image : defaultLogoUrl}" alt="${product.name}" class="w-full md:h-40 h-20  object-contain" onerror="this.onerror=null; this.src='${defaultLogoUrl}'">
-                        </a>
+                        </div>
                     </div>
                     <div class="mt-4">
                         <p class="md:text-sm text-xs text-gray-500">${category}</p>
@@ -326,7 +340,7 @@
 
 
                     });
-
+                    scrollHandle();
                 }
 
             });
