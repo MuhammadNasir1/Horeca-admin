@@ -253,7 +253,7 @@
             </div>
 
         </div>
-        <div class="absolute right-2 top-1/2 -translate-y-1/2  hidden lg:block">
+        <div class="absolute right-2 top-1/2 -translate-y-1/2  hidden ">
 
             <button class="bg-black flex py-2 rounded-md px-3 justify-center items-center  gap-1 text-white">
                 <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -270,7 +270,7 @@
 
 
         <div class="w-[90%] block mx-auto md:hidden mb-2 ">
-            <form class=" mx-auto">
+            <div class=" mx-auto">
                 <div class="flex">
                     <button id="dropdown-button" data-dropdown-toggle="dropdown"
                         class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-r-0  rounded-s-lg hover:bg-gray-200 "
@@ -290,8 +290,6 @@
                         <input type="search" id="search-input"
                             class="block search-input p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50  border border-gray-300  focus:border-primary "
                             placeholder="Search" required />
-                        <p class="absolute top-1/2 -translate-y-1/2 right-12 text-sm ">Matches: <s1pan
-                                class="text-red-600 match-count"> 0 </s1pan>
                         </p>
                         <button type="submit"
                             class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-primary rounded-e-lg border border-primary  focus:outline-none ">
@@ -304,8 +302,12 @@
                         </button>
                     </div>
                 </div>
-            </form>
+                <p class="  text-sm text-right mr-10 hidden " id="match-count-con">Matches: <span
+                        class="text-red-600 match-count"> 0
+                    </span>
+                    </form>
 
+            </div>
         </div>
 
         <hr class="border-primary">
