@@ -264,4 +264,7 @@ return [
     "Sign up for our newsletter" => "Melden Sie sich für unseren Newsletter an",
     "Stay up to date with the roadmap progress, announcements and exclusive discounts feel free to sign up with your email" => "Bleiben Sie auf dem Laufenden über den Fortschritt der Roadmap, Ankündigungen und exklusive Rabatte. Melden Sie sich gerne mit Ihrer E-Mail an.",
     "We care about the protection of your data" => "Wir kümmern uns um den Schutz Ihrer Daten",
+    "Call_For_Order" => "Bestellung per Anruf",
+
+
 ];

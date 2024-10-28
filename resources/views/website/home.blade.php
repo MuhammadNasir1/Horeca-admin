@@ -396,7 +396,7 @@
                         <div class="mt-4">
                             <a href="tel:${num}">
                                 <button class="bg-[#def9ec] text-primary py-2 md:px-4 px-1 rounded-md w-full font-semibold md:text-sm text-xs shadow-md">
-                                    <i class="fa fa-shopping-cart p-1"></i> Call For Order
+                                    <i class="fa fa-shopping-cart p-1"></i> @lang('lang.Call_For_Order')
                                 </button>
                             </a>
                         </div>
