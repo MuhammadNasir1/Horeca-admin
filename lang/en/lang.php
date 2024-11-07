@@ -262,4 +262,9 @@ return [
     "Stay up to date with the roadmap progress, announcements and exclusive discounts feel free to sign up with your email" => "Stay up to date with the roadmap progress, announcements and exclusive discounts feel free to sign up with your email",
     "We care about the protection of your data" => "We care about the protection of your data",
     "Call_For_Order" => "Call For Order",
+
+    "No_product_Find" => "No product Find",
+    "This_category_has_0_product" => "This category has 0 product",
+
+
 ];

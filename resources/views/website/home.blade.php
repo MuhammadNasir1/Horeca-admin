@@ -295,19 +295,29 @@
             let num = "12345687";
 
             function scrollHandle() {
-
                 $('.scroll-link').on('click', function(e) {
                     e.preventDefault();
 
                     let target = $(this).attr('href');
                     let offset = 150;
-                    $('html, body').animate({
-                        scrollTop: $(target).offset().top - offset
-                    }, 400);
+                    let targetElement = $(target);
+
+                    // Check if the target element exists
+                    if (targetElement.length) {
+                        $('html, body').animate({
+                            scrollTop: targetElement.offset().top - offset
+                        }, 400);
+                    } else {
+                        Swal.fire({
+                            title: "@lang('lang.No_product_Find')",
+                            text: "@lang('lang.This_category_has_0_product')",
+                            icon: "warning",
+                        });
+
+                    }
                 });
-
-
             }
+
             scrollHandle();
             const defaultLogoUrl = "{{ asset('images/Horeca-green.svg') }}";
             let baseUrl = 'https://horeca-kaya.com/';

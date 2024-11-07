@@ -346,6 +346,12 @@ class productController extends Controller
                         'status' => "active",
                         'image' => "",
                     ]);
+                } else {
+                    if ($checkCategory->status = "deleted") {
+                        $checkCategory->status = "active";
+                        $checkCategory->tax = $row[8];
+                        $checkCategory->update();
+                    }
                 }
                 $checkBrand = Brands::where('name', $row[3])->first();
                 if (!$checkBrand) {
@@ -354,6 +360,11 @@ class productController extends Controller
                         'image' => 'null',
 
                     ]);
+                } else {
+                    if ($checkBrand->status = "deleted") {
+                        $checkBrand->status = "active";
+                        $checkBrand->update();
+                    }
                 }
             }
         }
