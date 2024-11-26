@@ -250,29 +250,33 @@ class productController extends Controller
         foreach (array_slice($filteredData, 1) as $key => $row) {
             // Define validation rules for each row
             $validator = Validator::make([
-                'name' => $row[0],
-                'code' => $row[1],
-                'tags' => $row[2],
-                'brand' => $row[3],
-                'category' => $row[4],
-                'sub_category' => $row[5],
-                'purchase_price' => str_replace(',', '.', $row[6]),
-                'rate' => str_replace(',', '.', $row[7]),
-                'tax' => $row[8],
-                'quantity' => $row[9],
-                'quantity_alert' => $row[10],
-                'product_unit' => $row[11],
-                'unit_quantity' => $row[12],
-                'image' => $row[13],
-                'status' => $row[14],
-                'description' => $row[15],
-                'unit_price' => str_replace(',', '.', $row[16]),
-                'unit_pieces' => $row[17],
-                'package_quantity' => $row[18],
+                'code' => $row[0],
+                'brand' => $row[1],
+                'name' => $row[2],
+                'tags' => $row[17],
+                'category' => $row[3],
+                'sub_category' => $row[4],
+                'quantity' => $row[5],
+                'unit_quantity' => $row[6],
+                'product_unit' => $row[7],
+
+                'purchase_price' => str_replace(',', '.', $row[8]),
+                'tax' => $row[9],
+                'rate' => str_replace(',', '.', $row[10]),
+                'package_quantity' => $row[11],
+                'unit_price' => str_replace(',', '.', $row[12]),
+                'unit_pieces' => $row[13],
+                'quantity_alert' => $row[14],
+                'image' => $row[15],
+                'status' => $row[16],
+                'description' => $row[17],
+
+
             ], [
                 'name' => 'required',
-                'brand' => 'required',
                 'code' => 'required',
+                'brand' => 'required',
+                'category' => 'required',
                 'sub_category' => 'required',
                 'purchase_price' => 'required|numeric',
                 'rate' => 'required|numeric',
@@ -315,34 +319,37 @@ class productController extends Controller
         foreach (array_slice($data[0], 1) as $row) {
             if (array_filter($row)) {
                 product::create([
-                    'name' => $row[0],
-                    'code' => $row[1],
-                    'tags' => $row[2],
-                    'brand' => $row[3],
-                    'category' => $row[4],
-                    'sub_category' => $row[5],
-                    'purchase_price' => str_replace(',', '.', $row[6]),
-                    'rate' => str_replace(',', '.', $row[7]),
-                    'tax' => $row[8],
-                    'quantity' => $row[9],
-                    'quantity_alert' => $row[10],
-                    'product_unit' => $row[11],
-                    'unit_quantity' => $row[12],
-                    'image' => $row[13],
-                    'status' => $row[14],
-                    'description' => $row[15],
-                    'unit_price' => str_replace(',', '.', $row[16]),
-                    'unit_pieces' => $row[17],
-                    'package_quantity' => $row[18],
+                    'code' => $row[0],
+                    'brand' => $row[1],
+                    'name' => $row[2],
+                    'category' => $row[3],
+                    'sub_category' => $row[4],
+                    'quantity' => $row[5],
+                    'unit_quantity' => $row[6],
+                    'product_unit' => $row[7],
+
+                    'purchase_price' => str_replace(',', '.', $row[8]),
+                    'tax' => $row[9],
+                    'rate' => str_replace(',', '.', $row[10]),
+                    'package_quantity' => $row[11],
+                    'unit_price' => str_replace(',', '.', $row[12]),
+                    'unit_pieces' => $row[13],
+                    'quantity_alert' => $row[14],
+                    'image' => $row[15],
+                    'status' => $row[16],
+                    'description' => $row[17],
+                    'tags' => $row[18],
                     'content_weight' => $row[19],
                     'package_weight' => $row[20],
+
+
                 ]);
 
                 $checkCategory = Category::where('name', $row[4])->first();
                 if (!$checkCategory) {
                     category::create([
-                        'name' => $row[4],
-                        'tax' => $row[8],
+                        'name' => $row[3],
+                        'tax' => $row[9],
                         'status' => "active",
                         'image' => "",
                     ]);
@@ -356,7 +363,7 @@ class productController extends Controller
                 $checkBrand = Brands::where('name', $row[3])->first();
                 if (!$checkBrand) {
                     Brands::create([
-                        'name' => $row[3],
+                        'name' => $row[1],
                         'image' => 'null',
 
                     ]);
