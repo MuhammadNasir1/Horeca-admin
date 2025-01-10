@@ -266,7 +266,9 @@ return [
     "We care about the protection of your data" => "Wir kümmern uns um den Schutz Ihrer Daten",
     "Call_For_Order" => "Bestellung per Anruf",
     "No_product_Find" => "Kein Produkt gefunden",
-    "This_category_has_0_product" => "Diese Kategorie enthält 0 Produkte"
+    "This_category_has_0_product" => "Diese Kategorie enthält 0 Produkte",
+    "Unit_Type" => "Verpackungsart",
+
 
 
 
