@@ -266,5 +266,7 @@ return [
     "No_product_Find" => "No product Find",
     "This_category_has_0_product" => "This category has 0 product",
 
+    "Unit_Type" => "Unit Type",
+
 
 ];

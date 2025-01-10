@@ -195,7 +195,7 @@
     <div class="fixed inset-0 transition-opacity">
         <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
     </div>
-    <div class="relative p-4 w-full   max-w-6xl max-h-full ">
+    <div class="relative p-4 w-full   max-w-7xl max-h-full ">
         <form id="productForm" enctype="multipart/form-data" method="post" url="../addProduct">
             @csrf
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
@@ -321,21 +321,25 @@
                                 value="1" ">
                         </div>
                     </div>
-                    <div class="grid grid-cols-2  gap-4  mt-4">
+                    <div class="flex  gap-2  mt-4">
 
-                        <div>
+                        <div class="w-full">
                             <label class="text-[14px] font-normal" for="unitQuantity">@lang('lang.Content_of_Quantity')</label>
                             <input type="number"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="unit_quantity" id="unitQuantity" placeholder=" @lang('lang.Quantity_Here')" required
-                                >
+                                name="unit_quantity" id="unitQuantity" placeholder=" @lang('lang.Quantity_Here')" required>
                         </div>
-                        <div>
+                        <div class="">
                             <label class="text-[14px] font-normal" for="product_unit">@lang('lang.Unit')</label>
                             <input type="text"
+                                class="w-[70px] border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="product_unit" id="product_unit" placeholder=" @lang('lang.Unit_Here')" required>
+                        </div>
+                        <div class="w-full">
+                            <label class="text-[14px] font-normal" for="unitType">@lang('lang.Unit_Type')</label>
+                            <input type="text"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="product_unit" id="product_unit" placeholder=" @lang('lang.Unit_Here')" required
-                              >
+                                name="unit_type" id="unitType" placeholder=" @lang('lang.Unit_Type')">
                         </div>
 
                     </div>
@@ -884,6 +888,7 @@
                         $('#description').val(data.description);
                         $('#packageWeight').val(data.package_weight);
                         $('#contentWeight').val(data.content_weight);
+                        $('#unitType').val(data.unit_type);
 
 
                         $('#itext').html("@lang('lang.Update')");

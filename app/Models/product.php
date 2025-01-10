@@ -33,6 +33,7 @@ class product extends Model
         'package_quantity',
         'content_weight',
         'package_weight',
+        'unit_type',
     ];
 
 

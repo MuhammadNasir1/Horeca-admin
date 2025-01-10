@@ -41,6 +41,7 @@ class productController extends Controller
                 'package_quantity' => 'nullable',
                 'content_weight' => 'nullable',
                 'package_weight' => 'nullable',
+                'unit_type' => 'nullable',
             ]);
 
 
@@ -66,6 +67,7 @@ class productController extends Controller
                 'package_quantity' => $validateData['package_quantity'],
                 'content_weight' => $validateData['content_weight'],
                 'package_weight' => $validateData['package_weight'],
+                'unit_type' => $validateData['unit_type'],
 
             ]);
             if ($request->hasFile('product_image')) {
@@ -341,6 +343,7 @@ class productController extends Controller
                     'tags' => $row[18],
                     'content_weight' => $row[19],
                     'package_weight' => $row[20],
+                    'unit_type' => $row[21],
 
 
                 ]);
