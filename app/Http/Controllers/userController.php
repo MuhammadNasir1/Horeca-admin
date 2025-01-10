@@ -240,7 +240,7 @@ class userController extends Controller
     public function Dashboard()
     {
         $totalOrders = orders::count();
-        $totalProduct = product::count();
+        $totalProduct = product::where("status" , "active")->get()->count();
         $totalUser = User::where('role', 'customer')->orWhere('role',  'distributor')->count();
         $pendingOrders = orders::where('order_status', 'pending')->count();
         $confirmedOrders = orders::where('order_status', 'confirmed')->count();
