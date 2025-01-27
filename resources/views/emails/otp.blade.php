@@ -63,7 +63,7 @@
 </head>
 
 <body>
-    <div class="email-container">
+    {{-- <div class="email-container">
         <div class="email-header">
             <h1>Reset Your Password</h1>
         </div>
@@ -77,7 +77,23 @@
         <div class="email-footer">
             <p>© 2024 Horeca-kaya. All rights reserved.</p>
         </div>
+    </div> --}}
+    <div class="email-container">
+        <div class="email-header">
+            <h1>Passwort zurücksetzen</h1>
+        </div>
+        <div class="email-body">
+            <p>Hallo [Benutzer], {{ $otp }}</p>
+            <p>Wir haben eine Anfrage zum Zurücksetzen Ihres Passworts erhalten. Bitte klicken Sie auf die Schaltfläche unten, um es zurückzusetzen:</p>
+            <a href="http://horeca-kaya.com/resetPassword" class="reset-button">Passwort zurücksetzen</a>
+            <p>Wenn Sie kein Zurücksetzen des Passworts angefordert haben, können Sie diese E-Mail ignorieren.</p>
+            <p>Danke,<br>Das Horeca-Kaya-Team</p>
+        </div>
+        <div class="email-footer">
+            <p>© 2024 Horeca-Kaya. Alle Rechte vorbehalten.</p>
+        </div>
     </div>
+
 </body>
 
 </html>

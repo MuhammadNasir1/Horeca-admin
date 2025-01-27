@@ -56,7 +56,7 @@
 </head>
 
 <body>
-    <div class="email-container">
+    {{-- <div class="email-container">
         <h1>Registration {{ $status }}</h1>
         <p>Hello {{ $name }},</p>
         <p>We are pleased to inform you that your registration has been {{ $status }} by our admin team.</p>
@@ -69,7 +69,23 @@
     </div>
     <div class="footer">
         &copy; 2024 Your Company. All rights reserved.
+    </div> --}}
+    <div class="email-container">
+        <h1>Registrierung {{ $status }}</h1>
+        <p>Hallo {{ $name }},</p>
+        <p>Wir freuen uns, Ihnen mitteilen zu können, dass Ihre Registrierung von unserem Admin-Team {{ $status }}
+            wurde.</p>
+        @if ($status == 'approved')
+            <p>Um sich in Ihr Konto einzuloggen, klicken Sie auf die Schaltfläche unten:</p>
+            <a href="https://horeca-kaya.com/" class="button">Melden Sie sich in Ihrem Konto an</a>
+        @endif
+        <p>Wenn Sie Fragen haben oder weitere Unterstützung benötigen, wenden Sie sich gerne an unser Support-Team.</p>
+        <p>Vielen Dank, dass Sie sich uns angeschlossen haben!</p>
     </div>
+    <div class="footer">
+        &copy; 2024 Ihr Unternehmen. Alle Rechte vorbehalten.
+    </div>
+
 </body>
 
 </html>

@@ -67,7 +67,7 @@
 </head>
 
 <body>
-    <div class="email-container">
+    {{-- <div class="email-container">
         <h1>Welcome to Horeca-Kaya</h1>
         <p>Hello {{ $name }},</p>
         <p>Thank you for registering with us! Below are your login credentials:</p>
@@ -84,6 +84,25 @@
         <div class="footer">
             <p>If you didn’t sign up for this account, please contact our support team.</p>
             <p>© 2024 Horeca-Kaya. All rights reserved.</p>
+        </div>
+    </div> --}}
+    <div class="email-container">
+        <h1>Willkommen bei Horeca-Kaya</h1>
+        <p>Hallo {{ $name }},</p>
+        <p>Danke, dass Sie sich bei uns registriert haben! Nachfolgend finden Sie Ihre Anmeldedaten:</p>
+
+        <div class="credentials">
+            <p>E-Mail: <span>{{ $email }}</span></p>
+            <p>Passwort: <span>{{ $password }}</span></p>
+        </div>
+
+        <p>Bitte bewahren Sie Ihre Zugangsdaten sicher auf und teilen Sie sie niemandem mit.</p>
+
+        <a href="https://horeca-kaya.com/" class="btn">Jetzt einloggen</a>
+
+        <div class="footer">
+            <p>Falls Sie sich nicht für dieses Konto angemeldet haben, kontaktieren Sie bitte unser Support-Team.</p>
+            <p>© 2024 Horeca-Kaya. Alle Rechte vorbehalten.</p>
         </div>
     </div>
 </body>
