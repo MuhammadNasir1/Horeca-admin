@@ -19,7 +19,7 @@ class productController extends Controller
     {
         try {
             $validateData = $request->validate([
-                'name' => 'required',
+                'name' => 'required|unique:products,name',
                 'code' => 'required',
                 'category' => 'required',
                 'sub_category' => 'required',
@@ -274,7 +274,7 @@ class productController extends Controller
                 'image' => 'nullable',
                 'code' => 'required',
                 'brand' => 'required',
-                'name' => 'required',
+                'name' => 'required|unique:products,name',
                 'category' => 'required',
                 'sub_category' => 'required',
                 'purchase_price' => 'required',
