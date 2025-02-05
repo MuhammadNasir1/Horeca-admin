@@ -350,7 +350,7 @@
                  <div class="swiper-slide">
                      <a  href="#category-${category.category}" class="h-48 bg-[${color}] rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col items-center justify-center flex-1 scroll-link">
                          <div class="w-full h-28 flex justify-center">
-                      <img class="rounded-t-lg pt-6 w-[90%] "   src="${category.category_image !== "null" ? baseUrl + category.category_image : defaultLogoUrl}" alt="${category.category}" />
+                      <img class="rounded-t-lg pt-6 w-[90%] " loading="lazy"    src="${category.category_image !== "null" ? baseUrl + category.category_image : defaultLogoUrl}" alt="${category.category}" />
                          </div>
                          <div class="p-5 pb-8 text-center w-full">
                                  <h5 class="text-lg font-medium tracking-tight text-gray-900 dark:text-white">
