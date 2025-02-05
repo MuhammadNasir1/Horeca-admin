@@ -98,13 +98,13 @@
                                 id="priceLable">@lang('lang.Product_Price')</label>
                             <input type="number"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="price" id="Product_Price" value="0" readonly>
+                                name="price" id="Product_Price" value="0" >
                         </div>
                         <div>
                             <label class="text-[14px] font-normal" for="Tax">@lang('lang.Tax')%</label>
                             <input type="number"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="Tax" id="tax" readonly value="0">
+                                name="Tax" id="tax"  value="0">
                         </div>
                     </div>
 

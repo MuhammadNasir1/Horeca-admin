@@ -114,7 +114,7 @@
                                                         @lang('lang.Invoice')
                                                     </a>
                                                 </li>
-                                                <li class="py-1">
+                                                {{-- <li class="py-1">
                                                     <a href="../gatepass/{{ $data->id }}"
                                                         class="flex items-center gap-3">
                                                         <div
@@ -133,7 +133,7 @@
                                                         </div>
                                                         @lang('lang.Gate_Pass')
                                                     </a>
-                                                </li>
+                                                </li> --}}
                                                 <li class="py-1 text-black updateStatusBtn"
                                                     updateId="{{ $data->id }}">
                                                     <div class="flex items-center gap-3">
