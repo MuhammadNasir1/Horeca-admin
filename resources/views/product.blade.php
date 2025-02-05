@@ -723,6 +723,18 @@
 
 @include('layouts.footer')
 <script>
+    $(document).ready(function() {
+        let DataTable = $("#datatable").DataTable();
+
+        // Get stored page index
+        let savedPage = localStorage.getItem("datatablePage");
+
+        if (savedPage !== null) {
+            DataTable.page(parseInt(savedPage)).draw("page"); // Set to saved page
+        }
+        localStorage.removeItem("datatablePage"); // Clear after use
+    });
+
     $('#excelForm').on('submit', function(e) {
         e.preventDefault();
 
@@ -914,8 +926,10 @@
             $('.delButton').click(function() {
                 $('#deleteData').removeClass("hidden");
                 var id = $(this).attr('delId');
+                let Dtable = $("#datatable").DataTable();
+                let currentPage = Dtable.page(); // Get current page index
+                localStorage.setItem("datatablePage", currentPage); // Save page number
                 $('#delLink').attr('href', '../delProduct/' + id);
-                console.log(id);
             });
 
         }
@@ -1006,6 +1020,12 @@
                     $('#iaddBtn').attr('disabled', true);
                 },
                 success: function(response) {
+
+                    let table = $("#datatable").DataTable();
+                    let currentPage = table.page(); // Get current page index
+                    localStorage.setItem("datatablePage", currentPage); // Save page number
+
+                    // Reload the page
                     window.location.href = '../product';
 
                 },

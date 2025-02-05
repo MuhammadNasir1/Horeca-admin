@@ -207,13 +207,24 @@
 @include('layouts.footer')
 <script>
     $(document).ready(function() {
+        let DataTable = $("#datatable").DataTable();
+        let savedPage = localStorage.getItem("datatablePage");
 
+        if (savedPage !== null) {
+            DataTable.page(parseInt(savedPage)).draw("page"); // Set to saved page
+        }
+        localStorage.removeItem("datatablePage"); // Clear after use
         function deleteDatafun() {
             $('.delButton').click(function() {
                 $('#deleteData').removeClass("hidden");
                 $('#deleteData').addClass("flex");
                 var id = $(this).attr('delId');
-                $('#delLink').attr('href', '../delBrand/' + id);
+
+                var id = $(this).attr('delId');
+                let Dtable = $("#datatable").DataTable();
+                let currentPage = Dtable.page(); // Get current page index
+                localStorage.setItem("datatablePage",
+                currentPage); // Save page number$('#delLink').attr('href', '../delBrand/' + id);
                 console.log(id);
             });
         }
@@ -238,6 +249,11 @@
                         $('#addBtn').attr('disabled', true);
                     },
                     success: function(response) {
+                        var id = $(this).attr('delId');
+                        let Dtable = $("#datatable").DataTable();
+                        let currentPage = Dtable.page(); // Get current page index
+                        localStorage.setItem("datatablePage",
+                            currentPage); // Save page number
                         window.location.href = '../brands';
 
                     },

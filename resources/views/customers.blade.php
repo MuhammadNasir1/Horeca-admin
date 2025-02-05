@@ -503,11 +503,22 @@
 @include('layouts.footer')
 <script>
     $(document).ready(function() {
+        let DataTable = $("#datatable").DataTable();
+        let savedPage = localStorage.getItem("datatablePage");
+
+        if (savedPage !== null) {
+            DataTable.page(parseInt(savedPage)).draw("page"); // Set to saved page
+        }
+        localStorage.removeItem("datatablePage"); // Clear after use
         function deleteDatafun() {
 
             $('.delButton').click(function() {
                 var id = $(this).attr('delId');
                 $('#deleteData').removeClass('hidden').addClass('flex');
+                var id = $(this).attr('delId');
+                let Dtable = $("#datatable").DataTable();
+                let currentPage = Dtable.page(); // Get current page index
+                localStorage.setItem("datatablePage", currentPage); // Save page number
                 $('#delLink').attr('href', '../delCustomer/' + id);
             });
             $('.updateVerBtn').click(function() {
@@ -537,6 +548,10 @@
                     $('#AaddBtn').attr('disabled', true);
                 },
                 success: function(response) {
+                    var id = $(this).attr('delId');
+                    let Dtable = $("#datatable").DataTable();
+                    let currentPage = Dtable.page(); // Get current page index
+                    localStorage.setItem("datatablePage", currentPage); // Save page number
                     window.location.href = '../customers';
 
                 },
@@ -574,7 +589,10 @@
                 },
                 success: function(response) {
                     console.log(response);
-
+                    var id = $(this).attr('delId');
+                    let Dtable = $("#datatable").DataTable();
+                    let currentPage = Dtable.page(); // Get current page index
+                    localStorage.setItem("datatablePage", currentPage); // Save page number
                     window.location.href = '../customers';
                     // if (response.success == true) {
 
@@ -629,6 +647,10 @@
                     $('#uaddBtn').attr('disabled', true);
                 },
                 success: function(response) {
+                    var id = $(this).attr('delId');
+                    let Dtable = $("#datatable").DataTable();
+                    let currentPage = Dtable.page(); // Get current page index
+                    localStorage.setItem("datatablePage", currentPage); // Save page number
                     window.location.href = '../customers';
 
                 },
