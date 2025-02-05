@@ -12,9 +12,11 @@
     <script>
         $(document).ready(function() {
             // $('#datatable').DataTable();
-
+            $.fn.DataTable.ext.pager.numbers_length = 50; // Adjust as needed
             //Spanish
             $('#datatable').DataTable({
+                
+                 pagingType: "full_numbers",
                 "language": {
                     "sProcessing": "Verarbeitung...",
                     "sLengthMenu": "_MENU_ Einträge anzeigen",
@@ -45,7 +47,12 @@
 @else
     <script>
         $(document).ready(function() {
-            $('#datatable').DataTable();
+                   $.fn.DataTable.ext.pager.numbers_length = 50; // Adjust as needed
+
+$('#datatable').DataTable({
+    pagingType: "full_numbers"
+});
+          
         });
     </script>
 @endif
