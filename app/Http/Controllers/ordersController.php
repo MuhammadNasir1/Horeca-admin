@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 class ordersController extends Controller
 {
+
+public function index(){
+    $customers = User::select('id' , 'name' , 'email' , 'phone' , 'address')->where('role', 'customer')->where('verification' , 'approved')->get();
+    // return response()->json($customers);
+    return view('createOrder' , compact('customers'));
+}
+
     public function  insert(Request $request)
     {
         try {
@@ -181,6 +188,8 @@ class ordersController extends Controller
         } elseif ($routeName === 'gatepass') {
             $viewName = 'Invoices.gatepass';
         }
+
+        // return response()->json( ['order' =>  $order, 'orderItems' => $order_items, 'products' => $products]);
         return view($viewName, ['order' =>  $order, 'orderItems' => $order_items, 'products' => $products]);
     }
 
@@ -268,8 +277,10 @@ class ordersController extends Controller
             $product = product::where('id', $orderItem->product_id)->first();
             $products[] = $product;
         }
+    $customers = User::select('id' , 'name' , 'email' , 'phone' , 'address')->where('role', 'customer')->where('verification' , 'approved')->get();
 
-        return view('editOrder', ["order" => $order, 'orderItems' => $orderItems, 'products' => $products]);
+
+        return view('editOrder', ["order" => $order, 'orderItems' => $orderItems, 'products' => $products , 'customers' => $customers]);
     }
 
     public function Addorders(Request $request)

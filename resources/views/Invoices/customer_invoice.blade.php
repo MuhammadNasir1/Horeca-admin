@@ -126,7 +126,7 @@
         .content-div2 {
             border: 0.5px solid #d7dae0;
             border-radius: 16px;
-            min-height: 750px;
+            min-height: 850px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -144,7 +144,7 @@
         }
 
         .content-div2 table thead {
-            font-size: 18px;
+            font-size: 16px;
         }
 
         .content-div2 table th,
@@ -293,6 +293,19 @@
 
             font-size: 14px;
         }
+        .weight-container h4{
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: right;
+            font-size: 14px;
+        }
+        .weight-container span{
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: right;
+            font-size: 14px;
+            color:#027c56;
+            margin-right: 20px;
+            margin-left: 10px;
+        }
     </style>
 </head>
 
@@ -352,9 +365,10 @@
                         <thead>
                             <div class="border-head">
                                 <tr>
+                                    <th class="column2">@lang('lang.Qty')</th>
+                                    <th class="column2">@lang('lang.Unit')</th>
                                     <th class="description">@lang('lang.Description')</th>
                                     <th class="">@lang('lang.Brand')</th>
-                                    <th class="column2">@lang('lang.Qty')</th>
                                     <th class="column2">@lang('lang.Rate')</th>
                                     <th class="column3 text-1">@lang('lang.Tax')%</th>
                                     <th class="column3 text-1">@lang('lang.Total') </th>
@@ -372,6 +386,7 @@
                                 $total_weight_sum = 0;
                             @endphp
                             @foreach ($orderItems as $orderItem)
+
                                 @if ($orderItem->unit_status == 'single')
                                     @php
                                         $total_weight =
@@ -390,11 +405,13 @@
                                 @endphp
                                 <h1></h1>
                                 <tr class="font-size">
+                                    <td class="color">{{ $orderItem['product_quantity'] }}</td>
+                                    <td class="color">{{  \App\Models\Product::find($orderItem->product_id)->product_unit }}</td>
                                     <td class="column1">
                                         {{ $products->where('id', $orderItem->product_id)->first()->name }}
 
                                         @if ($orderItem->unit_status !== 'single')
-                                            <span class="unit"> (@lang('lang.Pack'))</span>
+                                            <span class="unit"> (@lang('lang.Full_Unit'))</span>
                                         @else
                                             <span class="unit"> (@lang('lang.Single'))</span>
                                         @endif
@@ -405,7 +422,7 @@
 
                                     <td class="brand">
                                         {{ $products->where('id', $orderItem->product_id)->first()->brand }}</td>
-                                    <td class="color">{{ $orderItem['product_quantity'] }}</td>
+                                
 
                                     <td class="color">
                                         {{ floor($orderItem['product_rate']) == $orderItem['product_rate'] ? number_format($orderItem['product_rate'], 0) : number_format($orderItem['product_rate'], 2) }}&euro;
@@ -475,10 +492,6 @@
                 </div>
                 <div class="div2-2">
                     <div class="div2-left">
-                        <h2>@lang('lang.Package_Weight')</h2>
-                        <h2 class="color">{{ $total_weight_sum }}Kg</h2>
-                    </div>
-                    <div class="div2-left">
                         <h2>@lang('lang.Sub_Total')</h2>
                         <h2 class="color">{{ number_format($order->sub_total, 2) }}&euro;</h2>
                     </div>
@@ -499,10 +512,12 @@
                         <h2>@lang('lang.Delivery_Charges')</h2>
                         <h2 class="color">{{ $order->delivery_charges }}&euro;</h2>
                     </div>
+                    @if($order->discount > 0)
                     <div class="div2-left">
                         <h2>@lang('lang.Discount')</h2>
                         <h2 class="color">{{ $order->discount }}%</h2>
                     </div>
+                    @endif
                     <div class="table-footer">
                         <div class="footer-content">
                             <h3>@lang('lang.Grand_total') </h3>
@@ -511,6 +526,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="weight-container">
+            <h4>@lang('lang.Package_Weight') <span> {{ $total_weight_sum }}Kg</span></h2>
+         
         </div>
         {{-- <div class="contain">
             <div class="signature">

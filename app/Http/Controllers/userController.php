@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Database\Seeders\users;
 use Illuminate\Support\Facades\Mail;
-
+use Illuminate\Support\Str;
 class userController extends Controller
 {
 
@@ -132,7 +132,7 @@ class userController extends Controller
                 $user_role = "customer";
             }
 
-            $password = 12345678;
+            $password = Str::random(8);
             $customer =  User::create([
                 'name' => $validateData['name'],
                 'email' => $validateData['email'],

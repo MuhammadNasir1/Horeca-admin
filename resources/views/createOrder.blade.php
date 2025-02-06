@@ -31,11 +31,32 @@
                                 name="order_date" id="order_date" required>
                         </div>
                     </div>
-                    <div class="">
-                        <label class="text-[14px] font-normal" for="customer_name">@lang('lang.Customer_Name')</label>
-                        <input type="text"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="customer_name" id="customer_name" placeholder=" @lang('lang.Name_Here')" required>
+                    <div class="flex gap-2 w-full ">
+                        <div class="w-full">
+                            <label class="text-[14px] font-normal" for="customer_name">@lang('lang.Customer_Name')</label>
+                        <div class="hidden" id="customName">
+                            <input type="text"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="customer_name" id="customer_name" placeholder=" @lang('lang.Name_Here')" required>
+                        </div>
+                        <div id="selectName">
+                            <select
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="customer_name" id="customer">
+                                <option value="" selected disabled>@lang('lang.Select_Customer')</option>
+                                @foreach ($customers as $customer)
+                                    <option value="{{ $customer->id }}" customerPhone="{{ $customer->phone }}"
+                                        customerAddress="{{ $customer->address }}">{{ $customer->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        </div>
+                        <div class="mt-6 flex">
+                            <button id="addCustomNameBtn" type="button"
+                                class="bg-primary toggle-button h-[40px] rounded-[4px]  px-3 font-bold text-white text-sm flex justify-center items-center">
+                                <span class="text-2xl">+</span></button>
+
+                        </div>
                     </div>
                     <div class="">
                         <label class="text-[14px] font-normal" for="customer_phone">@lang('lang.Customer_phone')</label>
@@ -98,13 +119,13 @@
                                 id="priceLable">@lang('lang.Product_Price')</label>
                             <input type="number"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="price" id="Product_Price" value="0" >
+                                name="price" id="Product_Price" value="0">
                         </div>
                         <div>
                             <label class="text-[14px] font-normal" for="Tax">@lang('lang.Tax')%</label>
                             <input type="number"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="Tax" id="tax"  value="0">
+                                name="Tax" id="tax" value="0">
                         </div>
                     </div>
 
@@ -223,6 +244,20 @@
 
     <script>
         $(document).ready(function() {
+            $("#customer").change(function() {
+                let selected = $(this).find(":selected");
+                $("#customer_phone").val(selected.attr("customerPhone") || "");
+                $("#Customer_Address").val(selected.attr("customerAddress") || "");
+            });
+
+            $('#addCustomNameBtn').click(function() {
+                $('#customName').toggleClass('hidden');
+                $('#selectName').toggleClass('hidden');
+                $("#customer_phone").val('');
+                $("#Customer_Address").val('');
+            });
+
+
             $("#orderForm").submit(function(event) {
                 event.preventDefault();
                 var formData = $(this).serialize();

@@ -44,9 +44,8 @@ Route::middleware('custom')->group(function () {
 
 
     Route::get('/orders', [ordersController::class, 'orders']);
-    Route::get('createOrder', function () {
-        return view('createOrder');
-    });
+    Route::get('/createOrder', [ordersController::class, 'index']);
+
 
 
     // product CRUD
