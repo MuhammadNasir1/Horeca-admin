@@ -38,7 +38,7 @@
                         <div class="" id="customName">
                             <input type="text"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="customer_name" id="customer_name" placeholder=" @lang('lang.Name_Here')" required  value="{{ $order->customer_name }}">
+                                name="customer_name" id="customer_name" placeholder=" @lang('lang.Name_Here')"   value="{{ $order->customer_name }}">
                         </div>
                         <div class="hidden" id="selectName">
                             <select
@@ -46,7 +46,7 @@
                                 name="customer_name" id="customer">
                                 <option value="" selected disabled>@lang('lang.Select_Customer')</option>
                                 @foreach ($customers as $customer)
-                                    <option value="{{ $customer->id }}" customerPhone="{{ $customer->phone }}"
+                                    <option value="{{ $customer->name }}" customerPhone="{{ $customer->phone }}"
                                         customerAddress="{{ $customer->address }}">{{ $customer->name }}</option>
                                 @endforeach
                             </select>
