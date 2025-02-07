@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\URL;
 use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpSpreadsheet\Calculation\Category as CalculationCategory;
 use Illuminate\Support\Facades\Validator;
-
+use App\Imports\ProductsImport;
 
 class productController extends Controller
 {
@@ -237,7 +237,8 @@ class productController extends Controller
         $file = $request->file('excel_file');
 
         // Convert the Excel data to an array and filter out empty rows
-        $data = Excel::toArray([], $file);
+        // $data = Excel::toArray([], $file);
+        $data = Excel::toArray(new ProductsImport, $file);
 
         // Filter out rows that are either completely empty or all null
         $filteredData = array_filter($data[0], function ($row) {
