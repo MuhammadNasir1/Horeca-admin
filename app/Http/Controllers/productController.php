@@ -285,7 +285,7 @@ class productController extends Controller
                 'product_unit' => 'required',
                 'package_quantity' => 'nullable',
                 'unit_price' => 'required',
-                'unit_pieces' => 'required|integer',
+                'unit_pieces' => 'required',
                 'description' => 'nullable|string',
                 'quantity_alert' => 'nullable|integer',
                 'status' => 'required',
