@@ -325,7 +325,7 @@
 
                         <div class="w-full">
                             <label class="text-[14px] font-normal" for="unitQuantity">@lang('lang.Content_of_Quantity')</label>
-                            <input type="number"
+                            <input type="text"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                                 name="unit_quantity" id="unitQuantity" placeholder=" @lang('lang.Quantity_Here')" required>
                         </div>
