@@ -19,7 +19,8 @@ class productController extends Controller
     {
         try {
             $validateData = $request->validate([
-                'name' => 'required|unique:products,name',
+                // 'name' => 'required|unique:products,name',
+                'name' => 'required',
                 'code' => 'required',
                 'category' => 'required',
                 'sub_category' => 'required',
@@ -275,7 +276,7 @@ class productController extends Controller
                 'image' => 'nullable',
                 'code' => 'required',
                 'brand' => 'required',
-                'name' => 'required|unique:products,name',
+                'name' => 'required',
                 'category' => 'required',
                 'sub_category' => 'required',
                 'purchase_price' => 'required',
@@ -625,5 +626,12 @@ class productController extends Controller
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
+    }
+
+    public function deleteMultipleProduct(Request $request){
+        $ids = $request->input('ids');
+        $products = product::whereIn('id', $ids)->update(['status' => 'deleted']);
+        return response()->json(['success' => true, 'message' => "Products deleted successfully"], 200);
+
     }
 }

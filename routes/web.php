@@ -56,6 +56,7 @@ Route::middleware('custom')->group(function () {
     Route::get('/singleproductData/{product_id}', [productController::class,  'SingleproductData']);
     Route::get('/ProductUpdataData/{product_id}', [productController::class,  'ProductUpdataData']);
     Route::post('/UpdataProduct/{product_id}', [productController::class,  'UpdataProduct']);
+    Route::get('/deleteMultipleProduct', [productController::class,  'deleteMultipleProduct']);
 
     Route::get('/product/{ids}', [productController::class,  'getProductData']);
 

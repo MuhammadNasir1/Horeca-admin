@@ -267,6 +267,8 @@ return [
     "Unit_Type" => "Unit Type",
 
     "Select_Customer" => "Select Customer",
+    "Delete_Checked_Products" => "Delete Checked Products",
+    "revert_this" => "You won't be able to revert this",
 
 
 ];

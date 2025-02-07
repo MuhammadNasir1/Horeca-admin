@@ -27,9 +27,25 @@
                 </div>
             </div>
             <div class="overflow-x-auto">
+                <div class=" px-[20px]">
+                    <button class="bg-red-500 text-white font-semibold px-4 py-3 rounded-md"
+                        id="delBtn">@lang('lang.Delete_Checked_Products')</button>
+                </div>
                 <table id="datatable" class="overflow-scroll">
                     <thead class="py-6 bg-primary text-white">
                         <tr>
+                            <th class="whitespace-nowrap text-sm">
+                                {{-- <button id="delBtn" class="w-full">
+                                    <svg class="h-[40px] w-[40px]" viewBox="0 0 36 36" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <circle opacity="0.1" cx="18" cy="18" r="18" fill="white" />
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M23.4905 13.7433C23.7356 13.7433 23.9396 13.9468 23.9396 14.2057V14.4451C23.9396 14.6977 23.7356 14.9075 23.4905 14.9075H13.0493C12.8036 14.9075 12.5996 14.6977 12.5996 14.4451V14.2057C12.5996 13.9468 12.8036 13.7433 13.0493 13.7433H14.8862C15.2594 13.7433 15.5841 13.478 15.6681 13.1038L15.7642 12.6742C15.9137 12.0889 16.4058 11.7002 16.9688 11.7002H19.5704C20.1273 11.7002 20.6249 12.0889 20.7688 12.6433L20.8718 13.1032C20.9551 13.478 21.2798 13.7433 21.6536 13.7433H23.4905ZM22.5573 22.4946C22.7491 20.7073 23.0849 16.4611 23.0849 16.4183C23.0971 16.2885 23.0548 16.1656 22.9709 16.0667C22.8808 15.9741 22.7669 15.9193 22.6412 15.9193H13.9028C13.7766 15.9193 13.6565 15.9741 13.5732 16.0667C13.4886 16.1656 13.447 16.2885 13.4531 16.4183C13.4542 16.4261 13.4663 16.5757 13.4864 16.8258C13.5759 17.9366 13.8251 21.0305 13.9861 22.4946C14.1001 23.5731 14.8078 24.251 15.8328 24.2756C16.6238 24.2938 17.4387 24.3001 18.272 24.3001C19.0569 24.3001 19.854 24.2938 20.6696 24.2756C21.7302 24.2573 22.4372 23.5914 22.5573 22.4946Z"
+                                            fill="white" />
+                                    </svg>
+                                </button> --}}
+
+                            </th>
                             <th class="text-sm">@lang('lang.STN')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Image')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Name')</th>
@@ -47,8 +63,11 @@
                     </thead>
                     <tbody id="">
                         @foreach ($products as $x => $data)
-                            <tr class="pt-4">
-                                <td>{{ $x + 1 }}</td>
+                            <tr class="pt-4" data-id="{{ $data->id }}">
+                                <td> <input id="checkbox->{{ $data->id }}" type="checkbox"
+                                        class="rowCheckbox w-5 h-5 text-red-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-red-500 ">
+                                </td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td class="md:w-[220px] w-full">
                                     <img loading="lazy" class="h-20 w-20 rounded-full bg-black object-contain"
                                         src="{{ isset($data->image) ? asset($data->image) : asset('images/circle-logo.png') }}"
@@ -142,8 +161,8 @@
                         data-modal-hide="addExcelSheetmodal">
                         <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                         </svg>
                     </button>
                 </div>
@@ -724,6 +743,7 @@
 @include('layouts.footer')
 <script>
     $(document).ready(function() {
+        $("#delBtn").hide();
         let DataTable = $("#datatable").DataTable();
 
         // Get stored page index
@@ -733,6 +753,57 @@
             DataTable.page(parseInt(savedPage)).draw("page"); // Set to saved page
         }
         localStorage.removeItem("datatablePage"); // Clear after use
+    });
+
+    var selectedIds = [];
+    $(document).on("change", ".rowCheckbox", function() {
+        var rowId = $(this).closest("tr").data("id");
+
+        if ($(this).prop("checked")) {
+            if (!selectedIds.includes(rowId)) {
+                selectedIds.push(rowId);
+            }
+        } else {
+            selectedIds = selectedIds.filter(id => id !== rowId);
+        }
+        if (selectedIds.length > 0) {
+            $("#delBtn").show();
+        } else {
+            $("#delBtn").hide();
+        }
+    });
+
+    $(document).on("click", "#delBtn", function() {
+
+        Swal.fire({
+            title: "{{ __('lang.Are_You_Sure') }}?",
+            text: "{{ __('lang.revert_this') }}!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#D42929FF",
+            cancelButtonColor: "gray",
+            confirmButtonText: "{{ __('lang.Yes') }}!",
+
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var queryString = selectedIds.map(id => `ids[]=${id}`).join("&");
+
+                $.ajax({
+                    type: "GET",
+                    url: `../deleteMultipleProduct?${queryString}`, // Append query parameters
+                    success: function(response) {
+                        location.reload();
+                    },
+                    error: function(xhr) {
+                        Swal.fire({
+                            title: "Error!",
+                            text: "There was an error deleting data.",
+                            icon: "error",
+                        });
+                    },
+                });
+            }
+        });
     });
 
     $('#excelForm').on('submit', function(e) {

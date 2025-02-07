@@ -268,7 +268,9 @@ return [
     "No_product_Find" => "Kein Produkt gefunden",
     "This_category_has_0_product" => "Diese Kategorie enthält 0 Produkte",
     "Unit_Type" => "Verpackungsart",
-
+    "Select_Customer" => "Kunden auswählen",
+    "Delete_Checked_Products" => "Markierte Produkte löschen",
+    "revert_this" => "Das kann nicht rückgängig gemacht werden",
 
 
 
