@@ -12,7 +12,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpSpreadsheet\Calculation\Category as CalculationCategory;
 use Illuminate\Support\Facades\Validator;
 use App\Imports\ProductsImport;
-
+use Illuminate\Validation\Rule;
 class productController extends Controller
 {
     public  function insert(Request $request)
@@ -20,7 +20,12 @@ class productController extends Controller
         try {
             $validateData = $request->validate([
                 // 'name' => 'required|unique:products,name',
-                'name' => 'required',
+                'name' => [
+                    'required',
+                    Rule::unique('products', 'name')->where(function ($query) {
+                        return $query->where('status', '!=', 'deleted');
+                    }),
+                ],
                 'code' => 'required',
                 'category' => 'required',
                 'sub_category' => 'required',
@@ -276,7 +281,12 @@ class productController extends Controller
                 'image' => 'nullable',
                 'code' => 'required',
                 'brand' => 'required',
-                'name' => 'required',
+                'name' => [
+                    'required',
+                    Rule::unique('products', 'name')->where(function ($query) {
+                        return $query->where('status', '!=', 'deleted');
+                    }),
+                ],
                 'category' => 'required',
                 'sub_category' => 'required',
                 'purchase_price' => 'required',
