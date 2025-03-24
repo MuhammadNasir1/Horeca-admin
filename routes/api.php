@@ -48,6 +48,7 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::get('getProducts', [productController::class, 'getAllProducts']);
 
 
+Route::get('getProductDetail/{id}', [productController::class, 'SingleproductData']);
 // order`
 Route::post('Addorders', [ordersController::class, 'Addorders']);
 Route::get('/orderHistory/{customer_id}', [ordersController::class, 'getorderHistory']);

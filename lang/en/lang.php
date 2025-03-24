@@ -263,12 +263,11 @@ return [
     "Call_For_Order" => "Call For Order",
     "No_product_Find" => "No product Find",
     "This_category_has_0_product" => "This category has 0 product",
-
     "Unit_Type" => "Unit Type",
-
     "Select_Customer" => "Select Customer",
     "Delete_Checked_Products" => "Delete Checked Products",
     "revert_this" => "You won't be able to revert this",
-
+    
+    "Product_Details" => "Product Details",
 
 ];

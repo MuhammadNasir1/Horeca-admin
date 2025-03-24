@@ -10,6 +10,8 @@
             transition: background-color 0.3s ease;
         }
     </style>
+    <div class="bg-primary">sdfhdf
+    </div>
     <div class=" mt-4 mx-1 lg:mx-6 xl:mx-12   ">
         <div id="header-carousel" class="relative w-full" data-carousel="slide">
             <!-- Carousel wrapper -->
@@ -250,7 +252,68 @@
 
 
 
+        <div id="ProductDetailsModal" data-modal-backdrop="static"
+            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="fixed inset-0 transition-opacity">
+                <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
+            </div>
+            <div class="relative p-4 w-full max-w-4xl max-h-full">
+                <form id="categoryForm" enctype="multipart/form-data" method="post" url="../addCategory">
+                    @csrf
+                    <div class="relative bg-white shadow-dark rounded-lg dark:bg-gray-700">
+                        <!-- Modal Header -->
+                        <div class="flex items-center justify-between p-5 rounded-t dark:border-gray-600 bg-primary">
+                            <h3 class="text-xl font-semibold text-white">
+                                @lang('lang.Product_Details')
+                            </h3>
+                            <button type="button"
+                                class="absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8"
+                                data-modal-hide="ProductDetailsModal">
+                                <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    fill="none" viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Modal Content: Row Layout -->
+                        <div class="flex items-center gap-6 p-6">
+                            <!-- Image Section -->
+                            <div class="w-48 h-48 flex-shrink-0">
+                                <img src="https://horeca-kaya.com/storage/product_image/1738752206.jpeg"
+                                    alt="Strauch Tomaten" class="w-full h-full object-cover rounded-lg">
+                            </div>
+
+                            <!-- Product Details -->
+                            <div class="flex flex-col flex-grow">
+                                <h2 class="text-lg font-semibold text-primary">Strauch Tomaten</h2>
+                                <p class="text-gray-600">Category: Gemüse</p>
+                                <p class="text-gray-800 font-bold text-xl">€2.99</p>
+
+                                <!-- Dropdown & Button -->
+                                <div class="flex items-center gap-4 mt-4">
+                               <div class="w-60">
+                                <select class="border rounded px-3 py-2 bg-gray-100 text-gray-700 w-full">
+                                    <option value="single">Single</option>
+                                    <option value="full">Full Unit</option>
+                                </select>
+                               </div>
+                                    <button class="bg-primary w0-full text-white px-4 py-2 rounded-lg ">
+                                        Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
     </div>
+
+    <button data-modal-target="ProductDetailsModal" data-modal-toggle="ProductDetailsModal"></button>
 @endsection
 @section('js')
     <script>
@@ -318,35 +381,46 @@
                 });
             }
 
+            function productDetailF() {
+                $(".productDetailBtn").click(function() {
+                    $('#ProductDetailsModal').removeClass('hidden').addClass('flex');
+
+                })
+
+            }
+            productDetailF()
+
             scrollHandle();
             const defaultLogoUrl = "{{ asset('images/Horeca-green.svg') }}";
             let baseUrl = 'https://horeca-kaya.com/';
-            $.ajax({
-                type: "GET",
-                url: 'https://horeca-kaya.com/api/getProducts',
-                beforeSend: function() {
-                    $('#spinner').removeClass('hidden');
+            $('#spinner').removeClass('hidden');
 
-                },
-                success: function(response) {
-                    $('#spinner').addClass('hidden');
-                    let categories = response.products;
-                    let products = response.products;
+            function getAllProducts() {
+                $.ajax({
+                    type: "GET",
+                    url: 'https://horeca-kaya.com/api/getProducts',
+                    beforeSend: function() {
 
-                    // Filter out duplicate categories by name
-                    let uniqueCategories = [];
-                    let categoryNames = new Set();
-                    let catBgColors = ["#F2FCE4", "#D6D3C4FF", "#ECFFEC", "#FEEFEA", "#FFF3FF"];
-                    categories.forEach(category => {
-                        if (!categoryNames.has(category.category)) {
-                            uniqueCategories.push(category);
-                            categoryNames.add(category.category);
-                        }
-                    });
+                    },
+                    success: function(response) {
+                        $('#spinner').addClass('hidden');
+                        let categories = response.products;
+                        let products = response.products;
 
-                    uniqueCategories.forEach((category, i) => {
-                        let color = catBgColors[i % catBgColors.length];
-                        let categoryHTML = `
+                        // Filter out duplicate categories by name
+                        let uniqueCategories = [];
+                        let categoryNames = new Set();
+                        let catBgColors = ["#F2FCE4", "#D6D3C4FF", "#ECFFEC", "#FEEFEA", "#FFF3FF"];
+                        categories.forEach(category => {
+                            if (!categoryNames.has(category.category)) {
+                                uniqueCategories.push(category);
+                                categoryNames.add(category.category);
+                            }
+                        });
+
+                        uniqueCategories.forEach((category, i) => {
+                            let color = catBgColors[i % catBgColors.length];
+                            let categoryHTML = `
                  <div class="swiper-slide">
                      <a  href="#category-${category.category}" class="h-48 bg-[${color}] rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col items-center justify-center flex-1 scroll-link">
                          <div class="w-full h-28 flex justify-center">
@@ -359,40 +433,40 @@
                          </div>
                      </a>
                  </div>`;
-                        $('.swiper-wrapper').append(categoryHTML);
+                            $('.swiper-wrapper').append(categoryHTML);
 
 
-                        let categoryData = ` <li>
+                            let categoryData = ` <li>
                                     <a  href="#category-${category.category}" class="scroll-link"> <button type="button"
                                             class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">${category.category}</button></a>
                                 </li>`;
-                        $('.category-dropdown').append(categoryData);
+                            $('.category-dropdown').append(categoryData);
 
 
-                    });
+                        });
 
+                        // <a href="tel:${num}">
+                        //  product output code
 
-                    //  product output code
+                        // Step 1: Get unique categories from the products array
+                        let uniqueCategory = [...new Set(products.map(product => product.category))];
 
-                    // Step 1: Get unique categories from the products array
-                    let uniqueCategory = [...new Set(products.map(product => product.category))];
-
-                    // Step 2: Loop through each category and append products under it
-                    uniqueCategory.forEach(category => {
-                        // Create a category section
-                        $('#product-container').append(`
+                        // Step 2: Loop through each category and append products under it
+                        uniqueCategory.forEach(category => {
+                            // Create a category section
+                            $('#product-container').append(`
             <div class="mt-10">
                 <h2 class="text-2xl font-semibold">${category}</h2>
                 <div class="grid xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 mt-4" id="category-${category}">
                 </div>
             </div>
         `);
-                        // Filter products for the current category and append each to the category section
-                        products.filter(product => product.category === category).forEach(
-                            product => {
-                                $(`#category-${category}`).append(`
+                            // Filter products for the current category and append each to the category section
+                            products.filter(product => product.category === category).forEach(
+                                product => {
+                                    $(`#category-${category}`).append(`
                     <div class="border border-gray rounded-lg shadow-sm p-4 cursor-pointer productCard product" productId="${product.id}" >
-                                    <a href="tel:${num}">
+                                    <button class="productDetailBtn"   >
                         <div class="relative">
                             <div class="min-h-22">
                            <img loading="lazy" src="${product.image && product.image !== 'null' ? product.image : defaultLogoUrl}" alt="${product.name}" class="w-full md:h-40 h-20  object-contain" onerror="this.onerror=null; this.src='${defaultLogoUrl}'">
@@ -410,19 +484,25 @@
                                 </button>
                             </a>
                         </div>
-                        </a>
+                        </button>
                     </div>
             `);
-                            });
+                                });
 
 
 
-                    });
-                    scrollHandle();
-                    handleSearch();
-                }
+                        });
+                        productDetailF()
+                        scrollHandle();
+                        handleSearch();
+                    }
 
-            });
+                });
+            }
+            setTimeout(getAllProducts, 1500);
+
+
+
         });
         var swiper = new Swiper(".mySwiper", {
             slidesPerView: 2,
