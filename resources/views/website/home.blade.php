@@ -10,8 +10,6 @@
             transition: background-color 0.3s ease;
         }
     </style>
-    <div class="bg-primary">sdfhdf
-    </div>
     <div class=" mt-4 mx-1 lg:mx-6 xl:mx-12   ">
         <div id="header-carousel" class="relative w-full" data-carousel="slide">
             <!-- Carousel wrapper -->
@@ -281,24 +279,24 @@
                         <div class="flex items-center gap-6 p-6">
                             <!-- Image Section -->
                             <div class="w-48 h-48 flex-shrink-0">
-                                <img src="https://horeca-kaya.com/storage/product_image/1738752206.jpeg"
-                                    alt="Strauch Tomaten" class="w-full h-full object-cover rounded-lg">
+                                <img src="{{ asset('images/Horeca-green.svg') }}" alt="product Image"
+                                    class="w-full h-full object-contain rounded-lg">
                             </div>
 
                             <!-- Product Details -->
                             <div class="flex flex-col flex-grow">
-                                <h2 class="text-lg font-semibold text-primary">Strauch Tomaten</h2>
-                                <p class="text-gray-600">Category: Gemüse</p>
-                                <p class="text-gray-800 font-bold text-xl">€2.99</p>
+                                <h2 class="text-lg font-semibold text-primary" id="modalTitle"></h2>
+                                <p class="text-gray-600">Category: <span id="modalCategory"></span></p>
+                                <p class="text-gray-800 font-bold text-xl" id="modalPrice"></p>
 
                                 <!-- Dropdown & Button -->
                                 <div class="flex items-center gap-4 mt-4">
-                               <div class="w-60">
-                                <select class="border rounded px-3 py-2 bg-gray-100 text-gray-700 w-full">
-                                    <option value="single">Single</option>
-                                    <option value="full">Full Unit</option>
-                                </select>
-                               </div>
+                                    <div class="w-60">
+                                        <select class="border rounded px-3 py-2 bg-gray-100 text-gray-700 w-full">
+                                            <option value="single">Single</option>
+                                            <option value="full">Full Unit</option>
+                                        </select>
+                                    </div>
                                     <button class="bg-primary w0-full text-white px-4 py-2 rounded-lg ">
                                         Add to Cart
                                     </button>
@@ -380,9 +378,32 @@
                     }
                 });
             }
+            const defaultLogoUrl = "{{ asset('images/Horeca-green.svg') }}";
+            let baseUrl = 'https://horeca-kaya.com/';
 
             function productDetailF() {
                 $(".productDetailBtn").click(function() {
+                    let url = baseUrl + 'api/getProductDetail/' + $(this).attr('productId');
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        beforeSend: function() {
+                            $('#ProductDetailsModal img').attr('src', defaultLogoUrl);
+                        },
+                        success: function(response) {
+                            let product = response.products[0];
+                            console.log(product);
+                            let imagePath = product.image;
+                            let finalImageSrc = imagePath.startsWith("storage/") ? baseUrl +
+                                imagePath : imagePath;
+
+                            $('#ProductDetailsModal img').attr('src', finalImageSrc);
+                            $('#modalTitle').text(product.name);
+                            $('#modalCategory').text(product.category);
+                            $('#modalPrice').text("€" + product.rate);
+                        }
+
+                    });
                     $('#ProductDetailsModal').removeClass('hidden').addClass('flex');
 
                 })
@@ -391,8 +412,7 @@
             productDetailF()
 
             scrollHandle();
-            const defaultLogoUrl = "{{ asset('images/Horeca-green.svg') }}";
-            let baseUrl = 'https://horeca-kaya.com/';
+
             $('#spinner').removeClass('hidden');
 
             function getAllProducts() {
@@ -465,8 +485,8 @@
                             products.filter(product => product.category === category).forEach(
                                 product => {
                                     $(`#category-${category}`).append(`
-                    <div class="border border-gray rounded-lg shadow-sm p-4 cursor-pointer productCard product" productId="${product.id}" >
-                                    <button class="productDetailBtn"   >
+                    <div class="border border-gray productDetailBtn rounded-lg shadow-sm p-4 cursor-pointer productCard product" productId="${product.id}" >
+                                    <div    >
                         <div class="relative">
                             <div class="min-h-22">
                            <img loading="lazy" src="${product.image && product.image !== 'null' ? product.image : defaultLogoUrl}" alt="${product.name}" class="w-full md:h-40 h-20  object-contain" onerror="this.onerror=null; this.src='${defaultLogoUrl}'">
@@ -478,13 +498,12 @@
                             <p class="text-xs md:text-sm text-gray-500">By <span class="text-primary">${product.brand}</span></p>
                         </div>
                         <div class="mt-4">
-                            <a href="tel:${num}">
+                       
                                 <button class="bg-[#def9ec] text-primary py-2 md:px-4 px-1 rounded-md w-full font-semibold md:text-sm text-xs shadow-md">
                                     <i class="fa fa-shopping-cart p-1"></i> @lang('lang.Call_For_Order')
                                 </button>
-                            </a>
                         </div>
-                        </button>
+                        </div>
                     </div>
             `);
                                 });
