@@ -255,7 +255,7 @@
             <div class="fixed inset-0 transition-opacity">
                 <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
             </div>
-            <div class="relative p-4 w-full max-w-4xl max-h-full">
+            <div class="relative p-4 w-full max-w-2xl max-h-full">
                 <form id="categoryForm" enctype="multipart/form-data" method="post" url="../addCategory">
                     @csrf
                     <div class="relative bg-white shadow-dark rounded-lg dark:bg-gray-700">
@@ -275,8 +275,20 @@
                             </button>
                         </div>
 
+                        <div class=" text-center  h-60 flex justify-center items-center " id="modalSpinner">
+                            <svg aria-hidden="true"
+                                class="w-10 h-10 mx-auto text-center text-gray-200 animate-spin fill-primary"
+                                viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                    fill="currentColor" />
+                                <path
+                                    d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                    fill="currentFill" />
+                            </svg>
+                        </div>
                         <!-- Modal Content: Row Layout -->
-                        <div class="flex items-center gap-6 p-6">
+                        <div class="flex items-center gap-6 p-6 hidden" id="modalContent">
                             <!-- Image Section -->
                             <div class="w-48 h-48 flex-shrink-0">
                                 <img src="{{ asset('images/Horeca-green.svg') }}" alt="product Image"
@@ -291,13 +303,14 @@
 
                                 <!-- Dropdown & Button -->
                                 <div class="flex items-center gap-4 mt-4">
-                                    <div class="w-60">
-                                        <select class="border rounded px-3 py-2 bg-gray-100 text-gray-700 w-full">
-                                            <option value="single">Single</option>
-                                            <option value="full">Full Unit</option>
+                                    <div class="w-52">
+                                        <select class="border rounded px-3 py-2 bg-gray-100 text-gray-700 w-full"
+                                            id="unitStatus">
+                                            <option value="single" selected>Single</option>
+                                            <option value="full" id="unitOption">Full Unit</option>
                                         </select>
                                     </div>
-                                    <button class="bg-primary w0-full text-white px-4 py-2 rounded-lg ">
+                                    <button class="bg-primary w-full text-white px-4 py-2 rounded-lg ">
                                         Add to Cart
                                     </button>
                                 </div>
@@ -315,108 +328,150 @@
 @endsection
 @section('js')
     <script>
-$(document).ready(function() {
-    function handleSearch() {
-        $('.search-input').on('keyup', function() {
-            const searchValue = $(this).val().toLowerCase();
-            const $products = $('.product');
+        $(document).ready(function() {
+            function handleSearch() {
+                $('.search-input').on('keyup', function() {
+                    const searchValue = $(this).val().toLowerCase();
+                    const $products = $('.product');
 
-            if (!searchValue) {
-                $products.removeClass('highlight');
-                $('#match-count').text("0");
-                $('#match-count-con').addClass("hidden");
-                return;
-            }
+                    if (!searchValue) {
+                        $products.removeClass('highlight');
+                        $('#match-count').text("0");
+                        $('#match-count-con').addClass("hidden");
+                        return;
+                    }
 
-            $products.removeClass('highlight');
-            const $matchedProducts = $products.filter(function() {
-                return $(this).text().toLowerCase().includes(searchValue);
-            });
+                    $products.removeClass('highlight');
+                    const $matchedProducts = $products.filter(function() {
+                        return $(this).text().toLowerCase().includes(searchValue);
+                    });
 
-            $matchedProducts.addClass('highlight');
-            $('#match-count-con').removeClass("hidden");
-            $('.match-count').text($matchedProducts.length);
+                    $matchedProducts.addClass('highlight');
+                    $('#match-count-con').removeClass("hidden");
+                    $('.match-count').text($matchedProducts.length);
 
-            if ($matchedProducts.length) {
-                $('html, body').animate({
-                    scrollTop: $matchedProducts.first().offset().top - ($(window).height() / 2) + ($matchedProducts.first().height() / 2)
-                }, 100);
-            }
-        });
-    }
-    handleSearch();
-    
-    function scrollHandle() {
-        $('.scroll-link').on('click', function(e) {
-            e.preventDefault();
-            let target = $(this).attr('href');
-            let offset = 150;
-            let targetElement = $(target);
-
-            if (targetElement.length) {
-                $('html, body').animate({
-                    scrollTop: targetElement.offset().top - offset
-                }, 400);
-            } else {
-                Swal.fire({
-                    title: "@lang('lang.No_product_Find')",
-                    text: "@lang('lang.This_category_has_0_product')",
-                    icon: "warning",
-                });
-            }
-        });
-    }
-
-    const defaultLogoUrl = "{{ asset('images/Horeca-green.svg') }}";
-    let baseUrl = 'https://horeca-kaya.com/';
-
-    function productDetailF() {
-        $(document).on('click', ".productDetailBtn", function() {
-            let url = baseUrl + 'api/getProductDetail/' + $(this).attr('productId');
-            $.ajax({
-                type: "GET",
-                url: url,
-                beforeSend: function() {
-                    $('#ProductDetailsModal img').attr('src', defaultLogoUrl);
-                },
-                success: function(response) {
-                    let product = response.products[0];
-                    let imagePath = product.image;
-                    let finalImageSrc = imagePath.startsWith("storage/") ? baseUrl + imagePath : imagePath;
-                    $('#ProductDetailsModal img').attr('src', finalImageSrc);
-                    $('#modalTitle').text(product.name);
-                    $('#modalCategory').text(product.category);
-                    $('#modalPrice').text("€" + product.rate);
-                }
-            });
-            $('#ProductDetailsModal').removeClass('hidden').addClass('flex');
-        });
-    }
-    
-    scrollHandle();
-    $('#spinner').removeClass('hidden');
-    
-    function getAllProducts() {
-        $.ajax({
-            type: "GET",
-            url: 'https://horeca-kaya.com/api/getProducts',
-            success: function(response) {
-                $('#spinner').addClass('hidden');
-                let products = response.products;
-                let uniqueCategories = [];
-                let categoryNames = new Set();
-                let catBgColors = ["#F2FCE4", "#D6D3C4FF", "#ECFFEC", "#FEEFEA", "#FFF3FF"];
-                
-                products.forEach(product => {
-                    if (!categoryNames.has(product.category)) {
-                        uniqueCategories.push(product);
-                        categoryNames.add(product.category);
+                    if ($matchedProducts.length) {
+                        $('html, body').animate({
+                            scrollTop: $matchedProducts.first().offset().top - ($(window).height() /
+                                2) + ($matchedProducts.first().height() / 2)
+                        }, 100);
                     }
                 });
-                
-                uniqueCategories.forEach((category, i) => {
-                    let color = catBgColors[i % catBgColors.length];
-                    let categoryHTML = `
+            }
+            handleSearch();
+
+            function scrollHandle() {
+                $('.scroll-link').on('click', function(e) {
+                    e.preventDefault();
+                    let target = $(this).attr('href');
+                    let offset = 150;
+                    let targetElement = $(target);
+
+                    if (targetElement.length) {
+                        $('html, body').animate({
+                            scrollTop: targetElement.offset().top - offset
+                        }, 400);
+                    } else {
+                        Swal.fire({
+                            title: "@lang('lang.No_product_Find')",
+                            text: "@lang('lang.This_category_has_0_product')",
+                            icon: "warning",
+                        });
+                    }
+                });
+            }
+
+            const defaultLogoUrl = "{{ asset('images/Horeca-green.svg') }}";
+            let baseUrl = 'https://horeca-kaya.com/';
+
+            function productDetailF() {
+                $(document).on('click', ".productDetailBtn", function() {
+                    let url = baseUrl + 'api/getProductDetail/' + $(this).attr('productId');
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        beforeSend: function() {
+                            $('#modalContent').addClass('hidden');
+                            $('#modalSpinner').removeClass('hidden');
+
+                            $('#ProductDetailsModal img').attr('src', defaultLogoUrl);
+                        },
+                        success: function(response) {
+                            $('#modalSpinner').addClass('hidden');
+                            $('#modalContent').removeClass('hidden');
+                            let product = response.products[0];
+                            let imagePath = product.image;
+                            let finalImageSrc = imagePath.startsWith("storage/") ? baseUrl +
+                                imagePath : imagePath;
+                            $('#ProductDetailsModal img').attr('src', finalImageSrc);
+                            $('#modalTitle').text(product.name);
+                            $('#modalCategory').text(product.category);
+                            $('#modalPrice').text("€" + product.rate);
+
+
+
+                            if (product.unit_price == 0) {
+                                $('#unitOption').prop('disabled', true);
+                                $('#unitStatus').val('single').trigger('change');
+                            } else {
+                                $('#unitOption').prop('disabled', false);
+                                $('#unitStatus').trigger('change');
+                            }
+
+                            function checkUnitStatus() {
+                                let unitStatus = $('#unitStatus').val();
+                                if (unitStatus == "single") {
+                                    $('#modalPrice').text("€" + product.rate);
+                                    $('#weight').val(product.content_weight);
+                                } else {
+                                    $('#modalPrice').text("€" + product.unit_price);
+                                    $('#weight').val(product.package_weight);
+                                }
+                            }
+                            console.log(unitStatus);
+                            checkUnitStatus(); // Initial check
+                            $('#unitStatus').change(
+                                checkUnitStatus); // Bind the event handler
+
+
+                            // $('#Product_Price').val(product.rate);
+                            // $('#Product_id').val(product.id);
+                            // $('#productCode').val(product.code);
+                            // $('#tax').val(product.tax);
+
+                            // });
+
+
+                        }
+                    });
+                    $('#ProductDetailsModal').removeClass('hidden').addClass('flex');
+                });
+            }
+
+            scrollHandle();
+            $('#spinner').removeClass('hidden');
+
+            function getAllProducts() {
+                $.ajax({
+                    type: "GET",
+                    url: 'https://horeca-kaya.com/api/getProducts',
+                    success: function(response) {
+                        $('#spinner').addClass('hidden');
+                        let products = response.products;
+                        let uniqueCategories = [];
+                        let categoryNames = new Set();
+                        let catBgColors = ["#F2FCE4", "#D6D3C4FF", "#ECFFEC", "#FEEFEA", "#FFF3FF"];
+
+                        products.forEach(product => {
+                            if (!categoryNames.has(product.category)) {
+                                uniqueCategories.push(product);
+                                categoryNames.add(product.category);
+                            }
+                        });
+
+                        uniqueCategories.forEach((category, i) => {
+                            let color = catBgColors[i % catBgColors.length];
+                            let categoryHTML = `
                         <div class="swiper-slide">
                             <a href="#category-${category.category}" class="h-48 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col items-center justify-center flex-1 scroll-link" style="background-color: ${color};">
                                 <div class="w-full h-28 flex justify-center">
@@ -427,34 +482,35 @@ $(document).ready(function() {
                                 </div>
                             </a>
                         </div>`;
-                    $('.swiper-wrapper').append(categoryHTML);
-                    
-                    let categoryData = `<li>
+                            $('.swiper-wrapper').append(categoryHTML);
+
+                            let categoryData = `<li>
                         <a href="#category-${category.category}" class="scroll-link"> 
                             <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                 ${category.category}
                             </button>
                         </a>
                     </li>`;
-                    $('.category-dropdown').append(categoryData);
-                });
-                
-                let uniqueCategory = [...new Set(products.map(product => product.category))];
-                
-                let index = 0;
-                function addProductWithDelay() {
-                    if (index >= products.length) return;
-                    let product = products[index];
-                    let categorySelector = `#category-${product.category}`;
-                    if (!$(categorySelector).length) {
-                        $('#product-container').append(`
+                            $('.category-dropdown').append(categoryData);
+                        });
+
+                        let uniqueCategory = [...new Set(products.map(product => product.category))];
+
+                        let index = 0;
+
+                        function addProductWithDelay() {
+                            if (index >= products.length) return;
+                            let product = products[index];
+                            let categorySelector = `#category-${product.category}`;
+                            if (!$(categorySelector).length) {
+                                $('#product-container').append(`
                             <div class="mt-10">
                                 <h2 class="text-2xl font-semibold">${product.category}</h2>
                                 <div class="grid xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 mt-4" id="category-${product.category}"></div>
                             </div>
                         `);
-                    }
-                    $(categorySelector).append(`
+                            }
+                            $(categorySelector).append(`
                         <div class="border border-gray productDetailBtn rounded-lg shadow-sm p-4 cursor-pointer productCard product" productId="${product.id}">
                             <div>
                                 <div class="relative">
@@ -467,18 +523,18 @@ $(document).ready(function() {
                             </div>
                         </div>
                     `);
-                    index++;
-                    setTimeout(addProductWithDelay, 100);
-                }
-                addProductWithDelay();
-                productDetailF();
-                scrollHandle();
-                handleSearch();
+                            index++;
+                            setTimeout(addProductWithDelay, 50);
+                        }
+                        addProductWithDelay();
+                        productDetailF();
+                        scrollHandle();
+                        handleSearch();
+                    }
+                });
             }
+            setTimeout(getAllProducts, 1500);
         });
-    }
-    setTimeout(getAllProducts, 1500);
-});
 
         var swiper = new Swiper(".mySwiper", {
             slidesPerView: 2,
