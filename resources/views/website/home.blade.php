@@ -315,203 +315,205 @@
 @endsection
 @section('js')
     <script>
-        const defaultLogoUrl = "{{ asset('images/Horeca-green.svg') }}";
-        const baseUrl = 'https://horeca-kaya.com/';
-        const catBgColors = ["#F2FCE4", "#D6D3C4FF", "#ECFFEC", "#FEEFEA", "#FFF3FF"];
+$(document).ready(function() {
+    function handleSearch() {
+        $('.search-input').on('keyup', function() {
+            const searchValue = $(this).val().toLowerCase();
+            const $products = $('.product');
 
-        function getAllProducts() {
+            if (!searchValue) {
+                $products.removeClass('highlight');
+                $('#match-count').text("0");
+                $('#match-count-con').addClass("hidden");
+                return;
+            }
+
+            $products.removeClass('highlight');
+            const $matchedProducts = $products.filter(function() {
+                return $(this).text().toLowerCase().includes(searchValue);
+            });
+
+            $matchedProducts.addClass('highlight');
+            $('#match-count-con').removeClass("hidden");
+            $('.match-count').text($matchedProducts.length);
+
+            if ($matchedProducts.length) {
+                $('html, body').animate({
+                    scrollTop: $matchedProducts.first().offset().top - ($(window).height() / 2) + ($matchedProducts.first().height() / 2)
+                }, 100);
+            }
+        });
+    }
+    handleSearch();
+    
+    function scrollHandle() {
+        $('.scroll-link').on('click', function(e) {
+            e.preventDefault();
+            let target = $(this).attr('href');
+            let offset = 150;
+            let targetElement = $(target);
+
+            if (targetElement.length) {
+                $('html, body').animate({
+                    scrollTop: targetElement.offset().top - offset
+                }, 400);
+            } else {
+                Swal.fire({
+                    title: "@lang('lang.No_product_Find')",
+                    text: "@lang('lang.This_category_has_0_product')",
+                    icon: "warning",
+                });
+            }
+        });
+    }
+
+    const defaultLogoUrl = "{{ asset('images/Horeca-green.svg') }}";
+    let baseUrl = 'https://horeca-kaya.com/';
+
+    function productDetailF() {
+        $(document).on('click', ".productDetailBtn", function() {
+            let url = baseUrl + 'api/getProductDetail/' + $(this).attr('productId');
             $.ajax({
                 type: "GET",
-                url: `${baseUrl}api/getProducts`,
-                beforeSend: () => $('#spinner').removeClass('hidden'),
-                success: (response) => {
-                    $('#spinner').addClass('hidden');
-                    let products = response.products;
-
-                    if (!products || !products.length) return;
-
-                    let uniqueCategories = [...new Set(products.map(p => p.category))];
-
-                    // Generate categories and category dropdown
-                    $('.swiper-wrapper, .category-dropdown').empty();
-                    uniqueCategories.forEach((category, i) => {
-                        let color = catBgColors[i % catBgColors.length];
-                        let categoryHTML = `
+                url: url,
+                beforeSend: function() {
+                    $('#ProductDetailsModal img').attr('src', defaultLogoUrl);
+                },
+                success: function(response) {
+                    let product = response.products[0];
+                    let imagePath = product.image;
+                    let finalImageSrc = imagePath.startsWith("storage/") ? baseUrl + imagePath : imagePath;
+                    $('#ProductDetailsModal img').attr('src', finalImageSrc);
+                    $('#modalTitle').text(product.name);
+                    $('#modalCategory').text(product.category);
+                    $('#modalPrice').text("€" + product.rate);
+                }
+            });
+            $('#ProductDetailsModal').removeClass('hidden').addClass('flex');
+        });
+    }
+    
+    scrollHandle();
+    $('#spinner').removeClass('hidden');
+    
+    function getAllProducts() {
+        $.ajax({
+            type: "GET",
+            url: 'https://horeca-kaya.com/api/getProducts',
+            success: function(response) {
+                $('#spinner').addClass('hidden');
+                let products = response.products;
+                let uniqueCategories = [];
+                let categoryNames = new Set();
+                let catBgColors = ["#F2FCE4", "#D6D3C4FF", "#ECFFEC", "#FEEFEA", "#FFF3FF"];
+                
+                products.forEach(product => {
+                    if (!categoryNames.has(product.category)) {
+                        uniqueCategories.push(product);
+                        categoryNames.add(product.category);
+                    }
+                });
+                
+                uniqueCategories.forEach((category, i) => {
+                    let color = catBgColors[i % catBgColors.length];
+                    let categoryHTML = `
                         <div class="swiper-slide">
-                            <a href="#category-${category}" class="h-48 bg-[${color}] rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col items-center justify-center flex-1 scroll-link">
+                            <a href="#category-${category.category}" class="h-48 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col items-center justify-center flex-1 scroll-link" style="background-color: ${color};">
                                 <div class="w-full h-28 flex justify-center">
-                                    <img class="rounded-t-lg pt-6 w-[90%]" loading="lazy" 
-                                        src="${products.find(p => p.category === category)?.category_image || defaultLogoUrl}" 
-                                        alt="${category}" 
-                                        onerror="this.onerror=null; this.src='${defaultLogoUrl}'">
+                                    <img class="rounded-t-lg pt-6 w-[90%]" loading="lazy" src="${category.category_image !== "null" ? baseUrl + category.category_image : defaultLogoUrl}" alt="${category.category}" />
                                 </div>
                                 <div class="p-5 pb-8 text-center w-full">
-                                    <h5 class="text-lg font-medium tracking-tight text-gray-900 dark:text-white">${category}</h5>
+                                    <h5 class="text-lg font-medium tracking-tight text-gray-900 dark:text-white">${category.category}</h5>
                                 </div>
                             </a>
                         </div>`;
-                        $('.swiper-wrapper').append(categoryHTML);
-
-                        $('.category-dropdown').append(`<li><a href="#category-${category}" class="scroll-link">
-                        <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                            ${category}
-                        </button></a>
-                    </li>`);
-                    });
-
-                    // Generate product listings
-                    $('#product-container').empty();
-                    uniqueCategories.forEach(category => {
-                        let categoryProducts = products.filter(product => product.category ===
-                        category);
-                        let productSection = `
-                        <div class="mt-10">
-                            <h2 class="text-2xl font-semibold">${category}</h2>
-                            <div class="grid xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 mt-4" id="category-${category}">
+                    $('.swiper-wrapper').append(categoryHTML);
+                    
+                    let categoryData = `<li>
+                        <a href="#category-${category.category}" class="scroll-link"> 
+                            <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                ${category.category}
+                            </button>
+                        </a>
+                    </li>`;
+                    $('.category-dropdown').append(categoryData);
+                });
+                
+                let uniqueCategory = [...new Set(products.map(product => product.category))];
+                
+                let index = 0;
+                function addProductWithDelay() {
+                    if (index >= products.length) return;
+                    let product = products[index];
+                    let categorySelector = `#category-${product.category}`;
+                    if (!$(categorySelector).length) {
+                        $('#product-container').append(`
+                            <div class="mt-10">
+                                <h2 class="text-2xl font-semibold">${product.category}</h2>
+                                <div class="grid xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 mt-4" id="category-${product.category}"></div>
                             </div>
-                        </div>`;
-                        $('#product-container').append(productSection);
-
-                        categoryProducts.forEach(product => {
-                            $(`#category-${category}`).append(`
-                            <div class="border border-gray productDetailBtn rounded-lg shadow-sm p-4 cursor-pointer productCard product" productId="${product.id}">
-                                <div>
-                                    <div class="relative">
-                                        <div class="min-h-22">
-                                            <img loading="lazy" src="${product.image && product.image !== 'null' ? product.image : defaultLogoUrl}" 
-                                                alt="${product.name}" class="w-full md:h-40 h-20 object-contain" 
-                                                onerror="this.onerror=null; this.src='${defaultLogoUrl}'">
-                                        </div>
-                                    </div>
-                                    <div class="mt-4">
-                                        <p class="md:text-sm text-xs text-gray-500">${category}</p>
-                                        <h2 class="md:text-md text-sm font-semibold">${product.name}</h2>
-                                        <p class="text-xs md:text-sm text-gray-500">By <span class="text-primary">${product.brand}</span></p>
-                                    </div>
-                                    <div class="mt-4">
-                                        <button class="bg-[#def9ec] text-primary py-2 md:px-4 px-1 rounded-md w-full font-semibold md:text-sm text-xs shadow-md">
-                                            <i class="fa fa-shopping-cart p-1"></i> @lang('lang.Call_For_Order')
-                                        </button>
-                                    </div>
+                        `);
+                    }
+                    $(categorySelector).append(`
+                        <div class="border border-gray productDetailBtn rounded-lg shadow-sm p-4 cursor-pointer productCard product" productId="${product.id}">
+                            <div>
+                                <div class="relative">
+                                    <img loading="lazy" src="${product.image && product.image !== 'null' ? product.image : defaultLogoUrl}" alt="${product.name}" class="w-full md:h-40 h-20 object-contain" onerror="this.onerror=null; this.src='${defaultLogoUrl}'">
                                 </div>
-                            </div>`);
-                        });
-                    });
-
-                    bindEvents();
-                },
-                error: () => {
-                    $('#spinner').addClass('hidden');
-                    alert("Failed to load products. Please try again.");
+                                <div class="mt-4">
+                                    <h2 class="md:text-md text-sm font-semibold">${product.name}</h2>
+                                    <p class="text-xs md:text-sm text-gray-500">By <span class="text-primary">${product.brand}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+                    index++;
+                    setTimeout(addProductWithDelay, 100);
                 }
-            });
-        }
-
-        function bindEvents() {
-            $('.scroll-link').off('click').on('click', function(e) {
-                e.preventDefault();
-                let target = $(this).attr('href');
-                let offset = 150;
-                let targetElement = $(target);
-                if (targetElement.length) {
-                    $('html, body').animate({
-                        scrollTop: targetElement.offset().top - offset
-                    }, 400);
-                } else {
-                    Swal.fire({
-                        title: "@lang('lang.No_product_Find')",
-                        text: "@lang('lang.This_category_has_0_product')",
-                        icon: "warning"
-                    });
-                }
-            });
-
-            $(".productDetailBtn").off('click').on('click', function() {
-                let productId = $(this).attr('productId');
-                let url = `${baseUrl}api/getProductDetail/${productId}`;
-                $.ajax({
-                    type: "GET",
-                    url: url,
-                    beforeSend: () => $('#ProductDetailsModal img').attr('src', defaultLogoUrl),
-                    success: (response) => {
-                        let product = response.products[0];
-                        let imagePath = product.image.startsWith("storage/") ? baseUrl + product.image :
-                            product.image;
-                        $('#ProductDetailsModal img').attr('src', imagePath);
-                        $('#modalTitle').text(product.name);
-                        $('#modalCategory').text(product.category);
-                        $('#modalPrice').text("€" + product.rate);
-                    },
-                    error: () => alert("Failed to load product details.")
-                });
-                $('#ProductDetailsModal').removeClass('hidden').addClass('flex');
-            });
-
-            $('.search-input').off('keyup').on('keyup', function() {
-                const searchValue = $(this).val().toLowerCase();
-                const $products = $('.product');
-                if (!searchValue) {
-                    $products.removeClass('highlight');
-                    $('#match-count').text("0");
-                    $('#match-count-con').addClass("hidden");
-                    return;
-                }
-
-                $products.removeClass('highlight');
-                const $matchedProducts = $products.filter(function() {
-                    return $(this).text().toLowerCase().includes(searchValue);
-                });
-
-                $matchedProducts.addClass('highlight');
-                $('#match-count-con').removeClass("hidden");
-                $('.match-count').text($matchedProducts.length);
-
-                if ($matchedProducts.length) {
-                    $('html, body').animate({
-                        scrollTop: $matchedProducts.first().offset().top - ($(window).height() / 2) + (
-                            $matchedProducts.first().height() / 2)
-                    }, 100);
-                }
-            });
-        }
-
-        $(document).ready(() => {
-            $('#spinner').removeClass('hidden');
-            setTimeout(getAllProducts, 1000);
+                addProductWithDelay();
+                productDetailF();
+                scrollHandle();
+                handleSearch();
+            }
         });
+    }
+    setTimeout(getAllProducts, 1500);
+});
 
         var swiper = new Swiper(".mySwiper", {
             slidesPerView: 2,
             spaceBetween: 25,
             pagination: {
                 el: ".swiper-pagination",
-                clickable: true
+                clickable: true,
             },
             navigation: {
                 nextEl: '.swiper-next',
-                prevEl: '.swiper-prev'
+                prevEl: '.swiper-prev',
             },
             breakpoints: {
                 1380: {
                     slidesPerView: 8,
-                    spaceBetween: 20
+                    spaceBetween: 20,
                 },
                 1370: {
                     slidesPerView: 6,
-                    spaceBetween: 20
+                    spaceBetween: 20,
                 },
+
                 820: {
                     slidesPerView: 4,
-                    spaceBetween: 10
+                    spaceBetween: 10,
                 },
                 768: {
                     slidesPerView: 3,
-                    spaceBetween: 10
+                    spaceBetween: 10,
                 },
                 576: {
                     slidesPerView: 2,
-                    spaceBetween: 8
-                }
+                    spaceBetween: 8,
+                },
+
             }
         });
     </script>

@@ -122,6 +122,33 @@ class productController extends Controller
             return response()->json(['success'  => false, 'message' => $e->getMessage()],  500);
         }
     }
+
+    function getProductsWeb(Request $request)
+    {
+        try {
+            $perPage = 20; // Number of products per request
+            $page = $request->query('page', 1); // Get the page number from request
+    
+            $products = product::whereNot('status', 'deleted')
+                ->orderBy('id', 'desc')
+                ->paginate($perPage, ['*'], 'page', $page); // Paginate results
+    
+            $categories = category::where('status', "active")->get();
+    
+            return response()->json([
+                'success' => true,
+                'message' => "Products retrieved successfully",
+                'products' => $products->items(), // Only return product list
+                'categories' => $categories,
+                'next_page' => $products->nextPageUrl() // Provide next page URL
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
     function SingleproductData($product_id)
     {
         try {

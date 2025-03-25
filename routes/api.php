@@ -37,7 +37,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('changepasword', [userController::class, 'changepasword']);
     Route::post('/updateSettings', [authController::class, 'updateSettings']);
     Route::get('/getUserProfile', [authController::class, 'getUserProfile']);
-});
+}); 
 
 
 // category
@@ -46,6 +46,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 //  products
 Route::get('getProducts', [productController::class, 'getAllProducts']);
+Route::get('getProductsWeb', [productController::class, 'getProductsWeb']);
 
 
 Route::get('getProductDetail/{id}', [productController::class, 'SingleproductData']);
