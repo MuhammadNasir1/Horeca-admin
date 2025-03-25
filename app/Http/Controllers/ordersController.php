@@ -12,7 +12,7 @@ class ordersController extends Controller
 {
 
 public function index(){
-    $customers = User::select('id' , 'name' , 'email' , 'phone' , 'address')->where('role', 'customer')->where('verification' , 'approved')->orderBy('id', 'desc')->get();
+    $customers = User::select('id' , 'name' , 'email' , 'phone' , 'address')->where('role', 'customer')->where('verification' , 'approved')->get();
     // return response()->json($customers);
     return view('createOrder' , compact('customers'));
 }
@@ -198,7 +198,7 @@ public function index(){
     public function orders()
     {
 
-        $orders = orders::all();
+        $orders = Orders::orderBy('id', 'desc')->get();
         return view('orders', ['orders' => $orders]);
     }
 
@@ -323,7 +323,7 @@ public function index(){
                 'order_status' => "pending",
                 'delivery_charges' => $request['delivery_charges'],
                 'order_from' => $validatedData['order_from'],
-                'platform' => "App",
+                'platform' => $validatedData['platform'] ?? 'App',
 
             ]);
             foreach ($validatedData['product_id'] as $j => $productId) {
