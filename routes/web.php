@@ -22,6 +22,9 @@ Route::get('/notifications', function () {
 Route::get('/error', function () {
     return view('error');
 });
+Route::get('/cart', function () {
+    return view('cart');
+});
 
 
 Route::get('/',  function () {

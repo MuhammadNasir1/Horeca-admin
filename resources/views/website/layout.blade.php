@@ -51,7 +51,9 @@
 
             <!-- logo -->
             <div class="mr-auto md:w-48 flex-shrink-0">
-                <img class="h-8 " src="{{ asset('images/Horeca-green.svg') }}" alt="Horeca-Kaya">
+                <a href="../">
+                    <img class="h-8 " src="{{ asset('images/Horeca-green.svg') }}" alt="Horeca-Kaya">
+                </a>
             </div>
 
             <!-- search -->
@@ -124,7 +126,7 @@
 
 
             <!-- logo -->
-            <div class="md:mr-auto md:w-48 flex-shrink-0">
+            <div class="md:mr-auto md:w-48 flex-shrink-0 flex items-center">
                 {{-- =============language dropdown======================== --}}
                 <button type="button" data-dropdown-toggle="language-dropdown-menu"
                     class="inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
@@ -250,6 +252,17 @@
                         </li>
                     </ul>
                 </div>
+                <div>
+                    <a href="../cart">
+
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 576 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                            <path fill="#000000"
+                                d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
+                        </svg>
+
+                    </a>
+                </div>
             </div>
 
         </div>
@@ -316,7 +329,33 @@
     <div class="max-w-[1920px] mx-auto">
         @yield('content')
     </div>
-
+    <footer class="bg-white rounded-lg  dark:bg-gray-900 m-4">
+        <div class="w-full  mx-auto p-4 md:py-8">
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <a class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
+                    <img src="{{ asset('images/Horeca-green.svg') }}" class="h-8" alt="Flowbite Logo" />
+                </a>
+                <ul
+                    class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">@lang('lang.About')</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">@lang('lang.Privacy_Policy')</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">@lang('lang.Licensing')</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline">@lang('lang.Contact')</a>
+                    </li>
+                </ul>
+            </div>
+            <hr class="my-6 border-primary sm:mx-auto  lg:my-8" />
+            <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a
+                    href="https://horeca-kaya.com/" class="hover:underline">Horeca</a> @lang('lang.All_Rights_Reserved').</span>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/b6b9586b26.js" crossorigin="anonymous"></script>

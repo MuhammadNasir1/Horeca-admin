@@ -12,7 +12,7 @@ class ordersController extends Controller
 {
 
 public function index(){
-    $customers = User::select('id' , 'name' , 'email' , 'phone' , 'address')->where('role', 'customer')->where('verification' , 'approved')->get();
+    $customers = User::select('id' , 'name' , 'email' , 'phone' , 'address')->where('role', 'customer')->where('verification' , 'approved')->orderBy('id', 'desc')->get();
     // return response()->json($customers);
     return view('createOrder' , compact('customers'));
 }

@@ -222,35 +222,6 @@
 
         </div>
 
-        <footer class="bg-white rounded-lg  dark:bg-gray-900 m-4">
-            <div class="w-full  mx-auto p-4 md:py-8">
-                <div class="sm:flex sm:items-center sm:justify-between">
-                    <a class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
-                        <img src="{{ asset('images/Horeca-green.svg') }}" class="h-8" alt="Flowbite Logo" />
-                    </a>
-                    <ul
-                        class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
-                        <li>
-                            <a href="#" class="hover:underline me-4 md:me-6">@lang('lang.About')</a>
-                        </li>
-                        <li>
-                            <a href="#" class="hover:underline me-4 md:me-6">@lang('lang.Privacy_Policy')</a>
-                        </li>
-                        <li>
-                            <a href="#" class="hover:underline me-4 md:me-6">@lang('lang.Licensing')</a>
-                        </li>
-                        <li>
-                            <a href="#" class="hover:underline">@lang('lang.Contact')</a>
-                        </li>
-                    </ul>
-                </div>
-                <hr class="my-6 border-primary sm:mx-auto  lg:my-8" />
-                <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a
-                        href="https://horeca-kaya.com/" class="hover:underline">Horeca</a> @lang('lang.All_Rights_Reserved').</span>
-            </div>
-        </footer>
-
-
 
         <div id="ProductDetailsModal" data-modal-backdrop="static"
             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -354,22 +325,24 @@
 
             $("#addToCart").on("click", function() {
                 let product = {
-                    id: $("#modalTitle").attr("productId"),
-                    name: $("#modalTitle").text(),
-                    category: $("#modalCategory").text(),
-                    price: parseFloat($("#modalPrice").text().replace("€", "")),
-                    quantity: parseInt($("#quantity").text()), // Get selected quantity
-                    unit_status: $("#unitStatus").val()
+                    id: $("#modalTitle").attr("productId"), // Product ID
+                    name: $("#modalTitle").text(), // Product Name
+                    category: $("#modalCategory").text(), // Category
+                    price: parseFloat($("#modalPrice").text().replace("€", "")), // Price
+                    quantity: parseInt($("#quantity").text()), // Quantity
+                    unit_status: $("#unitStatus").val() // Unit Type (Single/Full Unit)
                 };
 
                 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-                // Check if the product already exists in the cart
-                let existingProduct = cart.find(item => item.id === product.id);
+                // Check if the product with the same ID and unit type exists
+                let existingProduct = cart.find(item => item.id === product.id && item.unit_status ===
+                    product.unit_status);
+
                 if (existingProduct) {
-                    existingProduct.quantity += product.quantity;
+                    existingProduct.quantity += product.quantity; // Increase quantity
                 } else {
-                    cart.push(product);
+                    cart.push(product); // Add as a new product if unit type is different
                 }
 
                 localStorage.setItem("cart", JSON.stringify(cart));
