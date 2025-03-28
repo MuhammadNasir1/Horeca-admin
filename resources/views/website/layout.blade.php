@@ -46,7 +46,7 @@
     </div>
 
     <!-- component -->
- 
+
 
     <div class="max-w-[1920px] mx-auto">
         @yield('content')
@@ -132,6 +132,23 @@
     @endif
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
+        function updateCartBadge() {
+            // Get cart data from localStorage
+            const cartData = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Calculate total quantity
+            const totalQuantity = cartData.reduce((sum, item) => sum + (item.quantity || 0), 0);
+
+            // Find the badge element (assuming it has a specific class or ID)
+            const badge = document.querySelector('.cart-quantity-badge');
+
+            // Update the badge content and visibility
+            if (badge) {
+                badge.textContent = totalQuantity;
+                badge.style.display = totalQuantity > 0 ? 'flex' : 'none'; // Hide if 0
+            }
+        }
+        updateCartBadge()
         $(window).on('load', function() {
             $('#loading').hide();
         })

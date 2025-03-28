@@ -10,7 +10,7 @@
             transition: background-color 0.3s ease;
         }
     </style>
-      <nav class="bg-white  sticky top-0 z-50">
+    <nav class="bg-white  sticky top-0 z-50">
         <div class="container mx-auto px-2 md:px-4 py-2 flex items-center justify-between ">
 
             <!-- logo -->
@@ -186,15 +186,16 @@
                         </li>
                     </ul>
                 </div>
-                <div>
+                <div class="relative inline-block">
                     <a href="../cart">
-
-                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 576 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                             <path fill="#000000"
                                 d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
                         </svg>
-
+                        <!-- Quantity Badge with Class -->
+                        <span class="cart-quantity-badge absolute -top-2 -right-2 bg-primary text-white text-xs font-semibold rounded-full h-5 w-5 flex items-center justify-center">
+                            0 <!-- Initial value, will be updated by JS -->
+                        </span>
                     </a>
                 </div>
             </div>
@@ -333,18 +334,16 @@
             <div class="flex gap-6 items-center justify-between ">
                 <h2 class="text-2xl font-semibold">@lang('lang.Categories')</h2>
                 <div class="flex gap-4">
-                    <button
-                        class="swiper-prev h-10 w-10 rounded-full bg-slate-300 flex justify-center items-rounded-smh-6 w-6"
-                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                        <path fill="#242424"
-                            d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z" />
+                    <button class="swiper-prev  rounded-full bg-slate-300 flex justify-center items-rounded-sm p-2 ">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                            <path fill="#242424"
+                                d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z" />
                         </svg>
                     </button>
-                    <button
-                        class="swiper-next h-10 w-10 rounded-full bg-slate-300 flex justify-center items-rounded-smh-6 w-6"
-                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                        <path fill="#242424"
-                            d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
+                    <button class="swiper-next  rounded-full bg-slate-300 flex justify-center items-rounded-sm p-2">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                            <path fill="#242424"
+                                d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
                         </svg>
                     </button>
                 </div>
@@ -460,7 +459,8 @@
                                 </div>
                                 <div
                                     class="mx-auto max-w-screen-sm text-sm text-left text-gray-500 newsletter-form-footer">
-                                    @lang('lang.We care about the protection of your data'). <a href="#" class="font-medium text-primary hover:underline">
+                                    @lang('lang.We care about the protection of your data'). <a href="#"
+                                        class="font-medium text-primary hover:underline">
                                         @lang('lang.Read our Privacy Policy')
                                     </a>.</div>
                             </form>
@@ -495,57 +495,47 @@
                             </svg>
                         </button>
                     </div>
-
-                    <div class=" text-center  h-60 flex justify-center items-center " id="modalSpinner">
-                        <svg aria-hidden="true"
-                            class="w-10 h-10 mx-auto text-center text-gray-200 animate-spin fill-primary"
-                            viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                                fill="currentColor" />
-                            <path
-                                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                                fill="currentFill" />
-                        </svg>
-                    </div>
                     <!-- Modal Content: Row Layout -->
-                    <div class="flex items-center gap-6 p-6 hidden" id="modalContent">
-                        <!-- Image Section -->
-                        <div class="w-48 h-48 flex-shrink-0">
-                            <img src="{{ asset('images/Horeca-green.svg') }}" alt="product Image"
-                                class="w-full h-full object-contain rounded-lg">
-                        </div>
-
-                        <!-- Product Details -->
-                        <div class="flex flex-col flex-grow">
-                            <h2 class="text-lg font-semibold text-primary" id="modalTitle" productId=""></h2>
-                            <p class="text-gray-600">Category: <span id="modalCategory"></span></p>
-                            <p class="text-gray-800 font-bold text-xl" id="modalPrice"></p>
-                            <div class="flex gap-2 items-center mt-2" id="">
-                                <button type="button" class="text-xs bg-primary text-white rounded-sm h-6 w-6"
-                                    id="decreaseQty">-</button>
-                                <h3 class="text-sm" id="quantity">1</h3>
-                                <button type="button" class="text-xs bg-primary text-white rounded-sm h-6 w-6"
-                                    id="increaseQty">+</button>
-                            </div>
-
-                            <!-- Dropdown & Button -->
-                            <div class="flex items-center gap-4 mt-4">
-                                <div class="w-52">
-                                    <select class="border rounded px-3 py-2 bg-gray-100 text-gray-700 w-full"
-                                        id="unitStatus">
-                                        <option value="single" selected>Single</option>
-                                        <option value="full" id="unitOption">Full Unit</option>
-                                    </select>
-                                </div>
-                                <button class="bg-primary w-full text-white px-4 py-2 rounded-md " id="addToCart">
-                                    Add to Cart
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Modal Content: Row Layout -->
                     <div>
-                        <p class="text-sm mx-3 pb-4" id="modalDescription"></p>
+                        <div class="flex flex-col md:flex-row items-center gap-6 p-6" id="modalContent">
+                            <!-- Image Section -->
+                            <div class="w-48 h-48 flex-shrink-0">
+                                <img src="{{ asset('images/Horeca-green.svg') }}" alt="Product Image"
+                                    class="w-full h-full object-contain rounded-lg">
+                            </div>
+
+                            <!-- Product Details -->
+                            <div class="flex flex-col flex-grow w-full">
+                                <h2 class="text-lg font-semibold text-primary" id="modalTitle" productId=""></h2>
+                                <p class="text-gray-600">Category: <span id="modalCategory"></span></p>
+                                <p class="text-gray-800 font-bold text-xl" id="modalPrice"></p>
+                                <div class="flex gap-2 items-center mt-2">
+                                    <button type="button" class="text-xs bg-primary text-white rounded-sm h-6 w-6"
+                                        id="decreaseQty">-</button>
+                                    <h3 class="text-sm" id="quantity">1</h3>
+                                    <button type="button" class="text-xs bg-primary text-white rounded-sm h-6 w-6"
+                                        id="increaseQty">+</button>
+                                </div>
+
+                                <!-- Dropdown & Button -->
+                                <div class="flex flex-col sm:flex-row items-center gap-4 mt-4 w-full">
+                                    <div class="w-full sm:w-52">
+                                        <select class="border rounded px-3 py-2 bg-gray-100 text-gray-700 w-full"
+                                            id="unitStatus">
+                                            <option value="single" selected>Single</option>
+                                            <option value="full" id="unitOption">Full Unit</option>
+                                        </select>
+                                    </div>
+                                    <button class="bg-primary w-full text-white px-4 py-2 rounded-md" id="addToCart">
+                                        Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-sm mx-3 pb-4" id="modalDescription"></p>
+                        </div>
                     </div>
 
                 </div>
@@ -576,6 +566,7 @@
                 let product = {
                     id: $("#modalTitle").attr("productId"), // Product ID
                     name: $("#modalTitle").text(), // Product Name
+                    image: $('#ProductDetailsModal img').attr('src'), // Product Name
                     category: $("#modalCategory").text(), // Category
                     price: parseFloat($("#modalPrice").text().replace("€", "")), // Price
                     quantity: parseInt($("#quantity").text()), // Quantity
@@ -595,6 +586,8 @@
                 }
 
                 localStorage.setItem("cart", JSON.stringify(cart));
+                $('#unitStatus').trigger('change');
+                $('#quantity').text("1");
                 Swal.fire({
                     title: 'Success!',
                     text: 'Product added to Cart',
@@ -603,6 +596,7 @@
                     timer: 500 // Closes the alert after 500ms
                 });
                 $('#ProductDetailsModal').addClass('hidden');
+                updateCartBadge();
             });
 
             function handleSearch() {
@@ -662,66 +656,40 @@
 
             function productDetailF() {
                 $(document).on('click', ".productDetailBtn", function() {
-                    let url = baseUrl + 'api/getProductDetail/' + $(this).attr('productId');
-                    $.ajax({
-                        type: "GET",
-                        url: url,
-                        beforeSend: function() {
-                            $('#modalContent').addClass('hidden');
-                            $('#modalSpinner').removeClass('hidden');
-
-                            $('#ProductDetailsModal img').attr('src', defaultLogoUrl);
-                        },
-                        success: function(response) {
-                            $('#modalSpinner').addClass('hidden');
-                            $('#modalContent').removeClass('hidden');
-                            let product = response.products[0];
-                            let imagePath = product.image;
-                            let finalImageSrc = imagePath.startsWith("storage/") ? baseUrl +
-                                imagePath : imagePath;
-                            $('#ProductDetailsModal img').attr('src', finalImageSrc);
-                            $('#modalTitle').text(product.name);
-                            $('#modalTitle').attr("productId", product.id)
-                            $('#modalCategory').text(product.category);
-                            $('#modalPrice').text("€" + product.rate);
-                            $('#modalDescription').text(product.description);
 
 
+                    let imagePath = $(this).attr('image');
+                    let finalImageSrc = imagePath.startsWith("storage/") ? baseUrl +
+                        imagePath : imagePath;
+                    $('#ProductDetailsModal img').attr('src', finalImageSrc);
+                    $('#modalTitle').text($(this).attr('title'));
+                    $('#modalTitle').attr("productId", $(this).attr('productId'))
+                    $('#modalCategory').text($(this).attr('category'));
+                    $('#modalPrice').text("€" + $(this).attr('rate'));
+                    $('#modalDescription').text($(this).attr('description'));
 
-                            if (product.unit_price == 0) {
-                                $('#unitOption').prop('disabled', true);
-                                $('#unitStatus').val('single').trigger('change');
-                            } else {
-                                $('#unitOption').prop('disabled', false);
-                                $('#unitStatus').trigger('change');
-                            }
+                    let unitPrice = $(this).attr("unitPrice");
+                    let price = $(this).attr("rate");
+                    if (unitPrice == 0) {
+                        $('#unitOption').prop('disabled', true);
+                        $('#unitStatus').val('single').trigger('change');
+                    } else {
+                        $('#unitOption').prop('disabled', false);
+                        $('#unitStatus').trigger('change');
+                    }
 
-                            function checkUnitStatus() {
-                                let unitStatus = $('#unitStatus').val();
-                                if (unitStatus == "single") {
-                                    $('#modalPrice').text("€" + product.rate);
-                                    $('#weight').val(product.content_weight);
-                                } else {
-                                    $('#modalPrice').text("€" + product.unit_price);
-                                    $('#weight').val(product.package_weight);
-                                }
-                            }
-                            console.log(unitStatus);
-                            checkUnitStatus(); // Initial check
-                            $('#unitStatus').change(
-                                checkUnitStatus); // Bind the event handler
-
-
-                            // $('#Product_Price').val(product.rate);
-                            // $('#Product_id').val(product.id);
-                            // $('#productCode').val(product.code);
-                            // $('#tax').val(product.tax);
-
-                            // });
-
-
+                    function checkUnitStatus() {
+                        let unitStatus = $('#unitStatus').val();
+                        if (unitStatus == "single") {
+                            $('#modalPrice').text("€" + price);
+                        } else {
+                            $('#modalPrice').text("€" + unitPrice);
                         }
-                    });
+                    }
+                    console.log(unitStatus);
+                    checkUnitStatus(); // Initial check
+                    $('#unitStatus').change(
+                        checkUnitStatus); // Bind the event handler
                     $('#ProductDetailsModal').removeClass('hidden').addClass('flex');
                 });
             }
@@ -789,7 +757,7 @@
                         `);
                             }
                             $(categorySelector).append(`
-                        <div class="border border-gray productDetailBtn rounded-lg shadow-sm p-4 cursor-pointer productCard product" productId="${product.id}">
+                        <div class="border border-gray productDetailBtn rounded-lg shadow-sm p-4 cursor-pointer productCard product" productId="${product.id}" image="${product.image}" title="${product.name}" category="${product.category}" rate="${product.rate}" unitPrice="${product.unit_price}" description="${product.description}">
                             <div>
                                 <div class="relative">
                                     <img loading="lazy" src="${product.image && product.image !== 'null' ? product.image : defaultLogoUrl}" alt="${product.name}" class="w-full md:h-40 h-20 object-contain" onerror="this.onerror=null; this.src='${defaultLogoUrl}'">

@@ -145,15 +145,17 @@
                         </li>
                     </ul>
                 </div>
-                <div>
+                <div class="relative inline-block">
                     <a href="../cart">
-
-                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 576 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                             <path fill="#000000"
                                 d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
                         </svg>
-
+                        <!-- Quantity Badge with Class -->
+                        <span
+                            class="cart-quantity-badge absolute -top-2 -right-2 bg-primary text-white text-xs font-semibold rounded-full h-5 w-5 flex items-center justify-center">
+                            0 <!-- Initial value, will be updated by JS -->
+                        </span>
                     </a>
                 </div>
             </div>
@@ -175,88 +177,48 @@
         </div>
 
 
-        <div class="w-[90%] block mx-auto md:hidden mb-2 ">
-            <div class=" mx-auto">
-                <div class="flex">
-                    <button id="dropdown-button" data-dropdown-toggle="dropdown"
-                        class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-r-0  rounded-s-lg hover:bg-gray-200 "
-                        type="button">@lang('lang.Select_Category') <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 4 4 4-4" />
-                        </svg></button>
-                    <div id="dropdown"
-                        class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200  category-dropdown"
-                            aria-labelledby="dropdown-button">
-
-                        </ul>
-                    </div>
-                    <div class="relative w-full">
-                        <input type="search" id="search-input"
-                            class="block search-input p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50  border border-gray-300  focus:border-primary "
-                            placeholder="Search" required />
-                        </p>
-                        <button type="submit"
-                            class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-primary rounded-e-lg border border-primary  focus:outline-none ">
-                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 20 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                            </svg>
-                            <span class="sr-only">@lang('lang.Search')</span>
-                        </button>
-                    </div>
-                </div>
-                <p class="  text-sm text-right mr-10 hidden " id="match-count-con">@lang('lang.Matches') <span
-                        class="text-red-600 match-count"> 0
-                    </span>
-                    </form>
-
-            </div>
         </div>
 
         <hr class="border-primary">
     </nav>
-    <div class="max-w-6xl mx-auto p-6 bg-slate-50 mt-4  rounded-lg  flex gap-6">
-
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-6 p-4">
         <!-- Left Section: Cart Items -->
-        <div class="w-2/3">
-            <h2 class="text-2xl font-semibold mb-4">Shopping Cart</h2>
-
+        <div class="w-full md:w-2/3 bg-white rounded-lg shadow-md p-4">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-900">Shopping Cart</h2>
             <!-- Cart Items List -->
             <div id="cartItems" class="space-y-4"></div>
         </div>
 
         <!-- Right Section: Order Summary -->
-        <div class="w-1/3 p-4 bg-white rounded-lg h-fit  ">
-            <h3 class="text-xl font-semibold mb-4">Order Summary</h3>
+        <div class="w-full md:w-1/3 p-4 bg-white rounded-lg shadow-md h-fit">
+            <h3 class="text-xl font-semibold mb-4 text-gray-900">Order Summary</h3>
 
-            <div class="flex justify-between py-2 border-b">
-                <span>Subtotal</span>
-                <span>€<span id="subTotal">0</span></span>
+            <div class="flex justify-between py-2 border-b border-gray-200">
+                <span class="text-gray-600">Subtotal</span>
+                <span class="text-gray-800">€<span id="subTotal">0</span></span>
             </div>
 
-            <div class="flex justify-between py-2 border-b">
-                <span>Delivery Charges</span>
-                <span>€<span id="deliveryCharges">0</span></span>
+            <!-- Commented out Delivery Charges -->
+            {{-- <div class="flex justify-between py-2 border-b border-gray-200">
+                <span class="text-gray-600">Delivery Charges</span>
+                <span class="text-gray-800">€<span id="deliveryCharges">0</span></span>
+            </div> --}}
+
+            <div class="flex justify-between py-2 border-b border-gray-200">
+                <span class="text-gray-600">Delivery Type</span>
+                <span class="text-gray-800">COD</span>
             </div>
 
-            <div class="flex justify-between py-2 border-b">
-                <span>Delivery Type</span>
-                <span>COD</span>
-            </div>
-
-            <div class="flex justify-between py-3 mt-3 text-lg font-semibold">
+            <div class="flex justify-between py-3 mt-3 text-lg font-semibold text-gray-900">
                 <span>Grand Total</span>
                 <span>€<span id="grandTotal">0</span></span>
             </div>
 
-            <button id="checkoutBtn" class="w-full bg-blue-500 text-white px-6 py-2 rounded mt-4">
+            <button id="checkoutBtn"
+                class="w-full bg-primary text-white px-6 py-2 rounded-md mt-4 hover:bg-primary-600 focus:ring-4 focus:ring-primary-300 focus:outline-none">
                 Proceed to Checkout
             </button>
         </div>
-
     </div>
     <div id="checkoutModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
         <div class="bg-white p-6 rounded-lg shadow-lg w-1/3">
@@ -300,25 +262,42 @@
             cart.forEach((item, index) => {
                 let itemTotal = item.price * item.quantity;
                 subTotal += itemTotal;
-
                 cartHtml += `
-                <div class="flex justify-between items-center p-4 border rounded-md">
-                    <div>
-                        <h3 class="text-lg font-medium">${item.name} (${item.unit_status})</h3>
-                        <p class="text-gray-600">Category: ${item.category}</p>
-                        <p class="text-gray-800 font-semibold">€${item.price.toFixed(2)}</p>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <button class="bg-gray-300 px-3 py-1 rounded" onclick="updateQuantity(${index}, -1)">-</button>
-                        <span class="text-lg font-semibold">${item.quantity}</span>
-                        <button class="bg-gray-300 px-3 py-1 rounded" onclick="updateQuantity(${index}, 1)">+</button>
-                    </div>
-                    <p class="text-gray-800 font-bold">€${itemTotal.toFixed(2)}</p>
-                    <button class=" text-black px-3 py-1 rounded" onclick="removeItem(${index})">
-                        X
-                    </button>
-                </div>
-            `;
+                     <div class="flex flex-wrap items-center justify-between p-4 border border-primary rounded-md bg-white shadow-sm">
+                         <!-- Image and Product Details -->
+                         <div class="flex items-center gap-4 w-full sm:w-1/2">
+                             <!-- Image Section -->
+                             <div class="w-12 h-12 flex-shrink-0">
+                                 <img src="${item.image}" alt="${item.name}"
+                                     class="w-full h-full object-contain rounded-md">
+                             </div>
+                             <!-- Product Details -->
+                             <div class="flex-1 min-w-0">
+                                 <h3 class="text-base font-medium text-primary truncate">${item.name}</h3>
+                                 <p class="text-sm text-gray-600 truncate">Category: ${item.category}</p>
+                                 <p class="text-base font-semibold text-gray-800">€${itemTotal.toFixed(2)}</p>
+                             </div>
+                         </div>
+
+                         <!-- Quantity Controls (Breaks to New Line on Small Screens) -->
+                         <div class="flex items-center gap-2 mt-3 justify-end sm:mt-0 sm:ml-auto sm:mr-4">
+                             <button class="bg-primary text-white px-2 py-1 rounded hover:bg-primary-600 text-sm"
+                                 onclick="updateQuantity(${index}, -1)">-</button>
+                             <span class="text-base font-semibold w-8 text-center">${item.quantity}</span>
+                             <button class="bg-primary text-white px-2 py-1 rounded hover:bg-primary-600 text-sm"
+                                 onclick="updateQuantity(${index}, 1)">+</button>
+                         </div>
+
+                         <!-- Remove Button with SVG Icon -->
+                         <button class="text-primary px-2 py-1 rounded hover:text-primary-600 mt-3 sm:mt-0"
+                             onclick="removeItem(${index})">
+                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                             </svg>
+                         </button>
+                     </div>
+                        `;
+
             });
 
             grandTotal = subTotal + deliveryCharges;
@@ -335,6 +314,7 @@
             }
             localStorage.setItem("cart", JSON.stringify(cart));
             loadCart();
+            updateCartBadge()
         }
 
         function removeItem(index) {
@@ -342,6 +322,8 @@
             cart.splice(index, 1);
             localStorage.setItem("cart", JSON.stringify(cart));
             loadCart();
+            updateCartBadge()
+
         }
 
         $(document).ready(function() {
@@ -368,9 +350,8 @@
 
             // Extract order details
             let orderData = {
-                user_id: "1", // Change this dynamically if needed
                 order_date: new Date().toISOString().split("T")[0], // Current date
-                customer_id: 1, // Change if needed
+                customer_id: 4, // Change if needed
                 customer_name: $("#customerName").val(),
                 customer_phone: $("#customerPhone").val(),
                 customer_adress: $("#customerAddress").val(),

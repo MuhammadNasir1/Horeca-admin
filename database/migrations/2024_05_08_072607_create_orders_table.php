@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('customer_name')->nullable();
             $table->string('customer_id')->nullable();
             $table->string('customer_phone')->nullable();
+            $table->string('customer_email')->nullable();
             $table->text('customer_adress')->nullable();
             $table->string('sub_total');
             $table->string('order_vat')->nullable();
