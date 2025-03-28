@@ -28,7 +28,7 @@
                                 <td>{{ $data->id }}</td>
                                 <td>{{ $data->order_date }}</td>
                                 <td>{{ $data->platform }}</td>
-                                <td>{{ $data->customer_name }} <br> <a class="text-blue-700"
+                                <td>{{ $data->customer_name }} {{ $data->customer_email }} <br> <a class="text-blue-700"
                                         href="tel:{{ $data->customer_phone }}">{{ $data->customer_phone }}</a></td>
                                 <td>{{ $data->grand_total }}&euro;</td>
                                 <td><button
@@ -178,8 +178,8 @@
                 <button type="button"
                     class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
                     data-modal-hide="deleteData">
-                    <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 14 14">
+                    <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                     </svg>
@@ -291,7 +291,6 @@
 
 
 <script>
-
     function dropdownrun() {
 
         // Select all dropdown buttons
@@ -337,12 +336,12 @@
                 let currentPage = Dtable.page(); // Get current page index
                 localStorage.setItem("datatablePage", currentPage); // Save page number
                 let DataTable = $("#datatable").DataTable();
-        let savedPage = localStorage.getItem("datatablePage");
+                let savedPage = localStorage.getItem("datatablePage");
 
-        if (savedPage !== null) {
-            DataTable.page(parseInt(savedPage)).draw("page"); // Set to saved page
-        }
-        localStorage.removeItem("datatablePage"); // Clear after use
+                if (savedPage !== null) {
+                    DataTable.page(parseInt(savedPage)).draw("page"); // Set to saved page
+                }
+                localStorage.removeItem("datatablePage"); // Clear after use
                 $('#delLink').attr('href', '../delOrder/' + id);
                 console.log(id);
             });
@@ -390,9 +389,10 @@
                     },
                     success: function(response) {
                         var id = $(this).attr('delId');
-                let Dtable = $("#datatable").DataTable();
-                let currentPage = Dtable.page(); // Get current page index
-                localStorage.setItem("datatablePage", currentPage); // Save page number
+                        let Dtable = $("#datatable").DataTable();
+                        let currentPage = Dtable.page(); // Get current page index
+                        localStorage.setItem("datatablePage",
+                        currentPage); // Save page number
                         window.location.href = '../orders';
 
                     },

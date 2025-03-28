@@ -193,7 +193,8 @@
                                 d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
                         </svg>
                         <!-- Quantity Badge with Class -->
-                        <span class="cart-quantity-badge absolute -top-2 -right-2 bg-primary text-white text-xs font-semibold rounded-full h-5 w-5 flex items-center justify-center">
+                        <span
+                            class="cart-quantity-badge absolute -top-2 -right-2 bg-primary text-white text-xs font-semibold rounded-full h-5 w-5 flex items-center justify-center">
                             0 <!-- Initial value, will be updated by JS -->
                         </span>
                     </a>
@@ -697,17 +698,25 @@
             scrollHandle();
             $('#spinner').removeClass('hidden');
 
+
             function getAllProducts() {
                 $.ajax({
                     type: "GET",
                     url: 'https://horeca-kaya.com/api/getProducts',
                     success: function(response) {
-                        $('#spinner').addClass('hidden');
+                        $('#spinner').addClass('hidden'); // Hide spinner
+
                         let products = response.products;
                         let uniqueCategories = [];
                         let categoryNames = new Set();
                         let catBgColors = ["#F2FCE4", "#D6D3C4FF", "#ECFFEC", "#FEEFEA", "#FFF3FF"];
 
+                        // Use arrays for batch insertion (Avoid multiple .append() calls)
+                        let categoryHTMLArray = [];
+                        let categoryDropdownArray = [];
+                        let productContainerArray = [];
+
+                        // Find unique categories
                         products.forEach(product => {
                             if (!categoryNames.has(product.category)) {
                                 uniqueCategories.push(product);
@@ -715,71 +724,176 @@
                             }
                         });
 
+                        // Generate category HTML in a single pass
                         uniqueCategories.forEach((category, i) => {
                             let color = catBgColors[i % catBgColors.length];
-                            let categoryHTML = `
-                        <div class="swiper-slide">
-                            <a href="#category-${category.category}" class="h-48 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col items-center justify-center flex-1 scroll-link" style="background-color: ${color};">
-                                <div class="w-full h-28 flex justify-center">
-                                    <img class="rounded-t-lg pt-6 w-[90%]" loading="lazy" src="${category.category_image !== "null" ? baseUrl + category.category_image : defaultLogoUrl}" alt="${category.category}" />
-                                </div>
-                                <div class="p-5 pb-8 text-center w-full">
-                                    <h5 class="text-lg font-medium tracking-tight text-gray-900 dark:text-white">${category.category}</h5>
-                                </div>
-                            </a>
-                        </div>`;
-                            $('.swiper-wrapper').append(categoryHTML);
 
-                            let categoryData = `<li>
+                            categoryHTMLArray.push(`
+                    <div class="swiper-slide">
+                        <a href="#category-${category.category}" class="h-48 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col items-center justify-center flex-1 scroll-link" style="background-color: ${color};">
+                            <div class="w-full h-28 flex justify-center">
+                                <img class="rounded-t-lg pt-6 w-[90%]" loading="lazy" src="${category.category_image !== "null" ? baseUrl + category.category_image : defaultLogoUrl}" alt="${category.category}" />
+                            </div>
+                            <div class="p-5 pb-8 text-center w-full">
+                                <h5 class="text-lg font-medium tracking-tight text-gray-900 dark:text-white">${category.category}</h5>
+                            </div>
+                        </a>
+                    </div>
+                `);
+
+                            categoryDropdownArray.push(`
+                    <li>
                         <a href="#category-${category.category}" class="scroll-link"> 
                             <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                 ${category.category}
                             </button>
                         </a>
-                    </li>`;
-                            $('.category-dropdown').append(categoryData);
+                    </li>
+                `);
                         });
 
-                        let uniqueCategory = [...new Set(products.map(product => product.category))];
+                        // Append all category HTML at once
+                        $('.swiper-wrapper').append(categoryHTMLArray.join(''));
+                        $('.category-dropdown').append(categoryDropdownArray.join(''));
 
-                        let index = 0;
+                        // Optimize product rendering
+                        let categoryElements = {}; // Cache category elements
 
-                        function addProductWithDelay() {
-                            if (index >= products.length) return;
-                            let product = products[index];
-                            let categorySelector = `#category-${product.category}`;
-                            if (!$(categorySelector).length) {
-                                $('#product-container').append(`
-                            <div class="mt-10">
-                                <h2 class="text-2xl font-semibold">${product.category}</h2>
-                                <div class="grid xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 mt-4" id="category-${product.category}"></div>
-                            </div>
-                        `);
-                            }
-                            $(categorySelector).append(`
-                        <div class="border border-gray productDetailBtn rounded-lg shadow-sm p-4 cursor-pointer productCard product" productId="${product.id}" image="${product.image}" title="${product.name}" category="${product.category}" rate="${product.rate}" unitPrice="${product.unit_price}" description="${product.description}">
-                            <div>
-                                <div class="relative">
-                                    <img loading="lazy" src="${product.image && product.image !== 'null' ? product.image : defaultLogoUrl}" alt="${product.name}" class="w-full md:h-40 h-20 object-contain" onerror="this.onerror=null; this.src='${defaultLogoUrl}'">
-                                </div>
-                                <div class="mt-4">
-                                    <h2 class="md:text-md text-sm font-semibold">${product.name}</h2>
-                                    <p class="text-xs md:text-sm text-gray-500">By <span class="text-primary">${product.brand}</span></p>
-                                </div>
-                            </div>
+                        products.forEach(product => {
+                            let categoryID = `category-${product.category}`;
+
+                            // Create category section if not already created
+                            if (!categoryElements[categoryID]) {
+                                productContainerArray.push(`
+                        <div class="mt-10">
+                            <h2 class="text-2xl font-semibold">${product.category}</h2>
+                            <div class="grid xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 mt-4" id="${categoryID}"></div>
                         </div>
                     `);
-                            index++;
-                            setTimeout(addProductWithDelay, 50);
+                                categoryElements[categoryID] = [];
+                            }
+
+                            // Push product HTML to array (batch insertion)
+                            categoryElements[categoryID].push(`
+                    <div class="border border-gray productDetailBtn rounded-lg shadow-sm p-4 cursor-pointer productCard product"
+                        productId="${product.id}" image="${product.image}" title="${product.name}" 
+                        category="${product.category}" rate="${product.rate}" unitPrice="${product.unit_price}" 
+                        description="${product.description}">
+                        <div>
+                            <div class="relative">
+                                <img loading="lazy" src="${product.image && product.image !== 'null' ? product.image : defaultLogoUrl}" 
+                                    alt="${product.name}" class="w-full md:h-40 h-20 object-contain" 
+                                    onerror="this.onerror=null; this.src='${defaultLogoUrl}'">
+                            </div>
+                            <div class="mt-4">
+                                <h2 class="md:text-md text-sm font-semibold">${product.name}</h2>
+                                <p class="text-xs md:text-sm text-gray-500">By <span class="text-primary">${product.brand}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                `);
+                        });
+
+                        // Append category sections first
+                        $('#product-container').append(productContainerArray.join(''));
+
+                        // Append products inside their respective categories
+                        for (const categoryID in categoryElements) {
+                            $(`#${categoryID}`).append(categoryElements[categoryID].join(''));
                         }
-                        addProductWithDelay();
+
                         productDetailF();
                         scrollHandle();
                         handleSearch();
                     }
                 });
             }
-            setTimeout(getAllProducts, 1500);
+
+            setTimeout(getAllProducts, 500);
+
+            // function getAllProducts() {
+            //     $.ajax({
+            //         type: "GET",
+            //         url: 'https://horeca-kaya.com/api/getProducts',
+            //         success: function(response) {
+            //             $('#spinner').addClass('hidden');
+            //             let products = response.products;
+            //             let uniqueCategories = [];
+            //             let categoryNames = new Set();
+            //             let catBgColors = ["#F2FCE4", "#D6D3C4FF", "#ECFFEC", "#FEEFEA", "#FFF3FF"];
+
+            //             products.forEach(product => {
+            //                 if (!categoryNames.has(product.category)) {
+            //                     uniqueCategories.push(product);
+            //                     categoryNames.add(product.category);
+            //                 }
+            //             });
+
+            //             uniqueCategories.forEach((category, i) => {
+            //                 let color = catBgColors[i % catBgColors.length];
+            //                 let categoryHTML = `
+        //             <div class="swiper-slide">
+        //                 <a href="#category-${category.category}" class="h-48 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col items-center justify-center flex-1 scroll-link" style="background-color: ${color};">
+        //                     <div class="w-full h-28 flex justify-center">
+        //                         <img class="rounded-t-lg pt-6 w-[90%]" loading="lazy" src="${category.category_image !== "null" ? baseUrl + category.category_image : defaultLogoUrl}" alt="${category.category}" />
+        //                     </div>
+        //                     <div class="p-5 pb-8 text-center w-full">
+        //                         <h5 class="text-lg font-medium tracking-tight text-gray-900 dark:text-white">${category.category}</h5>
+        //                     </div>
+        //                 </a>
+        //             </div>`;
+            //                 $('.swiper-wrapper').append(categoryHTML);
+
+            //                 let categoryData = `<li>
+        //             <a href="#category-${category.category}" class="scroll-link"> 
+        //                 <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+        //                     ${category.category}
+        //                 </button>
+        //             </a>
+        //         </li>`;
+            //                 $('.category-dropdown').append(categoryData);
+            //             });
+
+            //             let uniqueCategory = [...new Set(products.map(product => product.category))];
+
+            //             let index = 0;
+
+            //             function addProductWithDelay() {
+            //                 if (index >= products.length) return;
+            //                 let product = products[index];
+            //                 let categorySelector = `#category-${product.category}`;
+            //                 if (!$(categorySelector).length) {
+            //                     $('#product-container').append(`
+        //                 <div class="mt-10">
+        //                     <h2 class="text-2xl font-semibold">${product.category}</h2>
+        //                     <div class="grid xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 mt-4" id="category-${product.category}"></div>
+        //                 </div>
+        //             `);
+            //                 }
+            //                 $(categorySelector).append(`
+        //             <div class="border border-gray productDetailBtn rounded-lg shadow-sm p-4 cursor-pointer productCard product" productId="${product.id}" image="${product.image}" title="${product.name}" category="${product.category}" rate="${product.rate}" unitPrice="${product.unit_price}" description="${product.description}">
+        //                 <div>
+        //                     <div class="relative">
+        //                         <img loading="lazy" src="${product.image && product.image !== 'null' ? product.image : defaultLogoUrl}" alt="${product.name}" class="w-full md:h-40 h-20 object-contain" onerror="this.onerror=null; this.src='${defaultLogoUrl}'">
+        //                     </div>
+        //                     <div class="mt-4">
+        //                         <h2 class="md:text-md text-sm font-semibold">${product.name}</h2>
+        //                         <p class="text-xs md:text-sm text-gray-500">By <span class="text-primary">${product.brand}</span></p>
+        //                     </div>
+        //                 </div>
+        //             </div>
+        //         `);
+            //                 index++;
+            //                 setTimeout(addProductWithDelay, 50);
+            //             }
+            //             addProductWithDelay();
+            //             productDetailF();
+            //             scrollHandle();
+            //             handleSearch();
+            //         }
+            //     });
+            // }
+            // setTimeout(getAllProducts, 500);
         });
 
         var swiper = new Swiper(".mySwiper", {
