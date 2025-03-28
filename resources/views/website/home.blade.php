@@ -278,7 +278,7 @@
                 </div>
                 <!-- Item 2 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="{{ asset('images/banners/sp-banner.png') }}"
+                    <img src="{{ asset('images/banners/sp-banner.jpg') }}"
                         class="absolute block w-full -translate-x-1/2  top-0 left-1/2" alt="Banner-3">
                 </div>
                 <!-- Item 2 -->
