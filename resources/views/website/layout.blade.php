@@ -26,7 +26,7 @@
             height: 100%;
             background-color: white;
             z-index: 9999;
-            display: none;
+            /* display: none; */
         }
     </style>
 </head>
@@ -150,9 +150,9 @@
             }
         }
         updateCartBadge()
-        // $(window).on('load', function() {
-        //     $('#loading').hide();
-        // })
+        $(window).on('load', function() {
+            $('#loading').hide();
+        })
         $(document).ready(function() {
             $('#datatable').DataTable();
         });
