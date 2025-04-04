@@ -283,6 +283,8 @@ return [
     "Success" => "Erfolg",
     "COD" => "KABELJAU",
     "Matches" => "Streichhölzer",
+    "Your_cart_is_empty" => "Ihr Warenkorb ist leer",
+
 
 
 

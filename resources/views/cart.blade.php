@@ -221,12 +221,9 @@
             </button>
         </div>
     </div>
-<<<<<<< HEAD
     {{-- <div id="checkoutModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
         <div class="bg-white p-6 rounded-lg shadow-lg w-1/3">
             <h2 class="text-2xl font-semibold mb-4">Checkout</h2>
-=======
->>>>>>> 53424723937af1f883282f916117c757364bac14
 
     <div id="checkoutModal" data-modal-backdrop="static"
         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -399,7 +396,7 @@
             let grandTotal = 0;
 
             if (cart.length === 0) {
-                $("#cartItems").html("<p class='text-center text-gray-600'>Your cart is empty.</p>");
+                $("#cartItems").html("<p class='text-center text-gray-600'>@lang('lang.Your_cart_is_empty').</p>");
                 $("#subTotal").text("0");
                 $("#grandTotal").text("0");
                 return;
@@ -523,19 +520,11 @@
                     localStorage.removeItem("cart");
                     $("#checkoutModal").addClass("hidden");
                     Swal.fire({
-<<<<<<< HEAD
                         title: "@lang('lang.Success')",
                         text: "@lang('lang.Order_placed_successfully')",
                         icon: 'success',
                         showConfirmButton: false, // Hides the "OK" button
                         timer: 1000 // Closes the alert after 500ms
-=======
-                        title: 'Success!',
-                        text: 'Order placed successfully!',
-                        icon: 'success',
-                        showConfirmButton: false, // Hides the "OK" button
-                        timer: 500 // Closes the alert after 500ms
->>>>>>> 53424723937af1f883282f916117c757364bac14
                     }).then(() => {
                         window.location.href = '/'; // Redirects to home page
                     });
