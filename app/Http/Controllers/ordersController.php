@@ -313,6 +313,7 @@ public function index(){
                 'customer_name' => $validatedData['customer_name'],
                 'customer_phone' => $validatedData['customer_phone'],
                 'customer_adress' => $validatedData['customer_adress'],
+                'customer_email' => $request['customer_email'],
                 'sub_total' => $validatedData['sub_total'],
                 'discount' => 0,
                 'grand_total' => $validatedData['grand_total'],

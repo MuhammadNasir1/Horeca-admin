@@ -224,7 +224,7 @@ return [
     "No" => "NEIN",
     "Yes" => "Ja",
     "Single" => "Einzelverpackung",
-    "Full_Unit" => "Karton",
+    "Full_Unit" => "Kiste",
     "Select_Unit_Sale" => "Einzelverkauf auswählen",
     "Read_Only" => "Nur lesen",
     "Total_Quantity" => "Gesamtmenge",
@@ -243,7 +243,6 @@ return [
     "Content_of_Quantity" => "Inhalt pro Packung ",
     "Select_Category" => "Kategorie auswählen",
     "Select_Brand" => "Marke auswählen",
-
     "Excel_Error_Preview" => "Excel-Fehlervorschau",
     "Content_Weight" => "Inhaltsgewicht",
     "Package_Weight" => "Paketgewicht",
@@ -271,6 +270,19 @@ return [
     "Select_Customer" => "Kunden auswählen",
     "Delete_Checked_Products" => "Markierte Produkte löschen",
     "revert_this" => "Das kann nicht rückgängig gemacht werden",
+    "Add_to_Cart" => "zum Warenkorb hinzufügen ",
+
+    "Proceed_to_Checkout" => "Angebot anfordern",
+    "Order_Summary" => "Bestellübersicht",
+    "Delivery_Type" => "Lieferart",
+    "Shopping_Cart" => "Warenkorb",
+    "Warning" => "Warnung",
+    "Product_Details" => "Produkdetails",
+    "Product_added_to_Cart" => "Produkt zum Warenkorb hinzugefügt",
+    "Order_placed_successfully" => "Bestellung erfolgreich aufgegeben",
+    "Success" => "Erfolg",
+    "COD" => "KABELJAU",
+    "Matches" => "Streichhölzer",
 
 
 

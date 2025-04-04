@@ -184,16 +184,16 @@
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-6 p-4">
         <!-- Left Section: Cart Items -->
         <div class="w-full md:w-2/3 bg-white rounded-lg shadow-md p-4">
-            <h2 class="text-2xl font-semibold mb-4 text-gray-900">Shopping Cart</h2>
+            <h2 class="text-2xl font-semibold mb-4 text-gray-900">@lang('lang.Shopping_Cart')</h2>
             <!-- Cart Items List -->
             <div id="cartItems" class="space-y-4"></div>
         </div>
 
         <!-- Right Section: Order Summary -->
         <div class="w-full md:w-1/3 p-4 bg-white rounded-lg shadow-md h-fit">
-            <h3 class="text-xl font-semibold mb-4 text-gray-900">Order Summary</h3>
+            <h3 class="text-xl font-semibold mb-4 text-gray-900">@lang('lang.Order_Summary')</h3>
 
-            <div class="flex justify-between py-2 border-b border-gray-200">
+            <div class="flex justify-between py-2 border-b border-gray-200 hidden">
                 <span class="text-gray-600">Subtotal</span>
                 <span class="text-gray-800">€<span id="subTotal">0</span></span>
             </div>
@@ -205,22 +205,23 @@
             </div> --}}
 
             <div class="flex justify-between py-2 border-b border-gray-200">
-                <span class="text-gray-600">Delivery Type</span>
-                <span class="text-gray-800">COD</span>
+                <span class="text-gray-600">@lang('lang.Delivery_Type')</span>
+                <span class="text-gray-800">@lang('lang.COD')</span>
             </div>
 
             <div class="flex justify-between py-3 mt-3 text-lg font-semibold text-gray-900">
-                <span>Grand Total</span>
-                <span>€<span id="grandTotal">0</span></span>
+                <span>@lang('lang.Grand_total')</span>
+                <span class="hidden">€<span id="grandTotal">0</span></span>
+                <span>N/A</span>
             </div>
 
-            <button id="checkoutBtn"
+            <button id="checkoutBtn" data-modal-target="checkoutModal" data-modal-toggle="checkoutModal"
                 class="w-full bg-primary text-white px-6 py-2 rounded-md mt-4 hover:bg-primary-600 focus:ring-4 focus:ring-primary-300 focus:outline-none">
-                Proceed to Checkout
+                @lang('lang.Proceed_to_Checkout')
             </button>
         </div>
     </div>
-    <div id="checkoutModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    {{-- <div id="checkoutModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
         <div class="bg-white p-6 rounded-lg shadow-lg w-1/3">
             <h2 class="text-2xl font-semibold mb-4">Checkout</h2>
 
@@ -239,6 +240,86 @@
             <div class="mt-4 flex justify-end">
                 <button id="confirmCheckout" class="bg-blue-500 text-white px-4 py-2 rounded">Confirm Order</button>
             </div>
+        </div>
+    </div> --}}
+
+    <div id="checkoutModal" data-modal-backdrop="static"
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="fixed inset-0 transition-opacity">
+            <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
+        </div>
+        <div class="relative p-4 w-full   max-w-2xl max-h-full ">
+
+            <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
+                <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
+                    <h3 class="text-xl font-semibold text-white " id="modalHeading">
+                        @lang('lang.Orders')
+                    </h3>
+                    <button type="button"
+                        class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
+                        data-modal-hide="checkoutModal">
+
+
+                        <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+
+                    </button>
+                </div>
+                <div class="grid  gap-x-6 gap-y-4 mx-6 my-6">
+                    <div>
+                        <label class="text-[14px] font-normal" for="Name">@lang('lang.Name')</label>
+                        <input type="text" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            id="customerName" placeholder=" @lang('lang.Name_Here')">
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="tax">@lang('lang.Email')</label>1
+                        <input type="text"
+                            class="w-full border-[#DEE2E6]  border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            id="customerEmail" placeholder="% @lang('lang.Email_Here')">
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="image">@lang('lang.Phone_No')</label>
+                        <input type="text"
+                            class="w-full border-[#DEE2E6]  border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            id="customerPhone" placeholder="% @lang('lang.Phone_Here')">
+                    </div>
+                    <div class="grid-cols-2">
+                        <label class="text-[14px] font-normal" for="Status">@lang('lang.Address')</label>
+                        <textarea id="customerAddress" placeholder=" @lang('lang.Address_Here')" rows="2"
+                            class="w-full   border-[#DEE2E6] rounded-[4px] focus:border-primary [40px] text-[14px]"></textarea>
+
+                    </div>
+                </div>
+                <div class="flex justify-end ">
+                    <button class="bg-primary text-white py-2 px-6 my-4 rounded-[4px]  mx-6 uaddBtn  font-semibold "
+                        id="confirmCheckout">
+                        <div class=" text-center hidden" id="spinner">
+                            <svg aria-hidden="true"
+                                class="w-5 h-5 mx-auto text-center text-gray-200 animate-spin fill-primary"
+                                viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                    fill="currentColor" />
+                                <path
+                                    d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                    fill="currentFill" />
+                            </svg>
+                        </div>
+                        <div id="text">
+                            @lang('lang.Add_Order')
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <div>
+
+            </div>
+
         </div>
     </div>
 @endsection
@@ -274,8 +355,8 @@
                              <!-- Product Details -->
                              <div class="flex-1 min-w-0">
                                  <h3 class="text-base font-medium text-primary truncate">${item.name}</h3>
-                                 <p class="text-sm text-gray-600 truncate">Category: ${item.category}</p>
-                                 <p class="text-base font-semibold text-gray-800">€${itemTotal.toFixed(2)}</p>
+                                 <p class="text-sm text-gray-600 truncate">@lang('lang.Category') ${item.category}</p>
+                                 <p class="text-base font-semibold text-gray-800 hidden">€${itemTotal.toFixed(2)}</p>
                              </div>
                          </div>
 
@@ -331,15 +412,6 @@
         });
 
 
-        $("#checkoutBtn").on("click", function() {
-            $("#checkoutModal").removeClass("hidden");
-        });
-
-        // Close checkout modal
-        $("#closeCheckout").on("click", function() {
-            $("#checkoutModal").addClass("hidden");
-        });
-
         // Confirm order and send data to API
         $("#confirmCheckout").on("click", function() {
             let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -350,18 +422,19 @@
 
             // Extract order details
             let orderData = {
+                user_id: 4,
                 order_date: new Date().toISOString().split("T")[0], // Current date
                 customer_id: 4, // Change if needed
                 customer_name: $("#customerName").val(),
                 customer_phone: $("#customerPhone").val(),
                 customer_adress: $("#customerAddress").val(),
+                customer_email: $("#customerEmail").val(),
                 product_id: cart.map(item => item.id),
                 product_quantity: cart.map(item => item.quantity),
                 grand_total: parseFloat($("#grandTotal").text()),
                 sub_total: parseFloat($("#subTotal").text()),
                 payment_type: $("#paymentType").val(),
                 order_description: "New order",
-                order_note: "N/A",
                 delivery_charges: 0, // Fixed charge
                 unit_status: cart.map(item => item.unit_status),
                 order_from: "customer",
@@ -376,18 +449,35 @@
                 data: JSON.stringify(orderData),
                 contentType: "application/json",
                 dataType: "json",
+                beforeSend: function() {
+                    $('#spinner').removeClass('hidden');
+                    $('#text').addClass('hidden');
+                    $('#confirmCheckout').attr('disabled', true);
+                },
                 success: function(response) {
                     localStorage.removeItem("cart");
                     $("#checkoutModal").addClass("hidden");
-                    alert("Order placed successfully!");
+                    Swal.fire({
+                        title: "@lang('lang.Success')",
+                        text: "@lang('lang.Order_placed_successfully')",
+                        icon: 'success',
+                        showConfirmButton: false, // Hides the "OK" button
+                        timer: 1000 // Closes the alert after 500ms
+                    }).then(() => {
+                        window.location.href = '/'; // Redirects to home page
+                    });
+
                 },
                 error: function(jqXHR) {
                     let response = JSON.parse(jqXHR.responseText);
                     Swal.fire(
-                        'Warning!',
+                        "@lang('lang.Warning')!",
                         response.message,
-                        'warning'
+                        "@lang('lang.Warning')",
                     )
+                    $('#text').removeClass('hidden');
+                    $('#spinner').addClass('hidden');
+                    $('#confirmCheckout').attr('disabled', false);
                 }
             });
         });

@@ -267,7 +267,18 @@ return [
     "Select_Customer" => "Select Customer",
     "Delete_Checked_Products" => "Delete Checked Products",
     "revert_this" => "You won't be able to revert this",
+    "Add_to_Cart" => "Add to Cart",
     
+    "Proceed_to_Checkout" => "Proceed to Checkout",
+    "Order_Summary" => "Order Summary",
+    "Delivery_Type" => "Delivery Type",
+    "Shopping_Cart" => "Shopping Cart",
+    "COD" => "COD",
+    "Matches" => "Matches",
+    "Warning" => "Warning",
+    "Success" => "Success",
     "Product_Details" => "Product Details",
+    "Product_added_to_Cart" => "Product added to Cart",
+    "Order_placed_successfully" => "Order placed successfully",
 
 ];

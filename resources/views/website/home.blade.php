@@ -42,8 +42,8 @@
                             <input type="search" id="search-input"
                                 class="block search-input p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50  border border-gray-300  focus:border-primary "
                                 placeholder="@lang('lang.Search')" required />
-                            <p class="absolute top-1/2 -translate-y-1/2 right-12 text-sm ">@lang('Matches') : <s1pan
-                                    class="text-red-600 match-count"> 0 </s1pan>
+                            <p class="absolute top-1/2 -translate-y-1/2 right-12 text-sm ">@lang('Matches') : <span
+                                    class="text-red-600 match-count"> 0 </span>
                             </p>
                             <button type="submit"
                                 class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-primary rounded-e-lg border border-primary  focus:outline-none ">
@@ -193,7 +193,8 @@
                                 d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
                         </svg>
                         <!-- Quantity Badge with Class -->
-                        <span class="cart-quantity-badge absolute -top-2 -right-2 bg-primary text-white text-xs font-semibold rounded-full h-5 w-5 flex items-center justify-center">
+                        <span
+                            class="cart-quantity-badge absolute -top-2 -right-2 bg-primary text-white text-xs font-semibold rounded-full h-5 w-5 flex items-center justify-center">
                             0 <!-- Initial value, will be updated by JS -->
                         </span>
                     </a>
@@ -508,29 +509,31 @@
                             <!-- Product Details -->
                             <div class="flex flex-col flex-grow w-full">
                                 <h2 class="text-lg font-semibold text-primary" id="modalTitle" productId=""></h2>
-                                <p class="text-gray-600">Category: <span id="modalCategory"></span></p>
-                                <p class="text-gray-800 font-bold text-xl" id="modalPrice"></p>
-                                <div class="flex gap-2 items-center mt-2">
-                                    <button type="button" class="text-xs bg-primary text-white rounded-sm h-6 w-6"
-                                        id="decreaseQty">-</button>
-                                    <h3 class="text-sm" id="quantity">1</h3>
-                                    <button type="button" class="text-xs bg-primary text-white rounded-sm h-6 w-6"
-                                        id="increaseQty">+</button>
+                                <p class="text-gray-600">@lang('lang.Category') <span id="modalCategory"></span></p>
+                                <p class="text-gray-800 font-bold text-xl hidden" id="modalPrice"></p>
+                                <div class="flex flex-col sm:flex-row items-center gap-4 mt-4 w-full">
+                                    <div class="flex gap-2 items-center mt-2">
+                                        <button type="button" class="text-xs bg-primary text-white rounded-sm h-6 w-6"
+                                            id="decreaseQty">-</button>
+                                        <h3 class="text-sm" id="quantity">1</h3>
+                                        <button type="button" class="text-xs bg-primary text-white rounded-sm h-6 w-6"
+                                            id="increaseQty">+</button>
+                                    </div>
+                                    <div class="w-full sm:w-40">
+                                        <select class="border rounded px-3 py-2 bg-gray-100 text-gray-700 w-full"
+                                            id="unitStatus">
+                                            <option value="single" selected>@lang('lang.Single')</option>
+                                            <option value="full" id="unitOption">@lang('lang.Full_Unit')</option>
+                                        </select>
+                                    </div>
                                 </div>
 
                                 <!-- Dropdown & Button -->
-                                <div class="flex flex-col sm:flex-row items-center gap-4 mt-4 w-full">
-                                    <div class="w-full sm:w-52">
-                                        <select class="border rounded px-3 py-2 bg-gray-100 text-gray-700 w-full"
-                                            id="unitStatus">
-                                            <option value="single" selected>Single</option>
-                                            <option value="full" id="unitOption">Full Unit</option>
-                                        </select>
-                                    </div>
-                                    <button class="bg-primary w-full text-white px-4 py-2 rounded-md" id="addToCart">
-                                        Add to Cart
-                                    </button>
-                                </div>
+
+                                <button class="bg-primary w-full text-white px-4 mt-4  py-2 rounded-md whitespace-nowrap"
+                                    id="addToCart">
+                                    @lang('lang.Add_to_Cart')
+                                </button>
                             </div>
                         </div>
                         <div>
@@ -588,13 +591,15 @@
                 localStorage.setItem("cart", JSON.stringify(cart));
                 $('#unitStatus').trigger('change');
                 $('#quantity').text("1");
-                Swal.fire({
-                    title: 'Success!',
-                    text: 'Product added to Cart',
-                    icon: 'success',
-                    showConfirmButton: false, // Hides the "OK" button
-                    timer: 500 // Closes the alert after 500ms
-                });
+                Toastify({
+                    text: "@lang('lang.Product_added_to_Cart')",
+                    duration: 2000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+                }).showToast();
+
                 $('#ProductDetailsModal').addClass('hidden');
                 updateCartBadge();
             });
@@ -645,7 +650,9 @@
                         Swal.fire({
                             title: "@lang('lang.No_product_Find')",
                             text: "@lang('lang.This_category_has_0_product')",
-                            icon: "warning",
+                            icon: "@lang('lang.Warning')",
+                            showConfirmButton: false,
+                            timer: 1000
                         });
                     }
                 });

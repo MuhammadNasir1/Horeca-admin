@@ -1,1 +1,0 @@
-ALTER TABLE `orders` ADD `customer_email` VARCHAR(255) NULL DEFAULT NULL AFTER `customer_phone`;
