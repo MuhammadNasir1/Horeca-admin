@@ -27,6 +27,7 @@
             height: 100%;
             background-color: white;
             z-index: 9999;
+            /* display: none; */
         }
     </style>
 </head>

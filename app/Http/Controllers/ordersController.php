@@ -198,7 +198,7 @@ public function index(){
     public function orders()
     {
 
-        $orders = Orders::orderBy('id', 'desc')->get();
+        $orders = Orders::latest()->get();
         return view('orders', ['orders' => $orders]);
     }
 
