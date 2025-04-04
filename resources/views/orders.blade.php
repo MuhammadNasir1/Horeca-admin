@@ -28,16 +28,11 @@
                                 <td>{{ $data->id }}</td>
                                 <td>{{ $data->order_date }}</td>
                                 <td>{{ $data->platform }}</td>
-<<<<<<< HEAD
                                 <td>{{ $data->customer_name }} <br> <a class="text-blue-700"
                                         href="tel:{{ $data->customer_phone }}">{{ $data->customer_phone }}</a> <br>
                                         <a class="text-blue-700"
                                         href="mailto:{{ $data->customer_email }}">{{ $data->customer_email }}</a>
                                     </td>
-=======
-                                <td>{{ $data->customer_name }} {{ $data->customer_email }} <br> <a class="text-blue-700"
-                                        href="tel:{{ $data->customer_phone }}">{{ $data->customer_phone }}</a></td>
->>>>>>> 53424723937af1f883282f916117c757364bac14
                                 <td>{{ $data->grand_total }}&euro;</td>
                                 <td><button
                                         class="p-1 rounded-md   bg-green text-white font-bold {{ $data->order_from == 'custom' ? 'bg-slate-600' : 'bg-red-950' }}">{{ $data->order_from }}</button>
