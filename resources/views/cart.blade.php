@@ -526,7 +526,7 @@
                         showConfirmButton: false, // Hides the "OK" button
                         timer: 1000 // Closes the alert after 500ms
                     }).then(() => {
-                        // window.location.href = '/'; // Redirects to home page
+                        window.location.href = '/'; // Redirects to home page
                     });
 
                 },
