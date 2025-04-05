@@ -281,5 +281,6 @@ return [
     "Product_added_to_Cart" => "Product added to Cart",
     "Order_placed_successfully" => "Order placed successfully",
     "Your_cart_is_empty" => "Your cart is empty",
+    "Developed_by" => "Developed by",
 
 ];

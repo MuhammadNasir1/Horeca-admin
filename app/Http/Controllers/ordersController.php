@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\newOrderMail;
 use App\Models\order_items;
 use App\Models\orders;
 use App\Models\product;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ordersController extends Controller
 {
@@ -64,6 +66,8 @@ public function index(){
                 'order_from' => $validatedData['order_from'],
 
             ]);
+            Mail::to('Hk@horeca-foodservice.de')->send(new newOrderMail($orders));
+
             foreach ($request['product_id'] as $j => $product) {
                 $order_items  = order_items::create([
                     'order_id' => $orders->id,
@@ -327,6 +331,7 @@ public function index(){
                 'platform' => $validatedData['platform'] ?? 'App',
 
             ]);
+            Mail::to('Hk@horeca-foodservice.de')->send(new newOrderMail($orders));
             foreach ($validatedData['product_id'] as $j => $productId) {
                 $product = product::find($productId);
                 if ($product) {
@@ -362,6 +367,7 @@ public function index(){
                     ], 404);
                 }
             };
+           
             return response()->json(['success' => true, 'message' => 'Order add successfully'], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);

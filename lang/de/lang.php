@@ -284,6 +284,7 @@ return [
     "COD" => "KABELJAU",
     "Matches" => "Streichhölzer",
     "Your_cart_is_empty" => "Ihr Warenkorb ist leer",
+    "Developed_by" => "Entwickelt von",
 
 
 
