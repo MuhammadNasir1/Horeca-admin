@@ -238,7 +238,7 @@
                     <div class="relative w-full">
                         <input type="search" id="search-input"
                             class="block search-input p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50  border border-gray-300  focus:border-primary "
-                            placeholder="Search" required />
+                            placeholder="@lang('lang.Search')" required />
                         </p>
                         <button type="submit"
                             class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-primary rounded-e-lg border border-primary  focus:outline-none ">
@@ -512,18 +512,18 @@
                                 <p class="text-gray-600">@lang('lang.Category') <span id="modalCategory"></span></p>
                                 <p class="text-gray-800 font-bold text-xl hidden" id="modalPrice"></p>
                                 <div class="flex flex-col sm:flex-row items-center gap-4 mt-4 w-full">
-                                    <div class="flex gap-2 items-center mt-2">
-                                        <button type="button" class="text-xs bg-primary text-white rounded-sm h-6 w-6"
+                                    <div class="flex gap-2 items-center">
+                                        <button type="button" class="text-xs bg-primary text-white rounded-sm h-8 w-8"
                                             id="decreaseQty">-</button>
                                         <h3 class="text-sm" id="quantity">1</h3>
-                                        <button type="button" class="text-xs bg-primary text-white rounded-sm h-6 w-6"
+                                        <button type="button" class="text-xs bg-primary text-white rounded-sm h-8 w-8"
                                             id="increaseQty">+</button>
                                     </div>
                                     <div class="w-full sm:w-40">
                                         <select class="border rounded px-3 py-2 bg-gray-100 text-gray-700 w-full"
                                             id="unitStatus">
-                                            <option value="single" selected>@lang('lang.Single')</option>
-                                            <option value="full" id="unitOption">@lang('lang.Full_Unit')</option>
+                                            <option value="full_unit" selected id="unitOption">@lang('lang.Full_Unit')</option>
+                                            <option value="single">@lang('lang.Single')</option>
                                         </select>
                                     </div>
                                 </div>
@@ -553,6 +553,131 @@
 @section('js')
     <script>
         $(document).ready(function() {
+            function getAllProducts() {
+                $.ajax({
+                    type: "GET",
+                    url: 'https://horeca-kaya.com/api/getProducts',
+                    success: function(response) {
+                        const fragment = document.createDocumentFragment();
+                        const products = response.products;
+                        const categoryNames = new Set();
+                        const uniqueCategories = [];
+                        const catBgColors = ["#F2FCE4", "#D6D3C4FF", "#ECFFEC", "#FEEFEA", "#FFF3FF"];
+                        const categoryElements = {};
+                        const categoryDropdownArray = [];
+
+                        // Step 1: Identify unique categories
+                        products.forEach(product => {
+                            if (!categoryNames.has(product.category)) {
+                                uniqueCategories.push(product);
+                                categoryNames.add(product.category);
+                            }
+                        });
+
+                        // Step 2: Build category cards for the swiper and dropdowns
+                        const swiperWrapper = document.querySelector('.swiper-wrapper');
+                        uniqueCategories.forEach((category, i) => {
+                            const color = catBgColors[i % catBgColors.length];
+
+                            // Swiper category HTML
+                            swiperWrapper.insertAdjacentHTML('beforeend', `
+                    <div class="swiper-slide">
+                        <a href="#category-${category.category}" class="scroll-link h-48 rounded-lg shadow flex flex-col items-center justify-center" style="background-color: ${color};">
+                            <img loading="lazy" src="${category.category_image !== 'null' ? baseUrl + category.category_image : defaultLogoUrl}" alt="${category.category}" class="rounded-t-lg pt-6 w-[90%]">
+                            <h5 class="text-lg font-medium text-gray-900">${category.category}</h5>
+                        </a>
+                    </div>
+                `);
+
+                            // Dropdown category HTML
+                            categoryDropdownArray.push(`
+                    <li>
+                        <a href="#category-${category.category}" class="scroll-link"> 
+                            <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                ${category.category}
+                            </button>
+                        </a>
+                    </li>
+                `);
+                        });
+
+                        // Step 3: Append dropdown HTML to all .category-dropdown elements
+                        const dropdownHTML = categoryDropdownArray.join('');
+                        const categoryDropdowns = document.querySelectorAll('.category-dropdown');
+                        categoryDropdowns.forEach(dropdown => {
+                            dropdown.innerHTML =
+                            dropdownHTML; // Replace content in each dropdown
+                            // Or use dropdown.insertAdjacentHTML('beforeend', dropdownHTML) to append instead
+                        });
+
+                        // Step 4: Build category sections and collect product HTML
+                        products.forEach(product => {
+                            const categoryID = `category-${product.category}`;
+
+                            // Create category section if it doesn’t exist
+                            if (!categoryElements[categoryID]) {
+                                const div = document.createElement('div');
+                                div.className = 'mt-10';
+                                div.innerHTML = `
+                        <h2 class="text-2xl font-semibold">${product.category}</h2>
+                        <div class="grid xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 mt-4" id="${categoryID}"></div>
+                    `;
+                                fragment.appendChild(div);
+                                categoryElements[
+                            categoryID] = []; // Initialize array for products
+                            }
+
+                            // Add product HTML to the category’s array
+                            categoryElements[categoryID].push(`
+                    <div class="border border-gray productDetailBtn rounded-lg shadow-sm p-4 cursor-pointer productCard product"
+                        productId="${product.id}" image="${product.image}" title="${product.name}" 
+                        category="${product.category}" rate="${product.rate}" unitPrice="${product.unit_price}" 
+                        description="${product.description}">
+                        <div>
+                            <div class="relative">
+                                <img loading="lazy" src="${product.image && product.image !== 'null' ? product.image : defaultLogoUrl}" 
+                                    alt="${product.name}" class="w-full md:h-40 h-20 object-contain" 
+                                    onerror="this.onerror=null; this.src='${defaultLogoUrl}'">
+                            </div>
+                            <div class="mt-4">
+                                <h2 class="md:text-md text-sm font-semibold">${product.name}</h2>
+                                <p class="text-xs md:text-sm text-gray-500">By <span class="text-primary">${product.brand}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                `);
+                        });
+
+                        // Step 5: Append the category sections to the DOM
+                        const productContainer = document.getElementById('product-container');
+                        productContainer.appendChild(fragment);
+
+                        // Step 6: Append products to their respective category sections
+                        for (const categoryID in categoryElements) {
+                            const categoryElement = document.getElementById(categoryID);
+                            if (categoryElement) {
+                                categoryElement.innerHTML = categoryElements[categoryID].join('');
+                            } else {
+                                console.error(
+                                    `Category element with ID ${categoryID} not found in the DOM.`);
+                            }
+                        }
+
+                        // Step 7: Finalize UI updates
+                        document.getElementById('spinner').classList.add('hidden');
+                        productDetailF();
+                        scrollHandle();
+                        handleSearch();
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Failed to fetch products:', error);
+                    }
+                });
+            }
+
+            getAllProducts();
+
+
             $('#increaseQty').click(function() {
                 let qty = parseInt($('#quantity').text());
                 $('#quantity').text(qty + 1);
@@ -567,7 +692,7 @@
 
             $("#addToCart").on("click", function() {
                 let product = {
-                    id: $("#modalTitle").attr("productId"), // Product ID
+                    id: parseInt( $("#modalTitle").attr("productId")), // Product ID
                     name: $("#modalTitle").text(), // Product Name
                     image: $('#ProductDetailsModal img').attr('src'), // Product Name
                     category: $("#modalCategory").text(), // Category
@@ -663,8 +788,6 @@
 
             function productDetailF() {
                 $(document).on('click', ".productDetailBtn", function() {
-
-
                     let imagePath = $(this).attr('image');
                     let finalImageSrc = imagePath.startsWith("storage/") ? baseUrl +
                         imagePath : imagePath;
@@ -674,6 +797,7 @@
                     $('#modalCategory').text($(this).attr('category'));
                     $('#modalPrice').text("€" + $(this).attr('rate'));
                     $('#modalDescription').text($(this).attr('description'));
+                    $('#unitStatus').val('full_unit').trigger('change');
 
                     let unitPrice = $(this).attr("unitPrice");
                     let price = $(this).attr("rate");
@@ -705,117 +829,118 @@
             $('#spinner').removeClass('hidden');
 
 
-            function getAllProducts() {
-                $.ajax({
-                    type: "GET",
-                    url: 'https://horeca-kaya.com/api/getProducts',
-                    success: function(response) {
-                        $('#spinner').addClass('hidden'); // Hide spinner
+            // function getAllProducts() {
+            //     $.ajax({
+            //         type: "GET",
+            //         url: 'https://horeca-kaya.com/api/getProducts',
+            //         success: function(response) {
+            //             $('#spinner').addClass('hidden'); // Hide spinner
 
-                        let products = response.products;
-                        let uniqueCategories = [];
-                        let categoryNames = new Set();
-                        let catBgColors = ["#F2FCE4", "#D6D3C4FF", "#ECFFEC", "#FEEFEA", "#FFF3FF"];
+            //             let products = response.products;
+            //             let uniqueCategories = [];
+            //             let categoryNames = new Set();
+            //             let catBgColors = ["#F2FCE4", "#D6D3C4FF", "#ECFFEC", "#FEEFEA", "#FFF3FF"];
 
-                        // Use arrays for batch insertion (Avoid multiple .append() calls)
-                        let categoryHTMLArray = [];
-                        let categoryDropdownArray = [];
-                        let productContainerArray = [];
+            //             // Use arrays for batch insertion (Avoid multiple .append() calls)
+            //             let categoryHTMLArray = [];
+            //             let categoryDropdownArray = [];
+            //             let productContainerArray = [];
 
-                        // Find unique categories
-                        products.forEach(product => {
-                            if (!categoryNames.has(product.category)) {
-                                uniqueCategories.push(product);
-                                categoryNames.add(product.category);
-                            }
-                        });
+            //             // Find unique categories
+            //             products.forEach(product => {
+            //                 if (!categoryNames.has(product.category)) {
+            //                     uniqueCategories.push(product);
+            //                     categoryNames.add(product.category);
+            //                 }
+            //             });
 
-                        // Generate category HTML in a single pass
-                        uniqueCategories.forEach((category, i) => {
-                            let color = catBgColors[i % catBgColors.length];
+            //             // Generate category HTML in a single pass
+            //             uniqueCategories.forEach((category, i) => {
+            //                 let color = catBgColors[i % catBgColors.length];
 
-                            categoryHTMLArray.push(`
-                    <div class="swiper-slide">
-                        <a href="#category-${category.category}" class="h-48 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col items-center justify-center flex-1 scroll-link" style="background-color: ${color};">
-                            <div class="w-full h-28 flex justify-center">
-                                <img class="rounded-t-lg pt-6 w-[90%]" loading="lazy" src="${category.category_image !== "null" ? baseUrl + category.category_image : defaultLogoUrl}" alt="${category.category}" />
-                            </div>
-                            <div class="p-5 pb-8 text-center w-full">
-                                <h5 class="text-lg font-medium tracking-tight text-gray-900 dark:text-white">${category.category}</h5>
-                            </div>
-                        </a>
-                    </div>
-                `);
+            //                 categoryHTMLArray.push(`
+        //         <div class="swiper-slide">
+        //             <a href="#category-${category.category}" class="h-48 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col items-center justify-center flex-1 scroll-link" style="background-color: ${color};">
+        //                 <div class="w-full h-28 flex justify-center">
+        //                     <img class="rounded-t-lg pt-6 w-[90%]" loading="lazy" src="${category.category_image !== "null" ? baseUrl + category.category_image : defaultLogoUrl}" alt="${category.category}" />
+        //                 </div>
+        //                 <div class="p-5 pb-8 text-center w-full">
+        //                     <h5 class="text-lg font-medium tracking-tight text-gray-900 dark:text-white">${category.category}</h5>
+        //                 </div>
+        //             </a>
+        //         </div>
+        //     `);
 
-                            categoryDropdownArray.push(`
-                    <li>
-                        <a href="#category-${category.category}" class="scroll-link"> 
-                            <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                ${category.category}
-                            </button>
-                        </a>
-                    </li>
-                `);
-                        });
+            //                 categoryDropdownArray.push(`
+        //         <li>
+        //             <a href="#category-${category.category}" class="scroll-link"> 
+        //                 <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+        //                     ${category.category}
+        //                 </button>
+        //             </a>
+        //         </li>
+        //     `);
+            //             });
 
-                        // Append all category HTML at once
-                        $('.swiper-wrapper').append(categoryHTMLArray.join(''));
-                        $('.category-dropdown').append(categoryDropdownArray.join(''));
+            //             // Append all category HTML at once
+            //             $('.swiper-wrapper').append(categoryHTMLArray.join(''));
+            //             $('.category-dropdown').append(categoryDropdownArray.join(''));
 
-                        // Optimize product rendering
-                        let categoryElements = {}; // Cache category elements
+            //             // Optimize product rendering
+            //             let categoryElements = {}; // Cache category elements
 
-                        products.forEach(product => {
-                            let categoryID = `category-${product.category}`;
+            //             products.forEach(product => {
+            //                 let categoryID = `category-${product.category}`;
 
-                            // Create category section if not already created
-                            if (!categoryElements[categoryID]) {
-                                productContainerArray.push(`
-                        <div class="mt-10">
-                            <h2 class="text-2xl font-semibold">${product.category}</h2>
-                            <div class="grid xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 mt-4" id="${categoryID}"></div>
-                        </div>
-                    `);
-                                categoryElements[categoryID] = [];
-                            }
+            //                 // Create category section if not already created
+            //                 if (!categoryElements[categoryID]) {
+            //                     productContainerArray.push(`
+        //             <div class="mt-10">
+        //                 <h2 class="text-2xl font-semibold">${product.category}</h2>
+        //                 <div class="grid xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 mt-4" id="${categoryID}"></div>
+        //             </div>
+        //         `);
+            //                     categoryElements[categoryID] = [];
+            //                 }
 
-                            // Push product HTML to array (batch insertion)
-                            categoryElements[categoryID].push(`
-                    <div class="border border-gray productDetailBtn rounded-lg shadow-sm p-4 cursor-pointer productCard product"
-                        productId="${product.id}" image="${product.image}" title="${product.name}" 
-                        category="${product.category}" rate="${product.rate}" unitPrice="${product.unit_price}" 
-                        description="${product.description}">
-                        <div>
-                            <div class="relative">
-                                <img loading="lazy" src="${product.image && product.image !== 'null' ? product.image : defaultLogoUrl}" 
-                                    alt="${product.name}" class="w-full md:h-40 h-20 object-contain" 
-                                    onerror="this.onerror=null; this.src='${defaultLogoUrl}'">
-                            </div>
-                            <div class="mt-4">
-                                <h2 class="md:text-md text-sm font-semibold">${product.name}</h2>
-                                <p class="text-xs md:text-sm text-gray-500">By <span class="text-primary">${product.brand}</span></p>
-                            </div>
-                        </div>
-                    </div>
-                `);
-                        });
+            //                 // Push product HTML to array (batch insertion)
+            //                 categoryElements[categoryID].push(`
+        //         <div class="border border-gray productDetailBtn rounded-lg shadow-sm p-4 cursor-pointer productCard product"
+        //             productId="${product.id}" image="${product.image}" title="${product.name}" 
+        //             category="${product.category}" rate="${product.rate}" unitPrice="${product.unit_price}" 
+        //             description="${product.description}">
+        //             <div>
+        //                 <div class="relative">
+        //                     <img loading="lazy" src="${product.image && product.image !== 'null' ? product.image : defaultLogoUrl}" 
+        //                         alt="${product.name}" class="w-full md:h-40 h-20 object-contain" 
+        //                         onerror="this.onerror=null; this.src='${defaultLogoUrl}'">
+        //                 </div>
+        //                 <div class="mt-4">
+        //                     <h2 class="md:text-md text-sm font-semibold">${product.name}</h2>
+        //                     <p class="text-xs md:text-sm text-gray-500">By <span class="text-primary">${product.brand}</span></p>
+        //                 </div>
+        //             </div>
+        //         </div>
+        //     `);
+            //             });
 
-                        // Append category sections first
-                        $('#product-container').append(productContainerArray.join(''));
+            //             // Append category sections first
+            //             $('#product-container').append(productContainerArray.join(''));
 
-                        // Append products inside their respective categories
-                        for (const categoryID in categoryElements) {
-                            $(`#${categoryID}`).append(categoryElements[categoryID].join(''));
-                        }
+            //             // Append products inside their respective categories
+            //             for (const categoryID in categoryElements) {
+            //                 $(`#${categoryID}`).append(categoryElements[categoryID].join(''));
+            //             }
 
-                        productDetailF();
-                        scrollHandle();
-                        handleSearch();
-                    }
-                });
-            }
+            //             productDetailF();
+            //             scrollHandle();
+            //             handleSearch();
+            //         }
+            //     });
+            // }
 
-            setTimeout(getAllProducts, 1500);
+            // setTimeout(getAllProducts, 200);
+
         });
         // function getAllProducts() {
         //     $.ajax({

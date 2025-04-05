@@ -488,15 +488,15 @@
                 order_date: new Date().toISOString().split("T")[0], // Current date
                 customer_id: 4, // Change if needed
                 customer_name: $("#customerName").val(),
-                customer_phone: $("#customerPhone").val(),
+                customer_phone: parseInt($("#customerPhone").val()),
                 customer_adress: $("#customerAddress").val(),
                 customer_email: $("#customerEmail").val(),
-                product_id: cart.map(item => item.id),
-                product_quantity: cart.map(item => item.quantity),
+                product_id: cart.map(item => parseInt(item.id)),
+                product_quantity: cart.map(item => parseInt(item.quantity)),
                 grand_total: parseFloat($("#grandTotal").text()),
                 sub_total: parseFloat($("#subTotal").text()),
-                payment_type: $("#paymentType").val(),
-                order_description: "New order",
+                payment_type: "cod",
+                order_description: "",
                 delivery_charges: 0, // Fixed charge
                 unit_status: cart.map(item => item.unit_status),
                 order_from: "customer",
@@ -526,7 +526,7 @@
                         showConfirmButton: false, // Hides the "OK" button
                         timer: 1000 // Closes the alert after 500ms
                     }).then(() => {
-                        window.location.href = '/'; // Redirects to home page
+                        // window.location.href = '/'; // Redirects to home page
                     });
 
                 },

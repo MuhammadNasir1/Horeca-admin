@@ -52,7 +52,7 @@
                         </div>
                         </div>
                         <div class="mt-6 flex">
-                            <button id="addCustomNameBtn" type="button"
+                            <button id="addCustomNameBtn" type="buttowen"
                                 class="bg-primary toggle-button h-[40px] rounded-[4px]  px-3 font-bold text-white text-sm flex justify-center items-center">
                                 <span class="text-2xl">+</span></button>
 
