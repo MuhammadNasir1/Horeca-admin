@@ -31,7 +31,7 @@
                     <button class="bg-red-500 text-white font-semibold px-4 py-3 rounded-md"
                         id="delBtn">@lang('lang.Delete_Checked_Products')</button>
                 </div>
-                <table id="datatable" class="overflow-scroll">
+                <table id="datatable1" class="overflow-scroll">
                     <thead class="py-6 bg-primary text-white">
                         <tr>
                             <th class="whitespace-nowrap text-sm">
@@ -77,7 +77,7 @@
                                 <td>{{ $data->brand }}</td>
                                 <td>{{ $data->category }} / {{ $data->sub_category }}</td>
                                 <td>{{ $data->tax }}%</td>
-                                <td>{{ number_format($data->rate, 2) }}&euro;</td>
+                                <td>{{ number_format($data->rate, 2, ',', '') }}&euro;</td>
                                 <td>{{ $data->product_unit }}</td>
                                 <td>{{ $data->quantity }}</td>
                                 <td><span
@@ -743,8 +743,37 @@
 @include('layouts.footer')
 <script>
     $(document).ready(function() {
+        let table = $('#datatable1').DataTable({
+            pagingType: "full_numbers",
+            order: [
+                [2, 'asc']
+            ], // Assuming the actual data column starts at index 2
+            columnDefs: [{
+                    targets: 0,
+                    orderable: false,
+                    searchable: false
+                }, // Checkbox
+                {
+                    targets: 1,
+                    orderable: false,
+                    searchable: false
+                }, // Row number column
+            ]
+        });
+
+        // Update row numbers on sort/search
+        table.on('order.dt search.dt', function() {
+            table.column(1, {
+                search: 'applied',
+                order: 'applied'
+            }).nodes().each(function(cell, i) {
+                cell.innerHTML = i + 1;
+            });
+        }).draw();
+
+
         $("#delBtn").hide();
-        let DataTable = $("#datatable").DataTable();
+        let DataTable = $("#datatable1").DataTable();
 
         // Get stored page index
         let savedPage = localStorage.getItem("datatablePage");
@@ -997,7 +1026,7 @@
             $('.delButton').click(function() {
                 $('#deleteData').removeClass("hidden");
                 var id = $(this).attr('delId');
-                let Dtable = $("#datatable").DataTable();
+                let Dtable = $("#datatable1").DataTable();
                 let currentPage = Dtable.page(); // Get current page index
                 localStorage.setItem("datatablePage", currentPage); // Save page number
                 $('#delLink').attr('href', '../delProduct/' + id);
@@ -1005,7 +1034,7 @@
 
         }
         deleteDatafun();
-        var table = $('#datatable').DataTable();
+        var table = $('#datatable1').DataTable();
         table.on('draw', function() {
             deleteDatafun();
             updateData();
@@ -1092,7 +1121,7 @@
                 },
                 success: function(response) {
 
-                    let table = $("#datatable").DataTable();
+                    let table = $("#datatable1").DataTable();
                     let currentPage = table.page(); // Get current page index
                     localStorage.setItem("datatablePage", currentPage); // Save page number
 

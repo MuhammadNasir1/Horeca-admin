@@ -281,7 +281,7 @@ return [
     "Product_added_to_Cart" => "Produkt zum Warenkorb hinzugefügt",
     "Order_placed_successfully" => "Bestellung erfolgreich aufgegeben",
     "Success" => "Erfolg",
-    "COD" => "Nachnahme",
+    "COD" => "Anlieferung",
     "Matches" => "Streichhölzer",
     "Your_cart_is_empty" => "Ihr Warenkorb ist leer",
     "Developed_by" => "Entwickelt von",

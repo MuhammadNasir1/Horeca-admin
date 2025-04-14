@@ -165,7 +165,7 @@
 
             <button class="bg-black flex py-2 rounded-md px-3 justify-center items-center  gap-1 text-white">
                 <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 576 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                    viewBox="0 0 576 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.cFom License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                     <path fill="#ffffff"
                         d="M420.6 301.9a24 24 0 1 1 24-24 24 24 0 0 1 -24 24m-265.1 0a24 24 0 1 1 24-24 24 24 0 0 1 -24 24m273.7-144.5 47.9-83a10 10 0 1 0 -17.3-10h0l-48.5 84.1a301.3 301.3 0 0 0 -246.6 0L116.2 64.5a10 10 0 1 0 -17.3 10h0l47.9 83C64.5 202.2 8.2 285.6 0 384H576c-8.2-98.5-64.5-181.8-146.9-226.6" />
                 </svg> | <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -338,16 +338,16 @@
                             id="customerName" placeholder=" @lang('lang.Name_Here')">
                     </div>
                     <div>
-                        <label class="text-[14px] font-normal" for="tax">@lang('lang.Email')</label>1
-                        <input type="text"
+                        <label class="text-[14px] font-normal" for="tax">@lang('lang.Email')</label>
+                        <input type="email"
                             class="w-full border-[#DEE2E6]  border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            id="customerEmail" placeholder="% @lang('lang.Email_Here')">
+                            id="customerEmail" placeholder=" @lang('lang.Email_Here')">
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="image">@lang('lang.Phone_No')</label>
                         <input type="text"
                             class="w-full border-[#DEE2E6]  border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            id="customerPhone" placeholder="% @lang('lang.Phone_Here')">
+                            id="customerPhone" placeholder=" @lang('lang.Phone_Here')">
                     </div>
                     <div class="grid-cols-2">
                         <label class="text-[14px] font-normal" for="Status">@lang('lang.Address')</label>

@@ -513,10 +513,10 @@
                                 <p class="text-gray-800 font-bold text-xl hidden" id="modalPrice"></p>
                                 <div class="flex flex-col sm:flex-row items-center gap-4 mt-4 w-full">
                                     <div class="flex gap-2 items-center">
-                                        <button type="button" class="text-xs bg-primary text-white rounded-sm h-8 w-8"
+                                        <button type="button" class="text-xs bg-primary text-white rounded-md md:rounded-sm md:h-8 md:w-8  h-10 w-10"
                                             id="decreaseQty">-</button>
                                         <h3 class="text-sm" id="quantity">1</h3>
-                                        <button type="button" class="text-xs bg-primary text-white rounded-sm h-8 w-8"
+                                        <button type="button" class="text-xs bg-primary text-white rounded-md md:rounded-sm md:h-8 md:w-8 h-10 w-10"
                                             id="increaseQty">+</button>
                                     </div>
                                     <div class="w-full sm:w-40">
