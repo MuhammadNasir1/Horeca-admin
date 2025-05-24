@@ -19,12 +19,14 @@
                             <th class="whitespace-nowrap text-sm">@lang('lang.Amount')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Order_From')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Order_Status')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.STN')</th>
                             <th class="flex text-sm justify-center">@lang('lang.Action')</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($orders as $x => $data)
                             <tr class="pt-4">
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $data->id }}</td>
                                 <td>{{ $data->order_date }}</td>
                                 <td>{{ $data->platform }}</td>
