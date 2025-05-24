@@ -12,6 +12,7 @@
                 <table id="datatable" class="overflow-scroll">
                     <thead class="py-6 bg-primary text-white">
                         <tr>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.STN')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Order_Number')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Order_Date')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Platform')</th>
@@ -19,7 +20,6 @@
                             <th class="whitespace-nowrap text-sm">@lang('lang.Amount')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Order_From')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Order_Status')</th>
-                            <th class="whitespace-nowrap text-sm">@lang('lang.STN')</th>
                             <th class="flex text-sm justify-center">@lang('lang.Action')</th>
                         </tr>
                     </thead>
