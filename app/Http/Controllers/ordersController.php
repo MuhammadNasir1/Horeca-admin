@@ -13,11 +13,12 @@ use Illuminate\Support\Facades\Mail;
 class ordersController extends Controller
 {
 
-public function index(){
-    $customers = User::select('id' , 'name' , 'email' , 'phone' , 'address')->where('role', 'customer')->where('verification' , 'approved')->get();
-    // return response()->json($customers);
-    return view('createOrder' , compact('customers'));
-}
+    public function index()
+    {
+        $customers = User::select('id', 'name', 'email', 'phone', 'address')->where('role', 'customer')->where('verification', 'approved')->get();
+        // return response()->json($customers);
+        return view('createOrder', compact('customers'));
+    }
 
     public function  insert(Request $request)
     {
@@ -202,7 +203,7 @@ public function index(){
     public function orders()
     {
 
-        $orders = Orders::latest()->get();
+        $orders = Orders::orderBy('created_at', 'desc')->get();
         return view('orders', ['orders' => $orders]);
     }
 
@@ -281,10 +282,10 @@ public function index(){
             $product = product::where('id', $orderItem->product_id)->first();
             $products[] = $product;
         }
-    $customers = User::select('id' , 'name' , 'email' , 'phone' , 'address')->where('role', 'customer')->where('verification' , 'approved')->get();
+        $customers = User::select('id', 'name', 'email', 'phone', 'address')->where('role', 'customer')->where('verification', 'approved')->get();
 
 
-        return view('editOrder', ["order" => $order, 'orderItems' => $orderItems, 'products' => $products , 'customers' => $customers]);
+        return view('editOrder', ["order" => $order, 'orderItems' => $orderItems, 'products' => $products, 'customers' => $customers]);
     }
 
     public function Addorders(Request $request)
@@ -367,7 +368,7 @@ public function index(){
                     ], 404);
                 }
             };
-           
+
             return response()->json(['success' => true, 'message' => 'Order add successfully'], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
