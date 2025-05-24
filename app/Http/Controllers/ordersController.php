@@ -203,7 +203,7 @@ class ordersController extends Controller
     public function orders()
     {
 
-        $orders = Orders::orderBy('created_at', 'desc')->get();
+        $orders = Orders::orderBy('id', 'desc')->get();
         return view('orders', ['orders' => $orders]);
     }
 
